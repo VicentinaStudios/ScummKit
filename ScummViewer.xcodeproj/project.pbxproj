@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA327176B7F0090BA59 /* TreeNode.swift */; };
+		4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA9271777140090BA59 /* QueueArray.swift */; };
+		4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B3E27177B040088A49B /* QueueProtocol.swift */; };
+		4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B4027177B360088A49B /* QueueStack.swift */; };
 		4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */; };
 		4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD23D7E2716D66400832C4E /* ContentView.swift */; };
 		4CD23D812716D66600832C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD23D802716D66600832C4E /* Assets.xcassets */; };
@@ -14,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C5CDFA327176B7F0090BA59 /* TreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNode.swift; sourceTree = "<group>"; };
+		4C5CDFA9271777140090BA59 /* QueueArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueArray.swift; sourceTree = "<group>"; };
+		4C8A0B3E27177B040088A49B /* QueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueProtocol.swift; sourceTree = "<group>"; };
+		4C8A0B4027177B360088A49B /* QueueStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStack.swift; sourceTree = "<group>"; };
 		4CD23D792716D66400832C4E /* ScummViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScummViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummViewerApp.swift; sourceTree = "<group>"; };
 		4CD23D7E2716D66400832C4E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,6 +42,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C5CDFA8271776EE0090BA59 /* Data Structure & Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				4C5CDFAB27177AC30090BA59 /* Queues */,
+				4C8A0B4227177CC20088A49B /* Trees */,
+			);
+			path = "Data Structure & Algorithms";
+			sourceTree = "<group>";
+		};
+		4C5CDFAB27177AC30090BA59 /* Queues */ = {
+			isa = PBXGroup;
+			children = (
+				4C8A0B3E27177B040088A49B /* QueueProtocol.swift */,
+				4C5CDFA9271777140090BA59 /* QueueArray.swift */,
+				4C8A0B4027177B360088A49B /* QueueStack.swift */,
+			);
+			path = Queues;
+			sourceTree = "<group>";
+		};
+		4C8A0B4227177CC20088A49B /* Trees */ = {
+			isa = PBXGroup;
+			children = (
+				4C5CDFA327176B7F0090BA59 /* TreeNode.swift */,
+			);
+			path = Trees;
+			sourceTree = "<group>";
+		};
 		4CD23D702716D66400832C4E = {
 			isa = PBXGroup;
 			children = (
@@ -55,6 +90,7 @@
 			children = (
 				4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */,
 				4CD23D7E2716D66400832C4E /* ContentView.swift */,
+				4C5CDFA8271776EE0090BA59 /* Data Structure & Algorithms */,
 				4CD23D802716D66600832C4E /* Assets.xcassets */,
 				4CD23D852716D66600832C4E /* Info.plist */,
 				4CD23D862716D66600832C4E /* ScummViewer.entitlements */,
@@ -141,7 +177,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */,
+				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
+				4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */,
 				4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */,
+				4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */,
+				4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
