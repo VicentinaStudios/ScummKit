@@ -11,6 +11,9 @@
 		4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA9271777140090BA59 /* QueueArray.swift */; };
 		4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B3E27177B040088A49B /* QueueProtocol.swift */; };
 		4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B4027177B360088A49B /* QueueStack.swift */; };
+		4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B43271786F50088A49B /* ScummStore.swift */; };
+		4C8A0B46271787510088A49B /* FileMenuCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B45271787510088A49B /* FileMenuCommands.swift */; };
+		4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B49271790240088A49B /* ScummStoreDevData.swift */; };
 		4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */; };
 		4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD23D7E2716D66400832C4E /* ContentView.swift */; };
 		4CD23D812716D66600832C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD23D802716D66600832C4E /* Assets.xcassets */; };
@@ -22,6 +25,9 @@
 		4C5CDFA9271777140090BA59 /* QueueArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueArray.swift; sourceTree = "<group>"; };
 		4C8A0B3E27177B040088A49B /* QueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueProtocol.swift; sourceTree = "<group>"; };
 		4C8A0B4027177B360088A49B /* QueueStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStack.swift; sourceTree = "<group>"; };
+		4C8A0B43271786F50088A49B /* ScummStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStore.swift; sourceTree = "<group>"; };
+		4C8A0B45271787510088A49B /* FileMenuCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMenuCommands.swift; sourceTree = "<group>"; };
+		4C8A0B49271790240088A49B /* ScummStoreDevData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStoreDevData.swift; sourceTree = "<group>"; };
 		4CD23D792716D66400832C4E /* ScummViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScummViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummViewerApp.swift; sourceTree = "<group>"; };
 		4CD23D7E2716D66400832C4E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,6 +75,22 @@
 			path = Trees;
 			sourceTree = "<group>";
 		};
+		4C8A0B47271787690088A49B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4C8A0B43271786F50088A49B /* ScummStore.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4C8A0B482717876E0088A49B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4CD23D7E2716D66400832C4E /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		4CD23D702716D66400832C4E = {
 			isa = PBXGroup;
 			children = (
@@ -89,7 +111,9 @@
 			isa = PBXGroup;
 			children = (
 				4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */,
-				4CD23D7E2716D66400832C4E /* ContentView.swift */,
+				4C8A0B45271787510088A49B /* FileMenuCommands.swift */,
+				4C8A0B482717876E0088A49B /* Views */,
+				4C8A0B47271787690088A49B /* Models */,
 				4C5CDFA8271776EE0090BA59 /* Data Structure & Algorithms */,
 				4CD23D802716D66600832C4E /* Assets.xcassets */,
 				4CD23D852716D66600832C4E /* Info.plist */,
@@ -103,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				4CD23D832716D66600832C4E /* Preview Assets.xcassets */,
+				4C8A0B49271790240088A49B /* ScummStoreDevData.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -178,8 +203,11 @@
 			files = (
 				4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */,
 				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
+				4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */,
+				4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */,
 				4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */,
 				4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */,
+				4C8A0B46271787510088A49B /* FileMenuCommands.swift in Sources */,
 				4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */,
 				4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */,
 			);

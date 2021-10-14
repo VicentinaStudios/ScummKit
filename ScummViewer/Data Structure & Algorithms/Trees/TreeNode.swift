@@ -5,17 +5,30 @@
 //  Created by Michael Borgmann on 13.10.21.
 //
 
-class TreeNode<T> {
+import Foundation
+
+class TreeNode<T: Hashable>: Hashable {
+    
+    static func ==(lhs: TreeNode<T>, rhs: TreeNode<T>) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
+    }
     
     var value: T
-    var children: [TreeNode] = []
+    var children: [TreeNode]? = nil
     
     init(with value: T) {
         self.value = value
     }
     
     func add(_ child: TreeNode) {
-      children.append(child)
+        
+        if (children?.append(child)) == nil {
+            children = [child]
+        }
     }
 }
 
@@ -27,7 +40,7 @@ extension TreeNode {
         
         visit(self)
         
-        children.forEach {
+        children?.forEach {
             $0.depthFirstTraversal(visit: visit)
         }
     }
@@ -38,13 +51,13 @@ extension TreeNode {
         
         var queue = QueueStack<TreeNode>()
         
-        children.forEach { _ = queue.enqueue($0) }
+        children?.forEach { _ = queue.enqueue($0) }
         
         while  let node = queue.dequeue() {
             
             visit(node)
             
-            node.children.forEach { _ = queue.enqueue($0) }
+            node.children?.forEach { _ = queue.enqueue($0) }
         }
     }
 }
