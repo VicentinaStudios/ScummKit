@@ -7,33 +7,16 @@
 
 import SwiftUI
 
-struct Tree<Value: Hashable>: Hashable {
-    let value: Value
-    var children: [Tree]? = nil
-}
-
 struct ContentView: View {
     
-    @Binding var url: URL?
-    @EnvironmentObject var data: ScummStore
+    @EnvironmentObject var scummStore: ScummStore
     
     var body: some View {
         
-        List {
-            
-            ForEach(data.scummFiles, id: \.self) { filename in
-                
-                Section(header: Text(filename.value)) {
-                    
-                    OutlineGroup(
-                        filename.children ?? [],
-                        id: \.value,
-                        children: \.children
-                    ) { tree in
-                        Text(tree.value).font(.subheadline)
-                    }
-                }
-            }
+        if scummStore.scummFiles.isEmpty {
+            Text("No SCUMM Game Loaded")
+        } else {
+            NavigatorView()
         }
     }
 }
@@ -42,7 +25,7 @@ struct ContentView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        ContentView(url: .constant(nil))
-            .environmentObject(ScummStore())
+        ContentView()
+            .environmentObject(ScummStore.create)
     }
 }

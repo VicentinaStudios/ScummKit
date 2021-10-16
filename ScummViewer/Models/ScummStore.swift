@@ -7,31 +7,58 @@
 
 import Foundation
 
+enum FileError: Error {
+    case loadFailure
+    case saveFailure
+    case urlFailure
+}
+
 class ScummStore: ObservableObject {
     
-    @Published var scummFiles: [TreeNode<String>] = []
+    @Published var scummFiles: [TreeNode<URL>] = []
     
-    init() {
+    init() {}
         
-        //#if DEBUG
-        createDevData()
-        //#endif
+    init(witchChecking: Bool) throws {
+        
+        #if DEBUG
+        do {
+            try createDevData()
+        } catch {
+            throw error
+        }
+        #endif
     }
     
-    private func readDirectory(at url: URL) -> [URL]? {
+    func readDirectory(at url: URL) throws {
         
-        do {
+        do {            
             let urls = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+            
+            guard !urls.isEmpty else {
+                throw FileError.urlFailure
+            }
             
             let sorted = urls.sorted { a, b in
                 a.lastPathComponent.localizedStandardCompare(b.lastPathComponent) == ComparisonResult.orderedAscending
             }
             
-            return sorted
+            scummFiles.removeAll()
             
+            sorted.forEach { fileURL in
+                let file = TreeNode<URL>(with: fileURL)
+                scummFiles.append(file)
+            }
         } catch {
-            debugPrint("Cannot read directory")
-            return nil
+            throw error
+        }
+    }
+    
+    static var create: ScummStore {
+        do {
+            return try ScummStore(witchChecking: true)
+        } catch {
+            return ScummStore()
         }
     }
 }
