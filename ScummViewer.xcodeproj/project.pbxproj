@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C33EF70271BA9B800323220 /* DetailsView.swift */; };
+		4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C408069271B972500A76C75 /* Data+Ext.swift */; };
+		4C40806E271B976C00A76C75 /* UInt8+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C40806D271B976C00A76C75 /* UInt8+Ext.swift */; };
+		4C408070271B97A500A76C75 /* UInt16+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C40806F271B97A500A76C75 /* UInt16+Ext.swift */; };
+		4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C408071271B97BC00A76C75 /* UInt32+Ext.swift */; };
 		4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA327176B7F0090BA59 /* TreeNode.swift */; };
 		4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA9271777140090BA59 /* QueueArray.swift */; };
+		4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B819271C23D00030E564 /* ScummVersion.swift */; };
+		4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B81B271C26470030E564 /* URL+Ext.swift */; };
 		4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B3E27177B040088A49B /* QueueProtocol.swift */; };
 		4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B4027177B360088A49B /* QueueStack.swift */; };
 		4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B43271786F50088A49B /* ScummStore.swift */; };
@@ -21,8 +28,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C33EF70271BA9B800323220 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		4C408069271B972500A76C75 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
+		4C40806D271B976C00A76C75 /* UInt8+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt8+Ext.swift"; sourceTree = "<group>"; };
+		4C40806F271B97A500A76C75 /* UInt16+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt16+Ext.swift"; sourceTree = "<group>"; };
+		4C408071271B97BC00A76C75 /* UInt32+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt32+Ext.swift"; sourceTree = "<group>"; };
 		4C5CDFA327176B7F0090BA59 /* TreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNode.swift; sourceTree = "<group>"; };
 		4C5CDFA9271777140090BA59 /* QueueArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueArray.swift; sourceTree = "<group>"; };
+		4C79B819271C23D00030E564 /* ScummVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummVersion.swift; sourceTree = "<group>"; };
+		4C79B81B271C26470030E564 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		4C8A0B3E27177B040088A49B /* QueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueProtocol.swift; sourceTree = "<group>"; };
 		4C8A0B4027177B360088A49B /* QueueStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStack.swift; sourceTree = "<group>"; };
 		4C8A0B43271786F50088A49B /* ScummStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStore.swift; sourceTree = "<group>"; };
@@ -48,6 +62,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C40806B271B973300A76C75 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4C408069271B972500A76C75 /* Data+Ext.swift */,
+				4C40806D271B976C00A76C75 /* UInt8+Ext.swift */,
+				4C40806F271B97A500A76C75 /* UInt16+Ext.swift */,
+				4C408071271B97BC00A76C75 /* UInt32+Ext.swift */,
+				4C79B81B271C26470030E564 /* URL+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4C40806C271B973B00A76C75 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				4C5CDFA8271776EE0090BA59 /* Data Structure & Algorithms */,
+				4C40806B271B973300A76C75 /* Extensions */,
+				4C79B819271C23D00030E564 /* ScummVersion.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		4C5CDFA8271776EE0090BA59 /* Data Structure & Algorithms */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +124,7 @@
 			children = (
 				4CD23D7E2716D66400832C4E /* ContentView.swift */,
 				4CEFF22B271AEE14001021C9 /* NavigatorView.swift */,
+				4C33EF70271BA9B800323220 /* DetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -114,7 +151,7 @@
 				4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */,
 				4C8A0B482717876E0088A49B /* Views */,
 				4C8A0B47271787690088A49B /* Models */,
-				4C5CDFA8271776EE0090BA59 /* Data Structure & Algorithms */,
+				4C40806C271B973B00A76C75 /* Helper */,
 				4CD23D802716D66600832C4E /* Assets.xcassets */,
 				4CD23D852716D66600832C4E /* Info.plist */,
 				4CD23D862716D66600832C4E /* ScummViewer.entitlements */,
@@ -201,15 +238,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */,
+				4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */,
 				4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */,
+				4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */,
 				4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */,
+				4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */,
 				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
 				4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */,
+				4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */,
 				4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */,
 				4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */,
 				4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */,
 				4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */,
 				4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */,
+				4C408070271B97A500A76C75 /* UInt16+Ext.swift in Sources */,
+				4C40806E271B976C00A76C75 /* UInt8+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +318,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -328,6 +373,7 @@
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

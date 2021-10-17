@@ -16,6 +16,7 @@ enum FileError: Error {
 class ScummStore: ObservableObject {
     
     @Published var scummFiles: [TreeNode<URL>] = []
+    @Published var scummVersion: ScummVersion?
     
     init() {}
         

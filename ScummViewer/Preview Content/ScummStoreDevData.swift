@@ -16,8 +16,10 @@ extension ScummStore {
         
         do {
             try readDirectory(at: url)
+            scummVersion = ScummVersion.dectect(files: scummFiles.map { $0.value })
         } catch {
             throw error
         }
+        
     }
 }

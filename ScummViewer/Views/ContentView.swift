@@ -13,10 +13,15 @@ struct ContentView: View {
     
     var body: some View {
         
-        if scummStore.scummFiles.isEmpty {
-            Text("No SCUMM Game Loaded")
-        } else {
-            NavigatorView()
+        VStack {
+            HSplitView {
+                NavigatorView()
+                NavigatorView()
+            }
+            
+            if let version = scummStore.scummVersion {
+                Text("SCUMM Version: \(String(describing: version))")
+            }
         }
     }
 }

@@ -53,6 +53,7 @@ struct ScummViewerApp: App {
             
             do {
                 try scummStore.readDirectory(at: url)
+                scummStore.scummVersion = ScummVersion.dectect(files: scummStore.scummFiles.map { $0.value} )
             } catch {
                 showAlert = true
             }

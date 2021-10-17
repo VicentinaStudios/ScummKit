@@ -33,5 +33,6 @@ struct NavigatorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigatorView()
             .environmentObject(ScummStore.create)
+            .previewLayout(.sizeThatFits)
     }
 }
