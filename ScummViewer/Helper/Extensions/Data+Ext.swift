@@ -38,13 +38,27 @@ extension Data {
     var hexString: String {
         map { String(format: "%02hhx", $0) }.joined()
     }
+
+    func xor(with xor: UInt8) -> Data {
+        Data(byteBuffer.map { $0.xor(with: 0x69) })
+    }
     
-    func xor(with xor: UInt8) -> String {
+    func dump() throws {
         
-        byteBuffer
-            .map { $0.xor(with: 0x69) }
-            .map { $0.char }
-            .joined()
+        let decoded = xor(with: 0x69)
+        let data = Data(decoded)
+        
+        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as NSURL
+        
+        guard let fileUrl = documentsUrl.appendingPathComponent("scumm_dump.txt") else {
+            throw FileError.urlFailure
+        }
+        
+        do {
+            try data.write(to: fileUrl)
+        } catch {
+            throw FileError.saveFailure
+        }
     }
 }
 

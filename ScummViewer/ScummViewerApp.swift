@@ -52,8 +52,12 @@ struct ScummViewerApp: App {
             }
             
             do {
+                
                 try scummStore.readDirectory(at: url)
-                scummStore.scummVersion = ScummVersion.dectect(files: scummStore.scummFiles.map { $0.value} )
+                
+                let urls = scummStore.scummFiles.map { $0.value.fileURL }
+                scummStore.scummVersion = ScummVersion.dectect(files: urls )
+                
             } catch {
                 showAlert = true
             }

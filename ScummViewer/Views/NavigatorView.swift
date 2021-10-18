@@ -12,19 +12,30 @@ struct NavigatorView: View {
     @EnvironmentObject var scummStore: ScummStore
     
     var body: some View {
-        List {
-            ForEach(scummStore.scummFiles, id: \.self) { fileURL in
-                Section(header: Text(fileURL.value.lastPathComponent)) {
+        
+        NavigationView {
+        
+            List {
+                
+                ForEach(scummStore.scummFiles, id: \.self) { file in
                     
-                    OutlineGroup(
-                        fileURL.children ?? [],
-                        id: \.value,
-                        children: \.children
-                    ) { node in
-                        Text(node.value.absoluteString).font(.subheadline)
+                    Section(header: Text(file.value.fileURL.lastPathComponent)) {
+                        
+                        OutlineGroup(
+                            file.value.tree?.children ?? [],
+                            id: \.value,
+                            children: \.children
+                        ) { node in
+                            
+                            NavigationLink(
+                                destination: DetailsView(block: node.value)
+                            ) {
+                                Text(node.value.name).font(.subheadline)
+                            }
+                        }
                     }
                 }
-            }
+            }.listStyle(SidebarListStyle())
         }
     }
 }
