@@ -28,13 +28,16 @@ struct NavigatorView: View {
                         ) { node in
                             
                             NavigationLink(
-                                destination: DetailsView(block: node.value)
+                                destination: DetailsView(
+                                    block: .constant(node.value),
+                                    url: .constant(file.value.fileURL))
                             ) {
                                 Text(node.value.name).font(.subheadline)
                             }
                         }
                     }
                 }
+                
             }.listStyle(SidebarListStyle())
         }
     }

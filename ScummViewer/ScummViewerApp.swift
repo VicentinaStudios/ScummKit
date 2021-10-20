@@ -21,7 +21,7 @@ struct ScummViewerApp: App {
         
         WindowGroup {
             ContentView()
-                .frame(minWidth: 640, maxWidth: .infinity, minHeight: 480, maxHeight: .infinity, alignment: .center)
+                .frame(minWidth: 1024, maxWidth: .infinity, minHeight: 768, maxHeight: .infinity, alignment: .center)
                 .environmentObject(scummStore)
                 .alert(isPresented: $showAlert) {
                     Alert(

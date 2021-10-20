@@ -18,6 +18,7 @@
 		4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B81B271C26470030E564 /* URL+Ext.swift */; };
 		4C79B825271D77FD0030E564 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B824271D77FD0030E564 /* Block.swift */; };
 		4C79B827271D8CC40030E564 /* ScummFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B826271D8CC40030E564 /* ScummFile.swift */; };
+		4C79B829271E3C340030E564 /* BlockInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B828271E3C340030E564 /* BlockInfoView.swift */; };
 		4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B3E27177B040088A49B /* QueueProtocol.swift */; };
 		4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B4027177B360088A49B /* QueueStack.swift */; };
 		4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B43271786F50088A49B /* ScummStore.swift */; };
@@ -26,6 +27,7 @@
 		4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD23D7E2716D66400832C4E /* ContentView.swift */; };
 		4CD23D812716D66600832C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD23D802716D66600832C4E /* Assets.xcassets */; };
 		4CD23D842716D66600832C4E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD23D832716D66600832C4E /* Preview Assets.xcassets */; };
+		4CE24556271F99E4007D7847 /* HexEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE24555271F99E4007D7847 /* HexEditorView.swift */; };
 		4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFF22B271AEE14001021C9 /* NavigatorView.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,7 @@
 		4C79B81B271C26470030E564 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		4C79B824271D77FD0030E564 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		4C79B826271D8CC40030E564 /* ScummFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummFile.swift; sourceTree = "<group>"; };
+		4C79B828271E3C340030E564 /* BlockInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockInfoView.swift; sourceTree = "<group>"; };
 		4C8A0B3E27177B040088A49B /* QueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueProtocol.swift; sourceTree = "<group>"; };
 		4C8A0B4027177B360088A49B /* QueueStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStack.swift; sourceTree = "<group>"; };
 		4C8A0B43271786F50088A49B /* ScummStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStore.swift; sourceTree = "<group>"; };
@@ -52,6 +55,7 @@
 		4CD23D832716D66600832C4E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4CD23D852716D66600832C4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CD23D862716D66600832C4E /* ScummViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScummViewer.entitlements; sourceTree = "<group>"; };
+		4CE24555271F99E4007D7847 /* HexEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexEditorView.swift; sourceTree = "<group>"; };
 		4CEFF22B271AEE14001021C9 /* NavigatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +135,8 @@
 				4CD23D7E2716D66400832C4E /* ContentView.swift */,
 				4CEFF22B271AEE14001021C9 /* NavigatorView.swift */,
 				4C33EF70271BA9B800323220 /* DetailsView.swift */,
+				4C79B828271E3C340030E564 /* BlockInfoView.swift */,
+				4CE24555271F99E4007D7847 /* HexEditorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,6 +259,7 @@
 				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
 				4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */,
 				4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */,
+				4C79B829271E3C340030E564 /* BlockInfoView.swift in Sources */,
 				4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */,
 				4C79B825271D77FD0030E564 /* Block.swift in Sources */,
 				4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */,
@@ -261,6 +268,7 @@
 				4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */,
 				4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */,
 				4C408070271B97A500A76C75 /* UInt16+Ext.swift in Sources */,
+				4CE24556271F99E4007D7847 /* HexEditorView.swift in Sources */,
 				4C40806E271B976C00A76C75 /* UInt8+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

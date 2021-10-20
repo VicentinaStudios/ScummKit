@@ -24,7 +24,23 @@ extension UInt8 {
     }
     
     var char: String {
-        String(unicode)
+        
+        let ascii = [
+            "␀", "␁", "␂", "␃", "␄", "␅", "␆", "␇", "␈", "␉", "␤", "␋", "␌", "␍", "␎", "␏",
+            "␐", "␑", "␒", "␓", "␔", "␕", "␖", "␗", "␘", "␙", "␚", "␛", "␜", "␝", "␞", "␟",
+            "␠"
+        ]
+        
+        switch self {
+        case 0...32:
+            //return ascii[Int(self)]
+            return "."
+        case 127:
+            //return "␡"
+            return "."
+        default:
+            return String(unicode.isASCII ? unicode : ".")
+        }
     }
     
     func debug(xor gate: UInt8?) -> String {

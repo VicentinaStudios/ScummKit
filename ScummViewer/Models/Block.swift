@@ -8,8 +8,8 @@
 struct Block: Hashable {
     
     var name: String
-    let size: UInt32
-    let offset: UInt32
+    var size: UInt32
+    var offset: UInt32
     
     init(for name: String, with size: UInt32, at offset: UInt32) {
         self.name = name

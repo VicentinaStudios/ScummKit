@@ -5,36 +5,67 @@
 //  Created by Michael Borgmann on 17.10.21.
 //
 
+import Foundation
 import SwiftUI
 
 struct DetailsView: View {
     
-    @State var block: Block
+    @EnvironmentObject var scummStore: ScummStore
     
-    @State private var blockType: String = ""
-    @State private var blockSize: String = ""
-    @State private var blockOffset: String = ""
+    @Binding var block: Block
+    @Binding var url: URL
+
+    @State private var buffer: [UInt8] = []
+    
+    private let columns = [GridItem(.flexible())]
     
     var body: some View {
+        
+        VStack {
+            BlockInfoView(block: $block)
 
-        HStack {
+            ScrollView(.vertical) {
+                HexEditorView(buffer: $buffer)
+            }
             
-            Spacer()
-            
-            Text("Block Type: \(block.name)")
-                .frame(alignment: .leading)
-            
-            Spacer()
+        }.onAppear {
+            buffer = try! blockData.byteBuffer.map { $0.xor(with: 0x69) }
+        }
+    }
+}
 
-            Text("Block Size: \(block.size) bytes")
-                .frame(alignment: .leading)
+extension DetailsView {
+
+    var blockData: Data {
+        get throws {
+            do {
+                
+                return try readData(
+                    from: url,
+                    at: UInt64(block.offset),
+                    with: Int(block.size)
+                )
+                
+            } catch {
+                throw FileError.loadFailure
+            }
+        }
+    }
+    
+    private func readData(from file: URL, at offset: UInt64, with length: Int) throws -> Data {
+        
+        do {
             
-            Spacer()
+            let fileHandle = try FileHandle(forReadingFrom: file)
+            fileHandle.seek(toFileOffset: offset)
+            let data = fileHandle.readData(ofLength: length)
             
-            Text("Block Offset: 0x\(block.offset.hex)")
-                .frame(alignment: .leading)
+            fileHandle.closeFile()
             
-            Spacer()
+            return data
+            
+        } catch {
+            throw FileError.loadFailure
         }
     }
 }
@@ -42,8 +73,15 @@ struct DetailsView: View {
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let block = Block(for: "ROOM", with: 10, at: 20)
+        let block = Block(for: "ROOM", with: 20, at: 20)
         
-        DetailsView(block: block)
+        let path = "SCUMM.000"
+        let url = URL(fileURLWithPath: path, isDirectory: true)
+        
+        DetailsView(
+            block: .constant(block),
+            url: .constant(url)
+        )
+        .environmentObject(ScummStore.create)
     }
 }
