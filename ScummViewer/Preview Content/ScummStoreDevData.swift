@@ -8,10 +8,25 @@
 import Foundation
 
 extension ScummStore {
+    
+    static var gamePath: String? {
+        Bundle.main.infoDictionary?["SCUMM Game Path"] as? String
+    }
+    
+    static var indexFile: String? {
+        Bundle.main.infoDictionary?["Index File"] as? String
+    }
+    
+    static var dataFile: String? {
+        Bundle.main.infoDictionary?["Data File"] as? String
+    }
   
     func createDevData() throws  {
         
-        let path = "/PATH/OF/SCUMM/GAME"
+        guard let path = ScummStore.gamePath else {
+            return
+        }
+        
         let url = URL(fileURLWithPath: path, isDirectory: true)
         
         do {

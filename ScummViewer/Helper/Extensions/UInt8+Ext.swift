@@ -5,6 +5,8 @@
 //  Created by Michael Borgmann on 17.10.21.
 //
 
+import Foundation
+
 extension UInt8 {
     
     var hex: String {
@@ -24,6 +26,10 @@ extension UInt8 {
     }
     
     var char: String {
+        String(unicode)
+    }
+    
+    var printable: String {
         
         let ascii = [
             "␀", "␁", "␂", "␃", "␄", "␅", "␆", "␇", "␈", "␉", "␤", "␋", "␌", "␍", "␎", "␏",
@@ -54,5 +60,68 @@ extension UInt8 {
         } else {
             return "\(hex) [\(character)]"
         }
+    }
+}
+
+extension Array where Element == UInt8 {
+    
+    func slice(_ index: Int, size: Int) -> [UInt8]{
+        (index..<index+size).map { self[$0] }
+    }
+    
+    func byte(_ index: Int) -> UInt8 {
+        self[index]
+    }
+    
+    func wordBE(_ index: Int) -> UInt16 {
+        (index..<index+2).map { self[$0] }.wordBE
+    }
+    
+    func wordLE(_ index: Int) -> UInt16 {
+        (index..<index+2).map { self[$0] }.wordLE
+    }
+    
+    func dwordBE(_ index: Int) -> UInt32 {
+        (index..<index+4).map { self[$0] }.dwordBE
+    }
+    
+    func dwordLE(_ index: Int) -> UInt32 {
+        (index..<index+4).map { self[$0] }.dwordLE
+    }
+    
+    var wordLE: UInt16 {
+        
+        let u16 = self.reversed().reduce(0) { soFar, byte in
+            soFar << 8 | UInt16(byte)
+        }
+        
+        return u16
+    }
+    
+    var wordBE: UInt16 {
+        
+        let u16 = self.reduce(0) { soFar, byte in
+            soFar << 8 | UInt16(byte)
+        }
+        
+        return u16
+    }
+
+    var dwordLE: UInt32 {
+        
+        let u16 = self.reversed().reduce(0) { soFar, byte in
+            soFar << 8 | UInt32(byte)
+        }
+        
+        return u16
+    }
+
+    var dwordBE: UInt32 {
+        
+        let u16 = self.reduce(0) { soFar, byte in
+            soFar << 8 | UInt32(byte)
+        }
+        
+        return u16
     }
 }

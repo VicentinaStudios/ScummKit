@@ -30,8 +30,6 @@ struct HexEditorView: View {
             .map { ceil($0)}
             .map { Int($0)}
         
-//        let columns = offset + hex
-        
         LazyVGrid(columns: columns, pinnedViews: .sectionHeaders) {
             
             Section(
@@ -46,7 +44,6 @@ struct HexEditorView: View {
                     
                     let start = index * 16
                     let end = start + 16
-                    //let end = start + 16 < buffer.count ? start + 16 : start + buffer.count % 16
                     
                     let offs = UInt32(start).hex
                     
@@ -55,14 +52,14 @@ struct HexEditorView: View {
                     }.joined(separator: " ")
                                         
                     let chars = (start..<end).map {
-                        $0 < buffer.count ? buffer[$0].char : " "
+                        $0 < buffer.count ? buffer[$0].printable : " "
                     }.joined(separator: " ")
                     
                     Text("\(offs) \(hex) \(chars)")
                         .font(.system(.headline, design: .monospaced))
                 }
             }
-        }
+        }.frame(width: 740)
     }
 }
 
@@ -72,7 +69,5 @@ struct HexEditorView_Previews: PreviewProvider {
         let buffer = Data("This is a buffer...".utf8).byteBuffer
         
         HexEditorView(buffer: .constant(buffer))
-            .frame(width: 750)
-//            .previewLayout(.device)
     }
 }

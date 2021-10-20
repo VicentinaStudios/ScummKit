@@ -14,6 +14,8 @@
 		4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C408071271B97BC00A76C75 /* UInt32+Ext.swift */; };
 		4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA327176B7F0090BA59 /* TreeNode.swift */; };
 		4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA9271777140090BA59 /* QueueArray.swift */; };
+		4C637CC927207F6200634F8E /* InspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637CC827207F6200634F8E /* InspectView.swift */; };
+		4C637CCB27209E3600634F8E /* RNAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637CCA27209E3600634F8E /* RNAM.swift */; };
 		4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B819271C23D00030E564 /* ScummVersion.swift */; };
 		4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B81B271C26470030E564 /* URL+Ext.swift */; };
 		4C79B825271D77FD0030E564 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B824271D77FD0030E564 /* Block.swift */; };
@@ -39,6 +41,8 @@
 		4C408071271B97BC00A76C75 /* UInt32+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt32+Ext.swift"; sourceTree = "<group>"; };
 		4C5CDFA327176B7F0090BA59 /* TreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNode.swift; sourceTree = "<group>"; };
 		4C5CDFA9271777140090BA59 /* QueueArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueArray.swift; sourceTree = "<group>"; };
+		4C637CC827207F6200634F8E /* InspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectView.swift; sourceTree = "<group>"; };
+		4C637CCA27209E3600634F8E /* RNAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNAM.swift; sourceTree = "<group>"; };
 		4C79B819271C23D00030E564 /* ScummVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummVersion.swift; sourceTree = "<group>"; };
 		4C79B81B271C26470030E564 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		4C79B824271D77FD0030E564 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 				4C8A0B43271786F50088A49B /* ScummStore.swift */,
 				4C79B824271D77FD0030E564 /* Block.swift */,
 				4C79B826271D8CC40030E564 /* ScummFile.swift */,
+				4C637CCA27209E3600634F8E /* RNAM.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -135,6 +140,7 @@
 				4CD23D7E2716D66400832C4E /* ContentView.swift */,
 				4CEFF22B271AEE14001021C9 /* NavigatorView.swift */,
 				4C33EF70271BA9B800323220 /* DetailsView.swift */,
+				4C637CC827207F6200634F8E /* InspectView.swift */,
 				4C79B828271E3C340030E564 /* BlockInfoView.swift */,
 				4CE24555271F99E4007D7847 /* HexEditorView.swift */,
 			);
@@ -251,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */,
+				4C637CCB27209E3600634F8E /* RNAM.swift in Sources */,
 				4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */,
 				4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */,
 				4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */,
@@ -264,6 +271,7 @@
 				4C79B825271D77FD0030E564 /* Block.swift in Sources */,
 				4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */,
 				4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */,
+				4C637CC927207F6200634F8E /* InspectView.swift in Sources */,
 				4C79B827271D8CC40030E564 /* ScummFile.swift in Sources */,
 				4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */,
 				4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */,

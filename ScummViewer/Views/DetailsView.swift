@@ -22,10 +22,21 @@ struct DetailsView: View {
     var body: some View {
         
         VStack {
+            
+            Text("Room Names")
+                .padding()
+                .font(.system(.title2))
+            
             BlockInfoView(block: $block)
-
-            ScrollView(.vertical) {
-                HexEditorView(buffer: $buffer)
+            
+            TabView {
+                
+                InspectView(buffer: $buffer)
+                    .tabItem { Text("Inspect") }
+                
+                ScrollView(.vertical) {
+                    HexEditorView(buffer: $buffer)
+                }.tabItem { Text("Hex View") }
             }
             
         }.onAppear {
@@ -73,15 +84,15 @@ extension DetailsView {
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let block = Block(for: "ROOM", with: 20, at: 20)
-        
-        let path = "SCUMM.000"
+        let scummStore = ScummStore.create
+        let block = Block(for: "RNAM", with: 859, at: 0)
+        let path = "\(ScummStore.gamePath!)/\(ScummStore.indexFile!)"
         let url = URL(fileURLWithPath: path, isDirectory: true)
         
         DetailsView(
             block: .constant(block),
             url: .constant(url)
         )
-        .environmentObject(ScummStore.create)
+        .environmentObject(scummStore)
     }
 }
