@@ -33,7 +33,7 @@ struct HexEditorView: View {
         LazyVGrid(columns: columns, pinnedViews: .sectionHeaders) {
             
             Section(
-                header: Text("\(offsetsHeader) \(hexHeader) \(byteHeader)")
+                header: Text("\(offsetsHeader)   \(hexHeader)   \(byteHeader)")
                     .font(.system(.headline, design: .monospaced))
                     .padding()
                     .background(Color.gray)
@@ -55,11 +55,11 @@ struct HexEditorView: View {
                         $0 < buffer.count ? buffer[$0].printable : " "
                     }.joined(separator: " ")
                     
-                    Text("\(offs) \(hex) \(chars)")
+                    Text("\(offs)   \(hex)   \(chars)")
                         .font(.system(.headline, design: .monospaced))
                 }
             }
-        }.frame(width: 740)
+        }.frame(width: 780)
     }
 }
 
