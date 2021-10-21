@@ -25,4 +25,8 @@ extension UInt32 {
     var char: [String] {
         unicode.map { String($0) }
     }
+    
+    var string: String {
+        char.joined()
+    }
 }

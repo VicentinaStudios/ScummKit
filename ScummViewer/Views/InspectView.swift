@@ -17,17 +17,19 @@ struct InspectView: View {
             
             if !buffer.isEmpty {
                 
-                switch blockName {
-                case "RNAM":
+                switch BlockType(rawValue: blockName) {
+                case .RNAM:
                     RNAMView(buffer: $buffer)
-                case "MAXS":
+                case .MAXS:
                     MAXSView(buffer: $buffer)
+                case .DROO:
+                    DirectoryView(buffer: $buffer)
                 default:
                     Text("Cannot inspect block")
                 }
             }
         }.onAppear {
-            blockName = buffer.dwordLE.char.joined()
+            blockName = buffer.dwordLE.string
         }
     }
 }
@@ -35,10 +37,11 @@ struct InspectView: View {
 struct InspectView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let block = Block(for: "RNAM", with: 859, at: 0)
-        let path = "\(ScummStore.gamePath!)/\(ScummStore.indexFile!)"
-        let url = URL(fileURLWithPath: path, isDirectory: true)
-        let buffer = try! block.read(from: url).byteBuffer.map { $0.xor(with: 0x69) }
+        let buffer = ScummStore.buffer(
+            at: ScummStore.indexFileURL,
+            for: ScummStore.block(),
+            xor: 0x69
+        )
         
         InspectView(buffer: .constant(buffer))
     }

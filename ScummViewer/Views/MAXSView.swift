@@ -42,10 +42,11 @@ struct MAXSView: View {
 struct MAXSView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let block = Block(for: "MAXS", with: 26, at: 0x35b)
-        let path = "\(ScummStore.gamePath!)/\(ScummStore.indexFile!)"
-        let url = URL(fileURLWithPath: path, isDirectory: true)
-        let buffer = try! block.read(from: url).byteBuffer.map { $0.xor(with: 0x69) }
+        let buffer = ScummStore.buffer(
+            at: ScummStore.indexFileURL,
+            for: ScummStore.block(name: BlockType.MAXS, with: 26, at: 0x35b),
+            xor: 0x69
+        )
         
         MAXSView(buffer: .constant(buffer))
     }

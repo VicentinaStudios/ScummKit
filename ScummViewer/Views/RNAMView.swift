@@ -45,7 +45,7 @@ struct RNAMView: View {
                         HStack {
                             Text("#\(room.number)")
                                 .frame(width: Constants.numberOfRoomsLabelWidth)
-                            Text(room.name.map { $0.char }.joined())
+                            Text(room.name.string)
                         }
                     }
                 }
@@ -60,10 +60,11 @@ struct RNAMView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        let block = Block(for: "RNAM", with: 859, at: 0)
-        let path = "\(ScummStore.gamePath!)/\(ScummStore.indexFile!)"
-        let url = URL(fileURLWithPath: path, isDirectory: true)
-        let buffer = try! block.read(from: url).byteBuffer.map { $0.xor(with: 0x69) }
+        let buffer = ScummStore.buffer(
+            at: ScummStore.indexFileURL,
+            for: ScummStore.block(name: BlockType.RNAM, with: 859, at: 0),
+            xor: 0x69
+        )
         
         RNAMView(buffer: .constant(buffer))
     }

@@ -37,7 +37,7 @@ struct BlockInfoView: View {
 struct BlockInfoView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let block = Block(for: "ROOM", with: 10, at: 20)
+        let block = Block(for: BlockType.ROOM.rawValue, with: 10, at: 20)
         
         BlockInfoView(block: .constant(block))
     }

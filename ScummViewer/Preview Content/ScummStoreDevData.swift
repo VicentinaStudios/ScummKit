@@ -9,6 +9,28 @@ import Foundation
 
 extension ScummStore {
     
+    static func block(name: BlockType = BlockType.DROO, with size: UInt32 = 510, at offset: UInt32 = 0x375) -> Block {
+        Block(for: name.rawValue, with: size, at: offset)
+    }
+    
+    static func buffer(at url: URL, for block: Block, xor: UInt8) -> [UInt8] {
+        try! block.read(from: url).byteBuffer.xor(with: xor)
+    }
+
+    static var gameURL: URL {
+        URL(fileURLWithPath: gamePath!, isDirectory: true)
+    }
+
+    static var indexFileURL: URL {
+        let path = "\(gamePath!)/\(indexFile!)"
+        return URL(fileURLWithPath: path, isDirectory: true)
+    }
+    
+    static var dataFileURL: URL {
+        let path = "\(gamePath!)/\(indexFile!)"
+        return URL(fileURLWithPath: path, isDirectory: true)
+    }
+    
     static var gamePath: String? {
         Bundle.main.infoDictionary?["SCUMM Game Path"] as? String
     }

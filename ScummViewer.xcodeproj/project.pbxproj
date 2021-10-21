@@ -26,6 +26,10 @@
 		4C872D3B2720D084007FCCA7 /* MAXS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C872D3A2720D084007FCCA7 /* MAXS.swift */; };
 		4C872D3D2720DA5E007FCCA7 /* ValueFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C872D3C2720DA5E007FCCA7 /* ValueFieldView.swift */; };
 		4C872D3F27211783007FCCA7 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C872D3E27211783007FCCA7 /* BottomBarView.swift */; };
+		4C872D4127211E8D007FCCA7 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C872D4027211E8D007FCCA7 /* Directory.swift */; };
+		4C872D432721212E007FCCA7 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C872D422721212E007FCCA7 /* DirectoryView.swift */; };
+		4C872D452721751C007FCCA7 /* BlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C872D442721751C007FCCA7 /* BlockType.swift */; };
+		4C872D4727217BA6007FCCA7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4C872D4627217BA6007FCCA7 /* README.md */; };
 		4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B3E27177B040088A49B /* QueueProtocol.swift */; };
 		4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B4027177B360088A49B /* QueueStack.swift */; };
 		4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B43271786F50088A49B /* ScummStore.swift */; };
@@ -58,6 +62,10 @@
 		4C872D3A2720D084007FCCA7 /* MAXS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAXS.swift; sourceTree = "<group>"; };
 		4C872D3C2720DA5E007FCCA7 /* ValueFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueFieldView.swift; sourceTree = "<group>"; };
 		4C872D3E27211783007FCCA7 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
+		4C872D4027211E8D007FCCA7 /* Directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
+		4C872D422721212E007FCCA7 /* DirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView.swift; sourceTree = "<group>"; };
+		4C872D442721751C007FCCA7 /* BlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockType.swift; sourceTree = "<group>"; };
+		4C872D4627217BA6007FCCA7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4C8A0B3E27177B040088A49B /* QueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueProtocol.swift; sourceTree = "<group>"; };
 		4C8A0B4027177B360088A49B /* QueueStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStack.swift; sourceTree = "<group>"; };
 		4C8A0B43271786F50088A49B /* ScummStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStore.swift; sourceTree = "<group>"; };
@@ -102,6 +110,7 @@
 				4C5CDFA8271776EE0090BA59 /* Data Structure & Algorithms */,
 				4C40806B271B973300A76C75 /* Extensions */,
 				4C79B819271C23D00030E564 /* ScummVersion.swift */,
+				4C872D442721751C007FCCA7 /* BlockType.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -141,6 +150,7 @@
 				4C79B826271D8CC40030E564 /* ScummFile.swift */,
 				4C637CCA27209E3600634F8E /* RNAM.swift */,
 				4C872D3A2720D084007FCCA7 /* MAXS.swift */,
+				4C872D4027211E8D007FCCA7 /* Directory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -154,6 +164,7 @@
 				4C637CC827207F6200634F8E /* InspectView.swift */,
 				4C872D362720CA94007FCCA7 /* RNAMView.swift */,
 				4C872D382720CB52007FCCA7 /* MAXSView.swift */,
+				4C872D422721212E007FCCA7 /* DirectoryView.swift */,
 				4C79B828271E3C340030E564 /* BlockInfoView.swift */,
 				4CE24555271F99E4007D7847 /* HexEditorView.swift */,
 				4C872D3C2720DA5E007FCCA7 /* ValueFieldView.swift */,
@@ -165,6 +176,7 @@
 		4CD23D702716D66400832C4E = {
 			isa = PBXGroup;
 			children = (
+				4C872D4627217BA6007FCCA7 /* README.md */,
 				4CD23D7B2716D66400832C4E /* ScummViewer */,
 				4CD23D7A2716D66400832C4E /* Products */,
 			);
@@ -259,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C872D4727217BA6007FCCA7 /* README.md in Resources */,
 				4CD23D842716D66600832C4E /* Preview Assets.xcassets in Resources */,
 				4CD23D812716D66600832C4E /* Assets.xcassets in Resources */,
 			);
@@ -271,13 +284,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C872D432721212E007FCCA7 /* DirectoryView.swift in Sources */,
 				4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */,
 				4C637CCB27209E3600634F8E /* RNAM.swift in Sources */,
 				4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */,
 				4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */,
 				4C872D3B2720D084007FCCA7 /* MAXS.swift in Sources */,
 				4C872D372720CA94007FCCA7 /* RNAMView.swift in Sources */,
+				4C872D452721751C007FCCA7 /* BlockType.swift in Sources */,
 				4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */,
+				4C872D4127211E8D007FCCA7 /* Directory.swift in Sources */,
 				4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */,
 				4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */,
 				4C872D3F27211783007FCCA7 /* BottomBarView.swift in Sources */,

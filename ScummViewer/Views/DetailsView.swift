@@ -16,6 +16,7 @@ struct DetailsView: View {
     @Binding var url: URL
 
     @State private var buffer: [UInt8] = []
+    @State private var title: String = ""
     
     private let columns = [GridItem(.flexible())]
     
@@ -23,7 +24,7 @@ struct DetailsView: View {
         
         VStack {
             
-            Text("Room Names")
+            Text(title)
                 .padding()
                 .font(.system(.title2))
             
@@ -31,9 +32,9 @@ struct DetailsView: View {
             
             TabView {
                 
-                switch block.name {
+                switch BlockType(rawValue: block.name) {
                     
-                case "RNAM", "MAXS":
+                case .RNAM, .MAXS, .DROO:
                     
                     InspectView(buffer: $buffer)
                         .tabItem { Text("Inspect") }
@@ -48,7 +49,12 @@ struct DetailsView: View {
             }
             
         }.onAppear {
-            buffer = try! blockData.byteBuffer.map { $0.xor(with: scummStore.scummVersion?.xor ?? 0) }
+            
+            buffer = try! blockData.byteBuffer.xor(
+                with: scummStore.scummVersion?.xor ?? 0
+            )
+            
+            title = BlockType.init(rawValue: block.name)?.title ?? "Unkown"
         }
     }
 }
@@ -92,15 +98,9 @@ extension DetailsView {
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let scummStore = ScummStore.create
-        let block = Block(for: "RNAM", with: 859, at: 0)
-        let path = "\(ScummStore.gamePath!)/\(ScummStore.indexFile!)"
-        let url = URL(fileURLWithPath: path, isDirectory: true)
-        
         DetailsView(
-            block: .constant(block),
-            url: .constant(url)
-        )
-        .environmentObject(scummStore)
+            block: .constant(ScummStore.block()),
+            url: .constant(ScummStore.indexFileURL)
+        ).environmentObject(ScummStore.create)
     }
 }

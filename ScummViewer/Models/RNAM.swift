@@ -16,16 +16,13 @@ struct RNAM {
     
     let blockName: UInt32
     let blockSize: UInt32
-    var rooms: [Room]
+    let rooms: [Room]
     let blank: UInt8
 }
 
 extension RNAM {
     
     static func create(from buffer: [UInt8]) -> RNAM {
-        
-        let blockName = buffer.dwordLE(0)
-        let blockSize = buffer.dwordBE(4)
         
         var offset = 8
         
@@ -43,10 +40,10 @@ extension RNAM {
         }
                 
         return RNAM(
-            blockName: blockName,
-            blockSize: blockSize,
+            blockName: buffer.dwordLE(0),
+            blockSize: buffer.dwordBE(4),
             rooms: rooms,
-            blank: 0
+            blank: buffer.byte(offset)
         )
     }
 }

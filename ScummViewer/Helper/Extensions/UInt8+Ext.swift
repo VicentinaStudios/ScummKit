@@ -124,4 +124,12 @@ extension Array where Element == UInt8 {
         
         return u16
     }
+    
+    var string: String {
+        self.map { $0.char }.joined()
+    }
+    
+    func xor(with gate: UInt8) -> [UInt8] {
+        self.map { $0.xor(with: gate)}
+    }
 }
