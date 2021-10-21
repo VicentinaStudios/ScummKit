@@ -39,4 +39,20 @@ extension MAXS {
             inventoryObjects: buffer.wordLE(24)
         )
     }
+    
+    static var empty: MAXS {
+        MAXS(
+            blockName: 0,
+            blockSize: 0,
+            variables: 0,
+            unknown: 0,
+            bitVariables: 0,
+            localObjects: 0,
+            newNames: 0,
+            characterSets: 0,
+            verbs: 0,
+            array: 0,
+            inventoryObjects: 0
+        )
+    }
 }

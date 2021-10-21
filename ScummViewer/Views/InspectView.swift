@@ -28,6 +28,8 @@ struct InspectView: View {
                     DirectoryOfObjectView(buffer: $buffer)
                 case .LOFF:
                     LOFFView(buffer: $buffer)
+                case .RMHD:
+                    RMHDView(buffer: $buffer)
                 default:
                     Text("Cannot inspect block")
                 }
@@ -41,11 +43,7 @@ struct InspectView: View {
 struct InspectView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let buffer = ScummStore.buffer(
-            at: ScummStore.indexFileURL,
-            for: ScummStore.block(),
-            xor: 0x69
-        )
+        let buffer = ScummStore.buffer(at: ScummStore.indexFileURL)
         
         InspectView(buffer: .constant(buffer))
     }

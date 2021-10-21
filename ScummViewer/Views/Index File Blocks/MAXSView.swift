@@ -10,7 +10,7 @@ import SwiftUI
 struct MAXSView: View {
     
     @Binding var buffer: [UInt8]
-    @State private var maxs: MAXS? = nil
+    @State private var maxs = MAXS.empty
     
     var body: some View {
         
@@ -44,8 +44,7 @@ struct MAXSView_Previews: PreviewProvider {
         
         let buffer = ScummStore.buffer(
             at: ScummStore.indexFileURL,
-            for: ScummStore.block(name: BlockType.MAXS, with: 26, at: 0x35b),
-            xor: 0x69
+            for: ScummStore.block(name: BlockType.MAXS, with: 26, at: 0x35b)
         )
         
         MAXSView(buffer: .constant(buffer))

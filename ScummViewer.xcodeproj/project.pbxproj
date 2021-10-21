@@ -38,11 +38,14 @@
 		4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD23D7E2716D66400832C4E /* ContentView.swift */; };
 		4CD23D812716D66600832C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD23D802716D66600832C4E /* Assets.xcassets */; };
 		4CD23D842716D66600832C4E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD23D832716D66600832C4E /* Preview Assets.xcassets */; };
+		4CD9F4D72722217A00D3F0D7 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9F4D62722217A00D3F0D7 /* InputFieldView.swift */; };
 		4CE24556271F99E4007D7847 /* HexEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE24555271F99E4007D7847 /* HexEditorView.swift */; };
 		4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFF22B271AEE14001021C9 /* NavigatorView.swift */; };
 		4CF2240B2721B7BC0006F1CE /* DirectoryOfObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2240A2721B7BC0006F1CE /* DirectoryOfObjects.swift */; };
 		4CF22411272207870006F1CE /* LOFF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF22410272207870006F1CE /* LOFF.swift */; };
 		4CF2241427220AFF0006F1CE /* LOFFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2241327220AFF0006F1CE /* LOFFView.swift */; };
+		4CF224172722109D0006F1CE /* RMHD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF224162722109D0006F1CE /* RMHD.swift */; };
+		4CF22419272210B10006F1CE /* RMHDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF22418272210B10006F1CE /* RMHDView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,11 +83,14 @@
 		4CD23D832716D66600832C4E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4CD23D852716D66600832C4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CD23D862716D66600832C4E /* ScummViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScummViewer.entitlements; sourceTree = "<group>"; };
+		4CD9F4D62722217A00D3F0D7 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 		4CE24555271F99E4007D7847 /* HexEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexEditorView.swift; sourceTree = "<group>"; };
 		4CEFF22B271AEE14001021C9 /* NavigatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorView.swift; sourceTree = "<group>"; };
 		4CF2240A2721B7BC0006F1CE /* DirectoryOfObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryOfObjects.swift; sourceTree = "<group>"; };
 		4CF22410272207870006F1CE /* LOFF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOFF.swift; sourceTree = "<group>"; };
 		4CF2241327220AFF0006F1CE /* LOFFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOFFView.swift; sourceTree = "<group>"; };
+		4CF224162722109D0006F1CE /* RMHD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMHD.swift; sourceTree = "<group>"; };
+		4CF22418272210B10006F1CE /* RMHDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMHDView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +238,7 @@
 				4CE24555271F99E4007D7847 /* HexEditorView.swift */,
 				4C872D3C2720DA5E007FCCA7 /* ValueFieldView.swift */,
 				4C872D3E27211783007FCCA7 /* BottomBarView.swift */,
+				4CD9F4D62722217A00D3F0D7 /* InputFieldView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -259,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF22410272207870006F1CE /* LOFF.swift */,
+				4CF224162722109D0006F1CE /* RMHD.swift */,
 			);
 			path = "Data File Models";
 			sourceTree = "<group>";
@@ -267,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF2241327220AFF0006F1CE /* LOFFView.swift */,
+				4CF22418272210B10006F1CE /* RMHDView.swift */,
 			);
 			path = "Data File Blocks";
 			sourceTree = "<group>";
@@ -359,6 +368,7 @@
 				4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */,
 				4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */,
 				4C79B829271E3C340030E564 /* BlockInfoView.swift in Sources */,
+				4CF224172722109D0006F1CE /* RMHD.swift in Sources */,
 				4CF2240B2721B7BC0006F1CE /* DirectoryOfObjects.swift in Sources */,
 				4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */,
 				4C872D392720CB52007FCCA7 /* MAXSView.swift in Sources */,
@@ -366,12 +376,14 @@
 				4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */,
 				4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */,
 				4C637CC927207F6200634F8E /* InspectView.swift in Sources */,
+				4CD9F4D72722217A00D3F0D7 /* InputFieldView.swift in Sources */,
 				4CF2241427220AFF0006F1CE /* LOFFView.swift in Sources */,
 				4C79B827271D8CC40030E564 /* ScummFile.swift in Sources */,
 				4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */,
 				4C872D3D2720DA5E007FCCA7 /* ValueFieldView.swift in Sources */,
 				4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */,
 				4C408070271B97A500A76C75 /* UInt16+Ext.swift in Sources */,
+				4CF22419272210B10006F1CE /* RMHDView.swift in Sources */,
 				4CE24556271F99E4007D7847 /* HexEditorView.swift in Sources */,
 				4C40806E271B976C00A76C75 /* UInt8+Ext.swift in Sources */,
 			);
@@ -516,7 +528,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.3.0;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -542,7 +554,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.3.0;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

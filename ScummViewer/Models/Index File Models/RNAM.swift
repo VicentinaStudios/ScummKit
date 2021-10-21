@@ -16,7 +16,7 @@ struct RNAM {
     
     let blockName: UInt32
     let blockSize: UInt32
-    let rooms: [Room]
+    var rooms: [Room]
     let blank: UInt8
 }
 
@@ -45,5 +45,9 @@ extension RNAM {
             rooms: rooms,
             blank: buffer.byte(offset)
         )
+    }
+    
+    static var empty: RNAM {
+        RNAM(blockName: 0, blockSize: 0, rooms: [], blank: 0)
     }
 }

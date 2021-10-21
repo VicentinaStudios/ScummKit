@@ -82,4 +82,8 @@ extension Directory {
             offsets: offsets
         )
     }
+    
+    static var empty: Directory {
+        Directory(blockName: 0, blockSize: 0, numberOfItems: 0, itemNumbers: [], offsets: [])
+    }
 }

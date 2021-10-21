@@ -10,7 +10,7 @@ import SwiftUI
 struct RNAMView: View {
     
     @Binding var buffer: [UInt8]
-    @State private var rnam: RNAM? = nil
+    @State private var rnam = RNAM.empty
     @State private var order: Order = .unsorted
     
     var body: some View {
@@ -29,32 +29,29 @@ struct RNAMView: View {
                 }.font(.system(.headline)).buttonStyle(PlainButtonStyle())
             ) {
                 
-                if let rooms = $rnam.wrappedValue?.rooms {
-                    
-                    let ordered = rooms
-                        .sorted {
-                            switch order {
-                            case .unsorted:
-                                return false
-                            case .down:
-                                return $0.number < $1.number
-                            case .up:
-                                return $0.number > $1.number
-                            }
+                let ordered = $rnam.wrappedValue.rooms
+                    .sorted {
+                        switch order {
+                        case .unsorted:
+                            return false
+                        case .down:
+                            return $0.number < $1.number
+                        case .up:
+                            return $0.number > $1.number
                         }
-                    
-                    ForEach(ordered.indices, id: \.self) { index in
-                        HStack {
-                            
-                            Text("\(index + 1)")
-                                .frame(width: Constants.indexLabelWidth)
-                                .foregroundColor(.secondary)
-                            
-                            Text("#\(ordered[index].number)")
-                                .frame(width: Constants.numberOfRoomsLabelWidth)
-                            
-                            Text(ordered[index].name.string)
-                        }
+                    }
+                
+                ForEach(ordered.indices, id: \.self) { index in
+                    HStack {
+                        
+                        Text("\(index + 1)")
+                            .frame(width: Constants.indexLabelWidth)
+                            .foregroundColor(.secondary)
+                        
+                        Text("#\(ordered[index].number)")
+                            .frame(width: Constants.numberOfRoomsLabelWidth)
+                        
+                        Text(ordered[index].name.string)
                     }
                 }
             }
@@ -70,8 +67,7 @@ struct RNAMView_Previews: PreviewProvider {
         
         let buffer = ScummStore.buffer(
             at: ScummStore.indexFileURL,
-            for: ScummStore.block(name: BlockType.RNAM, with: 859, at: 0),
-            xor: 0x69
+            for: ScummStore.block(name: BlockType.RNAM, with: 859, at: 0)
         )
         
         RNAMView(buffer: .constant(buffer))

@@ -10,7 +10,7 @@ import SwiftUI
 struct LOFFView: View {
     
     @Binding var buffer: [UInt8]
-    @State private var loff: LOFF? = nil
+    @State private var loff = LOFF.empty
     
     var body: some View {
         
@@ -42,21 +42,18 @@ struct LOFFView: View {
                 }.font(.system(.headline)).buttonStyle(PlainButtonStyle())
             ) {
                 
-                if let loff = loff {
+                ForEach(0..<loff.numberOfRooms, id: \.self) { index in
                     
-                    ForEach(0..<loff.numberOfRooms, id: \.self) { index in
+                    HStack {
                         
-                        HStack {
-                            
-                            Text("\(index + 1)")
-                                .foregroundColor(.secondary)
-                                .frame(width: Constants.indexLabelWidth, alignment: .trailing)
-                            
-                            Text("\(loff.rooms[Int(index)].roomId)")
-                                .frame(width: Constants.offsetLabelWidth)
-                            
-                            Text("0x\(loff.rooms[Int(index)].offset.hex)")
-                        }
+                        Text("\(index + 1)")
+                            .foregroundColor(.secondary)
+                            .frame(width: Constants.indexLabelWidth, alignment: .trailing)
+                        
+                        Text("\(loff.rooms[Int(index)].roomId)")
+                            .frame(width: Constants.offsetLabelWidth)
+                        
+                        Text("0x\(loff.rooms[Int(index)].offset.hex)")
                     }
                 }
             }
@@ -69,11 +66,7 @@ struct LOFFView: View {
 struct LOFFView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let buffer = ScummStore.buffer(
-            at: ScummStore.dataFileURL,
-            for: ScummStore.block(),
-            xor: 0x69
-        )
+        let buffer = ScummStore.buffer(at: ScummStore.dataFileURL)
         
         LOFFView(buffer: .constant(buffer))
     }

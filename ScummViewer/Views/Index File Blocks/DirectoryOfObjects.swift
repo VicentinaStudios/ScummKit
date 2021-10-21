@@ -19,7 +19,7 @@ import SwiftUI
 struct DirectoryOfObjectView: View {
     
     @Binding var buffer: [UInt8]
-    @State private var directory: Directory? = nil
+    @State private var directory = Directory.empty
     
     var body: some View {
         List {
@@ -95,11 +95,7 @@ struct DirectoryOfObjectView: View {
 struct DirectoryOfObjectView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let buffer = ScummStore.buffer(
-            at: ScummStore.indexFileURL,
-            for: ScummStore.block(),
-            xor: 0x69
-        )
+        let buffer = ScummStore.buffer(at: ScummStore.indexFileURL)
         
         DirectoryOfObjectView(buffer: .constant(buffer))
     }

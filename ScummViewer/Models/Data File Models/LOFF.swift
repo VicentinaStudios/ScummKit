@@ -47,4 +47,8 @@ extension LOFF {
             rooms: rooms
         )
     }
+    
+    static var empty: LOFF {
+        LOFF(blockName: 0, blockSize: 0, numberOfRooms: 0, rooms: [])
+    }
 }

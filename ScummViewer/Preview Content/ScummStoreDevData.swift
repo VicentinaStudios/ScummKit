@@ -9,11 +9,11 @@ import Foundation
 
 extension ScummStore {
     
-    static func block(name: BlockType = BlockType.LOFF, with size: UInt32 = 429, at offset: UInt32 = 8) -> Block {
+    static func block(name: BlockType = BlockType.RMHD, with size: UInt32 = 14, at offset: UInt32 = 0x1c5) -> Block {
         Block(for: name.rawValue, with: size, at: offset)
     }
     
-    static func buffer(at url: URL, for block: Block, xor: UInt8) -> [UInt8] {
+    static func buffer(at url: URL, for block: Block = ScummStore.block(), xor: UInt8 = 0x69) -> [UInt8] {
         try! block.read(from: url).byteBuffer.xor(with: xor)
     }
 

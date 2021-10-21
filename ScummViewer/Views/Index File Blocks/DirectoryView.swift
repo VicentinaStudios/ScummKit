@@ -39,7 +39,6 @@ struct DirectoryView: View {
                         Text("4 bytes")
                             .font(.system(size: 8))
                     }
-                        
                     
                 }.font(.system(.headline)).buttonStyle(PlainButtonStyle())
             ) {
@@ -71,11 +70,7 @@ struct DirectoryView: View {
 struct DirectoryView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let buffer = ScummStore.buffer(
-            at: ScummStore.indexFileURL,
-            for: ScummStore.block(),
-            xor: 0x69
-        )
+        let buffer = ScummStore.buffer(at: ScummStore.indexFileURL)
         
         DirectoryView(buffer: .constant(buffer))
     }
