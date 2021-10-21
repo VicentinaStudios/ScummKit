@@ -50,7 +50,7 @@ struct DirectoryOfObjectView: View {
                     
                     VStack {
                         
-                        Text("Class Data (LE?)")
+                        Text("Class Data")
                         
                         Text("4 bytes")
                             .font(.system(size: 8))
@@ -80,7 +80,7 @@ struct DirectoryOfObjectView: View {
                             Text("\(state)")
                                 .frame(width: Constants.ownerStateLabelWidth)
                             
-                            let classData = directory.offsets[Int(index)].littleEndian.hex
+                            let classData = directory.offsets[Int(index)].hex
                             Text("0x\(classData)")
                         }
                     }
