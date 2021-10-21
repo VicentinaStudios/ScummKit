@@ -26,6 +26,8 @@ struct InspectView: View {
                     DirectoryView(buffer: $buffer)
                 case .DOBJ:
                     DirectoryOfObjectView(buffer: $buffer)
+                case .LOFF:
+                    LOFFView(buffer: $buffer)
                 default:
                     Text("Cannot inspect block")
                 }

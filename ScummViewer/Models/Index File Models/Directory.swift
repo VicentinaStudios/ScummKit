@@ -21,8 +21,8 @@ extension Directory {
     static func create(from buffer: [UInt8]) -> Directory {
         
         let numberOfItems = buffer.wordLE(8)
-        
         var itemNumbers: [UInt8] = []
+        
         var offset = 10
         
         for _ in 0..<numberOfItems {

@@ -41,6 +41,8 @@
 		4CE24556271F99E4007D7847 /* HexEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE24555271F99E4007D7847 /* HexEditorView.swift */; };
 		4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFF22B271AEE14001021C9 /* NavigatorView.swift */; };
 		4CF2240B2721B7BC0006F1CE /* DirectoryOfObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2240A2721B7BC0006F1CE /* DirectoryOfObjects.swift */; };
+		4CF22411272207870006F1CE /* LOFF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF22410272207870006F1CE /* LOFF.swift */; };
+		4CF2241427220AFF0006F1CE /* LOFFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2241327220AFF0006F1CE /* LOFFView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +83,8 @@
 		4CE24555271F99E4007D7847 /* HexEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexEditorView.swift; sourceTree = "<group>"; };
 		4CEFF22B271AEE14001021C9 /* NavigatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorView.swift; sourceTree = "<group>"; };
 		4CF2240A2721B7BC0006F1CE /* DirectoryOfObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryOfObjects.swift; sourceTree = "<group>"; };
+		4CF22410272207870006F1CE /* LOFF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOFF.swift; sourceTree = "<group>"; };
+		4CF2241327220AFF0006F1CE /* LOFFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOFFView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,7 @@
 				4C79B824271D77FD0030E564 /* Block.swift */,
 				4C79B826271D8CC40030E564 /* ScummFile.swift */,
 				4CF2240E2721DC8D0006F1CE /* Index File Models */,
+				4CF22412272207950006F1CE /* Data File Models */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 				4C33EF70271BA9B800323220 /* DetailsView.swift */,
 				4C637CC827207F6200634F8E /* InspectView.swift */,
 				4CF2240C2721DC610006F1CE /* Index File Blocks */,
+				4CF2241527220B0A0006F1CE /* Data File Blocks */,
 				4CF2240D2721DC7F0006F1CE /* Subviews */,
 			);
 			path = Views;
@@ -249,6 +255,22 @@
 			path = SCUMM;
 			sourceTree = "<group>";
 		};
+		4CF22412272207950006F1CE /* Data File Models */ = {
+			isa = PBXGroup;
+			children = (
+				4CF22410272207870006F1CE /* LOFF.swift */,
+			);
+			path = "Data File Models";
+			sourceTree = "<group>";
+		};
+		4CF2241527220B0A0006F1CE /* Data File Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				4CF2241327220AFF0006F1CE /* LOFFView.swift */,
+			);
+			path = "Data File Blocks";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -331,6 +353,7 @@
 				4C872D4127211E8D007FCCA7 /* Directory.swift in Sources */,
 				4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */,
 				4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */,
+				4CF22411272207870006F1CE /* LOFF.swift in Sources */,
 				4C872D3F27211783007FCCA7 /* BottomBarView.swift in Sources */,
 				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
 				4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */,
@@ -343,6 +366,7 @@
 				4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */,
 				4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */,
 				4C637CC927207F6200634F8E /* InspectView.swift in Sources */,
+				4CF2241427220AFF0006F1CE /* LOFFView.swift in Sources */,
 				4C79B827271D8CC40030E564 /* ScummFile.swift in Sources */,
 				4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */,
 				4C872D3D2720DA5E007FCCA7 /* ValueFieldView.swift in Sources */,
@@ -492,7 +516,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.2.3;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -518,7 +542,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.2.3;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
