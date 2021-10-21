@@ -33,8 +33,8 @@ struct DetailsView: View {
             TabView {
                 
                 switch BlockType(rawValue: block.name) {
-                    
-                case .RNAM, .MAXS, .DROO:
+                
+                case .RNAM, .MAXS, .DROO, .DSCR, .DSOU, .DCOS, .DCHR, .DOBJ:
                     
                     InspectView(buffer: $buffer)
                         .tabItem { Text("Inspect") }

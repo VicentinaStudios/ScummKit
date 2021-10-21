@@ -142,4 +142,24 @@ enum BlockType: String {
             return "Charset"
         }
     }
+
+    var directory: String {
+        switch self {
+        case .DROO:
+            return "Room"
+        case .DSCR:
+            return "Script"
+        case .DSOU:
+            return "Sound"
+        case .DCOS:
+            return "Costume"
+        case .DCHR:
+            return "Charset"
+        case .DOBJ:
+            return "Owner + State"
+        default:
+            return "Unknown Directory Type"
+        }
+    }
+    
 }

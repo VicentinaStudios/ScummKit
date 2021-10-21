@@ -7,3 +7,5 @@
 * [SCUMMEditor](http://scummeditor.scummbr.com)
 * [SCUMMEditor](https://github.com/mmoreira2000/scummeditor)
 * [SCUMM Compiler Wiki](https://github.com/AlbanBedel/scummc/wiki/Scumm-6-data-format)
+* [A Platform Study of the SCUMM Engine and Ron Gilbert’s The Secret of Monkey Island](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.994.322&rep=rep1&type=pdf)
+* [SCUMMVM GitHub](https://github.com/scummvm/scummvm)

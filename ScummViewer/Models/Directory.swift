@@ -20,11 +20,12 @@ extension Directory {
     
     static func create(from buffer: [UInt8]) -> Directory {
         
-        var offset = 10
+        let numberOfItems = buffer.wordLE(8)
         
         var itemNumbers: [UInt8] = []
+        var offset = 10
         
-        while offset < buffer.count - 1 {
+        for _ in 0..<numberOfItems {
             
             let itemNumber = buffer.byte(offset)
             itemNumbers.append(itemNumber)
@@ -34,18 +35,49 @@ extension Directory {
         
         var offsets: [UInt32] = []
         
-        while offset < buffer.count - 1 {
+        for _ in 0..<numberOfItems {
             
             let offs = buffer.dwordLE(offset)
             offsets.append(offs)
             
-            offset += 1
+            offset += 4
         }
         
         return Directory(
             blockName: buffer.dwordLE(0),
             blockSize: buffer.dwordBE(4),
-            numberOfItems: buffer.wordLE(8),
+            numberOfItems: numberOfItems,
+            itemNumbers: itemNumbers,
+            offsets: offsets
+        )
+    }
+    
+    static func createInOneLoop(from buffer: [UInt8]) -> Directory {
+        
+        let numberOfItems = buffer.wordLE(8)
+        
+        var itemNumbers: [UInt8] = []
+        var offsets: [UInt32] = []
+        
+        var offset = 10
+        
+        for _ in 0..<numberOfItems {
+            
+            let itemNumber = buffer.byte(offset)
+            itemNumbers.append(itemNumber)
+            
+            offset += 1
+            
+            let offs = buffer.dwordLE(offset)
+            offsets.append(offs)
+            
+            offset += 4
+        }
+        
+        return Directory(
+            blockName: buffer.dwordLE(0),
+            blockSize: buffer.dwordBE(4),
+            numberOfItems: numberOfItems,
             itemNumbers: itemNumbers,
             offsets: offsets
         )

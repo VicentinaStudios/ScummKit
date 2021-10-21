@@ -19,7 +19,9 @@ struct RNAMView: View {
             Section(
                 header: Button { order = order.next }
                 label: {
-                    Text("No.")
+                    Text("#")
+                        .frame(width: Constants.indexLabelWidth)
+                    Text("Room")
                         .frame(width: Constants.numberOfRoomsLabelWidth)
                     Text("Name")
                     Spacer()
@@ -41,11 +43,17 @@ struct RNAMView: View {
                             }
                         }
                     
-                    ForEach(ordered, id: \.self) { room in
+                    ForEach(ordered.indices, id: \.self) { index in
                         HStack {
-                            Text("#\(room.number)")
+                            
+                            Text("\(index + 1)")
+                                .frame(width: Constants.indexLabelWidth)
+                                .foregroundColor(.secondary)
+                            
+                            Text("#\(ordered[index].number)")
                                 .frame(width: Constants.numberOfRoomsLabelWidth)
-                            Text(room.name.string)
+                            
+                            Text(ordered[index].name.string)
                         }
                     }
                 }
@@ -102,6 +110,7 @@ extension RNAMView {
     }
     
     struct Constants {
-        static let numberOfRoomsLabelWidth: CGFloat = 30
+        static let indexLabelWidth: CGFloat = 20
+        static let numberOfRoomsLabelWidth: CGFloat = 40
     }
 }

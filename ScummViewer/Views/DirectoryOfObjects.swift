@@ -1,4 +1,13 @@
 //
+//  DirectoryOfObjects.swift
+//  ScummViewer
+//
+//  Created by Michael Borgmann on 21.10.21.
+//
+
+import SwiftUI
+
+//
 //  DirectoryView.swift
 //  ScummViewer
 //
@@ -7,7 +16,7 @@
 
 import SwiftUI
 
-struct DirectoryView: View {
+struct DirectoryOfObjectView: View {
     
     @Binding var buffer: [UInt8]
     @State private var directory: Directory? = nil
@@ -23,18 +32,25 @@ struct DirectoryView: View {
                     
                     VStack {
                         
-                        let itemNumberName = BlockType(rawValue: buffer.dwordLE.string)?.directory ?? "Unknown"
-
-                        Text("\(itemNumberName) No.")
-                            .frame(width: Constants.roomsLabelWidth)
+                        Text("Owner")
+                            .frame(width: Constants.ownerStateLabelWidth)
                         
-                        Text("1 byte")
+                        Text("4 bits")
                             .font(.system(size: 8))
                     }
                     
                     VStack {
                         
-                        Text("Offset")
+                        Text("State")
+                            .frame(width: Constants.ownerStateLabelWidth)
+                        
+                        Text("4 bits")
+                            .font(.system(size: 8))
+                    }
+                    
+                    VStack {
+                        
+                        Text("Class Data (LE?)")
                         
                         Text("4 bytes")
                             .font(.system(size: 8))
@@ -54,10 +70,18 @@ struct DirectoryView: View {
                                 .foregroundColor(.secondary)
                                 .frame(width: Constants.indexLabelWidth, alignment: .trailing)
                             
-                            Text("\(directory.itemNumbers[Int(index)])")
-                                .frame(width: Constants.roomsLabelWidth)
+                            let value = directory.itemNumbers[Int(index)]
+                            let owner = (value & 0xf0) >> 4
+                            let state = value & 0xf
                             
-                            Text("0x\(directory.offsets[Int(index)].hex)")
+                            Text("\(owner)")
+                                .frame(width: Constants.ownerStateLabelWidth)
+                            
+                            Text("\(state)")
+                                .frame(width: Constants.ownerStateLabelWidth)
+                            
+                            let classData = directory.offsets[Int(index)].littleEndian.hex
+                            Text("0x\(classData)")
                         }
                     }
                 }
@@ -68,7 +92,7 @@ struct DirectoryView: View {
     }
 }
 
-struct DirectoryView_Previews: PreviewProvider {
+struct DirectoryOfObjectView_Previews: PreviewProvider {
     static var previews: some View {
         
         let buffer = ScummStore.buffer(
@@ -77,16 +101,16 @@ struct DirectoryView_Previews: PreviewProvider {
             xor: 0x69
         )
         
-        DirectoryView(buffer: .constant(buffer))
+        DirectoryOfObjectView(buffer: .constant(buffer))
     }
 }
 
 // MARK: - Enums & Constants
 
-extension DirectoryView {
+extension DirectoryOfObjectView {
     
     struct Constants {
-        static let indexLabelWidth: CGFloat = 30
-        static let roomsLabelWidth: CGFloat = 90
+        static let indexLabelWidth: CGFloat = 40
+        static let ownerStateLabelWidth: CGFloat = 50
     }
 }

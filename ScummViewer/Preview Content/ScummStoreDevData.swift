@@ -9,7 +9,7 @@ import Foundation
 
 extension ScummStore {
     
-    static func block(name: BlockType = BlockType.DROO, with size: UInt32 = 510, at offset: UInt32 = 0x375) -> Block {
+    static func block(name: BlockType = BlockType.DOBJ, with size: UInt32 = 5960, at offset: UInt32 = 0xf7d) -> Block {
         Block(for: name.rawValue, with: size, at: offset)
     }
     

@@ -22,8 +22,10 @@ struct InspectView: View {
                     RNAMView(buffer: $buffer)
                 case .MAXS:
                     MAXSView(buffer: $buffer)
-                case .DROO:
+                case .DROO, .DSCR, .DSOU, .DCOS, .DCHR:
                     DirectoryView(buffer: $buffer)
+                case .DOBJ:
+                    DirectoryOfObjectView(buffer: $buffer)
                 default:
                     Text("Cannot inspect block")
                 }
