@@ -31,8 +31,16 @@ struct DetailsView: View {
             
             TabView {
                 
-                InspectView(buffer: $buffer)
-                    .tabItem { Text("Inspect") }
+                switch block.name {
+                    
+                case "RNAM", "MAXS":
+                    
+                    InspectView(buffer: $buffer)
+                        .tabItem { Text("Inspect") }
+                    
+                default:
+                    EmptyView()
+                }
                 
                 ScrollView(.vertical) {
                     HexEditorView(buffer: $buffer)
@@ -40,7 +48,7 @@ struct DetailsView: View {
             }
             
         }.onAppear {
-            buffer = try! blockData.byteBuffer.map { $0.xor(with: 0x69) }
+            buffer = try! blockData.byteBuffer.map { $0.xor(with: scummStore.scummVersion?.xor ?? 0) }
         }
     }
 }

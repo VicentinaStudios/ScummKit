@@ -32,6 +32,15 @@ enum ScummVersion: CustomStringConvertible {
             return "8"
         }
     }
+    
+    var xor: UInt8? {
+        switch self {
+        case .v5, .v6:
+            return 0x69
+        default:
+            return nil
+        }
+    }
 }
 
 extension ScummVersion {

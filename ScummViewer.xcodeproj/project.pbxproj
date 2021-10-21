@@ -25,6 +25,7 @@
 		4C872D392720CB52007FCCA7 /* MAXSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C872D382720CB52007FCCA7 /* MAXSView.swift */; };
 		4C872D3B2720D084007FCCA7 /* MAXS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C872D3A2720D084007FCCA7 /* MAXS.swift */; };
 		4C872D3D2720DA5E007FCCA7 /* ValueFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C872D3C2720DA5E007FCCA7 /* ValueFieldView.swift */; };
+		4C872D3F27211783007FCCA7 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C872D3E27211783007FCCA7 /* BottomBarView.swift */; };
 		4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B3E27177B040088A49B /* QueueProtocol.swift */; };
 		4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B4027177B360088A49B /* QueueStack.swift */; };
 		4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B43271786F50088A49B /* ScummStore.swift */; };
@@ -56,6 +57,7 @@
 		4C872D382720CB52007FCCA7 /* MAXSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAXSView.swift; sourceTree = "<group>"; };
 		4C872D3A2720D084007FCCA7 /* MAXS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAXS.swift; sourceTree = "<group>"; };
 		4C872D3C2720DA5E007FCCA7 /* ValueFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueFieldView.swift; sourceTree = "<group>"; };
+		4C872D3E27211783007FCCA7 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		4C8A0B3E27177B040088A49B /* QueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueProtocol.swift; sourceTree = "<group>"; };
 		4C8A0B4027177B360088A49B /* QueueStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStack.swift; sourceTree = "<group>"; };
 		4C8A0B43271786F50088A49B /* ScummStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStore.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				4C79B828271E3C340030E564 /* BlockInfoView.swift */,
 				4CE24555271F99E4007D7847 /* HexEditorView.swift */,
 				4C872D3C2720DA5E007FCCA7 /* ValueFieldView.swift */,
+				4C872D3E27211783007FCCA7 /* BottomBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */,
 				4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */,
 				4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */,
+				4C872D3F27211783007FCCA7 /* BottomBarView.swift in Sources */,
 				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
 				4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */,
 				4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */,

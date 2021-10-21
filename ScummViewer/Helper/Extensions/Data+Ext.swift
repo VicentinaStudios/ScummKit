@@ -40,12 +40,12 @@ extension Data {
     }
 
     func xor(with xor: UInt8) -> Data {
-        Data(byteBuffer.map { $0.xor(with: 0x69) })
+        Data(byteBuffer.map { $0.xor(with: xor) })
     }
     
-    func dump() throws {
+    func dump(with value: UInt8 = 0x69) throws {
         
-        let decoded = xor(with: 0x69)
+        let decoded = xor(with: value)
         let data = Data(decoded)
         
         let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as NSURL
