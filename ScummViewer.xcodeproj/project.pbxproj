@@ -34,6 +34,8 @@
 		4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B4027177B360088A49B /* QueueStack.swift */; };
 		4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B43271786F50088A49B /* ScummStore.swift */; };
 		4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B49271790240088A49B /* ScummStoreDevData.swift */; };
+		4C9F3D982723C4260052EEE2 /* CLUT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D972723C4260052EEE2 /* CLUT.swift */; };
+		4C9F3D9A2723C6570052EEE2 /* CLUTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D992723C6570052EEE2 /* CLUTView.swift */; };
 		4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */; };
 		4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD23D7E2716D66400832C4E /* ContentView.swift */; };
 		4CD23D812716D66600832C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD23D802716D66600832C4E /* Assets.xcassets */; };
@@ -76,6 +78,8 @@
 		4C8A0B4027177B360088A49B /* QueueStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStack.swift; sourceTree = "<group>"; };
 		4C8A0B43271786F50088A49B /* ScummStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStore.swift; sourceTree = "<group>"; };
 		4C8A0B49271790240088A49B /* ScummStoreDevData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStoreDevData.swift; sourceTree = "<group>"; };
+		4C9F3D972723C4260052EEE2 /* CLUT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLUT.swift; sourceTree = "<group>"; };
+		4C9F3D992723C6570052EEE2 /* CLUTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLUTView.swift; sourceTree = "<group>"; };
 		4CD23D792716D66400832C4E /* ScummViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScummViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummViewerApp.swift; sourceTree = "<group>"; };
 		4CD23D7E2716D66400832C4E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 			children = (
 				4CF22410272207870006F1CE /* LOFF.swift */,
 				4CF224162722109D0006F1CE /* RMHD.swift */,
+				4C9F3D972723C4260052EEE2 /* CLUT.swift */,
 			);
 			path = "Data File Models";
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 			children = (
 				4CF2241327220AFF0006F1CE /* LOFFView.swift */,
 				4CF22418272210B10006F1CE /* RMHDView.swift */,
+				4C9F3D992723C6570052EEE2 /* CLUTView.swift */,
 			);
 			path = "Data File Blocks";
 			sourceTree = "<group>";
@@ -356,6 +362,7 @@
 				4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */,
 				4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */,
 				4C872D3B2720D084007FCCA7 /* MAXS.swift in Sources */,
+				4C9F3D9A2723C6570052EEE2 /* CLUTView.swift in Sources */,
 				4C872D372720CA94007FCCA7 /* RNAMView.swift in Sources */,
 				4C872D452721751C007FCCA7 /* BlockType.swift in Sources */,
 				4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */,
@@ -373,6 +380,7 @@
 				4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */,
 				4C872D392720CB52007FCCA7 /* MAXSView.swift in Sources */,
 				4C79B825271D77FD0030E564 /* Block.swift in Sources */,
+				4C9F3D982723C4260052EEE2 /* CLUT.swift in Sources */,
 				4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */,
 				4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */,
 				4C637CC927207F6200634F8E /* InspectView.swift in Sources */,
@@ -528,7 +536,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.3.2;
+				MARKETING_VERSION = 0.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -554,7 +562,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.3.2;
+				MARKETING_VERSION = 0.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

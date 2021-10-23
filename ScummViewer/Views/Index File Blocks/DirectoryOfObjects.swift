@@ -95,7 +95,8 @@ struct DirectoryOfObjectView: View {
 struct DirectoryOfObjectView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let buffer = ScummStore.buffer(at: ScummStore.indexFileURL)
+        let block = Block(for: .DOBJ, with: 5960, at: 0xf50)
+        let buffer = ScummStore.buffer(at: ScummStore.indexFileURL, for: block)
         
         DirectoryOfObjectView(buffer: .constant(buffer))
     }

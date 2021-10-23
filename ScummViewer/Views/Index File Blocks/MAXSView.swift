@@ -42,10 +42,8 @@ struct MAXSView: View {
 struct MAXSView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let buffer = ScummStore.buffer(
-            at: ScummStore.indexFileURL,
-            for: ScummStore.block(name: BlockType.MAXS, with: 26, at: 0x35b)
-        )
+        let block = Block(for: .MAXS, with: 26, at: 0x35b)
+        let buffer = ScummStore.buffer(at: ScummStore.indexFileURL, for: block)
         
         MAXSView(buffer: .constant(buffer))
     }

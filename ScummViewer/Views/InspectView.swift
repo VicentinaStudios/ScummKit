@@ -30,6 +30,8 @@ struct InspectView: View {
                     LOFFView(buffer: $buffer)
                 case .RMHD:
                     RMHDView(buffer: $buffer)
+                case .CLUT:
+                    CLUTView(buffer: $buffer)
                 default:
                     Text("Cannot inspect block")
                 }

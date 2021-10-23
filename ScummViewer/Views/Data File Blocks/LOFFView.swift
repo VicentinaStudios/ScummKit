@@ -65,8 +65,9 @@ struct LOFFView: View {
 
 struct LOFFView_Previews: PreviewProvider {
     static var previews: some View {
-        
-        let buffer = ScummStore.buffer(at: ScummStore.dataFileURL)
+                
+        let block = Block(for: .LOFF, with: 429, at: 0x8)
+        let buffer = ScummStore.buffer(at: ScummStore.dataFileURL, for: block)
         
         LOFFView(buffer: .constant(buffer))
     }

@@ -41,7 +41,6 @@ struct RMHDView: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.secondary, lineWidth: 1)
         ).onAppear {
-            
             rmhd = RMHD.create(from: $buffer.wrappedValue)
         }
     }
@@ -51,7 +50,8 @@ struct RMHDView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        let buffer = ScummStore.buffer(at: ScummStore.dataFileURL)
+        let block = Block(for: .RMHD, with: 14, at: 0x1c5)
+        let buffer = ScummStore.buffer(at: ScummStore.dataFileURL, for: block)
         
         RMHDView(buffer: .constant(buffer))
             .frame(width: 300, height: 200)

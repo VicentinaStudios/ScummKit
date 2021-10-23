@@ -9,7 +9,7 @@ import Foundation
 
 extension ScummStore {
     
-    static func block(name: BlockType = BlockType.RMHD, with size: UInt32 = 14, at offset: UInt32 = 0x1c5) -> Block {
+    static func block(name: BlockType = BlockType.CLUT, with size: UInt32 = 776, at offset: UInt32 = 0x3b5) -> Block {
         Block(for: name.rawValue, with: size, at: offset)
     }
     
@@ -27,7 +27,7 @@ extension ScummStore {
     }
     
     static var dataFileURL: URL {
-        let path = "\(gamePath!)/\(indexFile!)"
+        let path = "\(gamePath!)/\(dataFile!)"
         return URL(fileURLWithPath: path, isDirectory: true)
     }
     

@@ -65,10 +65,8 @@ struct RNAMView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        let buffer = ScummStore.buffer(
-            at: ScummStore.indexFileURL,
-            for: ScummStore.block(name: BlockType.RNAM, with: 859, at: 0)
-        )
+        let block = Block(for: .RNAM, with: 859, at: 0)
+        let buffer = ScummStore.buffer(at: ScummStore.indexFileURL, for: block)
         
         RNAMView(buffer: .constant(buffer))
     }

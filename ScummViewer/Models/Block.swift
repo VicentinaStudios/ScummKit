@@ -13,6 +13,10 @@ struct Block: Hashable {
     var size: UInt32
     var offset: UInt32
     
+    init(for name: BlockType, with size: UInt32, at offset: UInt32) {
+        self.init(for: name.rawValue, with: size, at: offset)
+    }
+    
     init(for name: String, with size: UInt32, at offset: UInt32) {
         self.name = name
         self.size = size

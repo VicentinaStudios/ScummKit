@@ -34,7 +34,7 @@ struct DetailsView: View {
                 
                 switch BlockType(rawValue: block.name) {
                 
-                case .RNAM, .MAXS, .DROO, .DSCR, .DSOU, .DCOS, .DCHR, .DOBJ, .LOFF, .RMHD:
+                case .RNAM, .MAXS, .DROO, .DSCR, .DSOU, .DCOS, .DCHR, .DOBJ, .LOFF, .RMHD, .CLUT:
                     
                     InspectView(buffer: $buffer)
                         .tabItem { Text("Inspect") }

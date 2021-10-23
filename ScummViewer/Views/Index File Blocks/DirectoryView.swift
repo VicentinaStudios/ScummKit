@@ -70,7 +70,13 @@ struct DirectoryView: View {
 struct DirectoryView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let buffer = ScummStore.buffer(at: ScummStore.indexFileURL)
+        let block = Block(for: .DROO, with: 510, at: 0x375)
+        //let block = Block(for: .DSCR, with: 1005, at: 0x573)
+        //let block = Block(for: .DSOU, with: 760, at: 0x960)
+        //let block = Block(for: .DCOS, with: 760, at: 0xc58)
+        //let block = Block(for: .DCHR, with: 45, at: 0xf50)
+        
+        let buffer = ScummStore.buffer(at: ScummStore.indexFileURL, for: block)
         
         DirectoryView(buffer: .constant(buffer))
     }
