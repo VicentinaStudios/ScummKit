@@ -31,6 +31,7 @@ struct CLUTView: View {
                         
                         Text("\(index)")
                             .font(.system(size: 8, design: .monospaced))
+                            .foregroundColor(.black)
                             .background(Color.white)
                             .frame(alignment: .topLeading)
                             
@@ -44,9 +45,10 @@ struct CLUTView: View {
 
                             Text("#" +
                                  "\(clut.colors[index].red.hex)" +
-                                 "\(clut.colors[index].blue.hex)" +
-                                 "\(clut.colors[index].red.hex)"
+                                 "\(clut.colors[index].green.hex)" +
+                                 "\(clut.colors[index].blue.hex)"
                             )
+                                .foregroundColor(.black)
                                 .font(.system(size: 8, design: .monospaced))
                         }
                         

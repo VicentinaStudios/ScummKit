@@ -30,7 +30,9 @@ struct NavigatorView: View {
                             NavigationLink(
                                 destination: DetailsView(
                                     block: .constant(node.value),
-                                    url: .constant(file.value.fileURL))
+                                    node: .constant(node),
+                                    url: .constant(file.value.fileURL)
+                                )
                             ) {
                                 Text(node.value.name).font(.subheadline)
                             }

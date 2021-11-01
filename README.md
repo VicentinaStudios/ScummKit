@@ -7,12 +7,14 @@
 * [SCUMMEditor](http://scummeditor.scummbr.com)
 * [SCUMM Revisited](https://web.archive.org/web/20030423052534/http://scummrev.mixnmojo.com/)
 * [Lucas Forums](https://web.archive.org/web/20030417012810/http://www.lucasforums.com)
+* [Jestar Jokin: Apps](http://www.jestarjokin.net/apps/)
 
 ## SCUMM Sources
 
 * [GitHub: ScummVM](https://github.com/scummvm/scummvm)
 * [GitHub: SCUMMEditor](https://github.com/mmoreira2000/scummeditor)
 * [GitHub: ScummC](https://github.com/jamesu/scummc)
+* [BitBucket: Scumm Image Encoder](https://bitbucket.org/jestar_jokin/scumm-image-encoder)
 
 ## SCUMM Documentation
 

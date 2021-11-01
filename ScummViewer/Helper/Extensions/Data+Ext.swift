@@ -60,5 +60,20 @@ extension Data {
             throw FileError.saveFailure
         }
     }
+    
+    func savePng() throws {
+        
+        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as NSURL
+        
+        guard let fileUrl = documentsUrl.appendingPathComponent("image.png") else {
+            throw FileError.urlFailure
+        }
+        
+        do {
+            try self.write(to: fileUrl)
+        } catch {
+            throw FileError.saveFailure
+        }
+    }
 }
 

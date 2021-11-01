@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RMHD {
+struct RMHD: Equatable {
     
     let blockName: UInt32
     let blockSize: UInt32
@@ -30,5 +30,9 @@ extension RMHD {
     
     static var empty: RMHD {
         RMHD(blockName: 0, blockSize: 0, width: 0, height: 0, numberOfObjects: 0)
+    }
+    
+    var isEmpty: Bool {
+        self == RMHD.empty
     }
 }

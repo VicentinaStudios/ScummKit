@@ -19,12 +19,15 @@ class TreeNode<T: Hashable>: Hashable {
     
     var value: T
     var children: [TreeNode]? = nil
+    weak var parent: TreeNode?
     
     init(with value: T) {
         self.value = value
     }
     
     func add(_ child: TreeNode) {
+        
+        child.parent = self
         
         if (children?.append(child)) == nil {
             children = [child]
@@ -78,5 +81,18 @@ extension TreeNode where T: Equatable {
         }
         
         return result
+    }
+    
+    var root: TreeNode {
+        
+        var node: TreeNode<T> = self
+        
+        while node.parent != nil {
+            if let parent = node.parent {
+                node = parent
+            }
+        }
+        
+        return node
     }
 }

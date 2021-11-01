@@ -13,6 +13,7 @@ struct DetailsView: View {
     @EnvironmentObject var scummStore: ScummStore
     
     @Binding var block: Block
+    @Binding var node: TreeNode<Block>
     @Binding var url: URL
 
     @State private var buffer: [UInt8] = []
@@ -34,9 +35,10 @@ struct DetailsView: View {
                 
                 switch BlockType(rawValue: block.name) {
                 
-                case .RNAM, .MAXS, .DROO, .DSCR, .DSOU, .DCOS, .DCHR, .DOBJ, .LOFF, .RMHD, .CLUT:
+                case .RNAM, .MAXS, .DROO, .DSCR, .DSOU, .DCOS, .DCHR, .DOBJ,
+                        .LOFF, .RMHD, .CLUT, .SMAP:
                     
-                    InspectView(buffer: $buffer)
+                    InspectView(buffer: $buffer, node: $node)
                         .tabItem { Text("Inspect") }
                     
                 default:
@@ -53,8 +55,8 @@ struct DetailsView: View {
             buffer = try! blockData.byteBuffer.xor(
                 with: scummStore.scummVersion?.xor ?? 0
             )
-            
-            title = BlockType.init(rawValue: block.name)?.title ?? "Unkown"
+
+            title = BlockType.init(rawValue: node.value.name)?.title ?? "Unkown"
         }
     }
 }
@@ -98,8 +100,11 @@ extension DetailsView {
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
         
+        let node = TreeNode<Block>(with: ScummStore.block())
+        
         DetailsView(
             block: .constant(ScummStore.block()),
+            node: .constant(node),
             url: .constant(ScummStore.indexFileURL)
         ).environmentObject(ScummStore.create)
     }

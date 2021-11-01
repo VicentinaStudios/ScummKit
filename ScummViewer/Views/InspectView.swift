@@ -10,7 +10,9 @@ import SwiftUI
 struct InspectView: View {
     
     @Binding var buffer: [UInt8]
+    @Binding var node: TreeNode<Block>
     @State var blockName: String = ""
+    var block: Block? = nil
     
     var body: some View {
         VStack {
@@ -32,6 +34,8 @@ struct InspectView: View {
                     RMHDView(buffer: $buffer)
                 case .CLUT:
                     CLUTView(buffer: $buffer)
+                case .SMAP:
+                    SMAPView(node: $node)
                 default:
                     Text("Cannot inspect block")
                 }
@@ -46,7 +50,8 @@ struct InspectView_Previews: PreviewProvider {
     static var previews: some View {
         
         let buffer = ScummStore.buffer(at: ScummStore.indexFileURL)
+        let node = TreeNode<Block>(with: ScummStore.block())
         
-        InspectView(buffer: .constant(buffer))
+        InspectView(buffer: .constant(buffer), node: .constant(node))
     }
 }
