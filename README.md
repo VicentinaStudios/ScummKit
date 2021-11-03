@@ -19,7 +19,6 @@
 ## SCUMM Documentation
 
 * [ScummVM: Technical Reference](https://wiki.scummvm.org/index.php?title=SCUMM/Technical_Reference)
-* [SCUMM index file](https://wiki.scummvm.org/index.php?title=SCUMM/Technical_Reference/Index_File#0O_-_Directory_of_Objects)
 * [SCUMM Revisited: Format Encyclopedia](https://web.archive.org/web/20030418102229/http://scummrev.mixnmojo.com/specs/)
 * [SCUMM Revisited: Articles](https://web.archive.org/web/20030418102454/http://scummrev.mixnmojo.com/articles/)
 * [SCUMM Revisted: Online Help](https://web.archive.org/web/20030417011557/http://scummrev.mixnmojo.com/help/toc.shtml)

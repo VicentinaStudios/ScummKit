@@ -14,6 +14,8 @@ class Bitstream {
     private (set) var offset = 0
     private(set) var currentByte: UInt8
     
+    private var bitIndex = 0
+    
     private var byte: UInt8? {
         //!endOfStream ? buffer[offset] : nil
         buffer[offset]
@@ -25,6 +27,8 @@ class Bitstream {
     
     var bitPosition = 0 {
         didSet {
+            
+            bitIndex += 1
             
             if bitPosition == UInt8.bitWidth {
                 bitPosition = 0
@@ -43,7 +47,12 @@ class Bitstream {
         !(offset < buffer.count)
     }
     
+    var bitsLeft: Bool {
+        bitIndex < buffer.count * 8
+    }
+    
     var readBit: UInt8 {
+        
         let bit = currentByte & 0b00000001
         bitPosition += 1
         
@@ -54,6 +63,7 @@ class Bitstream {
         self.buffer = buffer
         self.offset = offset
         self.currentByte = buffer[offset]
+        self.bitIndex = offset * 8
     }
     
     func readBits(_ amount: Int) -> UInt8? {

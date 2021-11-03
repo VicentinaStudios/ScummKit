@@ -9,11 +9,6 @@ import Foundation
 
 struct SMAP {
     
-    struct Stripe {
-        let codec: UInt8
-        let data: [UInt8]
-    }
-    
     let blockName: UInt32
     let blockSize: UInt32
     let stripeOffsets: [UInt32]

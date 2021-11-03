@@ -38,8 +38,15 @@ struct Bitmap {
     }
     
     init(width: Int, height: Int, color: Color) {
+        
         self.width = width
         pixels = Array(repeating: color, count: width * height)
+    }
+    
+    init(from buffer: [Color]) {
+        
+        self.width = 8
+        self.pixels = buffer
     }
 }
 
@@ -71,7 +78,13 @@ extension Bitmap {
     }
     
     mutating func draw(x: Int, y: Int, with color: Color) {
+        
         let position = y * width + x
+
+        guard position < width * height else {
+            return
+        }
+        
         pixels[position] = color
     }
     
@@ -83,21 +96,5 @@ extension Bitmap {
         
         pixels[offset] = color
         offset += 1
-    }
-    
-    mutating func drawVertical(with color: Color) {
-        
-        if offset >= pixels.count {
-            return
-        }
-        
-        pixels[offset] = color
-        
-        offset += width
-        
-        if offset >= pixels.count {
-            offset -= pixels.count
-            offset += 1
-        }
     }
 }

@@ -65,7 +65,7 @@ struct SMAPView: View {
                 
                 if
                     let image = image,
-                    let cgImage = image.bitmap?.cgImage
+                    let cgImage = image.bitmap.cgImage
                 {
                     
                     Image(decorative: cgImage, scale: 1).padding()
