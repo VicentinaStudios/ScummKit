@@ -9,8 +9,9 @@ import Foundation
 
 enum CodecError: Error {
     case unknownCodec
-    case paletteIFailure
+    case paletteFailure
     case urlFailure
+    case decodingFailure
 }
 
 class ImageCodec {
@@ -138,7 +139,7 @@ extension ImageCodec {
             let amount = stripe.numberOfBitsForPaletteIndex,
             let bits = bitstream.readBits(Int(amount))
         else {
-            throw CodecError.paletteIFailure
+            throw CodecError.paletteFailure
         }
         
         paletteIndex = bits

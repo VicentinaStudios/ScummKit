@@ -18,13 +18,13 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>Data File</key>
-	<string>SCUMM.001</string>
-	<key>Index File</key>
-	<string>SCUMM.000</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>SCUMM Game Path</key>
 	<string>/PATH/TO/SCUMM/GAME</string>
+	<key>Index File</key>
+	<string>SCUMM.000</string>
+	<key>Data File</key>
+	<string>SCUMM.001</string>
 </dict>
 </plist>

@@ -25,8 +25,8 @@ struct ScummImage {
     }
     
     var bitmap: Bitmap {
-        
-        var bitmap = Bitmap(width: Int(rmhd.width), height: Int(rmhd.height), color: .blue)
+            
+        var bitmap = Bitmap(width: Int(rmhd.width), height: Int(rmhd.height), color: .clear)
 
         smap.stripes.enumerated().forEach { index, stripe in
             
@@ -53,7 +53,7 @@ struct ScummImage {
         
         smap.stripes[index].decoded.enumerated().map { index, pixel in
             
-            return Bitmap.Color(
+            Bitmap.Color(
                 red: clut.colors[Int(pixel)].red,
                 green: clut.colors[Int(pixel)].green,
                 blue: clut.colors[Int(pixel)].blue

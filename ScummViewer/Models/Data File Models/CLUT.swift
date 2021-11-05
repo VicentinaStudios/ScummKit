@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CLUT {
+struct CLUT: Equatable {
     
     struct Color: Hashable {
         
@@ -52,5 +52,9 @@ extension CLUT {
     
     static var empty: CLUT {
         CLUT(blockName: 0, blockSize: 0, colors: [])
+    }
+    
+    var isEmpty: Bool {
+        self == CLUT.empty
     }
 }

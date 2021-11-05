@@ -95,4 +95,13 @@ extension TreeNode where T: Equatable {
         
         return node
     }
+    
+    var level: Int? {
+        
+        guard let parentLevel = parent?.level else {
+            return 1
+        }
+        
+        return parentLevel + 1
+    }
 }

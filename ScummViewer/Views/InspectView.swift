@@ -32,6 +32,8 @@ struct InspectView: View {
                     LOFFView(buffer: $buffer)
                 case .RMHD:
                     RMHDView(buffer: $buffer)
+                case .TRNS:
+                    TRNSView(node: $node)
                 case .CLUT:
                     CLUTView(buffer: $buffer)
                 case .SMAP:

@@ -61,11 +61,11 @@ extension Data {
         }
     }
     
-    func savePng() throws {
+    func savePng(fileName: String = "image.png") throws {
         
         let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as NSURL
         
-        guard let fileUrl = documentsUrl.appendingPathComponent("image.png") else {
+        guard let fileUrl = documentsUrl.appendingPathComponent(fileName) else {
             throw FileError.urlFailure
         }
         

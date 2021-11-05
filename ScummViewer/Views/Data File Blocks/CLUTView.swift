@@ -21,43 +21,10 @@ struct CLUTView: View {
                 
                 ForEach(clut.colors.indices, id: \.self) { index in
                     
-                    let color = Color(
-                        red: Double(clut.colors[index].red) / 255,
-                        green: Double(clut.colors[index].green) / 255,
-                        blue: Double(clut.colors[index].blue) / 255
+                    ColorFieldView(
+                        index: UInt8(index),
+                        indexColor: clut.colors[index]
                     )
-                    
-                    VStack(alignment: .leading) {
-                        
-                        Text("\(index)")
-                            .font(.system(size: 8, design: .monospaced))
-                            .foregroundColor(.black)
-                            .background(Color.white)
-                            .frame(alignment: .topLeading)
-                            
-                        
-                        Spacer()
-                        
-                        ZStack {
-                            Rectangle()
-                                .fill(Color.white)
-                            .frame(width: 40, height: 10)
-
-                            Text("#" +
-                                 "\(clut.colors[index].red.hex)" +
-                                 "\(clut.colors[index].green.hex)" +
-                                 "\(clut.colors[index].blue.hex)"
-                            )
-                                .foregroundColor(.black)
-                                .font(.system(size: 8, design: .monospaced))
-                        }
-                        
-                    }
-                    .frame(width: 40, height: 40)
-                    .background(color)
-                    .overlay(RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.black, lineWidth: 1))
-                    .cornerRadius(5)
                 }
             }.onAppear {
                 clut = CLUT.create(from: $buffer.wrappedValue)

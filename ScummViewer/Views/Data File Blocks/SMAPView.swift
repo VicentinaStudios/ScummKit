@@ -13,6 +13,7 @@ struct SMAPView: View {
     @Binding var node: TreeNode<Block>
     @State private var smap = SMAP.empty
     @State private var clut = CLUT.empty
+    @State private var trns = TRNS.empty
     @State private var rmhd = RMHD.empty
     @State private var image: ScummImage? = nil
     
@@ -86,19 +87,23 @@ struct SMAPView: View {
     private func loadData() {
         
         guard
-            let clutNode = find(blockType: .CLUT),
-            let rmhdNode = find(blockType: .RMHD)
+            let trnsNode = node.find(blockType: .TRNS),
+            let clutNode = node.find(blockType: .CLUT),
+            let rmhdNode = node.find(blockType: .RMHD)
         else {
             return
         }
         
-        var buffer = try! read(block: clutNode.value)
+        var buffer = try! trnsNode.read(in: fileURL)
+        trns = TRNS.create(from: buffer)
+        
+        buffer = try! clutNode.read(in: fileURL)
         clut = CLUT.create(from: buffer)
         
-        buffer = try! read(block: rmhdNode.value)
+        buffer = try! rmhdNode.read(in: fileURL)
         rmhd = RMHD.create(from: buffer)
         
-        buffer = try! read(block: node.value)
+        buffer = try! node.read(in: fileURL)
         smap = SMAP.create(from: buffer, imageWidth: rmhd.width)
     }
 }
@@ -106,21 +111,7 @@ struct SMAPView: View {
 // MARK: - Queries
 
 extension SMAPView {
-    
-    private func read(block: Block) throws -> [UInt8] {
         
-        do {
-            let buffer = try blockData(for: block).byteBuffer.xor(
-                with: scummStore.scummVersion?.xor ?? 0
-            )
-            
-            return buffer
-            
-        } catch {
-            throw FileError.loadFailure
-        }
-    }
-    
     var fileURL: URL? {
         
         let url = scummStore.scummFiles.first { file in
@@ -128,88 +119,6 @@ extension SMAPView {
         }
         
         return url?.value.fileURL
-    }
-    
-    func findParent(of type: BlockType) -> TreeNode<Block> {
-        
-        var parent = node
-        
-        while parent.value.name != BlockType.ROOM.rawValue {
-            if let grandParent = parent.parent {
-                parent = grandParent
-            }
-        }
-        
-        return parent
-    }
-    
-    func find(blockType: BlockType) -> TreeNode<Block>? {
-        
-        let parent = findParent(of: .ROOM)
-        
-        let block = parent.children?.first { block in
-            block.value.name == blockType.rawValue
-        }
-        
-        return block
-    }
-    
-    func blockData(for block: Block) throws -> Data {
-            
-        guard let url = fileURL else {
-            throw FileError.urlFailure
-        }
-        
-        do {
-            
-            return try readData(
-                from: url,
-                at: UInt64(block.offset),
-                with: Int(block.size)
-            )
-            
-        } catch {
-            throw FileError.loadFailure
-        }
-    }
-    
-    var blockData: Data {
-        
-        get throws {
-            
-            guard let url = fileURL else {
-                throw FileError.urlFailure
-            }
-            
-            do {
-                
-                return try readData(
-                    from: url,
-                    at: UInt64(node.value.offset),
-                    with: Int(node.value.size)
-                )
-                
-            } catch {
-                throw FileError.loadFailure
-            }
-        }
-    }
-    
-    private func readData(from file: URL, at offset: UInt64, with length: Int) throws -> Data {
-        
-        do {
-            
-            let fileHandle = try FileHandle(forReadingFrom: file)
-            fileHandle.seek(toFileOffset: offset)
-            let data = fileHandle.readData(ofLength: length)
-            
-            fileHandle.closeFile()
-            
-            return data
-            
-        } catch {
-            throw FileError.loadFailure
-        }
     }
 }
 

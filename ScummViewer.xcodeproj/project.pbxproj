@@ -14,6 +14,9 @@
 		4C40806E271B976C00A76C75 /* UInt8+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C40806D271B976C00A76C75 /* UInt8+Ext.swift */; };
 		4C408070271B97A500A76C75 /* UInt16+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C40806F271B97A500A76C75 /* UInt16+Ext.swift */; };
 		4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C408071271B97BC00A76C75 /* UInt32+Ext.swift */; };
+		4C4A7B622734DC48006DE394 /* TRNS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A7B612734DC48006DE394 /* TRNS.swift */; };
+		4C4A7B642734DD68006DE394 /* TRNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A7B632734DD68006DE394 /* TRNSView.swift */; };
+		4C4A7B6627352ED0006DE394 /* ColorFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A7B6527352ED0006DE394 /* ColorFieldView.swift */; };
 		4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA327176B7F0090BA59 /* TreeNode.swift */; };
 		4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA9271777140090BA59 /* QueueArray.swift */; };
 		4C637CC927207F6200634F8E /* InspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637CC827207F6200634F8E /* InspectView.swift */; };
@@ -49,6 +52,7 @@
 		4CD23D812716D66600832C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD23D802716D66600832C4E /* Assets.xcassets */; };
 		4CD23D842716D66600832C4E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CD23D832716D66600832C4E /* Preview Assets.xcassets */; };
 		4CD9F4D72722217A00D3F0D7 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD9F4D62722217A00D3F0D7 /* InputFieldView.swift */; };
+		4CDF0F742733FC45008A9B6A /* TreeNode<Block>+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDF0F732733FC45008A9B6A /* TreeNode<Block>+Ext.swift */; };
 		4CE24556271F99E4007D7847 /* HexEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE24555271F99E4007D7847 /* HexEditorView.swift */; };
 		4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFF22B271AEE14001021C9 /* NavigatorView.swift */; };
 		4CF2240B2721B7BC0006F1CE /* DirectoryOfObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2240A2721B7BC0006F1CE /* DirectoryOfObjects.swift */; };
@@ -66,6 +70,9 @@
 		4C40806D271B976C00A76C75 /* UInt8+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt8+Ext.swift"; sourceTree = "<group>"; };
 		4C40806F271B97A500A76C75 /* UInt16+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt16+Ext.swift"; sourceTree = "<group>"; };
 		4C408071271B97BC00A76C75 /* UInt32+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt32+Ext.swift"; sourceTree = "<group>"; };
+		4C4A7B612734DC48006DE394 /* TRNS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRNS.swift; sourceTree = "<group>"; };
+		4C4A7B632734DD68006DE394 /* TRNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRNSView.swift; sourceTree = "<group>"; };
+		4C4A7B6527352ED0006DE394 /* ColorFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFieldView.swift; sourceTree = "<group>"; };
 		4C5CDFA327176B7F0090BA59 /* TreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNode.swift; sourceTree = "<group>"; };
 		4C5CDFA9271777140090BA59 /* QueueArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueArray.swift; sourceTree = "<group>"; };
 		4C637CC827207F6200634F8E /* InspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectView.swift; sourceTree = "<group>"; };
@@ -104,6 +111,7 @@
 		4CD23D852716D66600832C4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CD23D862716D66600832C4E /* ScummViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScummViewer.entitlements; sourceTree = "<group>"; };
 		4CD9F4D62722217A00D3F0D7 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
+		4CDF0F732733FC45008A9B6A /* TreeNode<Block>+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TreeNode<Block>+Ext.swift"; sourceTree = "<group>"; };
 		4CE24555271F99E4007D7847 /* HexEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexEditorView.swift; sourceTree = "<group>"; };
 		4CEFF22B271AEE14001021C9 /* NavigatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorView.swift; sourceTree = "<group>"; };
 		4CF2240A2721B7BC0006F1CE /* DirectoryOfObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryOfObjects.swift; sourceTree = "<group>"; };
@@ -133,6 +141,7 @@
 				4C408071271B97BC00A76C75 /* UInt32+Ext.swift */,
 				4C79B81B271C26470030E564 /* URL+Ext.swift */,
 				4CD01E6B272DD0EB0022462F /* CGImage+Ext.swift */,
+				4CDF0F732733FC45008A9B6A /* TreeNode<Block>+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -263,6 +272,7 @@
 				4C872D3C2720DA5E007FCCA7 /* ValueFieldView.swift */,
 				4C872D3E27211783007FCCA7 /* BottomBarView.swift */,
 				4CD9F4D62722217A00D3F0D7 /* InputFieldView.swift */,
+				4C4A7B6527352ED0006DE394 /* ColorFieldView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -295,6 +305,7 @@
 				4CF224162722109D0006F1CE /* RMHD.swift */,
 				4C9F3D972723C4260052EEE2 /* CLUT.swift */,
 				4C9F3D9F2724481D0052EEE2 /* SMAP.swift */,
+				4C4A7B612734DC48006DE394 /* TRNS.swift */,
 			);
 			path = "Data File Models";
 			sourceTree = "<group>";
@@ -306,6 +317,7 @@
 				4CF22418272210B10006F1CE /* RMHDView.swift */,
 				4C9F3D992723C6570052EEE2 /* CLUTView.swift */,
 				4C9F3DA12724A7E80052EEE2 /* SMAPView.swift */,
+				4C4A7B632734DD68006DE394 /* TRNSView.swift */,
 			);
 			path = "Data File Blocks";
 			sourceTree = "<group>";
@@ -392,6 +404,7 @@
 				4C1CFD5F2730295F001663CE /* ImageCodec.swift in Sources */,
 				4C872D372720CA94007FCCA7 /* RNAMView.swift in Sources */,
 				4C872D452721751C007FCCA7 /* BlockType.swift in Sources */,
+				4C4A7B622734DC48006DE394 /* TRNS.swift in Sources */,
 				4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */,
 				4C9F3DA02724481D0052EEE2 /* SMAP.swift in Sources */,
 				4C872D4127211E8D007FCCA7 /* Directory.swift in Sources */,
@@ -406,9 +419,11 @@
 				4C79B829271E3C340030E564 /* BlockInfoView.swift in Sources */,
 				4CF224172722109D0006F1CE /* RMHD.swift in Sources */,
 				4CF2240B2721B7BC0006F1CE /* DirectoryOfObjects.swift in Sources */,
+				4C4A7B642734DD68006DE394 /* TRNSView.swift in Sources */,
 				4C1CFD6127303611001663CE /* Stripe.swift in Sources */,
 				4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */,
 				4C872D392720CB52007FCCA7 /* MAXSView.swift in Sources */,
+				4C4A7B6627352ED0006DE394 /* ColorFieldView.swift in Sources */,
 				4C79B825271D77FD0030E564 /* Block.swift in Sources */,
 				4C9F3D982723C4260052EEE2 /* CLUT.swift in Sources */,
 				4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */,
@@ -418,6 +433,7 @@
 				4CD9F4D72722217A00D3F0D7 /* InputFieldView.swift in Sources */,
 				4CF2241427220AFF0006F1CE /* LOFFView.swift in Sources */,
 				4C79B827271D8CC40030E564 /* ScummFile.swift in Sources */,
+				4CDF0F742733FC45008A9B6A /* TreeNode<Block>+Ext.swift in Sources */,
 				4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */,
 				4C872D3D2720DA5E007FCCA7 /* ValueFieldView.swift in Sources */,
 				4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */,
@@ -568,7 +584,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.3.5;
+				MARKETING_VERSION = 0.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -594,7 +610,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.3.5;
+				MARKETING_VERSION = 0.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
