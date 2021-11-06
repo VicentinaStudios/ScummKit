@@ -141,7 +141,7 @@ extension Stripe {
             case 0x40...0x44:
                 return 0x3c
             case 0x54...0x58:
-                return 0x51
+                return 0x50         // NOTE: SCUMM Revisited article about image decompression uses 0x51 here
             case 0x68...0x6c:
                 return 0x64
             case 0x70...0x80:
