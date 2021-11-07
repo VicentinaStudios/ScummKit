@@ -15,7 +15,10 @@ struct SMAPView: View {
     @State private var clut = CLUT.empty
     @State private var trns = TRNS.empty
     @State private var rmhd = RMHD.empty
+    @State private var imhd = IMHD.empty
     @State private var image: ScummImage? = nil
+    @State private var width: UInt16 = 320
+    @State private var height: UInt16 = 500
     
     var body: some View {
         
@@ -28,8 +31,8 @@ struct SMAPView: View {
                 
                 HStack {
                     
-                    Text("Width: \(rmhd.width)")
-                    Text("Height: \(rmhd.height)")
+                    Text("Width: \(width)")
+                    Text("Height: \(height)")
                     Text("Stripes: \(smap.stripes.count)")
                 }
                 
@@ -40,30 +43,102 @@ struct SMAPView: View {
                     
                     VStack {
                         Image(decorative: cgImage, scale: 0.5).padding()
-                            .frame(width: CGFloat(rmhd.width))
+                            .frame(width: CGFloat(width))
                         
-                        Button("Export Image") {
+                        Button("Export") {
                             try! cgImage.pngData?.savePng()
                         }
-                    }.frame(width: CGFloat(rmhd.width))
+                    }.frame(width: CGFloat(width))
                         .padding()
                 }
             }.frame(minWidth: 320 * 2, minHeight: 500)
                 .padding()
             
         }.onAppear {
-            loadData()
             
-            image = ScummImage(from: smap, info: rmhd, palette: clut)
+            loadColorData()
+            
+            if isRoom {
+                
+                loadRoomData()
+                
+                width = rmhd.width
+                height = rmhd.height
+                
+            } else if isObject {
+                
+                loadObjectData()
+
+                width = imhd.width
+                height = imhd.height
+            }
+            
+            image = ScummImage(
+                from: smap,
+                palette: clut,
+                width: width,
+                height: height
+            )
         }
     }
+}
+
+extension SMAPView {
     
-    private func loadData() {
+    private var isRoom: Bool {
+        
+        guard let value = node.parent?.parent?.value else {
+            return false
+        }
+        
+        return BlockType(rawValue: value.name) == .RMIM ? true : false
+    }
+    
+    private var isObject: Bool {
+        guard let value = node.parent?.parent?.value else {
+            return false
+        }
+        
+        return BlockType(rawValue: value.name) == .OBIM ? true : false
+    }
+    
+    private func loadColorData() {
+        
+        guard
+            let trnsNode = node.find(blockType: .TRNS),
+            let clutNode = node.find(blockType: .CLUT)
+        else {
+            return
+        }
+        
+        var buffer = try! trnsNode.read(in: fileURL)
+        trns = TRNS.create(from: buffer)
+        
+        buffer = try! clutNode.read(in: fileURL)
+        clut = CLUT.create(from: buffer)
+    }
+    
+    private func loadRoomData() {
+        
+        guard
+            let rmhdNode = node.find(blockType: .RMHD)
+        else {
+            return
+        }
+        
+        var buffer = try! rmhdNode.read(in: fileURL)
+        rmhd = RMHD.create(from: buffer)
+        
+        buffer = try! node.read(in: fileURL)
+        smap = SMAP.create(from: buffer, imageWidth: rmhd.width)
+    }
+    
+    private func loadObjectData() {
         
         guard
             let trnsNode = node.find(blockType: .TRNS),
             let clutNode = node.find(blockType: .CLUT),
-            let rmhdNode = node.find(blockType: .RMHD)
+            let imhdNode = node.find(blockType: .IMHD, in: .OBIM)
         else {
             return
         }
@@ -74,11 +149,11 @@ struct SMAPView: View {
         buffer = try! clutNode.read(in: fileURL)
         clut = CLUT.create(from: buffer)
         
-        buffer = try! rmhdNode.read(in: fileURL)
-        rmhd = RMHD.create(from: buffer)
+        buffer = try! imhdNode.read(in: fileURL)
+        imhd = IMHD.create(from: buffer)
         
         buffer = try! node.read(in: fileURL)
-        smap = SMAP.create(from: buffer, imageWidth: rmhd.width)
+        smap = SMAP.create(from: buffer, imageWidth: imhd.width)
     }
 }
 

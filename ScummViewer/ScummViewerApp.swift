@@ -121,7 +121,7 @@ struct ScummViewerApp: App {
                                 buffer = try! node.read(in: scummStore.scummFiles.last?.value.fileURL)
                                 let smap = SMAP.create(from: buffer, imageWidth: rmhd.width)
                                 
-                                let image = ScummImage(from: smap, info: rmhd, palette: clut)
+                                let image = ScummImage(from: smap, palette: clut, width: rmhd.width, height: rmhd.height)
                                 let png = image.bitmap.cgImage?.pngData
                                 let leadingZeros = String(format: "%03d", imageCount)
                                 let filename = "image_\(leadingZeros).png"

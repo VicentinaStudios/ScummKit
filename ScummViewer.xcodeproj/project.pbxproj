@@ -10,6 +10,8 @@
 		4C1CFD5F2730295F001663CE /* ImageCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1CFD5E2730295F001663CE /* ImageCodec.swift */; };
 		4C1CFD6127303611001663CE /* Stripe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1CFD6027303611001663CE /* Stripe.swift */; };
 		4C27C9832736A2520081F280 /* NumberedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27C9822736A2520081F280 /* NumberedListView.swift */; };
+		4C27C98527386E080081F280 /* IMHD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27C98427386E080081F280 /* IMHD.swift */; };
+		4C27C9872738714D0081F280 /* IMHDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27C9862738714D0081F280 /* IMHDView.swift */; };
 		4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C33EF70271BA9B800323220 /* DetailsView.swift */; };
 		4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C408069271B972500A76C75 /* Data+Ext.swift */; };
 		4C40806E271B976C00A76C75 /* UInt8+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C40806D271B976C00A76C75 /* UInt8+Ext.swift */; };
@@ -67,6 +69,8 @@
 		4C1CFD5E2730295F001663CE /* ImageCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCodec.swift; sourceTree = "<group>"; };
 		4C1CFD6027303611001663CE /* Stripe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stripe.swift; sourceTree = "<group>"; };
 		4C27C9822736A2520081F280 /* NumberedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedListView.swift; sourceTree = "<group>"; };
+		4C27C98427386E080081F280 /* IMHD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMHD.swift; sourceTree = "<group>"; };
+		4C27C9862738714D0081F280 /* IMHDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMHDView.swift; sourceTree = "<group>"; };
 		4C33EF70271BA9B800323220 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		4C408069271B972500A76C75 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		4C40806D271B976C00A76C75 /* UInt8+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt8+Ext.swift"; sourceTree = "<group>"; };
@@ -309,6 +313,7 @@
 				4C9F3D972723C4260052EEE2 /* CLUT.swift */,
 				4C9F3D9F2724481D0052EEE2 /* SMAP.swift */,
 				4C4A7B612734DC48006DE394 /* TRNS.swift */,
+				4C27C98427386E080081F280 /* IMHD.swift */,
 			);
 			path = "Data File Models";
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 				4C9F3D992723C6570052EEE2 /* CLUTView.swift */,
 				4C9F3DA12724A7E80052EEE2 /* SMAPView.swift */,
 				4C4A7B632734DD68006DE394 /* TRNSView.swift */,
+				4C27C9862738714D0081F280 /* IMHDView.swift */,
 			);
 			path = "Data File Blocks";
 			sourceTree = "<group>";
@@ -426,8 +432,10 @@
 				4C1CFD6127303611001663CE /* Stripe.swift in Sources */,
 				4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */,
 				4C872D392720CB52007FCCA7 /* MAXSView.swift in Sources */,
+				4C27C98527386E080081F280 /* IMHD.swift in Sources */,
 				4C4A7B6627352ED0006DE394 /* ColorFieldView.swift in Sources */,
 				4C79B825271D77FD0030E564 /* Block.swift in Sources */,
+				4C27C9872738714D0081F280 /* IMHDView.swift in Sources */,
 				4C9F3D982723C4260052EEE2 /* CLUT.swift in Sources */,
 				4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */,
 				4C7A492D272586D900257C3F /* ScummImage.swift in Sources */,
@@ -588,7 +596,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.3.6;
+				MARKETING_VERSION = 0.3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -614,7 +622,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.3.6;
+				MARKETING_VERSION = 0.3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

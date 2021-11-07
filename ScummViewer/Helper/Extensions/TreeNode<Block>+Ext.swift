@@ -9,9 +9,9 @@ import Foundation
 
 extension TreeNode where T == Block {
     
-    func find(blockType: BlockType) -> TreeNode<Block>? {
+    func find(blockType: BlockType, in level: BlockType = .ROOM) -> TreeNode<Block>? {
         
-        let parent = findParent(of: .ROOM)
+        let parent = findParent(of: level)
         
         let block = parent.children?.first { block in
             block.value.name == blockType.rawValue
