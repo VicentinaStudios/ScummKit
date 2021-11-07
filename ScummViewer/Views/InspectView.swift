@@ -38,6 +38,8 @@ struct InspectView: View {
                     CLUTView(buffer: $buffer)
                 case .SMAP:
                     SMAPView(node: $node)
+                case .IMHD:
+                    IMHDView(buffer: $buffer)
                 default:
                     Text("Cannot inspect block")
                 }
