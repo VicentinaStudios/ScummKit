@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C1CFD5F2730295F001663CE /* ImageCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1CFD5E2730295F001663CE /* ImageCodec.swift */; };
 		4C1CFD6127303611001663CE /* Stripe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1CFD6027303611001663CE /* Stripe.swift */; };
+		4C27C9832736A2520081F280 /* NumberedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27C9822736A2520081F280 /* NumberedListView.swift */; };
 		4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C33EF70271BA9B800323220 /* DetailsView.swift */; };
 		4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C408069271B972500A76C75 /* Data+Ext.swift */; };
 		4C40806E271B976C00A76C75 /* UInt8+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C40806D271B976C00A76C75 /* UInt8+Ext.swift */; };
@@ -65,6 +66,7 @@
 /* Begin PBXFileReference section */
 		4C1CFD5E2730295F001663CE /* ImageCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCodec.swift; sourceTree = "<group>"; };
 		4C1CFD6027303611001663CE /* Stripe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stripe.swift; sourceTree = "<group>"; };
+		4C27C9822736A2520081F280 /* NumberedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedListView.swift; sourceTree = "<group>"; };
 		4C33EF70271BA9B800323220 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		4C408069271B972500A76C75 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		4C40806D271B976C00A76C75 /* UInt8+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt8+Ext.swift"; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				4C872D3E27211783007FCCA7 /* BottomBarView.swift */,
 				4CD9F4D62722217A00D3F0D7 /* InputFieldView.swift */,
 				4C4A7B6527352ED0006DE394 /* ColorFieldView.swift */,
+				4C27C9822736A2520081F280 /* NumberedListView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				4CF2241427220AFF0006F1CE /* LOFFView.swift in Sources */,
 				4C79B827271D8CC40030E564 /* ScummFile.swift in Sources */,
 				4CDF0F742733FC45008A9B6A /* TreeNode<Block>+Ext.swift in Sources */,
+				4C27C9832736A2520081F280 /* NumberedListView.swift in Sources */,
 				4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */,
 				4C872D3D2720DA5E007FCCA7 /* ValueFieldView.swift in Sources */,
 				4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */,

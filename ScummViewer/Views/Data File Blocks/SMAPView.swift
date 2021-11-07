@@ -21,39 +21,8 @@ struct SMAPView: View {
         
         HStack {
             
-            List {
-                
-                Section(
-                    header: HStack {
-                        
-                        
-                        Text("#")
-                            .frame(width: Constants.indexLabelWidth, alignment: .trailing)
-                    
-                        VStack {
-                            
-                            Text("Stripe Offsets")
-                            
-                            Text("4 bytes")
-                                .font(.system(size: 8))
-                        }
-                        
-                    }.font(.system(.headline)).buttonStyle(PlainButtonStyle())
-                ) {
-                    
-                    ForEach(smap.stripeOffsets.indices, id: \.self) { index in
-                        HStack {
-                            
-                            Text("\(index + 1)")
-                                .foregroundColor(.secondary)
-                                .frame(width: Constants.indexLabelWidth, alignment: .trailing)
-                            
-                            Text("0x\(smap.stripeOffsets[index].hex)")
-                        }
-                    }
-                
-                }
-            }.frame(width: 160)
+            NumberedListView(values: smap.stripeOffsets)
+                .frame(width: 160)
             
             VStack {
                 
@@ -69,13 +38,18 @@ struct SMAPView: View {
                     let cgImage = image.bitmap.cgImage
                 {
                     
-                    Image(decorative: cgImage, scale: 1).padding()
-                    
-                    Button("Export") {
-                        try! cgImage.pngData?.savePng()
-                    }
+                    VStack {
+                        Image(decorative: cgImage, scale: 0.5).padding()
+                            .frame(width: CGFloat(rmhd.width))
+                        
+                        Button("Export Image") {
+                            try! cgImage.pngData?.savePng()
+                        }
+                    }.frame(width: CGFloat(rmhd.width))
+                        .padding()
                 }
-            }
+            }.frame(minWidth: 320 * 2, minHeight: 500)
+                .padding()
             
         }.onAppear {
             loadData()
@@ -129,20 +103,10 @@ struct SMAPView_Previews: PreviewProvider {
     static var previews: some View {
         
         let scummStore = ScummStore.create
-        let block = Block(for: .SMAP, with: 22206, at: 0x6ff)
+        let block = Block(for: .SMAP, with: 34314, at: 0x18a9f)
         let node = (scummStore.scummFiles.last?.value.tree?.search(for: block))!
         
         SMAPView(node: .constant(node))
             .environmentObject(scummStore)
-    }
-}
-
-// MARK: - Enums & Constants
-
-extension SMAPView {
-    
-    struct Constants {
-        static let indexLabelWidth: CGFloat = 20
-        static let roomsLabelWidth: CGFloat = 90
     }
 }

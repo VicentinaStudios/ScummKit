@@ -68,6 +68,10 @@ class ImageCodec {
         
         buffer.enumerated().forEach { index, pixel in
             
+            guard x < 8 else {
+                return
+            }
+            
             verticalBuffer[offset] = pixel
             
             offset += 8
@@ -115,9 +119,11 @@ extension ImageCodec {
         
         paletteIndex = stripe.data[0]
         
+        buffer.append(paletteIndex)
+        
         while bitstream.bitsLeft {
             
-            buffer.append(paletteIndex)
+            
             
             if bitstream.readBit == 1 {
                 
@@ -130,6 +136,8 @@ extension ImageCodec {
                     commandsMethod2()
                 }
             }
+            
+            buffer.append(paletteIndex)
         }
     }
     
