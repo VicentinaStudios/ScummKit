@@ -13,6 +13,7 @@
 		4C27C98527386E080081F280 /* IMHD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27C98427386E080081F280 /* IMHD.swift */; };
 		4C27C9872738714D0081F280 /* IMHDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27C9862738714D0081F280 /* IMHDView.swift */; };
 		4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C33EF70271BA9B800323220 /* DetailsView.swift */; };
+		4C340B65273B27D00066B0F5 /* COSTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C340B64273B27D00066B0F5 /* COSTView.swift */; };
 		4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C408069271B972500A76C75 /* Data+Ext.swift */; };
 		4C40806E271B976C00A76C75 /* UInt8+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C40806D271B976C00A76C75 /* UInt8+Ext.swift */; };
 		4C408070271B97A500A76C75 /* UInt16+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C40806F271B97A500A76C75 /* UInt16+Ext.swift */; };
@@ -22,8 +23,10 @@
 		4C4A7B6627352ED0006DE394 /* ColorFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A7B6527352ED0006DE394 /* ColorFieldView.swift */; };
 		4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA327176B7F0090BA59 /* TreeNode.swift */; };
 		4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5CDFA9271777140090BA59 /* QueueArray.swift */; };
+		4C6204C3273891FA003E6A28 /* ZPnn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6204C2273891FA003E6A28 /* ZPnn.swift */; };
 		4C637CC927207F6200634F8E /* InspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637CC827207F6200634F8E /* InspectView.swift */; };
 		4C637CCB27209E3600634F8E /* RNAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637CCA27209E3600634F8E /* RNAM.swift */; };
+		4C64A250273AC8A700AD9AB8 /* COST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64A24F273AC8A700AD9AB8 /* COST.swift */; };
 		4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B819271C23D00030E564 /* ScummVersion.swift */; };
 		4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B81B271C26470030E564 /* URL+Ext.swift */; };
 		4C79B825271D77FD0030E564 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B824271D77FD0030E564 /* Block.swift */; };
@@ -72,6 +75,7 @@
 		4C27C98427386E080081F280 /* IMHD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMHD.swift; sourceTree = "<group>"; };
 		4C27C9862738714D0081F280 /* IMHDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMHDView.swift; sourceTree = "<group>"; };
 		4C33EF70271BA9B800323220 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		4C340B64273B27D00066B0F5 /* COSTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COSTView.swift; sourceTree = "<group>"; };
 		4C408069271B972500A76C75 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		4C40806D271B976C00A76C75 /* UInt8+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt8+Ext.swift"; sourceTree = "<group>"; };
 		4C40806F271B97A500A76C75 /* UInt16+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt16+Ext.swift"; sourceTree = "<group>"; };
@@ -81,8 +85,10 @@
 		4C4A7B6527352ED0006DE394 /* ColorFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFieldView.swift; sourceTree = "<group>"; };
 		4C5CDFA327176B7F0090BA59 /* TreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNode.swift; sourceTree = "<group>"; };
 		4C5CDFA9271777140090BA59 /* QueueArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueArray.swift; sourceTree = "<group>"; };
+		4C6204C2273891FA003E6A28 /* ZPnn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZPnn.swift; sourceTree = "<group>"; };
 		4C637CC827207F6200634F8E /* InspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectView.swift; sourceTree = "<group>"; };
 		4C637CCA27209E3600634F8E /* RNAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNAM.swift; sourceTree = "<group>"; };
+		4C64A24F273AC8A700AD9AB8 /* COST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COST.swift; sourceTree = "<group>"; };
 		4C79B819271C23D00030E564 /* ScummVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummVersion.swift; sourceTree = "<group>"; };
 		4C79B81B271C26470030E564 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		4C79B824271D77FD0030E564 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
@@ -312,8 +318,10 @@
 				4CF224162722109D0006F1CE /* RMHD.swift */,
 				4C9F3D972723C4260052EEE2 /* CLUT.swift */,
 				4C9F3D9F2724481D0052EEE2 /* SMAP.swift */,
+				4C6204C2273891FA003E6A28 /* ZPnn.swift */,
 				4C4A7B612734DC48006DE394 /* TRNS.swift */,
 				4C27C98427386E080081F280 /* IMHD.swift */,
+				4C64A24F273AC8A700AD9AB8 /* COST.swift */,
 			);
 			path = "Data File Models";
 			sourceTree = "<group>";
@@ -327,6 +335,7 @@
 				4C9F3DA12724A7E80052EEE2 /* SMAPView.swift */,
 				4C4A7B632734DD68006DE394 /* TRNSView.swift */,
 				4C27C9862738714D0081F280 /* IMHDView.swift */,
+				4C340B64273B27D00066B0F5 /* COSTView.swift */,
 			);
 			path = "Data File Blocks";
 			sourceTree = "<group>";
@@ -422,6 +431,7 @@
 				4CF22411272207870006F1CE /* LOFF.swift in Sources */,
 				4C872D3F27211783007FCCA7 /* BottomBarView.swift in Sources */,
 				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
+				4C340B65273B27D00066B0F5 /* COSTView.swift in Sources */,
 				4C9F3DA22724A7E80052EEE2 /* SMAPView.swift in Sources */,
 				4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */,
 				4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */,
@@ -429,9 +439,11 @@
 				4CF224172722109D0006F1CE /* RMHD.swift in Sources */,
 				4CF2240B2721B7BC0006F1CE /* DirectoryOfObjects.swift in Sources */,
 				4C4A7B642734DD68006DE394 /* TRNSView.swift in Sources */,
+				4C64A250273AC8A700AD9AB8 /* COST.swift in Sources */,
 				4C1CFD6127303611001663CE /* Stripe.swift in Sources */,
 				4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */,
 				4C872D392720CB52007FCCA7 /* MAXSView.swift in Sources */,
+				4C6204C3273891FA003E6A28 /* ZPnn.swift in Sources */,
 				4C27C98527386E080081F280 /* IMHD.swift in Sources */,
 				4C4A7B6627352ED0006DE394 /* ColorFieldView.swift in Sources */,
 				4C79B825271D77FD0030E564 /* Block.swift in Sources */,

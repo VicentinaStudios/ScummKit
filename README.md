@@ -15,6 +15,7 @@
 * [GitHub: SCUMMEditor](https://github.com/mmoreira2000/scummeditor)
 * [GitHub: ScummC](https://github.com/jamesu/scummc)
 * [BitBucket: Scumm Image Encoder](https://bitbucket.org/jestar_jokin/scumm-image-encoder)
+* [GitHub: ScummAtlas](https://github.com/ktzar/scummatlas)
 
 ## SCUMM Documentation
 
@@ -24,3 +25,8 @@
 * [SCUMM Revisted: Online Help](https://web.archive.org/web/20030417011557/http://scummrev.mixnmojo.com/help/toc.shtml)
 * [ScummC Wiki](https://github.com/AlbanBedel/scummc/wiki)
 * [A Platform Study of the SCUMM Engine and Ron Gilbert’s The Secret of Monkey Island](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.994.322&rep=rep1&type=pdf)
+
+## SCUMM Articles
+
+* [SCUMM internals and syntax for the sake of nostalgia](https://robertodip.com/blog/scumm-internals-syntax/)
+* [THE SECRETS OF MONKEY ISLAND’S SOURCE CODE](https://gamehistory.org/monkeyisland/)

@@ -36,10 +36,12 @@ struct InspectView: View {
                     TRNSView(node: $node)
                 case .CLUT:
                     CLUTView(buffer: $buffer)
-                case .SMAP:
+                case .SMAP, .ZP01, .ZP02, .ZP03:
                     SMAPView(node: $node)
                 case .IMHD:
                     IMHDView(buffer: $buffer)
+                case .COST:
+                    COSTView(buffer: $buffer)
                 default:
                     Text("Cannot inspect block")
                 }

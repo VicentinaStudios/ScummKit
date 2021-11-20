@@ -23,4 +23,8 @@ extension UInt16 {
     var char: [String] {
         unicode.map { String($0) }
     }
+    
+    var binary: String {
+        String(self, radix: 2)
+    }
 }
