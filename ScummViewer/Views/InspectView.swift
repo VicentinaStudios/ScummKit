@@ -41,7 +41,7 @@ struct InspectView: View {
                 case .IMHD:
                     IMHDView(buffer: $buffer)
                 case .COST:
-                    COSTView(buffer: $buffer)
+                    COSTView(node: $node)
                 default:
                     Text("Cannot inspect block")
                 }

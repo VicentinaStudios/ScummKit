@@ -9,8 +9,11 @@ import SwiftUI
 
 struct COSTView: View {
     
-    @Binding var buffer: [UInt8]
+    @EnvironmentObject var scummStore: ScummStore
+    @Binding var node: TreeNode<Block>
+    //@Binding var buffer: [UInt8]
     @State private var cost = COST.empty
+    @State private var clut = CLUT.empty
     
     var body: some View {
         
@@ -112,8 +115,10 @@ struct COSTView: View {
                             Text("MoveX = \(image.moveX) : MoveY = \(image.moveY)")
                         }
                         
-                        
-                        
+                        let texture = Texture(with: image, format: cost.format, palette: clut)
+                        if let cgImage = texture.bitmap.cgImage {
+                            Image(decorative: cgImage, scale: 0.25).padding()
+                        }
                     }
                 }
                 
@@ -123,17 +128,51 @@ struct COSTView: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color.secondary, lineWidth: 1)
         ).onAppear {
-            cost = COST.create(from: $buffer.wrappedValue)
+            
+            guard let clutNode = clutNode else {
+                return
+            }
+            
+            var buffer = try! clutNode.read(in: fileURL)
+            clut = CLUT.create(from: buffer)
+            
+            buffer = try! node.read(in: fileURL)
+            cost = COST.create(from: buffer)
         }
+    }
+}
+
+// MARK: - Queries
+
+extension COSTView {
+        
+    var fileURL: URL? {
+        
+        let url = scummStore.scummFiles.first { file in
+            file.value.fileURL.lastPathComponent == node.root.value.name
+        }
+        
+        return url?.value.fileURL
+    }
+    
+    var clutNode: TreeNode<Block>? {
+        node.parent?.children?
+            .first { $0.value.name == BlockType.ROOM.rawValue }?
+            .children?
+            .first { $0.value.name == BlockType.CLUT.rawValue }
+            
     }
 }
 
 struct COSTView_Previews: PreviewProvider {
     static var previews: some View {
         
+        let scummStore = ScummStore.create
         let block = Block(for: .COST, with: 382, at: 0x17fe3)
-        let buffer = ScummStore.buffer(at: ScummStore.dataFileURL, for: block)
+        //let buffer = ScummStore.buffer(at: ScummStore.dataFileURL, for: block)
+        let node = (scummStore.scummFiles.last?.value.tree?.search(for: block))!
         
-        COSTView(buffer: .constant(buffer))
+        COSTView(node: .constant(node))
+            .environmentObject(scummStore)
     }
 }

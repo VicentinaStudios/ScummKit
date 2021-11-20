@@ -12,6 +12,8 @@
 		4C27C9832736A2520081F280 /* NumberedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27C9822736A2520081F280 /* NumberedListView.swift */; };
 		4C27C98527386E080081F280 /* IMHD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27C98427386E080081F280 /* IMHD.swift */; };
 		4C27C9872738714D0081F280 /* IMHDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27C9862738714D0081F280 /* IMHDView.swift */; };
+		4C2A78D9274874DD00F358BA /* RLECodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A78D8274874DD00F358BA /* RLECodec.swift */; };
+		4C2A78DB2748772300F358BA /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A78DA2748772300F358BA /* Texture.swift */; };
 		4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C33EF70271BA9B800323220 /* DetailsView.swift */; };
 		4C340B65273B27D00066B0F5 /* COSTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C340B64273B27D00066B0F5 /* COSTView.swift */; };
 		4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C408069271B972500A76C75 /* Data+Ext.swift */; };
@@ -74,6 +76,8 @@
 		4C27C9822736A2520081F280 /* NumberedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedListView.swift; sourceTree = "<group>"; };
 		4C27C98427386E080081F280 /* IMHD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMHD.swift; sourceTree = "<group>"; };
 		4C27C9862738714D0081F280 /* IMHDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMHDView.swift; sourceTree = "<group>"; };
+		4C2A78D8274874DD00F358BA /* RLECodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLECodec.swift; sourceTree = "<group>"; };
+		4C2A78DA2748772300F358BA /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
 		4C33EF70271BA9B800323220 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		4C340B64273B27D00066B0F5 /* COSTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COSTView.swift; sourceTree = "<group>"; };
 		4C408069271B972500A76C75 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 				4CF2240F2721DCA50006F1CE /* SCUMM */,
 				4C9F3D9B2724476D0052EEE2 /* Bitstream.swift */,
 				4C9F3D9D272447950052EEE2 /* Bitmap.swift */,
+				4C7A492C272586D900257C3F /* ScummImage.swift */,
+				4C2A78DA2748772300F358BA /* Texture.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -305,8 +311,8 @@
 			children = (
 				4C79B819271C23D00030E564 /* ScummVersion.swift */,
 				4C872D442721751C007FCCA7 /* BlockType.swift */,
-				4C7A492C272586D900257C3F /* ScummImage.swift */,
 				4C1CFD5E2730295F001663CE /* ImageCodec.swift */,
+				4C2A78D8274874DD00F358BA /* RLECodec.swift */,
 			);
 			path = SCUMM;
 			sourceTree = "<group>";
@@ -414,6 +420,7 @@
 				4C9F3D9C2724476D0052EEE2 /* Bitstream.swift in Sources */,
 				4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */,
 				4C637CCB27209E3600634F8E /* RNAM.swift in Sources */,
+				4C2A78D9274874DD00F358BA /* RLECodec.swift in Sources */,
 				4C9F3D9E272447950052EEE2 /* Bitmap.swift in Sources */,
 				4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */,
 				4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */,
@@ -428,6 +435,7 @@
 				4C872D4127211E8D007FCCA7 /* Directory.swift in Sources */,
 				4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */,
 				4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */,
+				4C2A78DB2748772300F358BA /* Texture.swift in Sources */,
 				4CF22411272207870006F1CE /* LOFF.swift in Sources */,
 				4C872D3F27211783007FCCA7 /* BottomBarView.swift in Sources */,
 				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
