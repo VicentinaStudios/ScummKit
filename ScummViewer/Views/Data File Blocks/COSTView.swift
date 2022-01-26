@@ -15,113 +15,145 @@ struct COSTView: View {
     @State private var cost = COST.empty
     @State private var clut = CLUT.empty
     
+    @State private var isExpanded = true
+        
+    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 16)
+    
     var body: some View {
         
         List {
             
-            Group {
-            
-                Text("Number of Animations: \(cost.numberOfAnimations)")
-                Text("Format: 0x\(cost.format.hex)")
-                
-                let decode = cost.format & 0x7f
-                
-                Text("- Colors: 0x\(decode.hex) (0x58 = 16 colors, 0x59 = 32 colors)")
-                Text("- Alignement: \(cost.format & 0x80) (0x0=normal alignement, 0x80 different alignment)")
-                
-                ForEach(0..<cost.colors.count, id: \.self) { index in
-                    Text("Color #\(index): \(cost.colors[index])")
+            Section(header: Text("General")) {
+                HStack(spacing: 30) {
+                    
+                    Text("Number of Animations: \(cost.numberOfAnimations)")
+                    
+                    if isValidCostume {
+                        
+                        Text("Format: [\(isAnimationMirrored ? "X" : " ")] Mirror WEST Animations")
+                        Text("Colors \(cost.colors.count)")
+                        
+                    } else {
+                        Text("No valid costume.")
+                    }
+                }
+            }
+
+            Section(header: Text("Palette")) {
+                ScrollView {
+                    LazyVGrid(columns: columns) {
+                        ForEach(cost.colors, id: \.self) { index in
+                            
+                            ColorFieldView(
+                                index: UInt8(index),
+                                indexColor: clut.colors[Int(index)]
+                            )
+                        }
+                    }
                 }
             }
             
-            Group {
-            
-                Text("Animation Commands Offset: 0x\(cost.animationComandsOffset.hex)")
-                
-                ForEach(0..<cost.limbsOffsets.count, id: \.self) { index in
-                    Text("Limb Offset #\(index): 0x\(cost.limbsOffsets[index].hex)")
-                }
-                
-                ForEach(0..<cost.animationOffsets.count, id: \.self) { index in
-                    Text("Animation Offsets #\(index): 0x\(cost.animationOffsets[index].hex)")
+            Section(header: Text("Commands")) {
+                HStack(spacing: 30) {
+                    
+                    Text("Animation Commands Offset: 0x\(cost.animationComandsOffset.hex)")
                 }
             }
             
-            Group {
+            Section(header: Text("Limbs")) {
                 
-                VStack(alignment: .leading) {
-                    ForEach(0..<cost.animations.count) { index in
-                        
-                        let limbMask = cost.animations[index].limbMask
-                        let activeLimbs = COST.numberOfLimbs(for: limbMask)
-                        
-                        Text(
-                            "Animation Offset[0x\(cost.animationOffsets[index].hex)]" +
-                            " - Limb Mask [0b\(limbMask.binary)]" +
-                            " - Active Limbs: \(activeLimbs)"
-                        )
-                        
-                        VStack(alignment: .leading) {
-                            ForEach(0..<cost.animations[index].definition.count) { idx in
+                List {
+                    
+                    Section(
+                        header: HStack {
+                            
+                            Text("#")
+                                .frame(width: Constants.indexLabelWidth, alignment: .trailing)
+                            
+                            VStack {
                                 
-                                HStack {
+                                Text("Offset")
                                 
-                                    let start = cost.animations[index].definition[idx].index
+                                Text("2 bytes")
+                                    .font(.system(size: 8))
+                            }
+                            
+                        }.font(.system(.headline)).buttonStyle(PlainButtonStyle())
+                    ) {
+                        
+                    ForEach(0..<cost.limbsOffsets.count, id: \.self) { index in
+                                
+                        HStack {
                                     
-                                    if start == 0xffff {
-                                        Text("- Limb#\(idx) DISABLE")
-                                    } else {
-                                        Text("- Limb#\(idx) Start: 0x\(start.hex)")
-                                    }
-                                    
-                                    if let end = cost.animations[index].definition[idx].length {
-                                        let masked = end & 0b1111111
-                                        Text("- End: 0x\(masked.hex)")
-                                        
-                                        let isLooping = end & 0b10000000
-                                        Text("- Loop: \(isLooping)")
-                                    }
-                                }
+                            Text("\(index + 1)")
+                                .foregroundColor(.secondary)
+                                .frame(width: Constants.indexLabelWidth, alignment: .trailing)
+                                
+                            Text("0x\(cost.limbsOffsets[index].hex)")
+                            }
+                        }
+                    }
+                }.frame(height: CGFloat(cost.limbsOffsets.count + 1) * 25, alignment: .leading)
+                    .disabled(true)
+            }
+            
+            Section(header: Text("Animations")) {
+                
+                OutlineGroup(animationDefinitions, id: \.value, children: \.children) { tree in
+                    Text(tree.value).font(.subheadline)
+                }
+            }
+            
+            Section(header: Text("Commands")) {
+                
+                List {
+                    ForEach(cost.commands, id: \.self) { command in
+                        Text("0x\(command.hex)")
+                    }
+                }.frame(height: CGFloat(cost.commands.count) * 25, alignment: .leading)
+                    .disabled(true)
+            }
+            
+            Section(header: Text("Pictures")) {
+                
+                HStack(spacing: 30) {
+                    
+                    let numberOfPictures = UInt8(COST.numberOfPictures(for: cost.commands))
+                    
+                    Text("Number of Pictures: \(numberOfPictures) [0x\(numberOfPictures.hex)]")
+                }
+                
+                List {
+                    ForEach(cost.limbs, id: \.self) { limb in
+                        Text("0x\(limb.hex)")
+                    }
+                }.frame(height: CGFloat(cost.limbs.count) * 25, alignment: .leading)
+                    .disabled(true)
+            }
+            
+            Section(header: Text("Pictures II")) {
+                
+                Group {
+                    
+                    VStack{
+                        
+                        ForEach(0..<cost.images.count, id: \.self) { index in
+                            
+                            let image = cost.images[index]
+                            
+                            HStack {
+                                Text("Width = \(image.width) : Height = \(image.height)")
+                                Text("RelX = \(image.relX) : RelY = \(image.relY)")
+                                Text("MoveX = \(image.moveX) : MoveY = \(image.moveY)")
+                            }
+                            
+                            let texture = Texture(with: image, format: cost.format, clut: clut, colors: cost.colors)
+                            if let cgImage = texture.bitmap.cgImage {
+                                Image(decorative: cgImage, scale: 0.25).padding()
                             }
                         }
                     }
                 }
-            }
-            
-            Group {
-                VStack {
-                    Text("Commands: ")
-                    ForEach(0..<cost.commands.count, id: \.self) { index in
-                        Text("#\(index) 0x\(cost.commands[index].hex)")
-                    }
-                }.frame(width: 700)
-            }
-            
-            ForEach(0..<cost.limbs.count, id: \.self) { index in
-                Text("#\(index) Limb (picture offset): 0x\(cost.limbs[index].hex)")
-            }
-            
-            Group {
-                
-                VStack{
-                    
-                    ForEach(0..<cost.images.count, id: \.self) { index in
-                        
-                        let image = cost.images[index]
-                        
-                        HStack {
-                            Text("Width = \(image.width) : Height = \(image.height)")
-                            Text("RelX = \(image.relX) : RelY = \(image.relY)")
-                            Text("MoveX = \(image.moveX) : MoveY = \(image.moveY)")
-                        }
-                        
-                        let texture = Texture(with: image, format: cost.format, palette: clut)
-                        if let cgImage = texture.bitmap.cgImage {
-                            Image(decorative: cgImage, scale: 0.25).padding()
-                        }
-                    }
-                }
-                
             }
             
         }.overlay(
@@ -133,12 +165,68 @@ struct COSTView: View {
                 return
             }
             
+            
             var buffer = try! clutNode.read(in: fileURL)
             clut = CLUT.create(from: buffer)
-            
+                        
             buffer = try! node.read(in: fileURL)
             cost = COST.create(from: buffer)
         }
+    }
+}
+
+// MARK: - Helper
+
+extension COSTView {
+    
+    var isValidCostume: Bool {
+        (cost.format > 0x61 || cost.format < 0x57) ? false : true
+    }
+    
+    var isAnimationMirrored: Bool {
+        let format = cost.format & 0x7f
+        return format & 0x80 == 0 ? true : false
+    }
+    
+    var numberOfColors: UInt8 {
+        cost.format & 0x1 == 0 ? 16 : 32
+    }
+    
+    var animationDefinitions: [TreeNode<String>] {
+        
+        let tree = cost.animations.enumerated().map { index, animation -> TreeNode<String> in
+            
+            let offset = TreeNode(with: "Offset: 0x\(cost.animationOffsets[index].hex)")
+            
+            let limbMask = TreeNode(with: "Limb Mask: 0x\(animation.limbMask.hex)")
+            let numberOfLimbs = TreeNode(with: "Number of Limbs: \(COST.numberOfLimbs(for: animation.limbMask))")
+            
+            offset.add(limbMask)
+            offset.add(numberOfLimbs)
+            
+            animation.definition.enumerated().forEach { index, definition in
+                
+                let animation = TreeNode(with: "Animation \(index + 1)")
+                
+                let disabled = TreeNode(with: "Disabled: \(definition.index == 0xffff ? "True" : "False")")
+                let length = TreeNode(with: "Length: \(definition.length & 0x7f)")
+                let noLoop = TreeNode(with: "NoLoop: \((definition.length & 0x80) > 0 ? "True" : "False")")
+                let start = TreeNode(with: "Start: \(definition.index)")
+                let noLoopAndEndOffset = TreeNode(with: "NoLoopEndOffset: \(definition.length)")
+                
+                animation.add(disabled)
+                animation.add(length)
+                animation.add(noLoop)
+                animation.add(start)
+                animation.add(noLoopAndEndOffset)
+                
+                offset.add(animation)
+            }
+            
+            return offset
+        }
+        
+        return tree
     }
 }
 
@@ -174,5 +262,15 @@ struct COSTView_Previews: PreviewProvider {
         
         COSTView(node: .constant(node))
             .environmentObject(scummStore)
+    }
+}
+
+// MARK: - Enums & Constants
+
+extension COSTView {
+    
+    struct Constants {
+        static let indexLabelWidth: CGFloat = 20
+        static let cellLabelWidth: CGFloat = 90
     }
 }

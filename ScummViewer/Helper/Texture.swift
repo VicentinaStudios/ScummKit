@@ -13,6 +13,7 @@ struct Texture {
     
     private let clut: CLUT
     private let format: UInt8
+    private let colors: [UInt8]
     
     private var palette: [Bitmap.Color] {
         clut.colors.map { Bitmap.Color(red: $0.red, green: $0.green, blue: $0.blue) }
@@ -30,11 +31,12 @@ struct Texture {
         numberOfColors == 16 ? 0xf : 0x7
     }
     
-    init(with texture: COST.Image, format: UInt8, palette clut: CLUT) {
+    init(with texture: COST.Image, format: UInt8, clut: CLUT, colors: [UInt8]) {
         
         self.texture = texture
-        self.clut = clut
         self.format = format
+        self.clut = clut
+        self.colors = colors
     }
     
     var bitmap: Bitmap {
@@ -57,16 +59,20 @@ struct Texture {
             
             if repeating == 0 {
                 
-                if index >= texture.rle.count {
+                /*
+                if index >= texture.rle.count {     // NOTE: Can this be removed?
                     return bitmap
                 }
+                */
                 
-                repeating = texture.rle[index]; index += 0
+                repeating = texture.rle[index]; index += 1
             }
             
             while repeating > 0 {
-            
-                bitmap.draw(x: x, y: y, with: palette[Int(color)])
+                
+                let paletteIndex = colors[Int(color)]
+                
+                bitmap.draw(x: x, y: y, with: palette[Int(paletteIndex)])
                 
                 repeating -= 1
                 y += 1

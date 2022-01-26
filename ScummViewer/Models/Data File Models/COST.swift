@@ -14,7 +14,7 @@ struct COST {
         
         struct Definition {
             let index: UInt16
-            let length: UInt8?
+            let length: UInt8
         }
         
         let limbMask: UInt16
@@ -70,11 +70,12 @@ extension COST {
         let animationCommands = animationCommands(at: animationComandsOffset, with: size)
         
         let numberOfPictures = numberOfPictures(for: animationCommands)
+//        let numberOfPictures = numberOfPictures(for: limbOffsets.first)   // DOTT
         let limbs = limbs(for: limbOffsets, pictureCount: numberOfPictures)
         
         let images = images(for: limbs)
         
-        offset = 8
+        offset = 8 // DOTT=0xe
         
         return COST(
             blockName: buffer.dwordLE(0),
@@ -114,13 +115,17 @@ extension COST {
 
 extension COST {
     
-    private static var offset = 8
+    private static var offset = 8 // DOTT=0xe
     
     private static var _buffer: [UInt8] = []
     private static var buffer: [UInt8] {
         get { _buffer }
         set { _buffer = newValue }
     }
+    
+    private static let fixNumberOfAnimations: UInt8 = 1
+    private static let fixLimbOffset: UInt16 = 2 // DOTT=8
+    private static let fixCmdOffset: UInt16 = 2 // DOTT=8
 }
 
 // MARK: General Information
@@ -132,12 +137,10 @@ extension COST {
     }
     
     static private func numberOfAnimations() -> UInt8 {
-        
-        // NOTE: Is SCUMM 5 numberOfAnimations + 1?
-        
+                
         let numberOfAnimations = buffer.byte(offset)
         offset += 1
-        return numberOfAnimations + 1
+        return numberOfAnimations + fixNumberOfAnimations
     }
     
     static private func format() -> UInt8 {
@@ -160,36 +163,29 @@ extension COST {
 extension COST {
     
     static private func animationComandsOffset() -> UInt16 {
-        
-        // NOTE: Is SCUMM 5 anim cmd offs - 6?
-        
+                
         let animationComandsOffset = buffer.wordLE(offset)
         offset += 2
         return animationComandsOffset
     }
     
     static private func limbOffsets() -> [UInt16] {
-        
-        // NOTE: Is SCUMM 5 limb offset - 6?
-        
+                
         (0..<16).map { _ -> UInt16 in
             let limbOffset = buffer.wordLE(offset)
             offset += 2
-            return limbOffset - 6
+            return limbOffset
         }
     }
     
     static private func animationOffsets(for numberOfAnimations: UInt8) -> [UInt16] {
-        
-        // NOTE: Is SCUMM 5 anim offset - 6?
-        
+                
         (0..<numberOfAnimations).map { _ -> UInt16 in
             let animationOffset = buffer.wordLE(offset)
             offset += 2
             return animationOffset
         }
         .filter { $0 > 0 }
-        .map { $0 - 6 }
     }
 }
 
@@ -231,11 +227,9 @@ extension COST {
     }
     
     static private func animations(for animationOffsets: [UInt16]) -> [Animation] {
-        
-        // NOTE: Is SCUMM 5 anim cmd offs + 8?
-        
+                
         let animations = animationOffsets.filter { $0 > 0 }.map { animationOffsets -> Animation in
-            
+                        
             let limbMask = limbMask()
             let numberOfLimbs = numberOfLimbs(for: limbMask)
             
@@ -244,7 +238,7 @@ extension COST {
             for limb in 0..<numberOfLimbs {
                 
                 let startIndex = startIndex()
-                let endIndex = startIndex == 0xffff ? nil : endIndex()
+                let endIndex = startIndex == 0xffff ? 0 : endIndex()
                 
                 let definition = Animation.Definition(index: startIndex, length: endIndex)
                 definitions.append(definition)
@@ -258,7 +252,7 @@ extension COST {
     
     static private func animationCommands(at animationCommandsOffset: UInt16, with size: Int) -> [UInt8] {
     
-        let commands = buffer.slice(Int(animationCommandsOffset + 8), size: size)
+        let commands = buffer.slice(Int(animationCommandsOffset + fixCmdOffset), size: size)
         offset += size
         return commands
     }
@@ -268,32 +262,45 @@ extension COST {
 
 extension COST {
     
-    static private func numberOfPictures(for commands: [UInt8]) -> Int {
+    static func numberOfPictures(for firstLimbOffset: UInt16?) -> Int {
         
-        var count = 0
+        guard let firstLimbOffset = firstLimbOffset else {
+            return 0
+        }
+        
+        let fixedLimbOffset = Int(firstLimbOffset + fixLimbOffset)
+        let firstPictureOffset = buffer.wordLE(fixedLimbOffset)
+        let fixedFirstPictureOffset = Int(firstPictureOffset + fixLimbOffset)
+        
+        let pictures = fixedFirstPictureOffset - offset
+        
+        return pictures / 2
+    }
+    
+    static func numberOfPictures(for commands: [UInt8]) -> Int {
+        
+        var count: UInt8 = 0
         
         commands.enumerated().forEach { index, command in
-            if index < 0x71 && index > count {
-                count = index
+            if command < 0x71 &&  command > count {
+                count = command
             }
         }
         
-        return count
+        return Int(count)
     }
     
     static private func limbs(for limbOffsets: [UInt16], pictureCount: Int) -> [UInt16] {
         
-        offset = Int(limbOffsets[0])
+        offset = Int(limbOffsets[0] + fixLimbOffset)
         
-        let limbs = (0..<pictureCount).map { index -> UInt16 in
+        let limbs = (0...pictureCount).map { index -> UInt16 in
             
-            let pictureOffset = buffer.wordLE(offset + 8)
+            let pictureOffset = buffer.wordLE(offset)
             offset += 2
             return pictureOffset
         }
-        .filter { $0 > 6 }
-        .filter { $0 < buffer.count }
-        .map { $0 - 6 }
+        .filter { $0 > 0 }
         
         return limbs
     }
@@ -306,7 +313,7 @@ extension COST {
         
         limbs.enumerated().forEach { index, imageOffset in
             
-            offset = Int(imageOffset) + 8
+            offset = Int(imageOffset) + Int(fixLimbOffset)
             
             let width = buffer.wordLE(offset)
             offset += 2
@@ -326,9 +333,9 @@ extension COST {
             let moveY = buffer.wordLE(offset)
             offset += 2
             
-            var end = buffer.count - 1
+            var end = buffer.count
             if index < limbs.count - 1 {
-                end = Int(limbs[index + 1] + 8)
+                end = Int(limbs[index + 1] + fixLimbOffset)
             }
             
             if offset < end {
