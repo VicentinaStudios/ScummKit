@@ -45,7 +45,13 @@ extension Block {
         
         do {
             
+            debugPrint("buffer:", file, offset, length)
+            
             let fileHandle = try FileHandle(forReadingFrom: file)
+            
+            debugPrint(fileHandle)
+            
+            
             fileHandle.seek(toFileOffset: offset)
             let data = fileHandle.readData(ofLength: length)
             
@@ -54,6 +60,7 @@ extension Block {
             return data
             
         } catch {
+            debugPrint(error)
             throw FileError.loadFailure
         }
     }

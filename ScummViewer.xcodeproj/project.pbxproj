@@ -48,6 +48,8 @@
 		4C8A0B4127177B360088A49B /* QueueStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B4027177B360088A49B /* QueueStack.swift */; };
 		4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B43271786F50088A49B /* ScummStore.swift */; };
 		4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B49271790240088A49B /* ScummStoreDevData.swift */; };
+		4C92B5C82A5C366F00967FF2 /* CDHDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C92B5C72A5C366F00967FF2 /* CDHDView.swift */; };
+		4C92B5CA2A5C37CC00967FF2 /* CDHD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C92B5C92A5C37CC00967FF2 /* CDHD.swift */; };
 		4C9F3D982723C4260052EEE2 /* CLUT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D972723C4260052EEE2 /* CLUT.swift */; };
 		4C9F3D9A2723C6570052EEE2 /* CLUTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D992723C6570052EEE2 /* CLUTView.swift */; };
 		4C9F3D9C2724476D0052EEE2 /* Bitstream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D9B2724476D0052EEE2 /* Bitstream.swift */; };
@@ -112,6 +114,8 @@
 		4C8A0B4027177B360088A49B /* QueueStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStack.swift; sourceTree = "<group>"; };
 		4C8A0B43271786F50088A49B /* ScummStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStore.swift; sourceTree = "<group>"; };
 		4C8A0B49271790240088A49B /* ScummStoreDevData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStoreDevData.swift; sourceTree = "<group>"; };
+		4C92B5C72A5C366F00967FF2 /* CDHDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDHDView.swift; sourceTree = "<group>"; };
+		4C92B5C92A5C37CC00967FF2 /* CDHD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDHD.swift; sourceTree = "<group>"; };
 		4C9F3D972723C4260052EEE2 /* CLUT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLUT.swift; sourceTree = "<group>"; };
 		4C9F3D992723C6570052EEE2 /* CLUTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLUTView.swift; sourceTree = "<group>"; };
 		4C9F3D9B2724476D0052EEE2 /* Bitstream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitstream.swift; sourceTree = "<group>"; };
@@ -328,6 +332,7 @@
 				4C4A7B612734DC48006DE394 /* TRNS.swift */,
 				4C27C98427386E080081F280 /* IMHD.swift */,
 				4C64A24F273AC8A700AD9AB8 /* COST.swift */,
+				4C92B5C92A5C37CC00967FF2 /* CDHD.swift */,
 			);
 			path = "Data File Models";
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				4C4A7B632734DD68006DE394 /* TRNSView.swift */,
 				4C27C9862738714D0081F280 /* IMHDView.swift */,
 				4C340B64273B27D00066B0F5 /* COSTView.swift */,
+				4C92B5C72A5C366F00967FF2 /* CDHDView.swift */,
 			);
 			path = "Data File Blocks";
 			sourceTree = "<group>";
@@ -420,6 +426,7 @@
 				4C9F3D9C2724476D0052EEE2 /* Bitstream.swift in Sources */,
 				4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */,
 				4C637CCB27209E3600634F8E /* RNAM.swift in Sources */,
+				4C92B5CA2A5C37CC00967FF2 /* CDHD.swift in Sources */,
 				4C2A78D9274874DD00F358BA /* RLECodec.swift in Sources */,
 				4C9F3D9E272447950052EEE2 /* Bitmap.swift in Sources */,
 				4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */,
@@ -440,6 +447,7 @@
 				4C872D3F27211783007FCCA7 /* BottomBarView.swift in Sources */,
 				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
 				4C340B65273B27D00066B0F5 /* COSTView.swift in Sources */,
+				4C92B5C82A5C366F00967FF2 /* CDHDView.swift in Sources */,
 				4C9F3DA22724A7E80052EEE2 /* SMAPView.swift in Sources */,
 				4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */,
 				4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */,
@@ -602,7 +610,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ScummViewer/ScummViewer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -615,7 +622,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 0.3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -628,7 +635,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ScummViewer/ScummViewer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -641,7 +647,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 0.3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.ScummViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

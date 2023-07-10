@@ -16,7 +16,7 @@ struct MAXSView: View {
         
         List {
             
-            if let maxs = maxs {
+//            if let maxs = maxs {
                 
                 Section(header: HStack {
                     Text("Variable").frame(width: Constants.variableNameLabelWidth, alignment: .trailing)
@@ -32,7 +32,7 @@ struct MAXSView: View {
                     ValueFieldView(name: "Array", value: maxs.array)
                     ValueFieldView(name: "Inventory Objects", value: maxs.inventoryObjects)
                 }
-            }
+//            }
         }.onAppear {
             maxs = MAXS.create(from: $buffer.wrappedValue)
         }

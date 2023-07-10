@@ -75,5 +75,39 @@ extension Data {
             throw FileError.saveFailure
         }
     }
+    
+    func savePng(fileName: String = "image.png", to path: URL? = nil) throws {
+        
+        guard let path = path else {
+            try? savePng(fileName: fileName)
+            return
+        }
+        
+        //if !FileManager.default.fileExists(atPath: path.path, isDirectory: &isDirectory)
+        var isDirectory: ObjCBool = false
+        
+        
+        
+        if !FileManager.default.fileExists(atPath: path.absoluteString, isDirectory: &isDirectory) {
+            try? FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil)
+        }
+        
+        // Create the directory if it doesn't exist
+//                    do {
+//                        try FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: true, attributes: nil)
+//                    } catch {
+//                        print("Failed to create directory: \(error)")
+//                        return
+//                    }
+        
+        let exportURL = path.appendingPathComponent(fileName)
+        
+        do {
+            try self.write(to: exportURL)
+        } catch {
+            throw FileError.saveFailure
+        }
+    }
+        
 }
 

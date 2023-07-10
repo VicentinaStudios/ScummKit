@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct InputFieldView: View {
+struct InputFieldView<T>: View where T: BinaryInteger {
     
     
     let title: String
     let placeholder: String
-    @Binding var value: UInt16
+    @Binding var value: T
     let titleWidth: CGFloat
     
     var body: some View {

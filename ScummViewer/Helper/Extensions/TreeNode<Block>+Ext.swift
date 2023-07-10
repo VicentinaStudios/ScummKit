@@ -13,9 +13,15 @@ extension TreeNode where T == Block {
         
         let parent = findParent(of: level)
         
+        /*
         let block = parent.children?.first { block in
             block.value.name == blockType.rawValue
         }
+        */
+        
+        let block = parent.children?.first(where: { block in
+            block.value.name == blockType.rawValue
+        })
         
         return block
     }

@@ -60,7 +60,7 @@ struct DirectoryOfObjectView: View {
                 }.font(.system(.headline)).buttonStyle(PlainButtonStyle())
             ) {
             
-                if let directory = directory {
+//                if let directory = directory {
                     
                     ForEach(0..<directory.numberOfItems, id: \.self) { index in
                             
@@ -84,7 +84,7 @@ struct DirectoryOfObjectView: View {
                             Text("0x\(classData)")
                         }
                     }
-                }
+//                }
             }
         }.onAppear {
             directory = Directory.create(from: $buffer.wrappedValue)
