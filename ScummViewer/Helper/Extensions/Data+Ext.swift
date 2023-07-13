@@ -86,8 +86,6 @@ extension Data {
         //if !FileManager.default.fileExists(atPath: path.path, isDirectory: &isDirectory)
         var isDirectory: ObjCBool = false
         
-        
-        
         if !FileManager.default.fileExists(atPath: path.absoluteString, isDirectory: &isDirectory) {
             try? FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil)
         }

@@ -16,6 +16,7 @@
 * [GitHub: ScummC](https://github.com/jamesu/scummc)
 * [BitBucket: Scumm Image Encoder](https://bitbucket.org/jestar_jokin/scumm-image-encoder)
 * [GitHub: ScummAtlas](https://github.com/ktzar/scummatlas)
+* [SCUMM-Decompilation-Archive](https://github.com/EricOakford/SCUMM-Decompilation-Archive)
 
 ## SCUMM Documentation
 

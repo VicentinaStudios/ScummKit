@@ -102,8 +102,6 @@ struct CDHDView_Previews: PreviewProvider {
         let block = Block(for: .CDHD, with: 21, at: 0xae61)
         let buffer = ScummStore.buffer(at: ScummStore.dataFileURL, for: block)
         
-        let _ = debugPrint(buffer)
-        
         CDHDView(buffer: .constant(buffer))
             .frame(width: 300, height: 400)
     }
