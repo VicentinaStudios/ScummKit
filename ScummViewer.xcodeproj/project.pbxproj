@@ -70,6 +70,17 @@
 		4C9F3D9E272447950052EEE2 /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D9D272447950052EEE2 /* Bitmap.swift */; };
 		4C9F3DA02724481D0052EEE2 /* SMAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D9F2724481D0052EEE2 /* SMAP.swift */; };
 		4C9F3DA22724A7E80052EEE2 /* SMAPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3DA12724A7E80052EEE2 /* SMAPView.swift */; };
+		4CB073BE2A9121AF009FAE2E /* OCloadRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073BD2A9121AF009FAE2E /* OCloadRoom.swift */; };
+		4CB073C02A917C6E009FAE2E /* OCnotEqualZero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073BF2A917C6E009FAE2E /* OCnotEqualZero.swift */; };
+		4CB073C22A918E6E009FAE2E /* OClessOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073C12A918E6E009FAE2E /* OClessOrEqual.swift */; };
+		4CB073C42A919730009FAE2E /* OCisGreaterEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073C32A919730009FAE2E /* OCisGreaterEqual.swift */; };
+		4CB073C62A919849009FAE2E /* OCstopObjectCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073C52A919849009FAE2E /* OCstopObjectCode.swift */; };
+		4CB073C82A919D61009FAE2E /* OCisNotEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073C72A919D61009FAE2E /* OCisNotEqual.swift */; };
+		4CB073CA2A919F7F009FAE2E /* OCdelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073C92A919F7F009FAE2E /* OCdelay.swift */; };
+		4CB073CE2A91AAEF009FAE2E /* OCgetRandomNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073CD2A91AAEF009FAE2E /* OCgetRandomNumber.swift */; };
+		4CB073D02A91AE3B009FAE2E /* OCjumpRelative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073CF2A91AE3B009FAE2E /* OCjumpRelative.swift */; };
+		4CB073D22A91B28B009FAE2E /* OCincrement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073D12A91B28B009FAE2E /* OCincrement.swift */; };
+		4CB073D42A91B768009FAE2E /* OCisLess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB073D32A91B768009FAE2E /* OCisLess.swift */; };
 		4CCDF5B92A620676003F15C5 /* OCpseudoRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDF5B82A620676003F15C5 /* OCpseudoRoom.swift */; };
 		4CCDF5BB2A621BBB003F15C5 /* OCequalZero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDF5BA2A621BBB003F15C5 /* OCequalZero.swift */; };
 		4CCDF5BD2A622A9E003F15C5 /* OCbreakHere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCDF5BC2A622A9E003F15C5 /* OCbreakHere.swift */; };
@@ -154,6 +165,17 @@
 		4C9F3D9D272447950052EEE2 /* Bitmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
 		4C9F3D9F2724481D0052EEE2 /* SMAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMAP.swift; sourceTree = "<group>"; };
 		4C9F3DA12724A7E80052EEE2 /* SMAPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMAPView.swift; sourceTree = "<group>"; };
+		4CB073BD2A9121AF009FAE2E /* OCloadRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCloadRoom.swift; sourceTree = "<group>"; };
+		4CB073BF2A917C6E009FAE2E /* OCnotEqualZero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCnotEqualZero.swift; sourceTree = "<group>"; };
+		4CB073C12A918E6E009FAE2E /* OClessOrEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OClessOrEqual.swift; sourceTree = "<group>"; };
+		4CB073C32A919730009FAE2E /* OCisGreaterEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCisGreaterEqual.swift; sourceTree = "<group>"; };
+		4CB073C52A919849009FAE2E /* OCstopObjectCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCstopObjectCode.swift; sourceTree = "<group>"; };
+		4CB073C72A919D61009FAE2E /* OCisNotEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCisNotEqual.swift; sourceTree = "<group>"; };
+		4CB073C92A919F7F009FAE2E /* OCdelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCdelay.swift; sourceTree = "<group>"; };
+		4CB073CD2A91AAEF009FAE2E /* OCgetRandomNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCgetRandomNumber.swift; sourceTree = "<group>"; };
+		4CB073CF2A91AE3B009FAE2E /* OCjumpRelative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCjumpRelative.swift; sourceTree = "<group>"; };
+		4CB073D12A91B28B009FAE2E /* OCincrement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCincrement.swift; sourceTree = "<group>"; };
+		4CB073D32A91B768009FAE2E /* OCisLess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCisLess.swift; sourceTree = "<group>"; };
 		4CCDF5B82A620676003F15C5 /* OCpseudoRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCpseudoRoom.swift; sourceTree = "<group>"; };
 		4CCDF5BA2A621BBB003F15C5 /* OCequalZero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCequalZero.swift; sourceTree = "<group>"; };
 		4CCDF5BC2A622A9E003F15C5 /* OCbreakHere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCbreakHere.swift; sourceTree = "<group>"; };
@@ -239,17 +261,28 @@
 		4C617A102A6010CE008FA9DD /* Opcodes */ = {
 			isa = PBXGroup;
 			children = (
+				4CB073C32A919730009FAE2E /* OCisGreaterEqual.swift */,
+				4CB073C72A919D61009FAE2E /* OCisNotEqual.swift */,
 				4C617A132A605116008FA9DD /* OCstartScript.swift */,
 				4C617A052A600FF7008FA9DD /* OCresourceRoutines.swift */,
+				4CB073CD2A91AAEF009FAE2E /* OCgetRandomNumber.swift */,
+				4CB073CF2A91AE3B009FAE2E /* OCjumpRelative.swift */,
 				4C617A032A600FE1008FA9DD /* OCmove.swift */,
 				4C617A072A601046008FA9DD /* OCsetVarRange.swift */,
 				4C617A092A601075008FA9DD /* OCstringOps.swift */,
 				4CCDF5BA2A621BBB003F15C5 /* OCequalZero.swift */,
 				4C617A0B2A601085008FA9DD /* OCcursorCommand.swift */,
+				4CB073C92A919F7F009FAE2E /* OCdelay.swift */,
 				4C617A152A60646D008FA9DD /* OCroomOps.swift */,
+				4CB073C12A918E6E009FAE2E /* OClessOrEqual.swift */,
+				4CB073D32A91B768009FAE2E /* OCisLess.swift */,
+				4CB073D12A91B28B009FAE2E /* OCincrement.swift */,
 				4CCDF5BE2A62D446003F15C5 /* OCisEqual.swift */,
+				4CB073BD2A9121AF009FAE2E /* OCloadRoom.swift */,
 				4CCDF5BC2A622A9E003F15C5 /* OCbreakHere.swift */,
 				4C617A0D2A601091008FA9DD /* OCexpression.swift */,
+				4CB073BF2A917C6E009FAE2E /* OCnotEqualZero.swift */,
+				4CB073C52A919849009FAE2E /* OCstopObjectCode.swift */,
 				4CCDF5B82A620676003F15C5 /* OCpseudoRoom.swift */,
 			);
 			path = Opcodes;
@@ -484,11 +517,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CB073C82A919D61009FAE2E /* OCisNotEqual.swift in Sources */,
 				4C617A142A605116008FA9DD /* OCstartScript.swift in Sources */,
 				4C617A162A60646D008FA9DD /* OCroomOps.swift in Sources */,
 				4C872D432721212E007FCCA7 /* DirectoryView.swift in Sources */,
 				4C9F3D9C2724476D0052EEE2 /* Bitstream.swift in Sources */,
 				4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */,
+				4CB073D42A91B768009FAE2E /* OCisLess.swift in Sources */,
 				4C637CCB27209E3600634F8E /* RNAM.swift in Sources */,
 				4C92B5CA2A5C37CC00967FF2 /* CDHD.swift in Sources */,
 				4C2A78D9274874DD00F358BA /* RLECodec.swift in Sources */,
@@ -499,17 +534,21 @@
 				4C872D3B2720D084007FCCA7 /* MAXS.swift in Sources */,
 				4C9F3D9A2723C6570052EEE2 /* CLUTView.swift in Sources */,
 				4C617A002A5ED07A008FA9DD /* VirtualMachine.swift in Sources */,
+				4CB073CA2A919F7F009FAE2E /* OCdelay.swift in Sources */,
 				4CCDF5B92A620676003F15C5 /* OCpseudoRoom.swift in Sources */,
+				4CB073C22A918E6E009FAE2E /* OClessOrEqual.swift in Sources */,
 				4C1CFD5F2730295F001663CE /* ImageCodec.swift in Sources */,
 				4C872D372720CA94007FCCA7 /* RNAMView.swift in Sources */,
 				4CCDF5BF2A62D446003F15C5 /* OCisEqual.swift in Sources */,
 				4C872D452721751C007FCCA7 /* BlockType.swift in Sources */,
+				4CB073C42A919730009FAE2E /* OCisGreaterEqual.swift in Sources */,
 				4C4A7B622734DC48006DE394 /* TRNS.swift in Sources */,
 				4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */,
 				4C9F3DA02724481D0052EEE2 /* SMAP.swift in Sources */,
 				4C617A0A2A601075008FA9DD /* OCstringOps.swift in Sources */,
 				4C872D4127211E8D007FCCA7 /* Directory.swift in Sources */,
 				4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */,
+				4CB073C02A917C6E009FAE2E /* OCnotEqualZero.swift in Sources */,
 				4C92B5D22A5C721700967FF2 /* SCRPView.swift in Sources */,
 				4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */,
 				4C2A78DB2748772300F358BA /* Texture.swift in Sources */,
@@ -517,6 +556,7 @@
 				4C617A062A600FF7008FA9DD /* OCresourceRoutines.swift in Sources */,
 				4C872D3F27211783007FCCA7 /* BottomBarView.swift in Sources */,
 				4C617A042A600FE1008FA9DD /* OCmove.swift in Sources */,
+				4CB073C62A919849009FAE2E /* OCstopObjectCode.swift in Sources */,
 				4C92B5D02A5C719A00967FF2 /* SCRP.swift in Sources */,
 				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
 				4C340B65273B27D00066B0F5 /* COSTView.swift in Sources */,
@@ -525,6 +565,7 @@
 				4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */,
 				4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */,
 				4C92B5CE2A5C514300967FF2 /* VERB.swift in Sources */,
+				4CB073D02A91AE3B009FAE2E /* OCjumpRelative.swift in Sources */,
 				4C79B829271E3C340030E564 /* BlockInfoView.swift in Sources */,
 				4CF224172722109D0006F1CE /* RMHD.swift in Sources */,
 				4CF2240B2721B7BC0006F1CE /* DirectoryOfObjects.swift in Sources */,
@@ -554,10 +595,13 @@
 				4C27C9832736A2520081F280 /* NumberedListView.swift in Sources */,
 				4C5CDFAA271777140090BA59 /* QueueArray.swift in Sources */,
 				4C872D3D2720DA5E007FCCA7 /* ValueFieldView.swift in Sources */,
+				4CB073CE2A91AAEF009FAE2E /* OCgetRandomNumber.swift in Sources */,
 				4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */,
 				4C617A082A601046008FA9DD /* OCsetVarRange.swift in Sources */,
 				4C408070271B97A500A76C75 /* UInt16+Ext.swift in Sources */,
 				4CF22419272210B10006F1CE /* RMHDView.swift in Sources */,
+				4CB073BE2A9121AF009FAE2E /* OCloadRoom.swift in Sources */,
+				4CB073D22A91B28B009FAE2E /* OCincrement.swift in Sources */,
 				4CD01E6C272DD0EB0022462F /* CGImage+Ext.swift in Sources */,
 				4CE24556271F99E4007D7847 /* HexEditorView.swift in Sources */,
 				4C40806E271B976C00A76C75 /* UInt8+Ext.swift in Sources */,

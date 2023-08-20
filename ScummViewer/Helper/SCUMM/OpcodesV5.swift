@@ -14,6 +14,7 @@ class OpcodesV5 {
     internal var offset: Int = 0
     
     var updatedOffset: Int { vm.instructionPointer + offset }
+    var branchToAddress: Int = 0
     
     init(vm: VirtualMachine) {
         self.vm = vm
@@ -30,11 +31,19 @@ class OpcodesV5 {
         
         switch opcode {
         
+        case 0x04:
+            return isGreaterEqual
+        case 0x08:
+            return isNotEqual
         case 0x0a:
             return startScript
         case 0x0c:
             return resourceRoutines
-        case 0x1a:
+        case 0x16:
+            return getRandomNumber
+        case 0x18:
+            return jumpRelative
+        case 0x1a, 0x9a:
             return move
         case 0x26:
             return setVarRange
@@ -44,14 +53,28 @@ class OpcodesV5 {
             return equalZero
         case 0x2c:
             return cursorCommand
+        case 0x2e:
+            return delay
         case 0x33:
             return roomOps
-        case 0x48:
+        case 0x38:
+            return lessOrEqual
+        case 0x44:
+            return isLess
+        case 0x46:
+            return increment
+        case 0x48, 0xc8:
             return isEqual
+        case 0x72:
+            return loadRoom
         case 0x80:
             return breakHere
         case 0xac:
             return expression
+        case 0xa8:
+            return notEqualZero
+        case 0xa0:
+            return stopObjectCode
         case 0xcc:
             return pseudoRoom
         default:
@@ -87,7 +110,8 @@ extension OpcodesV5 {
         offset += 2
         
         if condition == false {   
-            offset += Int(relativeOffset)
+            //offset += Int(relativeOffset)
+            branchToAddress = Int(relativeOffset) + updatedOffset
         }
     }
     
