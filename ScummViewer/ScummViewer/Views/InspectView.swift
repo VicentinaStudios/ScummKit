@@ -46,6 +46,8 @@ struct InspectView: View {
                     CDHDView(buffer: $buffer)
                 case .CHAR:
                     CHARView(node: $node)
+                case .SOUN:
+                    SOUNView(buffer: $buffer)
                 default:
                     Text("Cannot inspect block")
                 }

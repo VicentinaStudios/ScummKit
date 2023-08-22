@@ -20,21 +20,24 @@ struct RMHDView: View {
                 title: "Width",
                 placeholder: "value",
                 value: $rmhd.width,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Height",
                 placeholder: "value",
                 value: $rmhd.height,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding(.horizontal)
             
             InputFieldView(
                 title: "Number of Objects",
                 placeholder: "value",
                 value: $rmhd.numberOfObjects,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
         }.overlay(

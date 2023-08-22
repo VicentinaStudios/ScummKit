@@ -20,7 +20,8 @@ struct CDHDView: View {
                 title: "Object ID",
                 placeholder: "value",
                 value: $cdhd.objectID,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             
@@ -28,63 +29,72 @@ struct CDHDView: View {
                 title: "X",
                 placeholder: "value",
                 value: $cdhd.x,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Y",
                 placeholder: "value",
                 value: $cdhd.y,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Width",
                 placeholder: "value",
                 value: $cdhd.width,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Height",
                 placeholder: "value",
                 value: $cdhd.height,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Flags",
                 placeholder: "value",
                 value: $cdhd.flags,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Parent",
                 placeholder: "value",
                 value: $cdhd.parent,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Walk X",
                 placeholder: "value",
                 value: $cdhd.walkX,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Walk Y",
                 placeholder: "value",
                 value: $cdhd.walkY,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Actor Direction",
                 placeholder: "value",
                 value: $cdhd.actorDirection,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
         }.overlay(

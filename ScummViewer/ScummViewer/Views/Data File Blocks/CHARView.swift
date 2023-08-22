@@ -24,14 +24,16 @@ struct CHARView: View {
                     title: "Size (-23)",
                     placeholder: "value",
                     value: $char.size,
-                    titleWidth: Constants.labelWidth
+                    titleWidth: Constants.labelWidth,
+                    type: .decimal
                 ).padding()
                 
                 InputFieldView(
                     title: "Version",
                     placeholder: "value",
                     value: $char.version,
-                    titleWidth: Constants.labelWidth
+                    titleWidth: Constants.labelWidth,
+                    type: .hexadecimal
                 ).padding()
                 
                 VStack {
@@ -59,21 +61,24 @@ struct CHARView: View {
                     title: "Bits per Pixel",
                     placeholder: "value",
                     value: $char.bitsPerPixel,
-                    titleWidth: Constants.labelWidth
+                    titleWidth: Constants.labelWidth,
+                    type: .decimal
                 ).padding()
                 
                 InputFieldView(
                     title: "Font Height",
                     placeholder: "value",
                     value: $char.fontHeight,
-                    titleWidth: Constants.labelWidth
+                    titleWidth: Constants.labelWidth,
+                    type: .decimal
                 ).padding()
                 
                 InputFieldView(
                     title: "Number of Characters",
                     placeholder: "value",
                     value: $char.numberOfCharacter,
-                    titleWidth: Constants.labelWidth
+                    titleWidth: Constants.labelWidth,
+                    type: .decimal
                 ).padding()
                 
                 Section(header: Text("Character Data Offsets")) {

@@ -38,7 +38,7 @@ struct DetailsView: View {
                 case
                     .RNAM, .MAXS, .DROO, .DSCR, .DSOU, .DCOS, .DCHR, .DOBJ,
                     .LOFF, .RMHD, .CLUT, .SMAP, .TRNS, .IMHD,
-                    .COST, .CDHD, .CHAR:
+                    .COST, .CDHD, .CHAR, .SOUN:
                         //.ZP01, .ZP02, .ZP03:
                     
                     InspectView(buffer: $buffer, node: $node)

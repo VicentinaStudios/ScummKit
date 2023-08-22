@@ -19,21 +19,24 @@ struct IMHDView: View {
                 title: "Object ID",
                 placeholder: "value",
                 value: $imhd.objectID,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Number of Images",
                 placeholder: "value",
                 value: $imhd.numberOfIMNN,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding(.horizontal)
             
             InputFieldView(
                 title: "Number of Z-Planes",
                 placeholder: "value",
                 value: $imhd.numberOfZPNN,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             /*
@@ -56,28 +59,32 @@ struct IMHDView: View {
                 title: "X",
                 placeholder: "value",
                 value: $imhd.x,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Y",
                 placeholder: "value",
                 value: $imhd.y,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Width",
                 placeholder: "value",
                 value: $imhd.width,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
             InputFieldView(
                 title: "Height",
                 placeholder: "value",
                 value: $imhd.height,
-                titleWidth: Constants.keyLabelWidth
+                titleWidth: Constants.keyLabelWidth,
+                type: .decimal
             ).padding()
             
         }.overlay(
