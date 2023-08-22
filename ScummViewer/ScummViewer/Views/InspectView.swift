@@ -44,6 +44,8 @@ struct InspectView: View {
                     COSTView(node: $node)
                 case .CDHD:
                     CDHDView(buffer: $buffer)
+                case .CHAR:
+                    CHARView(node: $node)
                 default:
                     Text("Cannot inspect block")
                 }

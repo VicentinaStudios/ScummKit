@@ -59,6 +59,22 @@ class Bitstream {
         return bit
     }
     
+    var readTwoBits: UInt8 {
+        
+        let bit = currentByte & 0b00000011
+        bitPosition += 2
+        
+        return bit
+    }
+    
+    var readNibble: UInt8 {
+        
+        let bit = currentByte & 0b00001111
+        bitPosition += 4
+        
+        return bit
+    }
+    
     init(with buffer: [UInt8], start offset: Int = 0) {
         self.buffer = buffer
         self.offset = offset

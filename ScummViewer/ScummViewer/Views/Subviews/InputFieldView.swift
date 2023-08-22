@@ -7,6 +7,27 @@
 
 import SwiftUI
 
+class HexFormatter: Formatter, ObservableObject {
+    @Published var hexValue: Int = 0
+    
+    override func string(for obj: Any?) -> String? {
+        if let value = obj as? Int {
+            return String(format: "0x%X", value)
+        }
+        return nil
+    }
+    
+    override func getObjectValue(_ obj: AutoreleasingUnsafeMutablePointer<AnyObject?>?,
+                        for string: String,
+                        errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
+        if let intValue = Int(string, radix: 16) {
+            obj?.pointee = NSNumber(value: intValue)
+            return true
+        }
+        return false
+    }
+}
+
 struct InputFieldView<T>: View where T: BinaryInteger {
     
     
@@ -14,6 +35,8 @@ struct InputFieldView<T>: View where T: BinaryInteger {
     let placeholder: String
     @Binding var value: T
     let titleWidth: CGFloat
+    
+    @State private var showHex = false
     
     var body: some View {
         HStack {
@@ -25,9 +48,17 @@ struct InputFieldView<T>: View where T: BinaryInteger {
                 
             }.frame(width: titleWidth)
             
-            TextField("\(placeholder)", value: $value, formatter: NumberFormatter())
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .frame(width: 80)
+            TextField(
+                "\(placeholder)",
+                value: $value,
+                formatter: showHex ? HexFormatter() : NumberFormatter()
+            )
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .frame(width: 80)
+            
+            Toggle("Dec|Hex", isOn: $showHex)
+                .toggleStyle(.switch)
+
         }
     }
 }
