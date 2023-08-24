@@ -45,15 +45,24 @@ struct InspectView: View {
                 case .CDHD:
                     CDHDView(buffer: $buffer)
                 case .CHAR:
-                    CHARView(node: $node)
+                    CHARView(node: $node, buffer: $buffer)
                 case .SOUN:
                     SOUNView(buffer: $buffer)
+                
+                    // v4
+                    
+                case .RN:
+                    RNView(buffer: $buffer)
+                    
+                case ._0R, ._0S, ._0N, ._0C:
+                    DirectoryView_v4(buffer: $buffer)
+                    
                 default:
                     Text("Cannot inspect block")
                 }
             }
         }.onAppear {
-            blockName = buffer.dwordLE.string
+            blockName = node.value.name
         }
     }
 }

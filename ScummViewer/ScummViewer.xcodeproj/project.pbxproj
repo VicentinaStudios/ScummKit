@@ -58,6 +58,14 @@
 		4C9F3D9E272447950052EEE2 /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D9D272447950052EEE2 /* Bitmap.swift */; };
 		4C9F3DA02724481D0052EEE2 /* SMAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D9F2724481D0052EEE2 /* SMAP.swift */; };
 		4C9F3DA22724A7E80052EEE2 /* SMAPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3DA12724A7E80052EEE2 /* SMAPView.swift */; };
+		4CC620772A9505670052936C /* SOUNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC620762A9505670052936C /* SOUNView.swift */; };
+		4CC620792A9507980052936C /* SOUN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC620782A9507980052936C /* SOUN.swift */; };
+		4CC6207B2A9554380052936C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC6207A2A9554380052936C /* Errors.swift */; };
+		4CC6207F2A959D9B0052936C /* VersionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC6207E2A959D9B0052936C /* VersionInfoView.swift */; };
+		4CC620812A961DD20052936C /* RecentFilesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC620802A961DD20052936C /* RecentFilesManager.swift */; };
+		4CC620832A96333E0052936C /* RN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC620822A96333E0052936C /* RN.swift */; };
+		4CC620852A9634AD0052936C /* RNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC620842A9634AD0052936C /* RNView.swift */; };
+		4CC620892A963C620052936C /* DirectoryView_v4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC620882A963C620052936C /* DirectoryView_v4.swift */; };
 		4CD01E6C272DD0EB0022462F /* CGImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD01E6B272DD0EB0022462F /* CGImage+Ext.swift */; };
 		4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */; };
 		4CD23D7F2716D66400832C4E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD23D7E2716D66400832C4E /* ContentView.swift */; };
@@ -126,6 +134,14 @@
 		4C9F3D9D272447950052EEE2 /* Bitmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
 		4C9F3D9F2724481D0052EEE2 /* SMAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMAP.swift; sourceTree = "<group>"; };
 		4C9F3DA12724A7E80052EEE2 /* SMAPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMAPView.swift; sourceTree = "<group>"; };
+		4CC620762A9505670052936C /* SOUNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOUNView.swift; sourceTree = "<group>"; };
+		4CC620782A9507980052936C /* SOUN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOUN.swift; sourceTree = "<group>"; };
+		4CC6207A2A9554380052936C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		4CC6207E2A959D9B0052936C /* VersionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionInfoView.swift; sourceTree = "<group>"; };
+		4CC620802A961DD20052936C /* RecentFilesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentFilesManager.swift; sourceTree = "<group>"; };
+		4CC620822A96333E0052936C /* RN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RN.swift; sourceTree = "<group>"; };
+		4CC620842A9634AD0052936C /* RNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNView.swift; sourceTree = "<group>"; };
+		4CC620882A963C620052936C /* DirectoryView_v4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView_v4.swift; sourceTree = "<group>"; };
 		4CD01E6B272DD0EB0022462F /* CGImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImage+Ext.swift"; sourceTree = "<group>"; };
 		4CD23D792716D66400832C4E /* ScummViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScummViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummViewerApp.swift; sourceTree = "<group>"; };
@@ -215,6 +231,7 @@
 		4C8A0B47271787690088A49B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4CC620802A961DD20052936C /* RecentFilesManager.swift */,
 				4C8A0B43271786F50088A49B /* ScummStore.swift */,
 				4C79B824271D77FD0030E564 /* Block.swift */,
 				4C1CFD6027303611001663CE /* Stripe.swift */,
@@ -259,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				4CD23D7C2716D66400832C4E /* ScummViewerApp.swift */,
+				4CC6207A2A9554380052936C /* Errors.swift */,
 				4C8A0B482717876E0088A49B /* Views */,
 				4C8A0B47271787690088A49B /* Models */,
 				4C40806C271B973B00A76C75 /* Helper */,
@@ -283,8 +301,10 @@
 			isa = PBXGroup;
 			children = (
 				4C872D362720CA94007FCCA7 /* RNAMView.swift */,
+				4CC620842A9634AD0052936C /* RNView.swift */,
 				4C872D382720CB52007FCCA7 /* MAXSView.swift */,
 				4C872D422721212E007FCCA7 /* DirectoryView.swift */,
+				4CC620882A963C620052936C /* DirectoryView_v4.swift */,
 				4CF2240A2721B7BC0006F1CE /* DirectoryOfObjects.swift */,
 			);
 			path = "Index File Blocks";
@@ -300,6 +320,7 @@
 				4CD9F4D62722217A00D3F0D7 /* InputFieldView.swift */,
 				4C4A7B6527352ED0006DE394 /* ColorFieldView.swift */,
 				4C27C9822736A2520081F280 /* NumberedListView.swift */,
+				4CC6207E2A959D9B0052936C /* VersionInfoView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -310,6 +331,7 @@
 				4C637CCA27209E3600634F8E /* RNAM.swift */,
 				4C872D3A2720D084007FCCA7 /* MAXS.swift */,
 				4C872D4027211E8D007FCCA7 /* Directory.swift */,
+				4CC620822A96333E0052936C /* RN.swift */,
 			);
 			path = "Index File Models";
 			sourceTree = "<group>";
@@ -338,6 +360,7 @@
 				4C64A24F273AC8A700AD9AB8 /* COST.swift */,
 				4C92B5C92A5C37CC00967FF2 /* CDHD.swift */,
 				4C0C50942A928341004B4466 /* CHAR.swift */,
+				4CC620782A9507980052936C /* SOUN.swift */,
 			);
 			path = "Data File Models";
 			sourceTree = "<group>";
@@ -354,6 +377,7 @@
 				4C340B64273B27D00066B0F5 /* COSTView.swift */,
 				4C92B5C72A5C366F00967FF2 /* CDHDView.swift */,
 				4C0C50922A927EB9004B4466 /* CHARView.swift */,
+				4CC620762A9505670052936C /* SOUNView.swift */,
 			);
 			path = "Data File Blocks";
 			sourceTree = "<group>";
@@ -399,6 +423,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 4CD23D702716D66400832C4E;
 			productRefGroup = 4CD23D7A2716D66400832C4E /* Products */;
@@ -429,6 +454,8 @@
 			files = (
 				4C872D432721212E007FCCA7 /* DirectoryView.swift in Sources */,
 				4C9F3D9C2724476D0052EEE2 /* Bitstream.swift in Sources */,
+				4CC620892A963C620052936C /* DirectoryView_v4.swift in Sources */,
+				4CC6207F2A959D9B0052936C /* VersionInfoView.swift in Sources */,
 				4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */,
 				4C637CCB27209E3600634F8E /* RNAM.swift in Sources */,
 				4C92B5CA2A5C37CC00967FF2 /* CDHD.swift in Sources */,
@@ -436,10 +463,13 @@
 				4C9F3D9E272447950052EEE2 /* Bitmap.swift in Sources */,
 				4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */,
 				4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */,
+				4CC620772A9505670052936C /* SOUNView.swift in Sources */,
 				4C872D3B2720D084007FCCA7 /* MAXS.swift in Sources */,
 				4C9F3D9A2723C6570052EEE2 /* CLUTView.swift in Sources */,
 				4C1CFD5F2730295F001663CE /* ImageCodec.swift in Sources */,
+				4CC620832A96333E0052936C /* RN.swift in Sources */,
 				4C872D372720CA94007FCCA7 /* RNAMView.swift in Sources */,
+				4CC620852A9634AD0052936C /* RNView.swift in Sources */,
 				4C872D452721751C007FCCA7 /* BlockType.swift in Sources */,
 				4C4A7B622734DC48006DE394 /* TRNS.swift in Sources */,
 				4C40806A271B972500A76C75 /* Data+Ext.swift in Sources */,
@@ -466,6 +496,7 @@
 				4C8A0B44271786F50088A49B /* ScummStore.swift in Sources */,
 				4C872D392720CB52007FCCA7 /* MAXSView.swift in Sources */,
 				4C6204C3273891FA003E6A28 /* ZPnn.swift in Sources */,
+				4CC6207B2A9554380052936C /* Errors.swift in Sources */,
 				4C27C98527386E080081F280 /* IMHD.swift in Sources */,
 				4C4A7B6627352ED0006DE394 /* ColorFieldView.swift in Sources */,
 				4C79B825271D77FD0030E564 /* Block.swift in Sources */,
@@ -475,6 +506,7 @@
 				4C0C50952A928341004B4466 /* CHAR.swift in Sources */,
 				4C7A492D272586D900257C3F /* ScummImage.swift in Sources */,
 				4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */,
+				4CC620792A9507980052936C /* SOUN.swift in Sources */,
 				4C637CC927207F6200634F8E /* InspectView.swift in Sources */,
 				4CD9F4D72722217A00D3F0D7 /* InputFieldView.swift in Sources */,
 				4CF2241427220AFF0006F1CE /* LOFFView.swift in Sources */,
@@ -485,6 +517,7 @@
 				4C872D3D2720DA5E007FCCA7 /* ValueFieldView.swift in Sources */,
 				4C8A0B3F27177B040088A49B /* QueueProtocol.swift in Sources */,
 				4C408070271B97A500A76C75 /* UInt16+Ext.swift in Sources */,
+				4CC620812A961DD20052936C /* RecentFilesManager.swift in Sources */,
 				4C538F0C2A942B6100D29783 /* Glyph.swift in Sources */,
 				4CF22419272210B10006F1CE /* RMHDView.swift in Sources */,
 				4CD01E6C272DD0EB0022462F /* CGImage+Ext.swift in Sources */,
@@ -547,7 +580,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -603,7 +636,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

@@ -20,6 +20,13 @@ enum BlockType: String {
     case DCHR
     case DOBJ
     
+    case RN
+    case _0R = "0R"
+    case _0S = "0S"
+    case _0N = "0N"
+    case _0C = "0C"
+    case _0O = "0O"
+    
     // Data File
     
     case LECF
@@ -59,21 +66,21 @@ enum BlockType: String {
             
         // Index File
         
-        case .RNAM:
+        case .RNAM, .RN:
             return "Room Numbers"
         case .MAXS:
             return "Maximum Values"
-        case .DROO:
+        case .DROO, ._0R:
             return "Directory of Rooms"
-        case .DSCR:
+        case .DSCR, ._0S:
             return "Directory of Scripts"
-        case .DSOU:
+        case .DSOU, ._0N:
             return "Directory of Sounds"
-        case .DCOS:
+        case .DCOS, ._0C:
             return "Directory of Costumes"
         case .DCHR:
             return "Directory of Charsets"
-        case .DOBJ:
+        case .DOBJ, ._0O:
             return "Directory of Objects"
         
         // Data Files

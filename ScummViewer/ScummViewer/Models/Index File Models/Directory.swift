@@ -54,12 +54,12 @@ extension Directory {
     
     static func createInOneLoop(from buffer: [UInt8]) -> Directory {
         
-        let numberOfItems = buffer.wordLE(8)
+        let numberOfItems = buffer.wordLE(6)
         
         var itemNumbers: [UInt8] = []
         var offsets: [UInt32] = []
         
-        var offset = 10
+        var offset = 8
         
         for _ in 0..<numberOfItems {
             
@@ -74,8 +74,10 @@ extension Directory {
             offset += 4
         }
         
+        let blockName = buffer.wordLE(4)
+        
         return Directory(
-            blockName: buffer.dwordLE(0),
+            blockName: UInt32(blockName),
             blockSize: buffer.dwordBE(4),
             numberOfItems: numberOfItems,
             itemNumbers: itemNumbers,

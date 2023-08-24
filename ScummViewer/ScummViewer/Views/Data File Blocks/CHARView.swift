@@ -11,6 +11,7 @@ struct CHARView: View {
     
     @EnvironmentObject var scummStore: ScummStore
     @Binding var node: TreeNode<Block>
+    @Binding var buffer: [UInt8]
     @State private var char = CHAR.empty
     @State private var clut = CLUT.empty
     
@@ -165,18 +166,26 @@ struct CHARView: View {
                 
             }.onAppear() {
                 
-                guard
-                    let roomNode = node.find(blockType: .ROOM, in: .LFLF),
-                    let clutNode = roomNode.find(blockType: .CLUT)
-                else {
-                    return
+                if let version = try? scummStore.scummVersion, version == .v4 {
+                    
+                    char = CHAR.create_v4(from: $buffer.wrappedValue)
+                    clut = CLUT.mock
+                    
+                } else {
+                    
+                    guard
+                        let roomNode = node.find(blockType: .ROOM, in: .LFLF),
+                        let clutNode = roomNode.find(blockType: .CLUT)
+                    else {
+                        return
+                    }
+                    
+                    var buffer = try! clutNode.read(in: fileURL)
+                    clut = CLUT.create(from: buffer)
+                    
+                    buffer = try! node.read(in: fileURL)
+                    char = CHAR.create(from: buffer)
                 }
-                
-                var buffer = try! clutNode.read(in: fileURL)
-                clut = CLUT.create(from: buffer)
-                
-                buffer = try! node.read(in: fileURL)
-                char = CHAR.create(from: buffer)
             }
         }
     }
@@ -194,6 +203,7 @@ extension CHARView {
     }
 }
 
+/*
 struct CHARView_Previews: PreviewProvider {
     
     static var previews: some View {
@@ -206,6 +216,7 @@ struct CHARView_Previews: PreviewProvider {
             .frame(width: 300, height: 400)
     }
 }
+*/
 
 extension CHARView {
     

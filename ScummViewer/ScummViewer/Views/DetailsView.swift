@@ -36,10 +36,15 @@ struct DetailsView: View {
                 switch BlockType(rawValue: block.name) {
                 
                 case
+                    
+                    // V5
                     .RNAM, .MAXS, .DROO, .DSCR, .DSOU, .DCOS, .DCHR, .DOBJ,
                     .LOFF, .RMHD, .CLUT, .SMAP, .TRNS, .IMHD,
-                    .COST, .CDHD, .CHAR, .SOUN:
+                    .COST, .CDHD, .CHAR, .SOUN,
                         //.ZP01, .ZP02, .ZP03:
+                    
+                    // V4
+                    .RN, ._0R, ._0S, ._0N, ._0C, ._0O:
                     
                     InspectView(buffer: $buffer, node: $node)
                         .tabItem { Text("Inspect") }
@@ -55,9 +60,13 @@ struct DetailsView: View {
             
         }.onAppear {
             
-            buffer = try! blockData.byteBuffer.xor(
-                with: scummStore.scummVersion?.xor ?? 0
-            )
+            if let name = node.parent?.value.name, name.hasSuffix("LEC") {
+                buffer = try! blockData.byteBuffer.xor(with: 0x69)
+            } else {
+                buffer = try! blockData.byteBuffer.xor(
+                    with: scummStore.scummVersion.xor ?? 0
+                )
+            }
 
             title = BlockType.init(rawValue: node.value.name)?.title ?? "Unkown"
         }

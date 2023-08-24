@@ -54,6 +54,22 @@ extension CLUT {
         CLUT(blockName: 0, blockSize: 0, colors: [])
     }
     
+    static var mock: CLUT {
+        
+        let colors = (0..<256).map { index in
+            Color(
+                red: UInt8.random(in: 0...255),
+                green: UInt8.random(in: 0...255),
+                blue: UInt8.random(in: 0...255)
+            )
+        }
+        
+        return CLUT(
+            blockName: 0x434c5554,
+            blockSize: 256 * 3 + 8,
+            colors: colors)
+    }
+    
     var isEmpty: Bool {
         self == CLUT.empty
     }

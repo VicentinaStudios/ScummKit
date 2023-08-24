@@ -12,6 +12,7 @@ struct ScummFile: Hashable {
     enum FileType {
         case indexFile
         case dataFile
+        case charFile
     }
     
     let fileURL: URL

@@ -7,20 +7,24 @@
 
 import Foundation
 
-enum FileError: Error {
-    case loadFailure
-    case saveFailure
-    case urlFailure
-}
-
+/// The `ScummStore` class is responsible to import the game.
 class ScummStore: ObservableObject {
     
+    // MARK: State
+    
+    /// Error state to be handled in `onChange`.
+    @Published var error: RuntimeError? = nil
+    
+    /// Directory `URL` of the SCUMM game.
+    @Published var directoryURL: URL? = nil
+    
     @Published var scummFiles: [TreeNode<ScummFile>] = []
-    @Published var scummVersion: ScummVersion?
+    
+    // MARK: Initializers
     
     init() {}
         
-    init(witchChecking: Bool) throws {
+    init(withChecking: Bool) throws {
         
         #if DEBUG
         do {
@@ -31,30 +35,87 @@ class ScummStore: ObservableObject {
         #endif
     }
     
-    func readDirectory(at url: URL) throws {
+    // MARK: - Computed State
+    
+    /// Get all files of directory `URL`
+    ///
+    /// The `directoryURL` should target the directory containing the SCUMM game.
+    ///
+    /// - Returns: `[URL]`s of found files  in the directory.
+    var filesInDirectory: [URL] {
         
-        do {            
+        get throws {
+            
+            guard let url = directoryURL else {
+                throw RuntimeError.noDirectorySet
+            }
+            
             let urls = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
             
+            
             guard !urls.isEmpty else {
-                throw FileError.urlFailure
+                throw RuntimeError.emptyDirectory
             }
             
-            let sorted = urls.sorted { a, b in
+            return urls.sorted { a, b in
                 a.lastPathComponent.localizedStandardCompare(b.lastPathComponent) == ComparisonResult.orderedAscending
             }
+        }
+    }
+    
+    /// Get SCUMM version for the game opened
+    ///
+    /// Be aware, that the ScummViewer is still in early development
+    /// and has only limited support. The current development focuses
+    /// on v5 and v4.
+    ///
+    /// - Returns: SCUMM Version
+    var scummVersion: ScummVersion {
+        get throws {
+            guard
+                let version = ScummVersion.dectect(files: try filesInDirectory)
+            else {
+                throw RuntimeError.unknownVersion
+            }
+            
+            return version
+        }
+    }
+    
+    // MARK: Behaviour
+    
+    /// Change directory to `URL`
+    ///
+    /// The directory `URL` should target the directory containing the SCUMM game.
+    /// Changing the directory will update the `files` property, holding `URL` of
+    /// the files found in the directory.
+    ///
+    /// - Parameter url: Directory `URL` of the game.
+    func changeDirectory(to url: URL) {
+        directoryURL = url
+    }
+    
+    /// (Deprecated) Load files of directory and analyze them
+    /// - Parameter url: Directory `URL` of the game.
+    func readDirectory(at url: URL) throws {
+        
+        do {
+            
+            changeDirectory(to: url)
             
             scummFiles.removeAll()
             
-            try sorted.forEach { fileURL in
+            try filesInDirectory.forEach { fileURL in
         
                 let type: ScummFile.FileType?
                 
                 switch fileURL.suffix {
                 case "000":
                     type = .indexFile
-                case "001":
+                case "001", "LEC":
                     type = .dataFile
+                case "LFL":
+                    type = fileURL.lastPathComponent == "000.LFL" ? .indexFile : .charFile
                 default:
                     type = nil
                 }
@@ -66,7 +127,16 @@ class ScummStore: ObservableObject {
                 case .indexFile:
                     tree = try analyzeIndexFile(url: fileURL)
                 case .dataFile:
-                    tree = try analyzeDataFile(url: fileURL)
+                    
+                    if try scummVersion == .v4 {
+                        tree = try hackDataFile(url: fileURL)
+                    } else {
+                        tree = try analyzeDataFile(url: fileURL)
+                    }
+                case .charFile:
+                    
+                    tree = try analyzeCharsetLFL(url: fileURL)
+                    
                 default:
                     return
                 }
@@ -82,7 +152,7 @@ class ScummStore: ObservableObject {
     
     static var create: ScummStore {
         do {
-            return try ScummStore(witchChecking: true)
+            return try ScummStore(withChecking: true)
         } catch {
             return ScummStore()
         }
@@ -92,6 +162,68 @@ class ScummStore: ObservableObject {
 // MARK: - Index & Data File
 
 extension ScummStore {
+    
+    private func hackDataFile(url dataFile: URL) throws -> TreeNode<Block> {
+        
+        do {
+            
+            let fileSize = try fileSize(from: dataFile)
+            
+            let root = Block(
+                for: dataFile.lastPathComponent,
+                with: UInt32(fileSize),
+                at: 0
+            )
+            
+            let tree = TreeNode<Block>(with: root)
+                        
+//            let data = try readData(from: dataFile, at: 0, with: Int(fileSize))
+//                .xor(with: 0x69)
+//                .map { $0.char }
+//                .joined()
+            
+            let blockInfo = Block(for: "LEC", with: UInt32(fileSize), at: 0)
+            
+            let child = TreeNode<Block>(with: blockInfo)
+            tree.add(child)
+            
+            return tree
+        } catch {
+            throw error
+        }
+    }
+    
+    private func analyzeCharsetLFL(url fileURL: URL) throws -> TreeNode<Block> {
+        
+        do {
+            
+            let fileSize = try fileSize(from: fileURL)
+            
+            let root = Block(
+                for: fileURL.lastPathComponent,
+                with: UInt32(fileSize),
+                at: 0
+            )
+            
+            let tree = TreeNode<Block>(with: root)
+            
+//            let data = try readData(from: fileURL, at: 0, with: Int(fileSize))
+//                .map { $0.char }
+//                .joined()
+            
+            let block = Block(for: "CHAR", with: UInt32(fileSize), at: 0)
+            
+//            let blockInfo = try readBlockInfo(from: fileURL, at: 0)
+            let child = TreeNode<Block>(with: block)
+            
+            tree.add(child)
+            
+            return tree
+            
+        } catch {
+            throw error
+        }
+    }
     
     func analyzeIndexFile(url indexFile: URL) throws -> TreeNode<Block> {
         
@@ -179,6 +311,10 @@ extension ScummStore {
     
     private func readBlockInfo(from url: URL, at offset: UInt64) throws -> Block {
         
+        if let version = try? scummVersion, version == .v4 {
+            return try readBlockInfo_v4(from: url, at: offset)
+        }
+        
         do {
             
             let blockName = try readData(from: url, at: offset, with: 4)
@@ -193,6 +329,24 @@ extension ScummStore {
             
             return Block(for: blockName, with: blockSize, at: UInt32(offset))
             
+        } catch {
+            throw FileError.loadFailure
+        }
+    }
+    
+    private func readBlockInfo_v4(from url: URL, at offset: UInt64) throws -> Block {
+        
+        do {
+            
+            let blockSize = try readData(from: url, at: offset, with: 4)
+                .doubleWordBuffer[0]
+                .littleEndian
+            
+            let blockName = try readData(from: url, at: offset + 4, with: 2)
+                .map { $0.char }
+                .joined()
+            
+            return Block(for: blockName, with: blockSize, at: UInt32(offset))
         } catch {
             throw FileError.loadFailure
         }

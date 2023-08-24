@@ -58,9 +58,7 @@ struct CHAR {
             
             let width = buffer.byte(Int(offset) + 29)
             let height = buffer.byte(Int(offset) + 1 + 29)
-            if offset == 1078 {
-                
-            }
+            
             let size = Int(width * height)
             let planeSize = size * Int(bitsPerPixel)
             
@@ -83,6 +81,67 @@ struct CHAR {
             colorMap: colorMap,
             bitsPerPixel: bitsPerPixel,
             fontHeight: buffer.byte(30),
+            numberOfCharacter: numberOfCharacters,
+            characterDataOffsets: characterDataOffsets,
+            characterGlyps: glyps
+        )
+    }
+    
+    static func create_v4(from buffer: [UInt8]) -> CHAR {
+        
+        var offset = 6      // 14
+        
+        var colorMap: [UInt8] = []
+        for index in 0..<15 {
+            let color = buffer.byte(offset + index)
+            colorMap.append(color)
+        }
+        
+        let bitsPerPixel = buffer.byte(21)
+        
+        let numberOfCharacters = buffer.wordLE(23)
+        
+        offset = 25
+        
+        var characterDataOffsets: [UInt32] = []
+        for index in 0..<numberOfCharacters {
+            let data = buffer.dwordLE(offset + Int(index * 4))
+            characterDataOffsets.append(data)
+        }
+        
+        let glyps = characterDataOffsets.map { offset in
+            
+            guard offset != 0 else {
+                return CharacterGlyph(width: 0, height: 0, offsetX: 0, offsetY: 0, bitstream: [])
+            }
+            
+            let afterColorMap = 21
+            
+            let width = buffer.byte(Int(offset) + afterColorMap)
+            let height = buffer.byte(Int(offset) + 1 + afterColorMap)
+            
+            let size = Int(width * height)
+            let planeSize = size * Int(bitsPerPixel)
+            
+            let data = buffer.slice(Int(offset) + 4 + afterColorMap, size: planeSize / 8)
+            
+            return CharacterGlyph(
+                width: width,
+                height: height,
+                offsetX: buffer.byte(Int(offset) + 2 + afterColorMap),
+                offsetY: buffer.byte(Int(offset) + 3 + afterColorMap),
+                bitstream: data
+            )
+        }
+        
+        return CHAR(
+            blockName: buffer.dwordLE(0),
+            blockSize: buffer.dwordBE(0),
+            size: buffer.dwordLE(0),
+            version: buffer.wordBE(4),
+            colorMap: colorMap,
+            bitsPerPixel: bitsPerPixel,
+            fontHeight: buffer.byte(22),
             numberOfCharacter: numberOfCharacters,
             characterDataOffsets: characterDataOffsets,
             characterGlyps: glyps

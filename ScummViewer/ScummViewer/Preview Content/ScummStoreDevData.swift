@@ -55,7 +55,7 @@ extension ScummStore {
             try readDirectory(at: url)
             
             let urls = scummFiles.map { $0.value.fileURL }
-            scummVersion = ScummVersion.dectect(files: urls)
+//            scummVersion = ScummVersion.dectect(files: urls)
             
         } catch {
             throw error

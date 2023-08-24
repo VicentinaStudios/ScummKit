@@ -11,8 +11,11 @@ import SwiftUI
 struct ScummViewerApp: App {
     
     @StateObject private var scummStore:  ScummStore
+    @StateObject private var recentFilesManager = RecentFilesManager()
+    
     @State private var showAlert = false
     @State private var isExportDisabled = true
+    @State private var isRecentsDisabled = true
     
     init() {
         _scummStore = StateObject(wrappedValue: ScummStore())
@@ -24,17 +27,36 @@ struct ScummViewerApp: App {
             ContentView()
                 .frame(minWidth: 1024, maxWidth: .infinity, minHeight: 768, maxHeight: .infinity, alignment: .center)
                 .environmentObject(scummStore)
-                .alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text("Error"),
-                        message: Text("Couldn't load SCUMM game data.")
-                    )
+                .onChange(of: scummStore.error) { change in
+                    showAlert = !showAlert
+                }
+                .alert(isPresented: $showAlert, error: scummStore.error) { error in
+                    Text(error.errorDescription ?? "Error Occured")
+                } message: { error in
+                    let message = [error.failureReason, error.recoverySuggestion]
+                        .compactMap { $0 }
+                        .joined(separator: "\n\n")
+                    Text(message)
                 }
         }.commands {
             
             CommandGroup(after: .newItem) {
                 Button(action: openGame) {
                     Text("Open Game…")
+                }
+                .keyboardShortcut("o", modifiers: .command)
+            }
+            
+            CommandGroup(after: .newItem) {
+                Menu("Open Recent") {
+                    ForEach(recentFilesManager.recentFiles.indices, id: \.self) { index in
+                        Button {
+                            openRecentFile(for: index)
+                        } label: {
+                            Text(recentFilesManager.recentFiles[index].lastPathComponent)
+                        }
+                        .keyboardShortcut(KeyEquivalent(Character(UnicodeScalar(0x0030+index + 1)!)) , modifiers: [.command])
+                    }
                 }
             }
             
@@ -64,15 +86,30 @@ struct ScummViewerApp: App {
                 
                 try scummStore.readDirectory(at: url)
                 
-                let urls = scummStore.scummFiles.map { $0.value.fileURL }
-                scummStore.scummVersion = ScummVersion.dectect(files: urls )
-                
                 isExportDisabled = false
+                recentFilesManager.recentFiles.insert(url, at: 0)
                 
             } catch {
-                showAlert = true
+                scummStore.error = error as? RuntimeError
             }
                 
+        }
+    }
+    
+    func openRecentFile(for index: Int) {
+        
+        do {
+            
+            let url = recentFilesManager.recentFiles[index]
+            try scummStore.readDirectory(at: url)
+            
+            isExportDisabled = false
+            
+            recentFilesManager.recentFiles.remove(at: index)
+            recentFilesManager.recentFiles.insert(url, at: 0)
+            
+        } catch {
+            scummStore.error = error as? RuntimeError
         }
     }
     
