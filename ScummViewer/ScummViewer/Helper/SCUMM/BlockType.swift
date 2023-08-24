@@ -20,6 +20,7 @@ enum BlockType: String {
     case DCHR
     case DOBJ
     
+    // v4
     case RN
     case _0R = "0R"
     case _0S = "0S"
@@ -60,6 +61,37 @@ enum BlockType: String {
     case SOUN
     case COST
     case CHAR
+    
+    // v4
+    // https://osiegmar.github.io/jmonkey/file-formats/data-files/
+    case LE
+    case FO
+    case LF
+    
+    case RO
+    
+    case HD
+    case CC
+    case SP
+    case BX
+    case PA
+    case SA
+    case BM
+    case OI
+    case NL
+    case SL
+    case OC
+    case EX
+    case EN
+    case LC
+    case LS
+    
+    case SC
+    case WA
+    case AD
+    case ROL
+    
+    case CO
     
     var title: String {
         switch self {
@@ -147,6 +179,61 @@ enum BlockType: String {
             return "Costume"
         case .CHAR:
             return "Charset"
+            
+        // SCUMM v4
+            
+        case .LE:
+            return "LucasArts Entertainment"
+        case .FO:
+            return "Info"
+        case .LF:
+            return "Lucas File"
+            
+        case .RO:
+            return "Room"
+            
+        case .HD:
+            return "Room Header"
+        case .CC:
+            return "Color Cycling"
+        case .SP:
+            return "EGA color palette"
+        case .BX:
+            return "Walking Boxes"
+        case .PA:
+            return "VGA color palette"
+        case .SA:
+            return "Scale slots"
+        case .BM:
+            return "Background Image"
+        case .OI:
+            return "Object Image"
+        case .NL:
+            return "List of sounds"
+        case .SL:
+            return "List of unknown"
+        case .OC:
+            return "Object Code"
+        case .EX:
+            return "Room exit script"
+        case .EN:
+            return "Room entry script"
+        case .LC:
+            return "Local script count"
+        case .LS:
+            return "Local script"
+        
+        case .SC:
+            return "Global Script"
+        case .WA:
+            return "Tandy"
+        case .AD:
+            return "Adlib"
+        case .ROL:
+            return "Roland MT-32"
+        
+        case .CO:
+            return "Costume"
         }
     }
 

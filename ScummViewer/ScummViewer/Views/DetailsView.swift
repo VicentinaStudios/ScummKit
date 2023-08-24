@@ -60,7 +60,7 @@ struct DetailsView: View {
             
         }.onAppear {
             
-            if let name = node.parent?.value.name, name.hasSuffix("LEC") {
+            if let name = node.parent?.root.value.name, name.hasSuffix("LEC") {
                 buffer = try! blockData.byteBuffer.xor(with: 0x69)
             } else {
                 buffer = try! blockData.byteBuffer.xor(

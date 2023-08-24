@@ -176,16 +176,8 @@ extension ScummStore {
             )
             
             let tree = TreeNode<Block>(with: root)
-                        
-//            let data = try readData(from: dataFile, at: 0, with: Int(fileSize))
-//                .xor(with: 0x69)
-//                .map { $0.char }
-//                .joined()
             
-            let blockInfo = Block(for: "LEC", with: UInt32(fileSize), at: 0)
-            
-            let child = TreeNode<Block>(with: blockInfo)
-            tree.add(child)
+            try analyzeTreeLevel_v4(node: tree, for: dataFile)
             
             return tree
         } catch {
@@ -207,15 +199,8 @@ extension ScummStore {
             
             let tree = TreeNode<Block>(with: root)
             
-//            let data = try readData(from: fileURL, at: 0, with: Int(fileSize))
-//                .map { $0.char }
-//                .joined()
-            
             let block = Block(for: "CHAR", with: UInt32(fileSize), at: 0)
-            
-//            let blockInfo = try readBlockInfo(from: fileURL, at: 0)
             let child = TreeNode<Block>(with: block)
-            
             tree.add(child)
             
             return tree
@@ -309,6 +294,42 @@ extension ScummStore {
         }
     }
     
+    private func analyzeTreeLevel_v4(node: TreeNode<Block>, for url: URL, at position: UInt64 = 0) throws {
+        
+        var offset = position
+        
+        do {
+            
+            while offset < node.value.size + node.value.offset {
+                
+                if offset == 0x10dce {
+                    
+                }
+                
+                if offset == 0x18fe3 {
+//                    offset = 0x1913d
+                }
+                
+                let blockInfo = try readBlockInfo_v4(from: url, at: offset, xor: 0x69)
+                let child = TreeNode<Block>(with: blockInfo)
+                node.add(child)
+                
+                switch blockInfo.name {
+                case "LE", "RO", "SO":
+                    try analyzeTreeLevel_v4(node: child, for: url, at: offset + 6)
+                case "LF":
+                    try analyzeTreeLevel_v4(node: child, for: url, at: offset + 8)
+                default:
+                    break
+                }
+                
+                offset += UInt64(blockInfo.size)
+            }
+        } catch {
+            throw FileError.loadFailure
+        }
+    }
+    
     private func readBlockInfo(from url: URL, at offset: UInt64) throws -> Block {
         
         if let version = try? scummVersion, version == .v4 {
@@ -334,19 +355,26 @@ extension ScummStore {
         }
     }
     
-    private func readBlockInfo_v4(from url: URL, at offset: UInt64) throws -> Block {
+    private func readBlockInfo_v4(from url: URL, at offset: UInt64, xor: UInt8 = 0) throws -> Block {
         
         do {
             
             let blockSize = try readData(from: url, at: offset, with: 4)
+                .xor(with: xor)
                 .doubleWordBuffer[0]
                 .littleEndian
             
             let blockName = try readData(from: url, at: offset + 4, with: 2)
+                .xor(with: xor)
                 .map { $0.char }
                 .joined()
             
-            return Block(for: blockName, with: blockSize, at: UInt32(offset))
+            // NOTE: Dirty hack to fix size bug in MI floppy disk 1 for SO
+            if offset == 0x10dce {
+                return Block(for: blockName, with: 0x8115, at: UInt32(offset))
+            } else {
+                return Block(for: blockName, with: blockSize, at: UInt32(offset))
+            }
         } catch {
             throw FileError.loadFailure
         }
