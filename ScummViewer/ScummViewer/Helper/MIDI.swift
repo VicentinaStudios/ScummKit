@@ -25,6 +25,7 @@ class MIDI {
     private var delay2 = 0
     private var oldDelay = 0
     private var adlib: [UInt8] = []
+    private var header: [UInt8] = []
     
     private var offset = 0
     
@@ -39,50 +40,133 @@ class MIDI {
     private var totalSize: Int {
         Constants.MIDIHeaderSize + 7 + 8 * Constants.ADLIB_INSTR_MIDI_HACK.count + trimmedBuffer.count + Constants.sysexAddition
     }
-    
-    private var tempoChangeMetaEvent: [UInt8] {
-        
-        // Write a tempo change Meta event
-        // 473 / 4 Hz, convert to micro seconds.
-        let dw = 1000000 * ppqn * 4 / 473;
-        
-        var event: [UInt8] = [0x00, 0xFF, 0x51, 0x03]
-        
-        event.append(contentsOf: [
-            UInt8((dw >> 16) & 0xFF),
-            UInt8((dw >> 8) & 0xFF),
-            UInt8(dw & 0xFF)
-        ])
-        
-        // NOTE: I think my code is buggy... too tired, check later with scummvm
-        //
-        // dw = 1000000 * ppqn * 4 / 473;
-        // memcpy(ptr, "\x00\xFF\x51\x03", 4); ptr += 4;
-        // *ptr++ = (byte)((dw >> 16) & 0xFF);
-        // *ptr++ = (byte)((dw >> 8) & 0xFF);
-        // *ptr++ = (byte)(dw & 0xFF);
-        
-        return event
-    }
         
     var midi: [UInt8] {
         
         let midi = trimmedBuffer
-        var header: [UInt8] = []
         
         offset = 2
         
         if midi.byte(offset) == 0x80 {
-            let header = createMIDIHeader(type: .adl)
+            
+            header = createMIDIHeader(type: .adl)
+            
+            // The "speed" of the song
+            let ticks = midi[offset + 1]
+            
+            // Flag that tells us whether we should loop the song (0) or play it only once (1)
+            let playOnce = midi[offset + 2]
+            
+            // Number of instruments used
+            let numberOfInstruments = midi[offset + 8]      // Normally 8
+            
+            // copy the pointer to instrument data
+            let channel = offset + 9
+            let instr = offset + 0x11
+            
+            // skip over the rest of the header and copy the MIDI data into a buffer
+            offset += 0x11 + 8 * 16
+            //size -= 0x11 + 8 * 16;
+            
+            let track = offset
+            
+            // Convert the ticks into a MIDI tempo.
+            // Unfortunate LOOM and INDY3 have different interpretation of the ticks value.
+            let dw = 500000 * 256 / Int(ticks);
+            //let dwIndy3 = 500000 * 256 / 473 * ppqn / Int(ticks)
+            //let dwLoom3 = dw = 500000 * ppqn / 4 / Int(ticks)
+            
+            writeTempoChangeMetaEvent(for: dw)
+            
+            // Copy our hardcoded instrument table into it
+            // Then, convert the instrument table as given in this song resource
+            // And write it *over* the hardcoded table.
+            // Note: we deliberately.
+            
+            /* now fill in the instruments */
+            for index in 0..<numberOfInstruments {
+                
+                let ch = midi[channel + Int(index)] - 1
+                
+                guard ch >= 0 && ch <= 15 else {
+                    continue
+                }
+                
+                // Sound instrument uses percussion
+                //if midi[instr + Int(index * 16 + 13)] { }
+                
+                adlib = Constants.ADLIB_INSTR_MIDI_HACK
+                
+                adlib[5] += UInt8(ch)
+                adlib[28] += UInt8(ch)
+                adlib[92] += UInt8(ch)
+                
+                let index = instr + Int(index * 16)
+                
+                
+                /* mod_characteristic */
+                adlib[30 + 0] = (midi[index + 3] >> 4) & 0xf
+                adlib[30 + 1] = midi[index + 3] & 0xf
+                
+                /* mod_scalingOutputLevel */
+                adlib[30 + 2] = (midi[index + 4] >> 4) & 0xf
+                adlib[30 + 3] = midi[index + 4] & 0xf
+                
+                /* mod_attackDecay */
+                adlib[30 + 4] = (~midi[index + 5] >> 4) & 0xf
+                adlib[30 + 5] = ~midi[index + 5] & 0xf
+
+                /* mod_sustainRelease */
+                adlib[30 + 6] = (~midi[index + 6] >> 4) & 0xf
+                adlib[30 + 7] = ~midi[index + 6] & 0xf
+                
+                /* mod_waveformSelect */
+                adlib[30 + 8] = (midi[index + 7] >> 4) & 0xf
+                adlib[30 + 9] = midi[index + 7] & 0xf
+                
+                /* car_characteristic */
+                adlib[30 + 10] = (midi[index + 3] >> 4) & 0xf
+                adlib[30 + 11] = midi[index + 3] & 0xf
+                
+                /* car_scalingOutputLevel */
+                adlib[30 + 12] = (midi[index + 9] >> 4) & 0xf
+                adlib[30 + 13] = midi[index + 9] & 0xf
+                
+                /* car_attackDecay */
+                adlib[30 + 14] = (~midi[index + 10] >> 4) & 0xf
+                adlib[30 + 15] = ~midi[index + 10] & 0xf
+                
+                /* car_sustainRelease */
+                adlib[30 + 16] = (~midi[index + 11] >> 4) & 0xf
+                adlib[30 + 17] = ~midi[index + 11] & 0xf
+                
+                /* car_waveFormSelect */
+                adlib[30 + 18] = (midi[index + 12] >> 4) & 0xf
+                adlib[30 + 19] = midi[index + 12] & 0xf
+                
+                /* feedback */
+                adlib[30 + 20] = (midi[index + 2] >> 4) & 0xf
+                adlib[30 + 21] = midi[index + 2] & 0xf
+            }
+            
+            // There is a constant delay of ppqn/3 before the music starts.
+            if ppqn / 3 >= 128 {
+                adlib.append(UInt8(((ppqn / 3) >> 7) | 0x80))
+            }
+            
+            adlib.append(UInt8(ppqn / 3 & 0x7f))
+            
+            adlib.append(contentsOf: midi.dropFirst(track))
+            
         } else {
             
             header = createMIDIHeader(type: .asfx)
             
+            // Write a tempo change Meta event
+            // 473 / 4 Hz, convert to micro seconds.
             let dw = 1000000 * ppqn * 4 / 473
-            header.append(contentsOf: [0x00, 0xff, 0x51, 0x03])
-            header.append(UInt8((dw >> 16) & 0xff))
-            header.append(UInt8((dw >> 8) & 0xff))
-            header.append(UInt8(dw & 0xff))
+            
+            writeTempoChangeMetaEvent(for: dw)
             
             processMIDITrackData()
             
@@ -135,7 +219,6 @@ class MIDI {
                 // Play Note?
                 case .type2:
                     
-                    //header.append(contentsOf: Constants.ADLIB_INSTR_MIDI_HACK)
                     adlib = Constants.ADLIB_INSTR_MIDI_HACK
                     
                     adlib[5] += UInt8(channel)
@@ -434,6 +517,13 @@ class MIDI {
         }
         
         adlib.append(UInt8(value))
+    }
+    
+    private func writeTempoChangeMetaEvent(for dw: Int) {
+        header.append(contentsOf: [0x00, 0xff, 0x51, 0x03])
+        header.append(UInt8((dw >> 16) & 0xff))
+        header.append(UInt8((dw >> 8) & 0xff))
+        header.append(UInt8(dw & 0xff))
     }
 }
 
