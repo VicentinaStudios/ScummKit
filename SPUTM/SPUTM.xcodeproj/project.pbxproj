@@ -1,0 +1,682 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C3DBFC12A9AB4CD004C62CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFC02A9AB4CD004C62CD /* AppDelegate.swift */; };
+		4C3DBFC32A9AB4CD004C62CD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFC22A9AB4CD004C62CD /* GameViewController.swift */; };
+		4C3DBFC62A9AB4CD004C62CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFC42A9AB4CD004C62CD /* Main.storyboard */; };
+		4C3DBFC92A9AB4CD004C62CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFC72A9AB4CD004C62CD /* LaunchScreen.storyboard */; };
+		4C3DBFD12A9AB4CE004C62CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFD02A9AB4CE004C62CD /* AppDelegate.swift */; };
+		4C3DBFD32A9AB4CE004C62CD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFD22A9AB4CE004C62CD /* GameViewController.swift */; };
+		4C3DBFD62A9AB4CE004C62CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFD42A9AB4CE004C62CD /* Main.storyboard */; };
+		4C3DBFD92A9AB4CE004C62CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFD72A9AB4CE004C62CD /* LaunchScreen.storyboard */; };
+		4C3DBFE12A9AB4CE004C62CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFE02A9AB4CE004C62CD /* AppDelegate.swift */; };
+		4C3DBFE32A9AB4CE004C62CD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFE22A9AB4CE004C62CD /* GameViewController.swift */; };
+		4C3DBFE62A9AB4CE004C62CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFE42A9AB4CE004C62CD /* Main.storyboard */; };
+		4C3DBFE82A9AB4CE004C62CD /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB52A9AB4C9004C62CD /* Actions.sks */; };
+		4C3DBFE92A9AB4CE004C62CD /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB52A9AB4C9004C62CD /* Actions.sks */; };
+		4C3DBFEA2A9AB4CE004C62CD /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB52A9AB4C9004C62CD /* Actions.sks */; };
+		4C3DBFEB2A9AB4CE004C62CD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB62A9AB4C9004C62CD /* GameScene.sks */; };
+		4C3DBFEC2A9AB4CE004C62CD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB62A9AB4C9004C62CD /* GameScene.sks */; };
+		4C3DBFED2A9AB4CE004C62CD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB62A9AB4C9004C62CD /* GameScene.sks */; };
+		4C3DBFEE2A9AB4CE004C62CD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB72A9AB4C9004C62CD /* GameScene.swift */; };
+		4C3DBFEF2A9AB4CE004C62CD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB72A9AB4C9004C62CD /* GameScene.swift */; };
+		4C3DBFF02A9AB4CE004C62CD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB72A9AB4C9004C62CD /* GameScene.swift */; };
+		4C3DBFF12A9AB4CE004C62CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB82A9AB4CD004C62CD /* Assets.xcassets */; };
+		4C3DBFF22A9AB4CE004C62CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB82A9AB4CD004C62CD /* Assets.xcassets */; };
+		4C3DBFF32A9AB4CE004C62CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB82A9AB4CD004C62CD /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4C3DBFB52A9AB4C9004C62CD /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		4C3DBFB62A9AB4C9004C62CD /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		4C3DBFB72A9AB4C9004C62CD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		4C3DBFB82A9AB4CD004C62CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4C3DBFBD2A9AB4CD004C62CD /* SPUTM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPUTM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C3DBFC02A9AB4CD004C62CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4C3DBFC22A9AB4CD004C62CD /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		4C3DBFC52A9AB4CD004C62CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4C3DBFC82A9AB4CD004C62CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4C3DBFCE2A9AB4CE004C62CD /* SPUTM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPUTM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C3DBFD02A9AB4CE004C62CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4C3DBFD22A9AB4CE004C62CD /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		4C3DBFD52A9AB4CE004C62CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4C3DBFD82A9AB4CE004C62CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4C3DBFDE2A9AB4CE004C62CD /* SPUTM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPUTM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C3DBFE02A9AB4CE004C62CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4C3DBFE22A9AB4CE004C62CD /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		4C3DBFE52A9AB4CE004C62CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4C3DBFE72A9AB4CE004C62CD /* SPUTM_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SPUTM_macOS.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C3DBFBA2A9AB4CD004C62CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C3DBFCB2A9AB4CE004C62CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C3DBFDB2A9AB4CE004C62CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C3DBFAF2A9AB4C9004C62CD = {
+			isa = PBXGroup;
+			children = (
+				4C3DBFB42A9AB4C9004C62CD /* SPUTM Shared */,
+				4C3DBFBF2A9AB4CD004C62CD /* SPUTM iOS */,
+				4C3DBFCF2A9AB4CE004C62CD /* SPUTM tvOS */,
+				4C3DBFDF2A9AB4CE004C62CD /* SPUTM macOS */,
+				4C3DBFBE2A9AB4CD004C62CD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4C3DBFB42A9AB4C9004C62CD /* SPUTM Shared */ = {
+			isa = PBXGroup;
+			children = (
+				4C3DBFB52A9AB4C9004C62CD /* Actions.sks */,
+				4C3DBFB62A9AB4C9004C62CD /* GameScene.sks */,
+				4C3DBFB72A9AB4C9004C62CD /* GameScene.swift */,
+				4C3DBFB82A9AB4CD004C62CD /* Assets.xcassets */,
+			);
+			path = "SPUTM Shared";
+			sourceTree = "<group>";
+		};
+		4C3DBFBE2A9AB4CD004C62CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C3DBFBD2A9AB4CD004C62CD /* SPUTM.app */,
+				4C3DBFCE2A9AB4CE004C62CD /* SPUTM.app */,
+				4C3DBFDE2A9AB4CE004C62CD /* SPUTM.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C3DBFBF2A9AB4CD004C62CD /* SPUTM iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4C3DBFC02A9AB4CD004C62CD /* AppDelegate.swift */,
+				4C3DBFC22A9AB4CD004C62CD /* GameViewController.swift */,
+				4C3DBFC42A9AB4CD004C62CD /* Main.storyboard */,
+				4C3DBFC72A9AB4CD004C62CD /* LaunchScreen.storyboard */,
+			);
+			path = "SPUTM iOS";
+			sourceTree = "<group>";
+		};
+		4C3DBFCF2A9AB4CE004C62CD /* SPUTM tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				4C3DBFD02A9AB4CE004C62CD /* AppDelegate.swift */,
+				4C3DBFD22A9AB4CE004C62CD /* GameViewController.swift */,
+				4C3DBFD42A9AB4CE004C62CD /* Main.storyboard */,
+				4C3DBFD72A9AB4CE004C62CD /* LaunchScreen.storyboard */,
+			);
+			path = "SPUTM tvOS";
+			sourceTree = "<group>";
+		};
+		4C3DBFDF2A9AB4CE004C62CD /* SPUTM macOS */ = {
+			isa = PBXGroup;
+			children = (
+				4C3DBFE02A9AB4CE004C62CD /* AppDelegate.swift */,
+				4C3DBFE22A9AB4CE004C62CD /* GameViewController.swift */,
+				4C3DBFE42A9AB4CE004C62CD /* Main.storyboard */,
+				4C3DBFE72A9AB4CE004C62CD /* SPUTM_macOS.entitlements */,
+			);
+			path = "SPUTM macOS";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4C3DBFBC2A9AB4CD004C62CD /* SPUTM iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C3DBFF62A9AB4CE004C62CD /* Build configuration list for PBXNativeTarget "SPUTM iOS" */;
+			buildPhases = (
+				4C3DBFB92A9AB4CD004C62CD /* Sources */,
+				4C3DBFBA2A9AB4CD004C62CD /* Frameworks */,
+				4C3DBFBB2A9AB4CD004C62CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SPUTM iOS";
+			productName = "SPUTM iOS";
+			productReference = 4C3DBFBD2A9AB4CD004C62CD /* SPUTM.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4C3DBFCD2A9AB4CE004C62CD /* SPUTM tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C3DBFF92A9AB4CE004C62CD /* Build configuration list for PBXNativeTarget "SPUTM tvOS" */;
+			buildPhases = (
+				4C3DBFCA2A9AB4CE004C62CD /* Sources */,
+				4C3DBFCB2A9AB4CE004C62CD /* Frameworks */,
+				4C3DBFCC2A9AB4CE004C62CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SPUTM tvOS";
+			productName = "SPUTM tvOS";
+			productReference = 4C3DBFCE2A9AB4CE004C62CD /* SPUTM.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4C3DBFDD2A9AB4CE004C62CD /* SPUTM macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C3DBFFC2A9AB4CE004C62CD /* Build configuration list for PBXNativeTarget "SPUTM macOS" */;
+			buildPhases = (
+				4C3DBFDA2A9AB4CE004C62CD /* Sources */,
+				4C3DBFDB2A9AB4CE004C62CD /* Frameworks */,
+				4C3DBFDC2A9AB4CE004C62CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SPUTM macOS";
+			productName = "SPUTM macOS";
+			productReference = 4C3DBFDE2A9AB4CE004C62CD /* SPUTM.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C3DBFB02A9AB4C9004C62CD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					4C3DBFBC2A9AB4CD004C62CD = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					4C3DBFCD2A9AB4CE004C62CD = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					4C3DBFDD2A9AB4CE004C62CD = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 4C3DBFB32A9AB4C9004C62CD /* Build configuration list for PBXProject "SPUTM" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4C3DBFAF2A9AB4C9004C62CD;
+			productRefGroup = 4C3DBFBE2A9AB4CD004C62CD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4C3DBFBC2A9AB4CD004C62CD /* SPUTM iOS */,
+				4C3DBFCD2A9AB4CE004C62CD /* SPUTM tvOS */,
+				4C3DBFDD2A9AB4CE004C62CD /* SPUTM macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C3DBFBB2A9AB4CD004C62CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C3DBFEB2A9AB4CE004C62CD /* GameScene.sks in Resources */,
+				4C3DBFC62A9AB4CD004C62CD /* Main.storyboard in Resources */,
+				4C3DBFE82A9AB4CE004C62CD /* Actions.sks in Resources */,
+				4C3DBFC92A9AB4CD004C62CD /* LaunchScreen.storyboard in Resources */,
+				4C3DBFF12A9AB4CE004C62CD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C3DBFCC2A9AB4CE004C62CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C3DBFEC2A9AB4CE004C62CD /* GameScene.sks in Resources */,
+				4C3DBFD62A9AB4CE004C62CD /* Main.storyboard in Resources */,
+				4C3DBFE92A9AB4CE004C62CD /* Actions.sks in Resources */,
+				4C3DBFD92A9AB4CE004C62CD /* LaunchScreen.storyboard in Resources */,
+				4C3DBFF22A9AB4CE004C62CD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C3DBFDC2A9AB4CE004C62CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C3DBFE62A9AB4CE004C62CD /* Main.storyboard in Resources */,
+				4C3DBFED2A9AB4CE004C62CD /* GameScene.sks in Resources */,
+				4C3DBFF32A9AB4CE004C62CD /* Assets.xcassets in Resources */,
+				4C3DBFEA2A9AB4CE004C62CD /* Actions.sks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C3DBFB92A9AB4CD004C62CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C3DBFEE2A9AB4CE004C62CD /* GameScene.swift in Sources */,
+				4C3DBFC32A9AB4CD004C62CD /* GameViewController.swift in Sources */,
+				4C3DBFC12A9AB4CD004C62CD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C3DBFCA2A9AB4CE004C62CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C3DBFEF2A9AB4CE004C62CD /* GameScene.swift in Sources */,
+				4C3DBFD32A9AB4CE004C62CD /* GameViewController.swift in Sources */,
+				4C3DBFD12A9AB4CE004C62CD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C3DBFDA2A9AB4CE004C62CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C3DBFF02A9AB4CE004C62CD /* GameScene.swift in Sources */,
+				4C3DBFE32A9AB4CE004C62CD /* GameViewController.swift in Sources */,
+				4C3DBFE12A9AB4CE004C62CD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4C3DBFC42A9AB4CD004C62CD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C3DBFC52A9AB4CD004C62CD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4C3DBFC72A9AB4CD004C62CD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C3DBFC82A9AB4CD004C62CD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		4C3DBFD42A9AB4CE004C62CD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C3DBFD52A9AB4CE004C62CD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4C3DBFD72A9AB4CE004C62CD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C3DBFD82A9AB4CE004C62CD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		4C3DBFE42A9AB4CE004C62CD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C3DBFE52A9AB4CE004C62CD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4C3DBFF42A9AB4CE004C62CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4C3DBFF52A9AB4CE004C62CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		4C3DBFF72A9AB4CE004C62CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FNBTP68MJQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.SPUTM;
+				PRODUCT_NAME = SPUTM;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4C3DBFF82A9AB4CE004C62CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FNBTP68MJQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.SPUTM;
+				PRODUCT_NAME = SPUTM;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4C3DBFFA2A9AB4CE004C62CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "tvOS App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FNBTP68MJQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.SPUTM;
+				PRODUCT_NAME = SPUTM;
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 16.4;
+			};
+			name = Debug;
+		};
+		4C3DBFFB2A9AB4CE004C62CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "tvOS App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FNBTP68MJQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.SPUTM;
+				PRODUCT_NAME = SPUTM;
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 16.4;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4C3DBFFD2A9AB4CE004C62CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "SPUTM macOS/SPUTM_macOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FNBTP68MJQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.SPUTM;
+				PRODUCT_NAME = SPUTM;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4C3DBFFE2A9AB4CE004C62CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "SPUTM macOS/SPUTM_macOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FNBTP68MJQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.SPUTM;
+				PRODUCT_NAME = SPUTM;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C3DBFB32A9AB4C9004C62CD /* Build configuration list for PBXProject "SPUTM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C3DBFF42A9AB4CE004C62CD /* Debug */,
+				4C3DBFF52A9AB4CE004C62CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C3DBFF62A9AB4CE004C62CD /* Build configuration list for PBXNativeTarget "SPUTM iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C3DBFF72A9AB4CE004C62CD /* Debug */,
+				4C3DBFF82A9AB4CE004C62CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C3DBFF92A9AB4CE004C62CD /* Build configuration list for PBXNativeTarget "SPUTM tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C3DBFFA2A9AB4CE004C62CD /* Debug */,
+				4C3DBFFB2A9AB4CE004C62CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C3DBFFC2A9AB4CE004C62CD /* Build configuration list for PBXNativeTarget "SPUTM macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C3DBFFD2A9AB4CE004C62CD /* Debug */,
+				4C3DBFFE2A9AB4CE004C62CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4C3DBFB02A9AB4C9004C62CD /* Project object */;
+}
