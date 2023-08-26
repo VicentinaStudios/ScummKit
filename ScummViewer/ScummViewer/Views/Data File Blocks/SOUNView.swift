@@ -77,12 +77,11 @@ struct SOUNView: View {
         }.onAppear {
             if let version = try? scummStore.scummVersion, version == .v4 {
                 soun = SOUN.create_v4(from: $buffer.wrappedValue)
-                debugPrint(soun.blockName2)
+                midi = MIDI(with: buffer).midi
             } else {
                 soun = SOUN.create(from: $buffer.wrappedValue)
+                midi = buffer
             }
-            
-            midi = MIDI(with: buffer).midi
         }
     }
     
