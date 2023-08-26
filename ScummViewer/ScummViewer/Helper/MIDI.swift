@@ -197,7 +197,10 @@ class MIDI {
                 offset = Int(trackData[channel])
                 let chunkType = trimmedBuffer[offset]
                 
-                if !currentNote.isEmpty, currentNote[channel] >= 0 {
+                if !currentNote.isEmpty,
+                   channel < currentNote.count,
+                   currentNote[channel] >= 0
+                {
                     
                     delay = minTime - currentTime
                     currentTime = minTime

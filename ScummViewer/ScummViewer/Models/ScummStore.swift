@@ -307,8 +307,22 @@ extension ScummStore {
                 node.add(child)
                 
                 switch blockInfo.name {
-                case "LE", "RO", "SO":
+                case "LE", "SO":
                     try analyzeTreeLevel_v4(node: child, for: url, at: offset + 6)
+                case "RO":
+                    
+                    let children = child.parent?.children?.filter { $0.value.name == "RO" }
+                    
+                    if let children = children, children.count > 1 {
+                        
+                    }
+                    
+                    guard children?.count ?? 00 == 1 else {
+                        break
+                    }
+
+                    try analyzeTreeLevel_v4(node: child, for: url, at: offset + 6)
+                    
                 case "LF":
                     try analyzeTreeLevel_v4(node: child, for: url, at: offset + 8)
                 default:
