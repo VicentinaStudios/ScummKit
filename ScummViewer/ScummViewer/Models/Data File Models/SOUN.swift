@@ -58,6 +58,46 @@ struct SOUN {
             music: musicBlocks)
     }
     
+    static func create_v4(from buffer: [UInt8]) -> SOUN {
+        
+        var offset: UInt32 = 0
+        
+        var musicBlocks: [Music] = []
+        
+        let blockSize: UInt32 = buffer.dwordLE(0) == 33301 ? 33045 : buffer.dwordLE(0)
+        
+        while offset < blockSize {
+            
+            let dataSize = buffer.dwordLE(Int(offset)) == 33301 ? 33045 : buffer.dwordLE(Int(offset))
+            
+            guard dataSize <= blockSize else {
+                break
+            }
+            
+            let data: [UInt8]
+            data = buffer.slice(Int(offset), size: Int(dataSize))
+            
+            let music = Music(
+                blockName: buffer.dwordLE(4) & 0xffff,
+                blockSize: buffer.dwordLE(0),
+                midi: data
+            )
+            
+            musicBlocks.append(music)
+            
+            offset += dataSize
+        }
+        
+        let soun = SOUN(
+            blockName: buffer.dwordLE(4) & 0xffff,
+            blockSize: blockSize,
+            blockName2: buffer.dwordLE(4) & 0xffff,
+            blockSize2: blockSize,
+            music: musicBlocks)
+        
+        return soun
+    }
+    
     static var empty: SOUN {
         SOUN(blockName: 0, blockSize: 0, blockName2: 0, blockSize2: 0, music: [])
     }

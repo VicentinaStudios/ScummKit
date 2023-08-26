@@ -44,7 +44,7 @@ struct DetailsView: View {
                         //.ZP01, .ZP02, .ZP03:
                     
                     // V4
-                    .RN, ._0R, ._0S, ._0N, ._0C, ._0O:
+                    .RN, ._0R, ._0S, ._0N, ._0C, ._0O, .SO, .AD, .WA:
                     
                     InspectView(buffer: $buffer, node: $node)
                         .tabItem { Text("Inspect") }

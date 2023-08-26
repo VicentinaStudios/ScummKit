@@ -87,6 +87,8 @@ enum BlockType: String {
     case LS
     
     case SC
+    
+    case SO
     case WA
     case AD
     case ROL
@@ -225,6 +227,9 @@ enum BlockType: String {
         
         case .SC:
             return "Global Script"
+            
+        case .SO:
+            return "Sound"
         case .WA:
             return "Tandy"
         case .AD:

@@ -302,14 +302,6 @@ extension ScummStore {
             
             while offset < node.value.size + node.value.offset {
                 
-                if offset == 0x10dce {
-                    
-                }
-                
-                if offset == 0x18fe3 {
-//                    offset = 0x1913d
-                }
-                
                 let blockInfo = try readBlockInfo_v4(from: url, at: offset, xor: 0x69)
                 let child = TreeNode<Block>(with: blockInfo)
                 node.add(child)

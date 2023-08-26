@@ -9,8 +9,10 @@ import SwiftUI
 
 struct SOUNView: View {
     
+    @EnvironmentObject var scummStore: ScummStore
     @Binding var buffer: [UInt8]
     @State private var soun = SOUN.empty
+    @State private var midi: [UInt8] = []
     
     var body: some View {
         
@@ -60,14 +62,33 @@ struct SOUNView: View {
                     }
                 }
             }
+            
+            VStack {
+                
+                Text("MIDI Conversion")
+                    .padding()
+                
+                ScrollView {
+                    HexEditorView(buffer: $midi)
+                }
+                .frame(height: 300)
+            }
+            
         }.onAppear {
-            soun = SOUN.create(from: $buffer.wrappedValue)
+            if let version = try? scummStore.scummVersion, version == .v4 {
+                soun = SOUN.create_v4(from: $buffer.wrappedValue)
+                debugPrint(soun.blockName2)
+            } else {
+                soun = SOUN.create(from: $buffer.wrappedValue)
+            }
+            
+            midi = MIDI(with: buffer).midi
         }
     }
     
     private func export(data: [UInt8]) {
         
-        let data = Data(data)
+        let data = Data(midi.dropFirst(24))
         
         let path = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Desktop")
         let fileURL = path.appendingPathComponent("music.mid")
@@ -92,7 +113,6 @@ struct SOUNView_Previews: PreviewProvider {
 }
 
 extension SOUNView {
-    
     struct Constants {
         static let labelWidth: CGFloat = 127
     }

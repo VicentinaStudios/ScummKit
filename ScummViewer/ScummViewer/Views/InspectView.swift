@@ -57,6 +57,9 @@ struct InspectView: View {
                 case ._0R, ._0S, ._0N, ._0C:
                     DirectoryView_v4(buffer: $buffer)
                     
+                case .SO, .AD, .WA:
+                    SOUNView(buffer: $buffer)
+                    
                 default:
                     Text("Cannot inspect block")
                 }

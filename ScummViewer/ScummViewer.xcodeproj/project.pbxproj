@@ -32,6 +32,7 @@
 		4C637CC927207F6200634F8E /* InspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637CC827207F6200634F8E /* InspectView.swift */; };
 		4C637CCB27209E3600634F8E /* RNAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C637CCA27209E3600634F8E /* RNAM.swift */; };
 		4C64A250273AC8A700AD9AB8 /* COST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64A24F273AC8A700AD9AB8 /* COST.swift */; };
+		4C6936172A97FC3C00359E3B /* MIDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6936162A97FC3C00359E3B /* MIDI.swift */; };
 		4C79B81A271C23D00030E564 /* ScummVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B819271C23D00030E564 /* ScummVersion.swift */; };
 		4C79B81C271C26470030E564 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B81B271C26470030E564 /* URL+Ext.swift */; };
 		4C79B825271D77FD0030E564 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B824271D77FD0030E564 /* Block.swift */; };
@@ -108,6 +109,7 @@
 		4C637CC827207F6200634F8E /* InspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectView.swift; sourceTree = "<group>"; };
 		4C637CCA27209E3600634F8E /* RNAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNAM.swift; sourceTree = "<group>"; };
 		4C64A24F273AC8A700AD9AB8 /* COST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COST.swift; sourceTree = "<group>"; };
+		4C6936162A97FC3C00359E3B /* MIDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDI.swift; sourceTree = "<group>"; };
 		4C79B819271C23D00030E564 /* ScummVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummVersion.swift; sourceTree = "<group>"; };
 		4C79B81B271C26470030E564 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		4C79B824271D77FD0030E564 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				4C7A492C272586D900257C3F /* ScummImage.swift */,
 				4C2A78DA2748772300F358BA /* Texture.swift */,
 				4C538F0B2A942B6100D29783 /* Glyph.swift */,
+				4C6936162A97FC3C00359E3B /* MIDI.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				4CD23D7D2716D66400832C4E /* ScummViewerApp.swift in Sources */,
 				4CC620792A9507980052936C /* SOUN.swift in Sources */,
 				4C637CC927207F6200634F8E /* InspectView.swift in Sources */,
+				4C6936172A97FC3C00359E3B /* MIDI.swift in Sources */,
 				4CD9F4D72722217A00D3F0D7 /* InputFieldView.swift in Sources */,
 				4CF2241427220AFF0006F1CE /* LOFFView.swift in Sources */,
 				4C79B827271D8CC40030E564 /* ScummFile.swift in Sources */,
