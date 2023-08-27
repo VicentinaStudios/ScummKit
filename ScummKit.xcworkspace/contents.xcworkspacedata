@@ -2,9 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:ScummViewer/ScummViewer.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:SPUTM/SPUTM.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ScummViewer/ScummViewer.xcodeproj">
+      location = "group:ScummCore">
    </FileRef>
 </Workspace>

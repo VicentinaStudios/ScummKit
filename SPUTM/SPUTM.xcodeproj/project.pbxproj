@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C2B2EA52A9BE4F80098A7CF /* ScummCore in Frameworks */ = {isa = PBXBuildFile; productRef = 4C2B2EA42A9BE4F80098A7CF /* ScummCore */; };
+		4C2B2EA72A9BE6130098A7CF /* ScummCore in Frameworks */ = {isa = PBXBuildFile; productRef = 4C2B2EA62A9BE6130098A7CF /* ScummCore */; };
+		4C2B2EA92A9BE6470098A7CF /* ScummCore in Frameworks */ = {isa = PBXBuildFile; productRef = 4C2B2EA82A9BE6470098A7CF /* ScummCore */; };
 		4C3DBFC12A9AB4CD004C62CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFC02A9AB4CD004C62CD /* AppDelegate.swift */; };
 		4C3DBFC32A9AB4CD004C62CD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFC22A9AB4CD004C62CD /* GameViewController.swift */; };
 		4C3DBFC62A9AB4CD004C62CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFC42A9AB4CD004C62CD /* Main.storyboard */; };
@@ -30,6 +33,15 @@
 		4C3DBFF12A9AB4CE004C62CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB82A9AB4CD004C62CD /* Assets.xcassets */; };
 		4C3DBFF22A9AB4CE004C62CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB82A9AB4CD004C62CD /* Assets.xcassets */; };
 		4C3DBFF32A9AB4CE004C62CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C3DBFB82A9AB4CD004C62CD /* Assets.xcassets */; };
+		4C3DC0002A9AC58A004C62CD /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFFF2A9AC58A004C62CD /* Engine.swift */; };
+		4C3DC0012A9AC58A004C62CD /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFFF2A9AC58A004C62CD /* Engine.swift */; };
+		4C3DC0022A9AC58A004C62CD /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DBFFF2A9AC58A004C62CD /* Engine.swift */; };
+		4C3DC0042A9AC8A4004C62CD /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DC0032A9AC8A4004C62CD /* Variables.swift */; };
+		4C3DC0052A9AC8A4004C62CD /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DC0032A9AC8A4004C62CD /* Variables.swift */; };
+		4C3DC0062A9AC8A4004C62CD /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DC0032A9AC8A4004C62CD /* Variables.swift */; };
+		4C3DC00C2A9ACE92004C62CD /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DC00B2A9ACE92004C62CD /* Errors.swift */; };
+		4C3DC00D2A9ACE92004C62CD /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DC00B2A9ACE92004C62CD /* Errors.swift */; };
+		4C3DC00E2A9ACE92004C62CD /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DC00B2A9ACE92004C62CD /* Errors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +64,10 @@
 		4C3DBFE22A9AB4CE004C62CD /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		4C3DBFE52A9AB4CE004C62CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C3DBFE72A9AB4CE004C62CD /* SPUTM_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SPUTM_macOS.entitlements; sourceTree = "<group>"; };
+		4C3DBFFF2A9AC58A004C62CD /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		4C3DC0032A9AC8A4004C62CD /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
+		4C3DC00B2A9ACE92004C62CD /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		4C3DC00F2A9AD758004C62CD /* OpcodesV5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpcodesV5.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C2B2EA72A9BE6130098A7CF /* ScummCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C2B2EA92A9BE6470098A7CF /* ScummCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,12 +91,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C2B2EA52A9BE4F80098A7CF /* ScummCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C2B2EA32A9BE4F80098A7CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4C3DBFAF2A9AB4C9004C62CD = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +113,7 @@
 				4C3DBFCF2A9AB4CE004C62CD /* SPUTM tvOS */,
 				4C3DBFDF2A9AB4CE004C62CD /* SPUTM macOS */,
 				4C3DBFBE2A9AB4CD004C62CD /* Products */,
+				4C2B2EA32A9BE4F80098A7CF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,7 +123,11 @@
 				4C3DBFB52A9AB4C9004C62CD /* Actions.sks */,
 				4C3DBFB62A9AB4C9004C62CD /* GameScene.sks */,
 				4C3DBFB72A9AB4C9004C62CD /* GameScene.swift */,
+				4C3DC00B2A9ACE92004C62CD /* Errors.swift */,
 				4C3DBFB82A9AB4CD004C62CD /* Assets.xcassets */,
+				4C3DBFFF2A9AC58A004C62CD /* Engine.swift */,
+				4C3DC0032A9AC8A4004C62CD /* Variables.swift */,
+				4C3DC00F2A9AD758004C62CD /* OpcodesV5.swift */,
 			);
 			path = "SPUTM Shared";
 			sourceTree = "<group>";
@@ -160,6 +191,9 @@
 			dependencies = (
 			);
 			name = "SPUTM iOS";
+			packageProductDependencies = (
+				4C2B2EA62A9BE6130098A7CF /* ScummCore */,
+			);
 			productName = "SPUTM iOS";
 			productReference = 4C3DBFBD2A9AB4CD004C62CD /* SPUTM.app */;
 			productType = "com.apple.product-type.application";
@@ -177,6 +211,9 @@
 			dependencies = (
 			);
 			name = "SPUTM tvOS";
+			packageProductDependencies = (
+				4C2B2EA82A9BE6470098A7CF /* ScummCore */,
+			);
 			productName = "SPUTM tvOS";
 			productReference = 4C3DBFCE2A9AB4CE004C62CD /* SPUTM.app */;
 			productType = "com.apple.product-type.application";
@@ -194,6 +231,9 @@
 			dependencies = (
 			);
 			name = "SPUTM macOS";
+			packageProductDependencies = (
+				4C2B2EA42A9BE4F80098A7CF /* ScummCore */,
+			);
 			productName = "SPUTM macOS";
 			productReference = 4C3DBFDE2A9AB4CE004C62CD /* SPUTM.app */;
 			productType = "com.apple.product-type.application";
@@ -283,8 +323,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C3DBFEE2A9AB4CE004C62CD /* GameScene.swift in Sources */,
+				4C3DC0042A9AC8A4004C62CD /* Variables.swift in Sources */,
+				4C3DC0002A9AC58A004C62CD /* Engine.swift in Sources */,
 				4C3DBFC32A9AB4CD004C62CD /* GameViewController.swift in Sources */,
 				4C3DBFC12A9AB4CD004C62CD /* AppDelegate.swift in Sources */,
+				4C3DC00C2A9ACE92004C62CD /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,8 +336,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C3DBFEF2A9AB4CE004C62CD /* GameScene.swift in Sources */,
+				4C3DC0052A9AC8A4004C62CD /* Variables.swift in Sources */,
+				4C3DC0012A9AC58A004C62CD /* Engine.swift in Sources */,
 				4C3DBFD32A9AB4CE004C62CD /* GameViewController.swift in Sources */,
 				4C3DBFD12A9AB4CE004C62CD /* AppDelegate.swift in Sources */,
+				4C3DC00D2A9ACE92004C62CD /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,8 +349,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C3DBFF02A9AB4CE004C62CD /* GameScene.swift in Sources */,
+				4C3DC0062A9AC8A4004C62CD /* Variables.swift in Sources */,
+				4C3DC0022A9AC58A004C62CD /* Engine.swift in Sources */,
 				4C3DBFE32A9AB4CE004C62CD /* GameViewController.swift in Sources */,
 				4C3DBFE12A9AB4CE004C62CD /* AppDelegate.swift in Sources */,
+				4C3DC00E2A9ACE92004C62CD /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +640,8 @@
 				DEVELOPMENT_TEAM = FNBTP68MJQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SPUTM;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.adventure-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -598,7 +649,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.SPUTM;
 				PRODUCT_NAME = SPUTM;
@@ -620,6 +671,8 @@
 				DEVELOPMENT_TEAM = FNBTP68MJQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SPUTM;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.adventure-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -627,7 +680,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaelborgmann.SPUTM;
 				PRODUCT_NAME = SPUTM;
@@ -677,6 +730,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4C2B2EA42A9BE4F80098A7CF /* ScummCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ScummCore;
+		};
+		4C2B2EA62A9BE6130098A7CF /* ScummCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ScummCore;
+		};
+		4C2B2EA82A9BE6470098A7CF /* ScummCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ScummCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4C3DBFB02A9AB4C9004C62CD /* Project object */;
 }
