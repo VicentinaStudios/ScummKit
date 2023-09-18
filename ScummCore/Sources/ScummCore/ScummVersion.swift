@@ -1,20 +1,16 @@
 //
 //  ScummVersion.swift
-//  SPUTM
+//
 //
 //  Created by Michael Borgmann on 27/08/2023.
 //
 
 import Foundation
 
-/// Enum representing all SCUMM versions by Lucas (v1 - v8)
+/// Enum representing all SCUMM versions by Lucas (v0 - v8)
 public enum ScummVersion: Int {
-    case v1, v2, v3, v4, v5, v6, v7, v8
-}
-
-extension ScummVersion: Comparable {
     
-
+    case v0, v1, v2, v3, v4, v5, v6, v7, v8
     
     /// Compares two `ScummVersion` instances to determine their relative order.
     ///
