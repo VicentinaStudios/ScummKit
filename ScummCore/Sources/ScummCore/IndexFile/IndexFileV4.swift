@@ -1,5 +1,5 @@
 //
-//  File 2.swift
+//  IndexFileV4.swift
 //  
 //
 //  Created by Michael Borgmann on 17/09/2023.
@@ -10,6 +10,10 @@ import Foundation
 class IndexFileV4: IndexFile {
     
     var indexFileURL: URL
+    
+    var roomNames: [RoomName]?
+    
+    var resources: Resources?
         
     required init(at gameDirectoryURL: URL) throws {
         

@@ -10,11 +10,17 @@ import Foundation
 /// Represents an IndexFileV5, responsible for reading SCUMM index files.
 class IndexFileV5: IndexFile {
     
+    /// The SCUMM file being read.
+    private let scummFile: ScummFile
+    
     /// The URL of the index file.
     var indexFileURL: URL
     
-    /// The SCUMM file being read.
-    private let scummFile: ScummFile
+    /// List of the room names in a SCUMM game.
+    var roomNames: [RoomName]?
+    
+    /// List of available resources in a SCUMM game, including rooms, scripts, sounds, costumes, characters, and objects.
+    var resources: Resources?
     
     /// Initializes an IndexFileV5 instance with the specified game directory URL.
     ///
@@ -41,34 +47,48 @@ class IndexFileV5: IndexFile {
         try readIndexFile(indexFileURL)
     }
     
-    /// Reads the SCUMM index file located at the specified URL.
+    /// Reads and processes an index file to create a Resources object.
     ///
-    /// - Parameter fileURL: The URL of the index file.
-    /// - Throws: Throws an error if there is an issue while reading the index file.
+    /// This method reads an index file located at the specified `fileURL` and processes its contents to create a `Resources` object containing various resource types.
+    ///
+    /// - Parameters:
+    ///   - fileURL: The URL of the index file to be processed.
+    ///
+    /// - Throws:
+    ///   - `ScummCoreError.unknownBlock` if an unknown block type is encountered in the index file.
+    ///   - `ScummCoreError.missingResource` if one or more required resource types are missing in the index file.
+    ///
+    /// - SeeAlso: `createResources(from:)`
     internal func readIndexFile(_ fileURL: URL) throws {
+        
+        var resourceData: [BlockType: [Resources.DirectoryEntry]] = [:]
         
         while !scummFile.isEndOfFile {
             
             let blockType = try scummFile.consumeUInt32.bigEndian
             let itemSize = try scummFile.consumeUInt32.bigEndian
             
-            guard
-                BlockType(rawValue: blockType.string) != .unknown
-            else {
+            let type = BlockType(rawValue: blockType.string)
+            
+            guard type != .unknown else {
                 throw ScummCoreError.unknownBlock(blockType.string)
             }
             
-            try readIndexBlock(
-                blockType: BlockType(rawValue: blockType.string),
+            if let resourceEntries = try readIndexBlock(
+                blockType: type,
                 itemSize: Int(itemSize)
-            )
+            ) {
+                resourceData[type] = resourceEntries
+            }
         }
+        
+        resources = try createResources(from: resourceData)
     }
     
     /// Reads room numbers and offsets from the SCUMM index file.
     ///
     /// - Throws: Throws an error if there is an issue while reading the room numbers and offsets.
-    private func readIndexBlock(blockType: BlockType, itemSize: Int) throws {
+    private func readIndexBlock(blockType: BlockType, itemSize: Int) throws -> [Resources.DirectoryEntry]? {
         
         switch blockType {
             
@@ -78,27 +98,11 @@ class IndexFileV5: IndexFile {
         case .maximumValues:
             try readMaximumValues()
             
-        case .directoryOfRooms:
-            try readDirectory()
-            
-        case .directoryOfScripts:
-            try readDirectory()
-            
-        case .directoryOfSounds:
-            try readDirectory()
-            
-        case .directoryOfCostumes:
-            try readDirectory()
-            
-        case .directoryOfCharacterSets:
-            try readDirectory()
-            
-        case .directoryOfObjects:
-            try readDirectory()
-            
         default:
-            break
+            return try readDirectory()
         }
+        
+        return nil
     }
     
     /// Reads room names and associated room numbers from the SCUMM index file.
@@ -106,24 +110,28 @@ class IndexFileV5: IndexFile {
     /// - Throws: Throws an error if there is an issue while reading room names.
     private func readRoomNames() throws {
         
-        while let room = try? scummFile.consumeUInt8 {
+        while let roomIndex = try? scummFile.consumeUInt8 {
             
-            guard room != 0 else {
+            guard roomIndex != 0 else {
                 break
             }
             
             let bytes = try scummFile.read(bytes: 9)
                 .map { $0.xorDecrypt(key: 0xff) }
             
-            let roomNumber = Int(room)
+            let roomNumber = Int(roomIndex)
             
             guard
                 let roomName = String(bytes: bytes, encoding: .utf8)?
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .trimmingCharacters(in: CharacterSet(charactersIn: "\0"))
             else {
                 throw ScummCoreError.decodeFailure("room name", bytes.map { String($0) }.joined())
             }
-                
+            
+            let room = RoomName(number: roomNumber, name: roomName)
+            if roomNames?.append(room) == nil {
+                roomNames = [room]
+            }
         }
     }
     
@@ -174,7 +182,7 @@ class IndexFileV5: IndexFile {
     /// Reads a list of room numbers and offsets from the SCUMM index file.
     ///
     /// - Throws: Throws an error if there is an issue while reading room numbers and offsets.
-    private func readDirectory() throws {
+    private func readDirectory() throws -> [Resources.DirectoryEntry] {
         
         let numberOfItems = try scummFile.consumeUInt16
         
@@ -185,6 +193,8 @@ class IndexFileV5: IndexFile {
         let offsets = try readValues(count: Int(numberOfItems), readBlock: {
             Int(try scummFile.consumeUInt32)
         })
+        
+        return Resources.DirectoryEntry.convert(roomNumbers: roomNumbers, offsets: offsets)
     }
 }
 
@@ -208,5 +218,46 @@ extension IndexFileV5 {
         }
         
         return values
+    }
+}
+
+extension IndexFileV5 {
+
+    /// Creates a `Resources` object from a dictionary of resource entries.
+    ///
+    /// This method takes a dictionary containing resource entries for various resource types and creates a `Resources` object from them.
+    ///
+    /// - Parameters:
+    ///   - resourceData: A dictionary containing resource entries categorized by `BlockType`.
+    ///
+    /// - Returns: A `Resources` object containing various resource types.
+    ///
+    /// - Throws:
+    ///   - `ScummCoreError.missingResource` if any of the required resource types are missing in the `resourceData` dictionary.
+    private func createResources(from resourceData: [BlockType: [Resources.DirectoryEntry]]) throws -> Resources {
+        
+        let resourceTypes = [
+            BlockType.directoryOfRooms,
+            .directoryOfScripts,
+            .directoryOfSounds,
+            .directoryOfCostumes,
+            .directoryOfCharacterSets,
+            .directoryOfObjects
+        ]
+        
+        try resourceTypes.forEach { type in
+            guard resourceData[type] != nil else {
+                throw ScummCoreError.missingResource(type.rawValueV5)
+            }
+        }
+        
+        return Resources(
+            rooms: resourceData[.directoryOfRooms]!,
+            scripts: resourceData[.directoryOfScripts]!,
+            sounds: resourceData[.directoryOfSounds]!,
+            costumes: resourceData[.directoryOfCostumes]!,
+            characters: resourceData[.directoryOfCharacterSets]!,
+            objects: resourceData[.directoryOfObjects]!
+        )
     }
 }

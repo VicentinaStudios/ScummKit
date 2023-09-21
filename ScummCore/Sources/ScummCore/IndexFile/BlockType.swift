@@ -41,7 +41,7 @@ enum BlockType {
     ///
     /// - Parameter rawValue: The raw value representing the block type.
     init(rawValue: String) {
-        
+                
         switch rawValue {
             
         case "RN", "RNAM":
@@ -67,9 +67,33 @@ enum BlockType {
             
         case "0O", "DOBJ":
             self = .directoryOfObjects
-            
+        
         default:
             self = .unknown
+        }
+    }
+    
+    var rawValueV5: String {
+        switch self {
+            
+        case .roomNames:
+            return "RNAM"
+        case .maximumValues:
+            return "MAXS"
+        case .directoryOfRooms:
+            return "DROO"
+        case .directoryOfScripts:
+            return "DSCR"
+        case .directoryOfSounds:
+            return "DSOU"
+        case .directoryOfCostumes:
+            return "DCOS"
+        case .directoryOfCharacterSets:
+            return "DCHR"
+        case .directoryOfObjects:
+            return "DOBJ"
+        default:
+            return "unknown block"
         }
     }
 }

@@ -17,7 +17,7 @@ public class ScummCore {
     let version: ScummVersion
     
     /// The index file associated with the Scumm game.
-    var indexFile: IndexFile?
+    public var indexFile: IndexFile?
     
     /// Initializes a ScummCore instance with the provided game directory URL and version.
     ///

@@ -76,6 +76,14 @@ final class IndexFileV5Tests: XCTestCase {
             XCTFail("Unexpected error: \(error)")
         }
     }
+    
+    func testIndexFilesHasReadResources() {
+        XCTAssertNotNil(indexFile?.resources)
+    }
+    
+    func testIndexFilesHasReadRoomNames() {
+        XCTAssertNotNil(indexFile?.roomNames)
+    }
 }
 
 extension IndexFileV5Tests {

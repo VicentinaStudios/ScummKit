@@ -10,27 +10,6 @@ import XCTest
 
 struct TestHelper {
     
-    /*
-    static var gameDirectoryURL: URL {
-        
-        /*
-        let path = CommandLine.arguments[1]
-        
-        var isDirectory: ObjCBool = true
-        let isPathExisting = FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
-        
-        guard isPathExisting && isDirectory.boolValue else {
-            XCTFail("Missing game path as argument in scheme")
-            fatalError()
-        }
-        
-        return URL(filePath: path)
-        */
-        
-        return URL(filePath: "/Users/michael/Desktop/ScummViewer/Monkey1")
-    }
-    */
-    
     static var gameInfo: [GameInfo]? {
                     
         var gamesJSON: String?
@@ -60,5 +39,3 @@ struct TestHelper {
         return gameInfos
     }
 }
-
-

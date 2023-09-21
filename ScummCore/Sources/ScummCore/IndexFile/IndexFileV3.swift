@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  IndexFileV3.swift
 //  
 //
 //  Created by Michael Borgmann on 18/09/2023.
@@ -7,36 +7,14 @@
 
 import Foundation
 
-
-/// A concrete implementation of the `IndexFile` protocol for SCUMM game version 3.
-///
-/// This class reads and processes the index file for SCUMM games of version 3.
-/// It extracts information about the number of global objects, rooms, costumes, scripts, and sounds
-/// from the index file.
-///
-/// - Parameters:
-///     - gameDirectoryURL: The URL of the game directory containing the index file.
-///
-/// - Throws:
-///     - `ScummCoreError.emptyDirectory`: If the game directory is empty.
-///     - `ScummCoreError.noIndexFileFound`: If the index file is not found in the game directory.
-///     - Errors from reading and processing the index file.
-///
-/// - SeeAlso: `IndexFile`
 class IndexFileV3: IndexFile {
     
-    /// The URL of the index file.
     var indexFileURL: URL
     
-    /// Initializes the `IndexFileV3` instance by reading and processing the index file.
-    ///
-    /// - Parameters:
-    ///     - gameDirectoryURL: The URL of the game directory containing the index file.
-    ///
-    ///  - Throws:
-    ///     - `ScummCoreError.emptyDirectory`: If the game directory is empty.
-    ///     - `ScummCoreError.noIndexFileFound`: If the index file is not found in the game directory.
-    ///     - Errors from reading and processing the index file.
+    var roomNames: [RoomName]?
+    
+    var resources: Resources?
+    
     required init(at gameDirectoryURL: URL) throws {
         
         guard let directoryContent = FileUtils.directoryContent(in: gameDirectoryURL)
@@ -54,13 +32,6 @@ class IndexFileV3: IndexFile {
         try readIndexFile(indexFileURL)
     }
     
-    /// Reads and processes the index file to extract resource information.
-    ///
-    /// This function reads and decrypts the index file to determine the number of global
-    /// objects, rooms, costumes, scripts, and sounds used in the SCUMM game.
-    ///
-    /// - Throws:
-    ///     - Errors from reading and processing the index file.
     internal func readIndexFile(_ fileURL: URL) throws {
         
         let scummFile = try ScummFile(fileURL: fileURL, encryptionKey: 0xff)

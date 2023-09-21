@@ -18,6 +18,7 @@ enum ScummCoreError: LocalizedError, Equatable {
     case unsupportedGame(String)
     case unknownBlock(String)
     case decodeFailure(String, String)
+    case missingResource(String)
     
     var errorDescription: String? {
         
@@ -49,6 +50,9 @@ enum ScummCoreError: LocalizedError, Equatable {
             
         case .decodeFailure:
             return "Decode Failure"
+            
+        case .missingResource:
+            return "Missing Resources"
         }
     }
     
@@ -83,6 +87,8 @@ enum ScummCoreError: LocalizedError, Equatable {
         case .decodeFailure(let entity, let value):
             return "Failed to decode `\(entity)` for `\(value)`."
             
+        case .missingResource(let blockType):
+            return "No resources found for `\(blockType)` in index file."
         }
     }
     
@@ -116,6 +122,9 @@ enum ScummCoreError: LocalizedError, Equatable {
             
         case .decodeFailure:
             return "If the data is corrupt, try another file."
+            
+        case .missingResource:
+            return "The index file seems to be incomplete."
         }
     }
 }
