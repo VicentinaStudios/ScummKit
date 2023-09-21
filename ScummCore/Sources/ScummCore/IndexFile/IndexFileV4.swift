@@ -9,11 +9,7 @@ import Foundation
 
 class IndexFileV4: IndexFile {
     
-    var isIndexFile: (URL) -> Bool = { url in
-        url.lastPathComponent == "000.LFL"
-    }
-    
-    var indexFileURL: URL? = nil
+    var indexFileURL: URL
         
     required init(at gameDirectoryURL: URL) throws {
         
@@ -22,14 +18,17 @@ class IndexFileV4: IndexFile {
             throw ScummCoreError.emptyDirectory(gameDirectoryURL.path)
         }
         
-        guard let matchedURL = directoryContent.filter({ isIndexFile($0) }).first
+        guard let matchedURL = directoryContent.filter({ $0.lastPathComponent == "000.LFL" }).first
         else {
             throw ScummCoreError.noIndexFileFound(gameDirectoryURL.path)
         }
         
         indexFileURL = matchedURL
+        
+        try readIndexFile(indexFileURL)
     }
     
     internal func readIndexFile(_ fileURL: URL) throws {
+        
     }
 }

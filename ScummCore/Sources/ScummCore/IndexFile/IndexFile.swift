@@ -10,11 +10,8 @@ import Foundation
 /// A protocol representing an index file for Scumm games.
 protocol IndexFile {
     
-    /// A closure to check if a given URL is an index file.
-    var isIndexFile: (URL) -> Bool { get }
-    
     /// The URL of the index file if found, otherwise `nil`.
-    var indexFileURL: URL? { get }
+    var indexFileURL: URL { get }
     
     /// Initializes an index file instance for a game located at the provided directory URL.
     ///

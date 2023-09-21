@@ -10,6 +10,35 @@ import XCTest
 
 final class IndexFileTests: XCTestCase {
     
+    
+    func testScummV2IndexFile() throws {
+        
+        guard
+            let path = TestHelper.gameInfo?.first(where: { $0.version == .v2 })?.path
+        else {
+            _ = XCTSkip("No SCUMM v2 game found.")
+            return
+        }
+        
+        let gameDirectoryURL = URL(filePath: path)
+        
+        let indexFile = try IndexFileV2(at: gameDirectoryURL)
+    }
+    
+    func testScummV3IndexFile() throws {
+        
+        guard
+            let path = TestHelper.gameInfo?.first(where: { $0.version == .v3 })?.path
+        else {
+            _ = XCTSkip("No SCUMM v3 game found.")
+            return
+        }
+        
+        let gameDirectoryURL = URL(filePath: path)
+        
+        let indexFile = try IndexFileV3(at: gameDirectoryURL)
+    }
+    
     func testScummV4IndexFile() throws {
         
         guard
@@ -24,17 +53,17 @@ final class IndexFileTests: XCTestCase {
         let indexFile = try IndexFileV4(at: gameDirectoryURL)
     }
     
-    func testScummV5IndexFile() throws {
+    func testScummV6IndexFile() throws {
         
         guard
-            let path = TestHelper.gameInfo?.first(where: { $0.version == .v5 })?.path
+            let path = TestHelper.gameInfo?.first(where: { $0.version == .v6 })?.path
         else {
-            _ = XCTSkip("No SCUMM v5 game found.")
+            _ = XCTSkip("No SCUMM v6 game found.")
             return
         }
         
         let gameDirectoryURL = URL(filePath: path)
         
-        let indexFile = try IndexFileV5(at: gameDirectoryURL)
+        let indexFile = try IndexFileV6(at: gameDirectoryURL)
     }
 }

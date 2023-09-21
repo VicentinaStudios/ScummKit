@@ -16,6 +16,8 @@ enum ScummCoreError: LocalizedError, Equatable {
     case unsupportedPlatform(String)
     case unsupportedVersion(Int)
     case unsupportedGame(String)
+    case unknownBlock(String)
+    case decodeFailure(String, String)
     
     var errorDescription: String? {
         
@@ -41,6 +43,12 @@ enum ScummCoreError: LocalizedError, Equatable {
             
         case .unsupportedGame:
             return "Unsupported Game"
+            
+        case .unknownBlock:
+            return "Unknown Block"
+            
+        case .decodeFailure:
+            return "Decode Failure"
         }
     }
     
@@ -68,6 +76,13 @@ enum ScummCoreError: LocalizedError, Equatable {
             
         case .unsupportedGame(let game):
             return "Unknown or unsupported SCUMM game `\(game)`."
+            
+        case .unknownBlock(let blockType):
+            return "Block type `\(blockType)` is unknown, not supported, or the file is corrupted."
+            
+        case .decodeFailure(let entity, let value):
+            return "Failed to decode `\(entity)` for `\(value)`."
+            
         }
     }
     
@@ -95,6 +110,12 @@ enum ScummCoreError: LocalizedError, Equatable {
             
         case .unsupportedGame:
             return "Select a SCUMM game (mania, zak, indy3, loom, monkey, monkey2, indy4, tentacle, samnmax, ft, dig, cmi)."
+            
+        case .unknownBlock:
+            return "Try with different configurations, or another game."
+            
+        case .decodeFailure:
+            return "If the data is corrupt, try another file."
         }
     }
 }

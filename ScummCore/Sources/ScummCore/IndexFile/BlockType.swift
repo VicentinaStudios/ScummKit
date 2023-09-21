@@ -10,6 +10,12 @@ import Foundation
 /// Represents different block types used in the Scumm game index files.
 enum BlockType {
     
+    /// Block type for names of rooms.
+    case roomNames
+    
+    /// Block type for maximum values used by the engine.
+    case maximumValues
+    
     /// Block type for directory of rooms.
     case directoryOfRooms
     
@@ -21,6 +27,9 @@ enum BlockType {
     
     /// Block type for directory of costumes.
     case directoryOfCostumes
+    
+    /// Block type for directory of character sets.
+    case directoryOfCharacterSets
     
     /// Block type for directory of objects.
     case directoryOfObjects
@@ -35,6 +44,12 @@ enum BlockType {
         
         switch rawValue {
             
+        case "RN", "RNAM":
+            self = .roomNames
+            
+        case "MAXS":
+            self = .maximumValues
+            
         case "0R", "DROO":
             self = .directoryOfRooms
             
@@ -46,6 +61,9 @@ enum BlockType {
             
         case "0C", "DCOS":
             self = .directoryOfCostumes
+            
+        case "DCHR":
+            self = .directoryOfCharacterSets
             
         case "0O", "DOBJ":
             self = .directoryOfObjects

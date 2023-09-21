@@ -12,6 +12,14 @@ class BlockTypeTests: XCTestCase {
     
     // MARK: - Initialization Tests
     
+    func testInitializationWithRN() {
+        XCTAssertEqual(BlockType(rawValue: "RN"), .roomNames)
+    }
+    
+    func testInitializationWithRNAM() {
+        XCTAssertEqual(BlockType(rawValue: "RNAM"), .roomNames)
+    }
+    
     func testInitializationWith0R() {
         XCTAssertEqual(BlockType(rawValue: "0R"), .directoryOfRooms)
     }

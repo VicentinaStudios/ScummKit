@@ -1,37 +1,36 @@
 //
-//  IndexFileV5.swift
+//  File.swift
+//  
 //
-//
-//  Created by Michael Borgmann on 17/09/2023.
+//  Created by Michael Borgmann on 18/09/2023.
 //
 
 import Foundation
 
-class IndexFileV5: IndexFile {
+class IndexFileV6: IndexFile {
     
-    var isIndexFile: (URL) -> Bool = { url in
-        url.pathExtension == "000"
-    }
-    
-    var indexFileURL: URL? = nil
+    var indexFileURL: URL
     
     required init(at gameDirectoryURL: URL) throws {
         
-        guard let matches = FileManager.default
-            .enumerator(at: gameDirectoryURL, includingPropertiesForKeys: nil)?
-            .allObjects
-            .compactMap({ $0 as? URL })
-            .filter({ $0.pathExtension == "000" }),
-              let fileURL = matches.first
+        guard let directoryContent = FileUtils.directoryContent(in: gameDirectoryURL)
+        else {
+            throw ScummCoreError.emptyDirectory(gameDirectoryURL.path)
+        }
+        
+        guard let matchedURL = directoryContent.filter({ $0.pathExtension == "000" || $0.pathExtension == "SM0" }).first
         else {
             throw ScummCoreError.noIndexFileFound(gameDirectoryURL.path)
         }
         
-        try readIndexFile(fileURL)
+        indexFileURL = matchedURL
+        
+        try readIndexFile(indexFileURL)
     }
+
     
     internal func readIndexFile(_ fileURL: URL) throws {
-        
+        /*
         let scummFile = try ScummFile(fileURL: fileURL)
         
         while !scummFile.isEndOfFile {
@@ -62,5 +61,6 @@ class IndexFileV5: IndexFile {
             
             try scummFile.move(to: Int(itemSize) + scummFile.currentPosition - 8)
         }
+        */
     }
 }

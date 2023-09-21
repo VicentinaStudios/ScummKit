@@ -27,6 +27,9 @@ class ScummFile {
     /// The data of the file loaded into memory.
     private let fileData: Data
     
+    /// The encryption key for XOR decryption.
+    var encryptionKey: (any BinaryInteger)?
+    
     /// The current byte offset within the data file.
     ///
     /// This property tracks the position of the file pointer within the data file.
@@ -48,10 +51,11 @@ class ScummFile {
     /// Initializes a `ScummFile` instance by loading the data of a file from a given URL.
     /// - Parameter fileURL: The URL of the file to be loaded.
     /// - Throws: An error of type `ScumeCoreError` if loading the file data fails.
-    init(fileURL: URL) throws {
+    init(fileURL: URL, encryptionKey: (any BinaryInteger)? = nil) throws {
         
         self.fileURL = fileURL
         self.fileData = try Data(contentsOf: fileURL)
+        self.encryptionKey = encryptionKey
     }
     
     /// A Boolean indicating whether the current file position is at or beyond the end of the data file.
@@ -61,16 +65,16 @@ class ScummFile {
         currentPosition >= fileData.count
     }
     
-    /// Reads an unsigned 32-bit integer in big-endian byte order from the current position within the data buffer.
+    /// Reads an unsigned 32-bit integer from the current position within the data buffer.
     ///
     /// - Returns: The read 32-bit integer.
     /// - Throws: An error of type `ScumeCoreError` if there is insufficient data available for reading.
     ///
     /// This property ensures thread safety when accessed by multiple tasks concurrently
     /// in a cooperative multitasking environment. It combines the action of reading an
-    /// unsigned 32-bit integer  in big-endian byte order and advancing the position.
+    /// unsigned 32-bit integer and advancing the position.
     ///
-    var readUInt32BE: UInt32 {
+    var readUInt32: UInt32 {
         
         get throws {
             
@@ -88,53 +92,32 @@ class ScummFile {
                 var value = UInt32.zero
                 
                 return withUnsafeMutableBytes(of: &value) { scratch in
+                    
                     scratch.copyBytes(from: buffer.prefix(MemoryLayout<UInt32>.size))
-                    return scratch.load(as: UInt32.self)
+                    var uint32 = scratch.load(as: UInt32.self)
+                    
+                    if let encryptionKey = encryptionKey {
+                        uint32 = uint32.xorDecrypt(key: encryptionKey)
+                    }
+                    
+                    return uint32
                 }
             }
             
-            return uint32.bigEndian
+            return uint32
         }
     }
     
-    /// Reads an unsigned 32-bit integer in little-endian byte order from the current position within the data buffer..
-    ///
-    /// - Returns: The read 32-bit integer.
-    /// - Throws: An error of type `ScumeCoreError` if there is insufficient data available for reading.
-    ///
-    /// This property ensures thread safety when accessed by multiple tasks concurrently
-    /// in a cooperative multitasking environment. It combines the action of reading an
-    /// unsigned 32-bit integer  in little-endian byte order and advancing the position.
-    ///
-    var readUInt32LE: UInt32 {
-        
-        get throws {
-            
-            currentPositionLock.lock()
-            defer { currentPositionLock.unlock() }
-            
-            guard fileData.count - currentPosition >= 4 else {
-                throw ScummCoreError.insufficientData
-            }
-            
-            let uint32 = fileData[currentPosition..<(currentPosition + 4)].withUnsafeBytes { pointer in
-                pointer.load(as: UInt32.self)
-            }
-            
-            return uint32.littleEndian
-        }
-    }
-    
-    /// Reads an unsigned 16-bit integer in big-endian byte order from the current position within the data buffer..
+    /// Reads an unsigned 16-bit integer  from the current position within the data buffer..
     ///
     /// - Returns: The read 16-bit integer.
     /// - Throws: An error of type `ScumeCoreError` if there is insufficient data available for reading.
     ///
     /// This property ensures thread safety when accessed by multiple tasks concurrently
     /// in a cooperative multitasking environment. It combines the action of reading an
-    /// unsigned 16-bit integer  in big-endian byte order and advancing the position.
+    /// unsigned 16-bit integer and advancing the position.
     ///
-    var readUInt16BE: UInt16 {
+    var readUInt16: UInt16 {
         
         get throws {
             
@@ -152,44 +135,16 @@ class ScummFile {
                     throw ScummCoreError.invalidPointer
                 }
                 
-                return pointer.pointee
-            }
-            
-            return uint16.bigEndian
-        }
-    }
-    
-    /// Reads an unsigned 16-bit integer in little-endian byte order from the current position within the data buffer..
-    ///
-    /// - Returns: The read 16-bit integer.
-    /// - Throws: An error of type `ScumeCoreError` if there is insufficient data available for reading.
-    ///
-    /// This property ensures thread safety when accessed by multiple tasks concurrently
-    /// in a cooperative multitasking environment. It combines the action of reading an
-    /// unsigned 16-bit integer  in little-endian byte order and advancing the position.
-    ///
-    var readUInt16LE: UInt16 {
-        
-        get throws {
-            
-            currentPositionLock.lock()
-            defer { currentPositionLock.unlock() }
-            
-            guard fileData.count - currentPosition >= 2 else {
-                throw ScummCoreError.insufficientData
-            }
-            
-            // NOTE: The direct access is a trade off for performance over security, in contrast to the scratch buffer.
-            let uint16 = try fileData[currentPosition..<(currentPosition + 2)].withUnsafeBytes { buffer in
+                var uint16 = pointer.pointee
                 
-                guard let pointer = buffer.baseAddress?.assumingMemoryBound(to: UInt16.self) else {
-                    throw ScummCoreError.invalidPointer
+                if let encryptionKey = encryptionKey {
+                    uint16 = uint16.xorDecrypt(key: encryptionKey)
                 }
                 
-                return pointer.pointee
+                return uint16
             }
             
-            return uint16.littleEndian
+            return uint16
         }
     }
     
@@ -213,7 +168,11 @@ class ScummFile {
                 throw ScummCoreError.insufficientData
             }
             
-            let uint8 = fileData[currentPosition]
+            var uint8 = fileData[currentPosition]
+            
+            if let encryptionKey = encryptionKey {
+                uint8 = uint8.xorDecrypt(key: encryptionKey)
+            }
             
             return uint8
         }
@@ -270,7 +229,7 @@ class ScummFile {
     ///
     /// Thread safety is guaranteed by the `readUInt32BE` property.
     ///
-    var consumeUInt32BE: UInt32 {
+    var consumeUInt32: UInt32 {
         
         get throws {
             
@@ -278,37 +237,14 @@ class ScummFile {
                 throw ScummCoreError.insufficientData
             }
             
-            let uint32 = try readUInt32BE
+            let uint32 = try readUInt32
             currentPosition += 4
             
             return uint32
         }
     }
     
-    /// Reads an unsigned 32-bit integer in little-endian byte order from the current position within the data buffer,
-    /// advances the position by four bytes, and returns the read value.
-    ///
-    /// - Returns: The read unsigned 32-bit integer value.
-    /// - Throws: An error of type `ScumeCoreError` if there is insufficient data available for reading.
-    ///
-    /// Thread safety is guaranteed by the `readUInt32LE` property.
-    ///
-    var consumeUInt32LE: UInt32 {
-        
-        get throws {
-            
-            guard currentPosition + 4 <= fileData.count else {
-                throw ScummCoreError.insufficientData
-            }
-            
-            let uint32 = try readUInt32LE
-            currentPosition += 4
-            
-            return uint32
-        }
-    }
-    
-    /// Reads an unsigned 16-bit integer in big-endian byte order from the current position within the data buffer,
+    /// Reads an unsigned 16-bit integer from the current position within the data buffer,
     /// advances the position by two bytes, and returns the read value.
     ///
     /// - Returns: The read unsigned 16-bit integer value.
@@ -316,7 +252,7 @@ class ScummFile {
     ///
     /// Thread safety is guaranteed by the `readUInt16BE` property.
     ///
-    var consumeUInt16BE: UInt16 {
+    var consumeUInt16: UInt16 {
         
         get throws {
             
@@ -324,32 +260,41 @@ class ScummFile {
                 throw ScummCoreError.insufficientData
             }
             
-            let uint16 = try readUInt16BE
+            let uint16 = try readUInt16
             currentPosition += 2
             
             return uint16
         }
     }
     
-    /// Reads an unsigned 16-bit integer in little-endian byte order from the current position within the data buffer,
-    /// advances the position by two bytes, and returns the read value.
+    /// Reads a specified number of bytes from the current position within the data buffer.
     ///
-    /// - Returns: The read unsigned 16-bit integer value.
+    /// - Parameter count: The number of bytes to read.
+    /// - Returns: An array of bytes read from the data buffer.
     /// - Throws: An error of type `ScumeCoreError` if there is insufficient data available for reading.
     ///
-    /// Thread safety is guaranteed by the `readUInt16LE` property.
-    ///
-    var consumeUInt16LE: UInt16 {
-        get throws {
-            
-            guard currentPosition + 2 <= fileData.count else {
-                throw ScummCoreError.insufficientData
-            }
-            
-            let uint16 = try readUInt16LE
-            currentPosition += 2
-            
-            return uint16
+    /// After reading, the `currentPosition` is advanced by the number of bytes read.
+    func read(bytes count: Int) throws -> [UInt8] {
+        
+        currentPositionLock.lock()
+        defer { currentPositionLock.unlock() }
+        
+        guard currentPosition + count <= fileData.count else {
+            throw ScummCoreError.insufficientData
         }
+        
+        let data = fileData[currentPosition..<(currentPosition + count)]
+            .map {
+                
+                if let encryptionKey = encryptionKey {
+                    return $0.xorDecrypt(key: encryptionKey)
+                }
+                
+                return $0
+            }
+        
+        currentPosition += count
+        
+        return Array(data)
     }
 }

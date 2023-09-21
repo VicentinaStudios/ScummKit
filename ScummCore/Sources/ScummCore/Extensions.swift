@@ -14,7 +14,7 @@ extension BinaryInteger {
     /// - Parameters:
     ///   - key: The XOR encryption key.
     /// - Returns: The decrypted result.
-    public func xorDecrypt(key: Self) -> Self {
+    public func xorDecrypt<T: BinaryInteger>(key: T) -> Self {
         self ^ generateKey(from: key)
     }
     
@@ -27,7 +27,7 @@ extension BinaryInteger {
     ///
     /// - Parameter key: The original integer key.
     /// - Returns: An XOR encryption key of the same integer type as the original key.
-    private func generateKey(from key: Self) -> Self {
+    private func generateKey<T: BinaryInteger>(from key: T) -> Self {
         
         let size = MemoryLayout<Self>.size
         
@@ -43,7 +43,7 @@ extension BinaryInteger {
     }
     
     /// Converts each Unicode scalar in the byte array to a string representation.
-    private var char: [String] {
+    public var char: [String] {
         unicode.map { String($0) }
     }
     
