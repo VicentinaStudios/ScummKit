@@ -24,8 +24,6 @@ class GameScene: SKScene {
         // Set the scale mode to scale to fit the window
         scene.scaleMode = .aspectFill
         
-        let engine = try? Engine()
-        
         return scene
     }
     

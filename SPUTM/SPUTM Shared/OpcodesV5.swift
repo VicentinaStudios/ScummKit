@@ -9,8 +9,8 @@ import Foundation
 
 struct Opcode {
     
-    private lazy var opcodes: [UInt8: () -> Void] = {
-        [:
+    lazy var opcodes: [UInt8: () -> Void] = {
+        [
             0x00: stopObjectCode,
             0x01: putActor,
             0x02: startMusic,
@@ -56,8 +56,8 @@ struct Opcode {
             0x2a: startScript,
             0x2b: delayVariable,
             0x2c: cursorCommand,
-            0x2d: putActorInRoom
-            0x2e: delay
+            0x2d: putActorInRoom,
+            0x2e: delay,
             //0x2f: ifNotState,
             0x30: matrixOps,
             0x31: getInventoryCount,
@@ -344,6 +344,7 @@ struct Opcode {
     private func getActorMoving() {}
     private func or() {}
     private func beginOverride() {}
+    private func add() {}
     private func divide() {}
     //private func oldRoomEffect() {}
     private func setClass() {}

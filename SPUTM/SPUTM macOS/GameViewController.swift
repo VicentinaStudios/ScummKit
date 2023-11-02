@@ -14,6 +14,8 @@ class GameViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupScummEngine()
+        
         let scene = GameScene.newGameScene()
         
         // Present the scene
@@ -26,5 +28,13 @@ class GameViewController: NSViewController {
         skView.showsNodeCount = true
     }
 
+    private func setupScummEngine() {
+        
+        guard let engine = try? Engine() else {
+            fatalError("Engine not working")
+        }
+        
+        engine.run()
+    }
 }
 

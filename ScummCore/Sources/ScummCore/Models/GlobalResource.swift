@@ -52,6 +52,9 @@ struct GlobalResource {
     /// The number of global scripts in the game.
     static var numberOfGlobalScripts = 0
     
+    /// The number of FL Objects. 
+    static var numberOfFLObjects = 0
+    
     /// The size of the shadow palette in the game.
     static var shadowPaletteSize = 0
 }

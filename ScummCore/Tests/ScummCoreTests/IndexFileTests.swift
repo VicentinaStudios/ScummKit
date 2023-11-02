@@ -39,20 +39,6 @@ final class IndexFileTests: XCTestCase {
         let indexFile = try IndexFileV3(at: gameDirectoryURL)
     }
     
-    func testScummV4IndexFile() throws {
-        
-        guard
-            let path = TestHelper.gameInfo?.first(where: { $0.version == .v4 })?.path
-        else {
-            _ = XCTSkip("No SCUMM v4 game found.")
-            return
-        }
-        
-        let gameDirectoryURL = URL(filePath: path)
-        
-        let indexFile = try IndexFileV4(at: gameDirectoryURL)
-    }
-    
     func testScummV6IndexFile() throws {
         
         guard

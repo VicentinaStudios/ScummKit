@@ -45,6 +45,8 @@ class IndexFileV5: IndexFile {
         scummFile = try ScummFile(fileURL: indexFileURL, encryptionKey: 0x69)
         
         try readIndexFile(indexFileURL)
+        
+        setupMaximumValues()
     }
     
     /// Reads and processes an index file to create a Resources object.
@@ -259,5 +261,44 @@ extension IndexFileV5 {
             characters: resourceData[.directoryOfCharacterSets]!,
             objects: resourceData[.directoryOfObjects]!
         )
+    }
+}
+
+extension IndexFileV5 {
+    
+    private func setupMaximumValues() {
+        
+        // Set the number of variables to 800
+        GlobalResource.numberOfVariables = 800
+        
+        // Set the number of bit variables to 4096
+        GlobalResource.numberOfBitVariable = 4096   // 2048
+        
+        // Set the number of local objects to 200
+        GlobalResource.numberOfLocalObjects = 200
+        
+        // Set the number of arrays to 50
+        GlobalResource.numberOfArrays = 50
+        
+        // Set the number of verbs to 100
+        GlobalResource.numberOfVerbs = 100
+        
+        // Set the number of new names to 150
+        GlobalResource.numberOfNewNames = 150
+        
+        // Set the number of character sets to 9
+        GlobalResource.numberOfCharacterSets = 9
+        
+        // Set the number of inventory objects to 80
+        GlobalResource.numberOfInventoryObjects = 80
+        
+        // Set the number of global scripts to 200
+        GlobalResource.numberOfGlobalScripts = 200
+        
+        // Set the number of global scripts to 200
+        GlobalResource.numberOfFLObjects = 50
+        
+        // Set the number of shadow palette size to 200
+        GlobalResource.shadowPaletteSize = 256
     }
 }
