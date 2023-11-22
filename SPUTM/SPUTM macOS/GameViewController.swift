@@ -8,13 +8,16 @@
 import Cocoa
 import SpriteKit
 import GameplayKit
+import ScummCore
 
 class GameViewController: NSViewController {
+    
+    private let gameInfo: GameInfo? = ScummGameDetector.gameInfo
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupScummEngine()
+        setupGame()
         
         let scene = GameScene.newGameScene()
         
@@ -28,11 +31,15 @@ class GameViewController: NSViewController {
         skView.showsNodeCount = true
     }
 
-    private func setupScummEngine() {
+    private func setupGame() {
         
-        guard let engine = try? Engine() else {
-            fatalError("Engine not working")
+        guard let gameInfo = gameInfo else {
+            fatalError("No SCUMM game detected")
         }
+        
+        guard let engine = try? Engine(gameInfo: gameInfo) else {
+           fatalError("Engine not working")
+       }
         
         engine.run()
     }

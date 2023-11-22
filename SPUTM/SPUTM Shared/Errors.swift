@@ -13,6 +13,7 @@ enum EngineError: LocalizedError {
     case scummVersionNotSupported(ScummVersion)
     case invalidDirectory(String)
     case missingGameDirectory
+    case missingScummVersion
     
     var errorDescription: String? {
         
@@ -26,6 +27,9 @@ enum EngineError: LocalizedError {
             
         case .missingGameDirectory:
             return "Missing Game Directory"
+            
+        case .missingScummVersion:
+            return "Missing SCUMM Version"
         }
     }
     
@@ -41,6 +45,9 @@ enum EngineError: LocalizedError {
             
         case .missingGameDirectory:
             return "The directory of the SCUMM game hasn't been defined."
+        
+        case .missingScummVersion:
+            return "Couldn't determing SCUMM version for game."
         }
     }
     
@@ -56,6 +63,9 @@ enum EngineError: LocalizedError {
             
         case .missingGameDirectory:
             return "Specify the game path using the command line argument `-d [PATH/TO/GAME]`."
+            
+        case .missingScummVersion:
+            return "Specify the SCUMM version using the command line argument `-v{0-8}`"
         }
     }
 }

@@ -16,19 +16,19 @@ import Foundation
      - id: A unique identifier for the game.
      - path: The path to the game directory.
  */
-struct GameInfo: Decodable {
+public struct GameInfo: Decodable {
     
     /// The version of the SCUMM game.
-    let version: ScummVersion
+    public let version: ScummVersion
     
     /// The platform on which the game runs.
-    let platform: ScummPlatform
+    public let platform: ScummPlatform
     
     /// A unique identifier for the game.
-    let id: ScummGame
+    public let id: ScummGame
     
     /// The path to the game directory.
-    let path: String
+    public let path: String
 
     /// Enum defining the coding keys used for encoding and decoding `GameInfo` objects.
     enum CodingKeys: String, CodingKey {
@@ -44,7 +44,7 @@ struct GameInfo: Decodable {
     ///
     /// - Parameter decoder: The decoder to read data from.
     /// - Throws: An error of type `ScummCoreError` if decoding fails due to unsupported data or missing keys.
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         

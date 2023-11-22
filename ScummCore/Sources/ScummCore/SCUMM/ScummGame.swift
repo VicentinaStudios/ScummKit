@@ -8,7 +8,7 @@
 import Foundation
 
 /// An enumeration representing various Scumm games.
-enum ScummGame: String {
+public enum ScummGame: String {
     
     /// Maniac Mansion
     case maniac

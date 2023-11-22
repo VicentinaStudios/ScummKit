@@ -35,6 +35,14 @@ public class ScummCore {
         // Implement index file loading logic here
         // Set 'indexFile' property based on the loaded index file
         // If loading fails, throw a 'noIndexFileFound' error
-        self.indexFile = try IndexFileV5(at: gameDirectoryURL)
+        
+        switch version {
+        case .v4:
+            self.indexFile = try IndexFileV4(at: gameDirectoryURL)
+        case .v5:
+            self.indexFile = try IndexFileV5(at: gameDirectoryURL)
+        default:
+            throw ScummCoreError.unsupportedVersion(version.rawValue)
+        }
     }
 }

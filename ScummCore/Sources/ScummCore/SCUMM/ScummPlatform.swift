@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents different platforms that SCUMM games have been released on.
-enum ScummPlatform: String {
+public enum ScummPlatform: String {
     
     /// 3DO
     case threeDO

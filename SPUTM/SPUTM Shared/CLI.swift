@@ -53,7 +53,6 @@ class CLI {
     var extractFilenames: String? {
         
         let optionWithParameter = /-[d]|--(directory)/
-        let optionWithoutParamter = /-.*|--.*/
         
         var isDirectory = false
         
@@ -63,6 +62,42 @@ class CLI {
                 return arg
             } else if let _ = try? optionWithParameter.wholeMatch(in: arg) {
                 isDirectory = true
+            }
+        }
+        
+        return nil
+    }
+    
+    var extractGameIdentifier: String? {
+        
+        let optionWithParameter = /-[g]|--(game)/
+        
+        var isGame = false
+        
+        for arg in args {
+            
+            if isGame {
+                return arg
+            } else if let match = try? optionWithParameter.wholeMatch(in: arg) {
+                isGame = true
+            }
+        }
+        
+        return nil
+    }
+    
+    var extractPlatform: String? {
+        
+        let optionWithParameter = /-[p]|--(platform)/
+        
+        var isPlatform = false
+        
+        for arg in args {
+            
+            if isPlatform {
+                return arg
+            } else if let match = try? optionWithParameter.wholeMatch(in: arg) {
+                isPlatform = true
             }
         }
         

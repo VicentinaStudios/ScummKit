@@ -87,7 +87,7 @@ struct Variables {
     
     init(_ version: ScummVersion) throws {
         
-        guard version == .v4 || version == .v5 else {
+        guard version == .v4 || version == .v5 || version == .v3 else {
             throw EngineError.scummVersionNotSupported(version)
         }
         
@@ -138,6 +138,10 @@ struct Variables {
         Variables.VAR_SOUNDCARD = 48
         Variables.VAR_VIDEOMODE = 49
         
+        if version == .v3 {
+            setupV3()
+        }
+        
         if version >= .v4 {
             minV4()
         }
@@ -175,6 +179,11 @@ struct Variables {
         Variables.VAR_ROOM_FLAG = 70
         Variables.VAR_GAME_LOADED = 71
         Variables.VAR_NEW_ROOM = 72
+    }
+    
+    private func setupV3() {
+        
+        Variables.VAR_CURRENT_LIGHTS = 9
     }
     
     private func setupV5() {

@@ -36,7 +36,7 @@ class IndexFileV3: IndexFile {
         
         let scummFile = try ScummFile(fileURL: fileURL, encryptionKey: 0xff)
         
-        let magic = try scummFile.consumeUInt16
+        let _ = try scummFile.consumeUInt16     // NOTE: value 'magic' isn't used in v3
         
         let readAndMove = { () -> Int in
             

@@ -51,8 +51,16 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-v5 -d /Users/michael/Desktop/ScummViewer/Monkey1"
+            argument = "-v3 -d /Users/michael/Desktop/ScummViewer/Indy\ 3\ VGA -p dos -g indy3"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-v4 -d /Users/michael/Desktop/ScummViewer/Monkey\ VGA  -p dos -g monkey"
             isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-v5 -d /Users/michael/Desktop/ScummViewer/Monkey1  -p dos -g monkey"
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

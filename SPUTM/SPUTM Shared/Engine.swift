@@ -12,33 +12,29 @@ class Engine {
     
     private let core: ScummCore
     private let variables: Variables
-    private let opcodes: Opcode
+    private var opcodes: OpcodeTableProtocol
     
-    static private var gameDirectoryURL: URL {
+    init(gameInfo: GameInfo) throws {
         
-        get throws {
-            
-            guard let path = CLI().extractFilenames else {
-                throw EngineError.missingGameDirectory
-            }
-
-            var isDirectory: ObjCBool = true
-            let isPathExisting = FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
-            
-            guard isPathExisting && isDirectory.boolValue else {
-                throw EngineError.invalidDirectory(path)
-            }
-            
-            return URL(filePath: path, directoryHint: .isDirectory)
+        let version = gameInfo.version
+        
+        self.variables = try Variables(version)
+        
+        switch version {
+        case .v3:
+            self.opcodes = OpcodeTableV3(gameInfo)
+        case .v4:
+            self.opcodes = OpcodeTableV4(gameInfo)
+        case .v5:
+            self.opcodes = OpcodeTableV5(gameInfo)
+        default:
+            fatalError("Couldn't create opcodes for v\(version.rawValue)")
         }
-    }
-    
-    init() throws {
         
-        self.variables = try Variables(.v5)
-        self.opcodes = Opcode()
-        
-        self.core = try ScummCore(gameDirectory: try Engine.gameDirectoryURL, version: .v5)
+        self.core = try ScummCore(
+            gameDirectory: URL(filePath: gameInfo.path.removingPercentEncoding!, directoryHint: .isDirectory),
+            version: gameInfo.version
+        )
         
         try core.loadIndexFile()
     }
