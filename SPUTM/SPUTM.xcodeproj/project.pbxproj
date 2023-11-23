@@ -69,6 +69,9 @@
 		4C6905302B0E4AB7000CBA27 /* OpcodeTableV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C69052F2B0E4AB7000CBA27 /* OpcodeTableV2.swift */; };
 		4C6905312B0E4AB7000CBA27 /* OpcodeTableV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C69052F2B0E4AB7000CBA27 /* OpcodeTableV2.swift */; };
 		4C6905322B0E4AB7000CBA27 /* OpcodeTableV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C69052F2B0E4AB7000CBA27 /* OpcodeTableV2.swift */; };
+		4CAF1B1B2B0E9A560051811E /* OpcodeTableV6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF1B1A2B0E9A560051811E /* OpcodeTableV6.swift */; };
+		4CAF1B1C2B0E9A560051811E /* OpcodeTableV6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF1B1A2B0E9A560051811E /* OpcodeTableV6.swift */; };
+		4CAF1B1D2B0E9A560051811E /* OpcodeTableV6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF1B1A2B0E9A560051811E /* OpcodeTableV6.swift */; };
 		4CDE8D4B2B0ABEAD00AFB4A7 /* OpcodeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE8D4A2B0ABEAD00AFB4A7 /* OpcodeDefinitions.swift */; };
 		4CDE8D4C2B0ABEAD00AFB4A7 /* OpcodeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE8D4A2B0ABEAD00AFB4A7 /* OpcodeDefinitions.swift */; };
 		4CDE8D4D2B0ABEAD00AFB4A7 /* OpcodeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE8D4A2B0ABEAD00AFB4A7 /* OpcodeDefinitions.swift */; };
@@ -107,6 +110,7 @@
 		4C6905272B0E35DA000CBA27 /* OpcodeTableV3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpcodeTableV3.swift; sourceTree = "<group>"; };
 		4C69052B2B0E416A000CBA27 /* CommonOpcodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonOpcodes.swift; sourceTree = "<group>"; };
 		4C69052F2B0E4AB7000CBA27 /* OpcodeTableV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpcodeTableV2.swift; sourceTree = "<group>"; };
+		4CAF1B1A2B0E9A560051811E /* OpcodeTableV6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpcodeTableV6.swift; sourceTree = "<group>"; };
 		4CDE8D4A2B0ABEAD00AFB4A7 /* OpcodeDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpcodeDefinitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,6 +233,7 @@
 				4C6905272B0E35DA000CBA27 /* OpcodeTableV3.swift */,
 				4C6905232B0E11B6000CBA27 /* OpcodeTableV4.swift */,
 				4C69051F2B0E11AC000CBA27 /* OpcodeTableV5.swift */,
+				4CAF1B1A2B0E9A560051811E /* OpcodeTableV6.swift */,
 			);
 			path = Opcodes;
 			sourceTree = "<group>";
@@ -391,6 +396,7 @@
 				4C6905302B0E4AB7000CBA27 /* OpcodeTableV2.swift in Sources */,
 				4C6905202B0E11AC000CBA27 /* OpcodeTableV5.swift in Sources */,
 				4C3DBFC32A9AB4CD004C62CD /* GameViewController.swift in Sources */,
+				4CAF1B1B2B0E9A560051811E /* OpcodeTableV6.swift in Sources */,
 				4C69052C2B0E416A000CBA27 /* CommonOpcodes.swift in Sources */,
 				4C3DBFC12A9AB4CD004C62CD /* AppDelegate.swift in Sources */,
 				4C3DC00C2A9ACE92004C62CD /* Errors.swift in Sources */,
@@ -414,6 +420,7 @@
 				4C6905312B0E4AB7000CBA27 /* OpcodeTableV2.swift in Sources */,
 				4C6905212B0E11AC000CBA27 /* OpcodeTableV5.swift in Sources */,
 				4C3DBFD32A9AB4CE004C62CD /* GameViewController.swift in Sources */,
+				4CAF1B1C2B0E9A560051811E /* OpcodeTableV6.swift in Sources */,
 				4C69052D2B0E416A000CBA27 /* CommonOpcodes.swift in Sources */,
 				4C3DBFD12A9AB4CE004C62CD /* AppDelegate.swift in Sources */,
 				4C3DC00D2A9ACE92004C62CD /* Errors.swift in Sources */,
@@ -437,6 +444,7 @@
 				4C6905322B0E4AB7000CBA27 /* OpcodeTableV2.swift in Sources */,
 				4C6905222B0E11AC000CBA27 /* OpcodeTableV5.swift in Sources */,
 				4C3DBFE32A9AB4CE004C62CD /* GameViewController.swift in Sources */,
+				4CAF1B1D2B0E9A560051811E /* OpcodeTableV6.swift in Sources */,
 				4C69052E2B0E416A000CBA27 /* CommonOpcodes.swift in Sources */,
 				4C3DBFE12A9AB4CE004C62CD /* AppDelegate.swift in Sources */,
 				4C3DC00E2A9ACE92004C62CD /* Errors.swift in Sources */,

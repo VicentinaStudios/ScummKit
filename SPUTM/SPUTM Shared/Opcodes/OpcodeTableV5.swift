@@ -36,7 +36,7 @@ public struct OpcodeTableV5: OpcodeTableProtocol {
         0x3b: .getActorScale,
         0xbb: .getActorScale,
         
-        0x4c: .soundKludge,
+        0x4c: .soundKludge(.v5),
         
         0xa7: .dummy(.v5)
     ]
