@@ -74,7 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				4C1A4C012A6729CE002B6C5B /* SCUMM Reference.docc */,
-				4CC64D2A2A6332C700D8A27C /* ScummCompiler */,
+				4CC64D2A2A6332C700D8A27C /* ScummInterpreter */,
 				4CC64D292A6332C700D8A27C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4CC64D2A2A6332C700D8A27C /* ScummCompiler */ = {
+		4CC64D2A2A6332C700D8A27C /* ScummInterpreter */ = {
 			isa = PBXGroup;
 			children = (
 				4CC64D2B2A6332C700D8A27C /* main.swift */,
@@ -104,7 +104,7 @@
 				4C75BB602A8FD76D005312B2 /* Environment.swift */,
 				4CD9C21E2A64C83B0028A5D2 /* CLI */,
 			);
-			path = ScummCompiler;
+			path = ScummInterpreter;
 			sourceTree = "<group>";
 		};
 		4CD9C21E2A64C83B0028A5D2 /* CLI */ = {
@@ -153,7 +153,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4CC64D232A6332C700D8A27C /* Build configuration list for PBXProject "ScummCompiler" */;
+			buildConfigurationList = 4CC64D232A6332C700D8A27C /* Build configuration list for PBXProject "ScummInterpreter" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -344,7 +344,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4CC64D232A6332C700D8A27C /* Build configuration list for PBXProject "ScummCompiler" */ = {
+		4CC64D232A6332C700D8A27C /* Build configuration list for PBXProject "ScummInterpreter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CC64D2D2A6332C700D8A27C /* Debug */,

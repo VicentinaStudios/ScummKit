@@ -17,7 +17,7 @@
                BlueprintIdentifier = "4CC64D272A6332C700D8A27C"
                BuildableName = "scumm"
                BlueprintName = "scumm"
-               ReferencedContainer = "container:ScummCompiler.xcodeproj">
+               ReferencedContainer = "container:ScummInterpreter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "4CC64D272A6332C700D8A27C"
             BuildableName = "scumm"
             BlueprintName = "scumm"
-            ReferencedContainer = "container:ScummCompiler.xcodeproj">
+            ReferencedContainer = "container:ScummInterpreter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "4CC64D272A6332C700D8A27C"
             BuildableName = "scumm"
             BlueprintName = "scumm"
-            ReferencedContainer = "container:ScummCompiler.xcodeproj">
+            ReferencedContainer = "container:ScummInterpreter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

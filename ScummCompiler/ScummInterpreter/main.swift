@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  ScummCompiler
+//  ScummInterpreter
 //
 //  Created by Michael Borgmann on 15/07/2023.
 //
@@ -20,7 +20,7 @@ if cli.args.isEmpty {
 }
 
 if cli.args.shouldShowVersion {
-    print("SCUMM Script Compiler 0.1".escape.greenBold)
+    print("SCUMM Script Interpreter 0.1".escape.greenBold)
     exit(1)
 } else if cli.args.shouldShowHelp {
     cli.printUsage()
@@ -65,7 +65,7 @@ filenames.forEach { filename in
 
 fileprivate func runPrompt() {
     
-    print("SCUMM Script Compiler v0.1".escape.greenBold)
+    print("SCUMM Script Interpreter v0.1".escape.greenBold)
     
     while true {
         

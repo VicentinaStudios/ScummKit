@@ -71,7 +71,7 @@ class Scanner {
             
             do {
                 try scanToken()
-            } catch let error as CompilerError {
+            } catch let error as InterpreterError {
                 ErrorHandler.handle(error)
             } catch {
                 print("others")
@@ -170,7 +170,7 @@ class Scanner {
         
             
         default:
-            throw CompilerError.unexpectedCharacter(atLine: line, character: currentCharacter)
+            throw InterpreterError.unexpectedCharacter(atLine: line, character: currentCharacter)
         }
         
     }
@@ -221,7 +221,7 @@ class Scanner {
         }
         
         if isEndOfFile {
-            throw CompilerError.unterminatedString(atLine: line)
+            throw InterpreterError.unterminatedString(atLine: line)
         }
         
         current = next

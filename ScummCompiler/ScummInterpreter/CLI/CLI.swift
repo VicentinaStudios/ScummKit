@@ -20,7 +20,7 @@ class CLI {
         case .standard:
             print("\(message)")
             
-        case .compilerError:
+        case .interpreterError:
             
             let position = {
                 line != nil ? "line \(line!):" : "line ?:"
@@ -31,7 +31,7 @@ class CLI {
             
             print("\(position) \(error) \(message)")
             
-        case .compilerWarning:
+        case .interpreterWarning:
             
             let position = {
                 line != nil ? "line \(line!):" : "line ?:"
@@ -64,7 +64,7 @@ extension CLI {
     enum OutputType {
         case error
         case standard
-        case compilerError
-        case compilerWarning
+        case interpreterError
+        case interpreterWarning
     }
 }

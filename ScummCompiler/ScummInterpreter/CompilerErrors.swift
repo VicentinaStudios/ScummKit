@@ -1,5 +1,5 @@
 //
-//  CompilerErrors.swift
+//  InterpreterErrors.swift
 //  scumm
 //
 //  Created by Michael Borgmann on 18/07/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CompilerError: Error {
+enum InterpreterError: Error {
     case unexpectedCharacter(atLine: Int, character: String)
     case unterminatedString(atLine: Int)
 }
