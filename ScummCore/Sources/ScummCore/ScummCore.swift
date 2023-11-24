@@ -19,6 +19,9 @@ public class ScummCore {
     /// The index file associated with the Scumm game.
     public var indexFile: IndexFile?
     
+    /// The data file associated with the Scumm game.
+    public var dataFile: DataFile?
+    
     /// Initializes a ScummCore instance with the provided game directory URL and version.
     ///
     /// - Parameters:
@@ -32,15 +35,22 @@ public class ScummCore {
     }
     
     public func loadIndexFile() throws {
-        // Implement index file loading logic here
-        // Set 'indexFile' property based on the loaded index file
-        // If loading fails, throw a 'noIndexFileFound' error
         
         switch version {
         case .v4:
             self.indexFile = try IndexFileV4(at: gameDirectoryURL)
         case .v5:
             self.indexFile = try IndexFileV5(at: gameDirectoryURL)
+        default:
+            throw ScummCoreError.unsupportedVersion(version.rawValue)
+        }
+    }
+    
+    public func loadDataFile() throws {
+        
+        switch version {
+        case .v5:
+            self.dataFile = try DataFileV5(at: gameDirectoryURL)
         default:
             throw ScummCoreError.unsupportedVersion(version.rawValue)
         }

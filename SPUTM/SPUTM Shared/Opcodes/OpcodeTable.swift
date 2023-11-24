@@ -9,6 +9,6 @@ import Foundation
 import ScummCore
 
 protocol OpcodeTableProtocol {
-    var opcodeTable: [UInt8: Opcodes] { get }
+    var opcodeTable: [UInt8: Instructions] { get }
     init(_ gameInfo: GameInfo)
 }

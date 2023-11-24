@@ -9,7 +9,7 @@ import Foundation
 
 struct CommonOpcodes {
     
-    static var sharedV3V4: [UInt8: Opcodes] {
+    static var sharedV3V4: [UInt8: Instructions] {
         [
             0x0f: .ifState(.v4),
             0x4f: .ifState(.v4),
@@ -41,7 +41,7 @@ struct CommonOpcodes {
         ]
     }
     
-    static var sharedV3V4V5: [UInt8: Opcodes] {
+    static var sharedV3V4V5: [UInt8: Instructions] {
         [
             0x00: .stopObjectCode(.v5),
             0x01: .putActor(.v5),

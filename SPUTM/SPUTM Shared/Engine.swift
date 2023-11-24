@@ -14,6 +14,7 @@ protocol EngineProtocol {
     var gameInfo: GameInfo  { get }
     var variables: Variables  { get }
     var opcodes: OpcodeTableProtocol  { get }
+    var instructionPointer: Int { get set }
     
     func run(scriptIndex: Int)
 }
@@ -23,6 +24,7 @@ class Engine {
     private let core: ScummCore
     private let variables: Variables
     private var opcodes: OpcodeTableProtocol
+    private var instructionPointer = 0
     
     init(gameInfo: GameInfo) throws {
         
@@ -36,9 +38,10 @@ class Engine {
         // Setup SCUM engine
         
         self.variables = try Variables(version)
-        self.opcodes = try OpcodeTableV5(gameInfo)
+        self.opcodes = OpcodeTableV5(gameInfo)
         
         try core.loadIndexFile()
+        try? core.loadDataFile()
         
         resetScumm()
     }
@@ -60,27 +63,51 @@ class Engine {
     func run(scriptIndex: Int = 1) {
         
         guard
-            let indexFile = core.indexFile?.indexFileURL.path(),
-            let script = core.indexFile?.resources?.scripts[scriptIndex],
-            let room = core.indexFile?.resources?.rooms[script.roomNumber],
-            let roomName = core.indexFile?.roomNames?.first(where: { $0.number == script.roomNumber })
+            let roomOffset = core.indexFile?.resources?.scripts[scriptIndex],
+            let script = try? core.dataFile?.readResource(resource: roomOffset, type: .script) as? Script
         else {
-            debugPrint("No start script found")
-            return
+            fatalError("Can't load script")
         }
         
-        debugPrint("Index file:", indexFile)
-        debugPrint("Start script:", scriptIndex)
-        debugPrint(" - Room number:", script.roomNumber)
-        debugPrint(" - Offset:", script.offset)
-        debugPrint(" - Room name:", roomName)
-        debugPrint(" - Room offset:", room.offset)
-        
-        execeuteScript()
+        executeScript(script)
     }
     
-    func execeuteScript() {
+    func executeScript(_ script: Script) {
         
+        while instructionPointer < script.byteCode.count {
+            
+            let opcode = script.byteCode[instructionPointer]
+            
+            try? executeOpcode(opcode)
+//            try? decompileOpcode(opcode, at: instructionPointer)
+            
+            instructionPointer += 1
+        }
+    }
+    
+    func executeOpcode(_ opcode: UInt8) throws {
+        
+        guard
+            let instruction = opcodes.opcodeTable[opcode]
+        else {
+            throw EngineError.invalidOpcode(opcode)
+        }
+        
+        instruction.interpret(opcode: opcode)?.execute()
+        
+    }
+    
+    func decompileOpcode(_ opcode: UInt8, at instructionPointer: Int) throws {
+        
+        guard
+            let instruction = opcodes.opcodeTable[opcode]?.interpret(opcode: opcode)
+        else {
+            throw EngineError.invalidOpcode(opcode)
+        }
+        
+        let source = instruction.decompile(at: instructionPointer)
+        
+        print("[\(instructionPointer)]", "(\(opcode))", source)
     }
 }
 

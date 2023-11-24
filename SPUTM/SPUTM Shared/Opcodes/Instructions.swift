@@ -1,5 +1,5 @@
 //
-//  OpcodesV5.swift
+//  Instructions.swift
 //  SPUTM
 //
 //  Created by Michael Borgmann on 27/08/2023.
@@ -8,9 +8,9 @@
 import Foundation
 import ScummCore
 
-enum Opcodes {
+enum Instructions {
     
-    // MARK: - V6 Opcodes
+    // MARK: - V6 Instructions
     
     case pushByte
     case pushWord
@@ -111,7 +111,7 @@ enum Opcodes {
     case getActorLayer
     case getObjectNewDir
     
-    // MARK: - V5 Opcodes
+    // MARK: - V5 Instructions
     
     case stopObjectCode(ScummVersion)       // v5, v6
     case putActor(ScummVersion)             // v2, v5
@@ -217,19 +217,19 @@ enum Opcodes {
     case pseudoRoom(ScummVersion)           // v5, v6
     case printEgo(ScummVersion)             // v5, v6
     
-    // MARK: - V4 Opcodes
+    // MARK: - V4 Instructions
     case oldRoomEffect(ScummVersion)            // v4
     case ifState(ScummVersion)                  // v4
     case saveLoadVars(ScummVersion)             // v4
     case saveLoadGame(ScummVersion)             // v4
     case ifNotState(ScummVersion)               // v4
     
-    // MARK: - V3 Opcodes
+    // MARK: - V3 Instructions
     case waitForActor(ScummVersion)             // v2, v3
     case waitForSentence(ScummVersion)          // v2, v3
     case setBoxFlags(ScummVersion)              // v2, v3
     
-    // MARK: - V2 Opcodes
+    // MARK: - V2 Instructions
     case assignVarByte(ScummVersion)            // v2
     case setBitVar(ScummVersion)                // v2
     case getBitVar(ScummVersion)                // v2
@@ -260,6 +260,20 @@ enum Opcodes {
     case drawSentence(ScummVersion)             // v2
     case waitForMessage(ScummVersion)           // v2
     
-    // MARK: - V0 Opcodes
+    // MARK: - V0 Instructions
     case stopCurrentScript(ScummVersion)
+}
+
+extension Instructions {
+    
+    func interpret(opcode: UInt8) -> InstructionProtocol? {
+        
+        switch self {
+        case .move:
+            return Move(version: .v5, opcode: opcode)
+        default:
+            debugPrint("Opcode not implemented")
+            return nil
+        }
+    }
 }

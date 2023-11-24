@@ -14,6 +14,7 @@ enum EngineError: LocalizedError {
     case invalidDirectory(String)
     case missingGameDirectory
     case missingScummVersion
+    case invalidOpcode(UInt8)
     
     var errorDescription: String? {
         
@@ -30,6 +31,9 @@ enum EngineError: LocalizedError {
             
         case .missingScummVersion:
             return "Missing SCUMM Version"
+            
+        case .invalidOpcode:
+            return "Invalid Opcode"
         }
     }
     
@@ -48,6 +52,9 @@ enum EngineError: LocalizedError {
         
         case .missingScummVersion:
             return "Couldn't determing SCUMM version for game."
+            
+        case .invalidOpcode(let opcode):
+            return "The opcode `0x\(opcode) doesn't exist."
         }
     }
     
@@ -66,6 +73,9 @@ enum EngineError: LocalizedError {
             
         case .missingScummVersion:
             return "Specify the SCUMM version using the command line argument `-v{0-8}`"
+            
+        case .invalidOpcode:
+            return "The game data seems to be corrupted."
         }
     }
 }

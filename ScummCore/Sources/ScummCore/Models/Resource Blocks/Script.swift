@@ -8,10 +8,14 @@
 import Foundation
 
 /// Represents a script resource containing byte code instructions.
-public struct Script: ResourceProtocol {
+public struct Script {
     
     /// The byte code instructions of the script resource.
-    let byteCode: [UInt8]
+    public let byteCode: [UInt8]
+}
+
+/// Conformance to the `ResourceProtocol` for the `Script` struct.
+extension Script: ResourceProtocol {
     
     /// Loads a script resource from a `ScummFile` at the specified offset.
     ///

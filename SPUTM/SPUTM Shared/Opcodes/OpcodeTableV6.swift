@@ -10,7 +10,7 @@ import ScummCore
 
 public struct OpcodeTableV6: OpcodeTableProtocol {
     
-    var opcodeTable: [UInt8 : Opcodes] = [
+    var opcodeTable: [UInt8 : Instructions] = [
         
         0x00: .pushByte,
         0x01: .pushWord,

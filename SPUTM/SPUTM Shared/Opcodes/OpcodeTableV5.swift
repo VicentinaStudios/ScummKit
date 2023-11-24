@@ -10,7 +10,7 @@ import ScummCore
 
 public struct OpcodeTableV5: OpcodeTableProtocol {
     
-    var opcodeTable: [UInt8 : Opcodes] = [:]
+    var opcodeTable: [UInt8 : Instructions] = [:]
     
     init(_ gameInfo: GameInfo) {
         
@@ -21,7 +21,7 @@ public struct OpcodeTableV5: OpcodeTableProtocol {
         })
     }
     
-    private var versionSpecificOpcodes: [UInt8 : Opcodes] = [
+    private var versionSpecificOpcodes: [UInt8 : Instructions] = [
         0x0f: .getObjectState,
         0x8f: .getObjectState,
         
