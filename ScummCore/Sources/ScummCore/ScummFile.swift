@@ -19,7 +19,7 @@ import Foundation
 /// To ensure thread safety, this class employs synchronization mechanisms when necessary. For example, the
 /// `currentPosition` property is synchronized using a lock (`currentPositionLock`) to prevent data inconsistencies
 /// and race conditions when accessed and modified by multiple tasks concurrently.
-class ScummFile {
+public class ScummFile {
     
     /// The URL of the file being accessed by the instance.
     private let fileURL: URL

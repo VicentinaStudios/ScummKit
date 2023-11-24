@@ -56,11 +56,11 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-v4 -d /Users/michael/Desktop/ScummViewer/Monkey\ VGA  -p dos -g monkey"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-v5 -d /Users/michael/Desktop/ScummViewer/Monkey1  -p dos -g monkey"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

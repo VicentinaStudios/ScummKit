@@ -7,9 +7,10 @@
 
 import Foundation
 
-enum ScummCoreError: LocalizedError, Equatable {
+public enum ScummCoreError: LocalizedError, Equatable {
     
     case noIndexFileFound(String)
+    case noDataFileFound(String)
     case insufficientData
     case invalidPointer
     case emptyDirectory(String)
@@ -18,14 +19,19 @@ enum ScummCoreError: LocalizedError, Equatable {
     case unsupportedGame(String)
     case unknownBlock(String)
     case decodeFailure(String, String)
-    case missingResource(String)
+    case missingResource(String, String)
+    case cantLoadResource(String, String)
+    case outOfBounds
     
-    var errorDescription: String? {
+    public var errorDescription: String? {
         
         switch self {
             
         case .noIndexFileFound:
             return "No Index File Found"
+            
+        case .noDataFileFound:
+            return "No Data File Found"
         
         case .insufficientData:
             return "Insufficient Data"
@@ -53,15 +59,24 @@ enum ScummCoreError: LocalizedError, Equatable {
             
         case .missingResource:
             return "Missing Resources"
+            
+        case .cantLoadResource:
+            return "Can't Load Resource"
+            
+        case .outOfBounds:
+            return "Out of Bounds"
         }
     }
     
-    var failureReason: String? {
+    public var failureReason: String? {
         
         switch self {
             
         case .noIndexFileFound(let path):
             return "No SCUMM game index file is found at `\(path)`."
+            
+        case .noDataFileFound(let path):
+            return "No SCUMM game resource data file is found at `\(path)`."
             
         case .insufficientData:
             return "Not enough data left to be read."
@@ -87,17 +102,26 @@ enum ScummCoreError: LocalizedError, Equatable {
         case .decodeFailure(let entity, let value):
             return "Failed to decode `\(entity)` for `\(value)`."
             
-        case .missingResource(let blockType):
-            return "No resources found for `\(blockType)` in index file."
+        case .missingResource(let blockType, let file):
+            return "No resources found for `\(blockType)` in \(file)."
+            
+        case .cantLoadResource(let resourceType, let file):
+            return "Can't load resource `\(resourceType)` from file `\(file)`."
+            
+        case .outOfBounds:
+            return "Some iteration seems to get out of bounds."
         }
     }
     
-    var recoverySuggestion: String? {
+    public var recoverySuggestion: String? {
         
         switch self {
             
         case .noIndexFileFound(_):
             return "The index file should be:\n* V3/4: 00.lfl / 000.lfl\n* V5/6: .000\n* V7/8: .LA0"
+            
+        case .noDataFileFound(_):
+            return "The data file should be:\n* V3: [1-99].lfl\n V4: *.lec / 001.lfl\n* V5/6: .001\n* V7/8: .LA1"
             
         case .insufficientData:
             return "The file or data can be corrupt. Please try another."
@@ -123,8 +147,14 @@ enum ScummCoreError: LocalizedError, Equatable {
         case .decodeFailure:
             return "If the data is corrupt, try another file."
             
-        case .missingResource:
-            return "The index file seems to be incomplete."
+        case .missingResource(_, let file):
+            return "The \(file) seems to be incomplete."
+            
+        case .cantLoadResource(let resourceType, let file):
+            return "The file `\(file)` seems to be corrupt and is missing data for `\(resourceType)`."
+            
+        case .outOfBounds:
+            return "Corrupt data or a bug."
         }
     }
 }

@@ -8,6 +8,16 @@
 import Foundation
 import ScummCore
 
+protocol EngineProtocol {
+    
+    var core: ScummCore { get }
+    var gameInfo: GameInfo  { get }
+    var variables: Variables  { get }
+    var opcodes: OpcodeTableProtocol  { get }
+    
+    func run(scriptIndex: Int)
+}
+
 class Engine {
     
     private let core: ScummCore
@@ -18,25 +28,33 @@ class Engine {
         
         let version = gameInfo.version
         
-        self.variables = try Variables(version)
-        
-        switch version {
-        case .v3:
-            self.opcodes = OpcodeTableV3(gameInfo)
-        case .v4:
-            self.opcodes = OpcodeTableV4(gameInfo)
-        case .v5:
-            self.opcodes = OpcodeTableV5(gameInfo)
-        default:
-            fatalError("Couldn't create opcodes for v\(version.rawValue)")
-        }
-        
         self.core = try ScummCore(
             gameDirectory: URL(filePath: gameInfo.path.removingPercentEncoding!, directoryHint: .isDirectory),
             version: gameInfo.version
         )
         
+        // Setup SCUM engine
+        
+        self.variables = try Variables(version)
+        self.opcodes = try OpcodeTableV5(gameInfo)
+        
         try core.loadIndexFile()
+        
+        resetScumm()
+    }
+    
+    private func resetScumm() {
+        
+        // 1. init screens (main, text, verbs, unknown)
+        // 2. reset palette
+        // 3. load charset
+        // 4. set shake
+        // 5. cursor animation
+        // 6. create actors
+        // 7. reset nested scripts
+        // 8. reset cut scenes
+        // 9. reset verbs
+        // 10. reset camera
     }
     
     func run(scriptIndex: Int = 1) {
@@ -57,18 +75,26 @@ class Engine {
         debugPrint(" - Offset:", script.offset)
         debugPrint(" - Room name:", roomName)
         debugPrint(" - Room offset:", room.offset)
+        
+        execeuteScript()
+    }
+    
+    func execeuteScript() {
+        
     }
 }
 
 struct Constants {
     
-    let screenWidth = 320
-    let screenHeight = 200
-    
-    let numberOfActors = 13
-    
-    let ofOwnerRoomer = 0x0f
-    
-    let minHeapThreshold = 400000
-    let maxHeapThreshold = 550000
+    struct V5 {
+        let screenWidth = 320
+        let screenHeight = 200
+        
+        let numberOfActors = 13
+        
+        let ofOwnerRoom = 0x0f
+        
+        let minHeapThreshold = 400000
+        let maxHeapThreshold = 550000
+    }
 }

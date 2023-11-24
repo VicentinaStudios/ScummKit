@@ -186,7 +186,7 @@ extension IndexFileV4 {
         
         try resourceTypes.forEach { type in
             guard resourceData[type] != nil else {
-                throw ScummCoreError.missingResource(type.rawValueV5)
+                throw ScummCoreError.missingResource(type.rawValueV5, "index file")
             }
         }
         
