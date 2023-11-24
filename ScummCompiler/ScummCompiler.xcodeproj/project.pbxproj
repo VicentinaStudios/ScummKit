@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4CD1E0222B11445E006628B6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD1E0212B11445E006628B6 /* main.swift */; };
+		4CD1E0292B1145A8006628B6 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD1E0282B1145A8006628B6 /* Chunk.swift */; };
+		4CD1E02B2B114A16006628B6 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD1E02A2B114A16006628B6 /* Debug.swift */; };
+		4CD1E02D2B114F8A006628B6 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD1E02C2B114F8A006628B6 /* Value.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,9 @@
 /* Begin PBXFileReference section */
 		4CD1E01E2B11445E006628B6 /* ScummCompiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ScummCompiler; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD1E0212B11445E006628B6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		4CD1E0282B1145A8006628B6 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
+		4CD1E02A2B114A16006628B6 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		4CD1E02C2B114F8A006628B6 /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				4CD1E0212B11445E006628B6 /* main.swift */,
+				4CD1E0282B1145A8006628B6 /* Chunk.swift */,
+				4CD1E02A2B114A16006628B6 /* Debug.swift */,
+				4CD1E02C2B114F8A006628B6 /* Value.swift */,
 			);
 			path = ScummCompiler;
 			sourceTree = "<group>";
@@ -121,6 +130,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CD1E0222B11445E006628B6 /* main.swift in Sources */,
+				4CD1E02B2B114A16006628B6 /* Debug.swift in Sources */,
+				4CD1E0292B1145A8006628B6 /* Chunk.swift in Sources */,
+				4CD1E02D2B114F8A006628B6 /* Value.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,5 +7,12 @@
 
 import Foundation
 
-print("Hello, World!")
+var chunk = Chunk()
 
+let constant = chunk.addConstant(value: 1.2)
+chunk.write(byte: Opcode.constant.rawValue, line: 123)
+chunk.write(byte: UInt8(constant), line: 123)
+
+chunk.write(byte: Opcode.return.rawValue, line: 123)
+
+disassembleChunk(chunk: chunk, name: "test chunk")
