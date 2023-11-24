@@ -7,13 +7,8 @@
 
 import Foundation
 
-public protocol ResourceProtocol {
-    
-    static func load(from file: ScummFile, at offset: Int) throws -> ResourceProtocol
-}
-
 /// Represents a script resource containing byte code instructions.
-public struct ScriptResource: ResourceProtocol {
+public struct Script: ResourceProtocol {
     
     /// The byte code instructions of the script resource.
     let byteCode: [UInt8]
@@ -36,6 +31,6 @@ public struct ScriptResource: ResourceProtocol {
         }
         
         let byteCode = try file.read(bytes: resourceSize)
-        return ScriptResource(byteCode: byteCode)
+        return Script(byteCode: byteCode)
     }
 }

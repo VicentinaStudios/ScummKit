@@ -1,5 +1,5 @@
 //
-//  ScriptResourceTests.swift
+//  ScriptTests.swift
 //  
 //
 //  Created by Michael Borgmann on 23/11/2023.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import ScummCore
 
-class MockScriptResourceFile {
+class MockScriptFile {
     
     var tempFileURL: URL!
     var testData: [UInt8]!
@@ -38,13 +38,13 @@ class MockScriptResourceFile {
     }
 }
 
-class ScriptResourceTests: XCTestCase {
+class ScriptTests: XCTestCase {
     
-    var mockFile: MockScriptResourceFile!
+    var mockFile: MockScriptFile!
     
     override func setUp() {
         super.setUp()
-        mockFile = MockScriptResourceFile()
+        mockFile = MockScriptFile()
     }
     
     override func tearDown() {
@@ -52,20 +52,20 @@ class ScriptResourceTests: XCTestCase {
         try? FileManager.default.removeItem(at: mockFile.tempFileURL)
     }
     
-    func testScriptResourceInitialization() {
+    func testScriptInitialization() {
         
-        let script = try? ScriptResource.load(from: mockFile.scummFile, at: 0) as? ScriptResource
+        let script = try? Script.load(from: mockFile.scummFile, at: 0) as? Script
             
         XCTAssertEqual(script?.byteCode, [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08])
         XCTAssertEqual(script?.byteCode.count, 8)
     }
     
-    func testScriptResourceInitializationFailure() {
+    func testScriptInitializationFailure() {
         
-        mockFile = MockScriptResourceFile(testData: [0x53, 0x43, 0x52, 0x50, 0x00, 0x00, 0x00, 0x04, 0x01, 0x02, 0x03, 0x04])
+        mockFile = MockScriptFile(testData: [0x53, 0x43, 0x52, 0x50, 0x00, 0x00, 0x00, 0x04, 0x01, 0x02, 0x03, 0x04])
 
         do {
-            let _ = try ScriptResource.load(from: mockFile.scummFile, at: 0)
+            let _ = try Script.load(from: mockFile.scummFile, at: 0)
             XCTFail("Expected error but succeeded.")
         } catch let error as ScummCoreError {
             XCTAssertEqual(error, .missingResource("script", "data file"))

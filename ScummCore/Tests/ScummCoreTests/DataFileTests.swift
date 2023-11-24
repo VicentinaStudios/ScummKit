@@ -56,7 +56,7 @@ final class DataFileTests: XCTestCase {
         
         let resource = indexFile.resources!.scripts[1]
         
-        let script = try? dataFile.readResource(resource: resource, type: .script) as? ScriptResource
+        let script = try? dataFile.readResource(resource: resource, type: .script) as? Script
         
         XCTAssertNotNil(script)
     }

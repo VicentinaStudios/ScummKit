@@ -85,7 +85,7 @@ class DataFileV5: DataFile {
         switch type {
             
         case .script:
-            return try ScriptResource.load(from: scummFile, at: offset)
+            return try Script.load(from: scummFile, at: offset)
         default:
             throw ScummCoreError.cantLoadResource(type.rawValue, dataFileURL.lastPathComponent)
         }
