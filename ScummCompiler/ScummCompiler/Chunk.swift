@@ -10,6 +10,11 @@ import Foundation
 enum Opcode: UInt8 {
     case `return`
     case constant
+    case add
+    case subtract
+    case multiply
+    case divide
+    case negate
 }
 
 struct Chunk {

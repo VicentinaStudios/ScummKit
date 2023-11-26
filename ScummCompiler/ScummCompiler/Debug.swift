@@ -33,6 +33,16 @@ func disassembleInstruction(chunk: Chunk, offset: Int) -> Int {
     switch Opcode(rawValue: instruction) {
     case .constant:
         return constantInstruction(name: "constant", chunk: chunk, offset: offset)
+    case .add:
+        return simpleInstruction(name: "add", offset: offset)
+    case .subtract:
+        return simpleInstruction(name: "subtract", offset: offset)
+    case .multiply:
+        return simpleInstruction(name: "multiplu", offset: offset)
+    case .divide:
+        return simpleInstruction(name: "divide", offset: offset)
+    case .negate:
+        return simpleInstruction(name: "negate", offset: offset)
     case .return:
         return simpleInstruction(name: "return", offset: offset)
     default:
@@ -52,16 +62,16 @@ func constantInstruction(name: String, chunk: Chunk, offset: Int) -> Int{
     
     let constant = chunk.code[offset + 1]
     
-    //let formattedString = String(format: "%-16s %04d '", name, constant)
-    //let formatted = String(format: "%-12s %04d", name, constant)
     let formatted = name.withCString { String(format: "%-16s %4d", $0, constant) }
     
     print(formatted, terminator: " ")
-    print("'\(chunk.constants.values[Int(constant) - 1])'")
+//    print("'\(chunk.constants.values[Int(constant) - 1])'")
+    printValue(value: chunk.constants.values[Int(constant) - 1])
+    print()
     
     return offset + 2
 }
 
 func printValue(value: Value) {
-    print(value)
+    print(value, terminator: "")
 }
