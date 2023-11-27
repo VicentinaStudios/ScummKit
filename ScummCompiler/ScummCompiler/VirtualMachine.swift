@@ -37,10 +37,9 @@ struct VirtualMachine {
         return value!
     }
     
-    mutating func interpret(chunk: Chunk) -> InterpretResult {
-        self.chunk = chunk
-        ip = 0
-        return run()
+    mutating func interpret(source: String) -> InterpretResult {
+        compile(source: source)
+        return .ok
     }
     
     mutating func run() -> InterpretResult{
@@ -82,8 +81,6 @@ struct VirtualMachine {
             default:
                 return .runtimeError
             }
-            
-            
         }
     }
     
@@ -113,6 +110,7 @@ struct VirtualMachine {
 }
 
 enum InterpretResult {
+    
     case ok
     case compileError
     case runtimeError

@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		4C0274312B12891C00AB1217 /* VirtualMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0274302B12891C00AB1217 /* VirtualMachine.swift */; };
+		4C22BFC72B150084009FCF14 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C22BFC62B150084009FCF14 /* CLI.swift */; };
+		4C22BFC92B1500A3009FCF14 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C22BFC82B1500A3009FCF14 /* Arguments.swift */; };
+		4C22BFCB2B1500D0009FCF14 /* EscapeCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C22BFCA2B1500D0009FCF14 /* EscapeCodes.swift */; };
+		4C22BFCD2B1500F1009FCF14 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C22BFCC2B1500F1009FCF14 /* Extensions.swift */; };
+		4C22BFD12B1516A9009FCF14 /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C22BFD02B1516A9009FCF14 /* Compiler.swift */; };
+		4C22BFD32B151702009FCF14 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C22BFD22B151702009FCF14 /* Scanner.swift */; };
+		4C22BFD52B151B39009FCF14 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C22BFD42B151B39009FCF14 /* Token.swift */; };
+		4C22BFD72B151B5D009FCF14 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C22BFD62B151B5D009FCF14 /* TokenType.swift */; };
 		4CD1E0222B11445E006628B6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD1E0212B11445E006628B6 /* main.swift */; };
 		4CD1E0292B1145A8006628B6 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD1E0282B1145A8006628B6 /* Chunk.swift */; };
 		4CD1E02B2B114A16006628B6 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD1E02A2B114A16006628B6 /* Debug.swift */; };
@@ -28,6 +36,15 @@
 
 /* Begin PBXFileReference section */
 		4C0274302B12891C00AB1217 /* VirtualMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMachine.swift; sourceTree = "<group>"; };
+		4C22BFC62B150084009FCF14 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
+		4C22BFC82B1500A3009FCF14 /* Arguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
+		4C22BFCA2B1500D0009FCF14 /* EscapeCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscapeCodes.swift; sourceTree = "<group>"; };
+		4C22BFCC2B1500F1009FCF14 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4C22BFCF2B1511BA009FCF14 /* helloworld.scu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helloworld.scu; sourceTree = "<group>"; };
+		4C22BFD02B1516A9009FCF14 /* Compiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compiler.swift; sourceTree = "<group>"; };
+		4C22BFD22B151702009FCF14 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
+		4C22BFD42B151B39009FCF14 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		4C22BFD62B151B5D009FCF14 /* TokenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
 		4CD1E01E2B11445E006628B6 /* ScummCompiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ScummCompiler; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD1E0212B11445E006628B6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4CD1E0282B1145A8006628B6 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
@@ -46,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C22BFCE2B15115C009FCF14 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				4C22BFCF2B1511BA009FCF14 /* helloworld.scu */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 		4CD1E0152B11445E006628B6 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +95,15 @@
 				4CD1E02A2B114A16006628B6 /* Debug.swift */,
 				4CD1E02C2B114F8A006628B6 /* Value.swift */,
 				4C0274302B12891C00AB1217 /* VirtualMachine.swift */,
+				4C22BFC62B150084009FCF14 /* CLI.swift */,
+				4C22BFC82B1500A3009FCF14 /* Arguments.swift */,
+				4C22BFCA2B1500D0009FCF14 /* EscapeCodes.swift */,
+				4C22BFD02B1516A9009FCF14 /* Compiler.swift */,
+				4C22BFD22B151702009FCF14 /* Scanner.swift */,
+				4C22BFD42B151B39009FCF14 /* Token.swift */,
+				4C22BFD62B151B5D009FCF14 /* TokenType.swift */,
+				4C22BFCC2B1500F1009FCF14 /* Extensions.swift */,
+				4C22BFCE2B15115C009FCF14 /* Scripts */,
 			);
 			path = ScummCompiler;
 			sourceTree = "<group>";
@@ -132,8 +166,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C22BFD32B151702009FCF14 /* Scanner.swift in Sources */,
 				4CD1E0222B11445E006628B6 /* main.swift in Sources */,
+				4C22BFCD2B1500F1009FCF14 /* Extensions.swift in Sources */,
+				4C22BFD52B151B39009FCF14 /* Token.swift in Sources */,
+				4C22BFD12B1516A9009FCF14 /* Compiler.swift in Sources */,
 				4C0274312B12891C00AB1217 /* VirtualMachine.swift in Sources */,
+				4C22BFD72B151B5D009FCF14 /* TokenType.swift in Sources */,
+				4C22BFC72B150084009FCF14 /* CLI.swift in Sources */,
+				4C22BFCB2B1500D0009FCF14 /* EscapeCodes.swift in Sources */,
+				4C22BFC92B1500A3009FCF14 /* Arguments.swift in Sources */,
 				4CD1E02B2B114A16006628B6 /* Debug.swift in Sources */,
 				4CD1E0292B1145A8006628B6 /* Chunk.swift in Sources */,
 				4CD1E02D2B114F8A006628B6 /* Value.swift in Sources */,
