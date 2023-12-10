@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VirtualMachine {
+class VirtualMachine {
     
     var chunk: Chunk?
     var ip: Int = 0
@@ -21,28 +21,40 @@ struct VirtualMachine {
         resetStack()
     }
     
-    private mutating func resetStack() {
+    private func resetStack() {
         stackTop = 0
     }
     
-    mutating func push(value: Value) {
+    func push(value: Value) {
         stack[stackTop] = value
         stackTop += 1
     }
     
-    mutating func pop() -> Value {
+    func pop() -> Value {
         stackTop -= 1
         let value = stack[stackTop]
         stack[stackTop] = nil
         return value!
     }
     
-    mutating func interpret(source: String) -> InterpretResult {
-        compile(source: source)
-        return .ok
+    func interpret(source: String) -> InterpretResult {
+        
+        let chunk = Chunk()
+        let compiler = Compiler(source: source)
+        
+        if !compiler.compile(source: source, chunk: chunk) {
+            return .compileError
+        }
+        
+        self.chunk = chunk
+        ip = 0
+        
+        let result = run()
+        
+        return result
     }
     
-    mutating func run() -> InterpretResult{
+    func run() -> InterpretResult{
         
         while true {
             
@@ -84,19 +96,19 @@ struct VirtualMachine {
         }
     }
     
-    private mutating func readByte() -> UInt8 {
+    private func readByte() -> UInt8 {
         let instruction = chunk!.code[ip]
         ip += 1
         return instruction
     }
     
-    private mutating func readConstant() -> Value {
+    private func readConstant() -> Value {
         let index = Int(readByte())
         let value = chunk!.constants.values[index - 1]
         return value
     }
     
-    private mutating func binaryOperation(op: (Double, Double) -> Double) {
+    private func binaryOperation(op: (Double, Double) -> Double) {
         
         repeat {
             

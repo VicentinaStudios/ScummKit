@@ -7,7 +7,8 @@
 
 import Foundation
 
-let DEBUG_TRACE_EXECUTION = true
+let DEBUG_TRACE_EXECUTION = false
+let DEBUG_PRINT_CODE = true
 let appName = "SCUMM Script Compiler"
 let version = "v0.1"
 
@@ -115,7 +116,8 @@ func runFile(_ fileName: String) {
 
 fileprivate func interpret(_ code: String) -> InterpretResult {
     
-    compile(source: code)
+    //compile(source: code)
+    virtualMachine.interpret(source: code)
     
     return .ok
 }
