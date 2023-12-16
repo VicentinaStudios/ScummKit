@@ -8,12 +8,15 @@
       location = "group:SPUTM/SPUTM.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:SCUMM/SCUMM.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:ScummInterpreter/ScummInterpreter.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ScummCompiler/ScummCompiler.xcodeproj">
+      location = "group:ScummCore">
    </FileRef>
    <FileRef
-      location = "group:ScummCore">
+      location = "group:/Users/michael/Sources/GitHub/VicentinaStudios/scummkit/ScummCompiler">
    </FileRef>
 </Workspace>
