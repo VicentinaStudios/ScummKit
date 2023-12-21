@@ -13,7 +13,9 @@ enum CompilerError: LocalizedError, Equatable {
     case unknownOpcode(UInt8)
     case emptyCodeChunk
     case outOfBounds(String, Int, Int)          // Type, Index, Total
-    case unknownOffset
+    case unknownIndex
+    case unexpectedCharacter(Character)
+    case unterminatedString(String)
     
     var errorDescription: String? {
         
@@ -31,8 +33,14 @@ enum CompilerError: LocalizedError, Equatable {
         case .outOfBounds:
             return "Out of Bounds"
             
-        case .unknownOffset:
-            return "Unknown Offset"
+        case .unknownIndex:
+            return "Unknown Index"
+            
+        case .unexpectedCharacter:
+            return "Unexpected Character"
+            
+        case .unterminatedString:
+            return "Unterminated Character"
         }
         
     }
@@ -53,8 +61,14 @@ enum CompilerError: LocalizedError, Equatable {
         case .outOfBounds(let type, _, _):
             return "Index out of bound for `\(type)`."
             
-        case .unknownOffset:
-            return "Unknown offset for operation."
+        case .unknownIndex:
+            return "Unknown index for operation."
+            
+        case .unexpectedCharacter(let character):
+            return "Unexpected character `\(character) in the source code.`"
+            
+        case .unterminatedString(let string):
+            return "The string \(string)\" (<~~) isn't terminated"
         }
     }
     
@@ -74,8 +88,14 @@ enum CompilerError: LocalizedError, Equatable {
         case .outOfBounds(_, let index, let total):
             return "Make sure the index @`\(index)` is within the bounds of `\(total)`."
             
-        case .unknownOffset:
+        case .unknownIndex:
             return "Try to clean the project and compile again."
+            
+        case .unexpectedCharacter:
+            return "Check your code for correctness and compile again."
+            
+        case .unterminatedString:
+            return "Check the string and make sure it's properly terminated with an `\"`."
         }
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 enum TokenType: CaseIterable {
     
     case lparen, rparen, lbrace, rbrace,lbracket, rbracket
-    case comma, colon, semicolon, exclamation
+    case comma, colon, semicolon, bang
     case plus, minus, slash, star
     case hash, backslash, caret, apostrophe,backtick, at
     

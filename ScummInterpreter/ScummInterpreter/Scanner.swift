@@ -98,7 +98,7 @@ class Scanner {
         
         switch currentCharacter {
             
-            // single character lexemes
+        // single character lexemes
             
         case "(":
             addToken(type: .LEFT_PAREN)

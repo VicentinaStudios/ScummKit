@@ -65,8 +65,8 @@ class Decompiler {
     
     private func simpleInstruction(opcode: Opcode) throws -> Decompilation {
         
-        guard var offset = offset else {
-            throw CompilerError.unknownOffset
+        guard let offset = offset else {
+            throw CompilerError.unknownIndex
         }
         
         let decompilation = Decompilation(offset: offset, opcode: opcode)

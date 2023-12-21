@@ -33,6 +33,10 @@ class Chunk {
         code.count
     }
     
+    /// The index representing the start of the bytecode in the chunk.
+    var codeStart: Array.Index {
+        code.startIndex
+    }
     
     /// Adds a byte to the bytecode chunk.
     ///
