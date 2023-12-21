@@ -9,14 +9,6 @@ import XCTest
 @testable import ScummCompiler
 
 final class ScannerTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
     
     func testSingleCharacterLexemes() throws {
         
@@ -77,5 +69,31 @@ final class ScannerTests: XCTestCase {
         let token = try scanner.scanToken()
         XCTAssertEqual(token.type, .identifier)
     }
-}
+    
+    func testMatchKeyword() throws {
+        
+        let source = "else if include"
+        let scanner = Scanner(source: source)
+        
+        let expectedTokens: [TokenType] = [
+            .else, .if, .include
+        ]
+        
+        for expectedToken in expectedTokens {
+            let token = try scanner.scanToken()
+            XCTAssertEqual(token.type, expectedToken)
+        }
+    }
+    
+    func testMultipleWhitespaces() throws {
+        
+        let scanner = Scanner(source: "   \t\n identifier123")
+        
+        let token = try scanner.scanToken()
+        
+        XCTAssertEqual(token.type, .identifier)
+        XCTAssertEqual(token.lexeme, "identifier123")
+        XCTAssertEqual(token.line, 2)
+    }
 
+}

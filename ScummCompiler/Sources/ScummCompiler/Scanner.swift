@@ -201,17 +201,20 @@ class Scanner {
     /// Skips whitespace characters, including space, tab, and carriage return, and updates the line number for newline characters.
     private func skipWhitespace() {
         
-        switch String(character) {
+        while true {
             
-        case " ", "\r", "\t":
-            _ = advance
-            
-        case "\n":
-            line += 1
-            _ = advance
-            
-        default:
-            return
+            switch String(character) {
+                
+            case " ", "\r", "\t":
+                _ = advance
+                
+            case "\n":
+                line += 1
+                _ = advance
+                
+            default:
+                return
+            }
         }
     }
     
@@ -258,10 +261,61 @@ class Scanner {
     /// - Returns: A `Token` representing the scanned identifier.
     private func identifier() -> Token {
         
-        while character.isLetter || character.isNumber {
+        while !isEndOfFile, character.isLetter || character.isNumber {
             _ = advance
         }
         
-        return createToken(token: .identifier)
+        return createToken(token: identifierType)
+    }
+    
+    /// Determines the type of identifier or keyword based on the current state.
+    ///
+    /// - Returns: The `TokenType` of the identifier or keyword.
+    private var identifierType: TokenType {
+        
+        switch source[start] {
+        case "e":
+            return checkKeyword(start: 1, length: 3, rest: "lse", type: .else)
+        case "i":
+            
+            if current > source.index(start, offsetBy: 1) {
+                switch source[source.index(start, offsetBy: 1)] {
+                case "f":
+                    return checkKeyword(start: 2, length: 0, rest: "", type: .if)
+                case "n":
+                    return checkKeyword(start: 2, length: 5, rest: "clude", type: .include)
+                default:
+                    break
+                }
+            }
+            
+        default:
+            break
+        }
+        
+        return .identifier
+    }
+    
+    /// Checks if the current identifier matches a keyword and returns the corresponding `TokenType`.
+    ///
+    /// - Parameters:
+    ///   - start: The offset from the current position to start checking.
+    ///   - length: The length of the keyword to check.
+    ///   - rest: The remaining part of the keyword to check.
+    ///   - type: The `TokenType` to return if the keyword matches.
+    /// - Returns: The `TokenType` of the keyword or `.identifier` if no match is found.
+    private func checkKeyword(start: Int, length: Int, rest: String, type: TokenType) -> TokenType {
+        
+        let startIndex = source.index(self.start, offsetBy: start)
+        let endIndex = source.index(startIndex, offsetBy: length)
+        
+        guard
+            endIndex == current,
+            source[startIndex..<endIndex] == rest
+        else {
+            return .identifier
+        }
+        
+        return type
     }
 }
