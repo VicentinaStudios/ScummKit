@@ -16,6 +16,7 @@ enum CompilerError: LocalizedError, Equatable {
     case unknownIndex
     case unexpectedCharacter(Character)
     case unterminatedString(String)
+    case compileError
     
     var errorDescription: String? {
         
@@ -41,6 +42,9 @@ enum CompilerError: LocalizedError, Equatable {
             
         case .unterminatedString:
             return "Unterminated Character"
+            
+        case .compileError:
+            return "Compile Error"
         }
         
     }
@@ -65,10 +69,13 @@ enum CompilerError: LocalizedError, Equatable {
             return "Unknown index for operation."
             
         case .unexpectedCharacter(let character):
-            return "Unexpected character `\(character) in the source code.`"
+            return "Unexpected character `\(character)` in the source code."
             
         case .unterminatedString(let string):
             return "The string \(string)\" (<~~) isn't terminated"
+            
+        case .compileError:
+            return "Failed to compile the source code."
         }
     }
     
@@ -96,6 +103,9 @@ enum CompilerError: LocalizedError, Equatable {
             
         case .unterminatedString:
             return "Check the string and make sure it's properly terminated with an `\"`."
+            
+        case .compileError:
+            return "Check the source code is using the correct syntax."
         }
     }
 }

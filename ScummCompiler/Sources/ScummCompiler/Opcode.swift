@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Opcode: UInt8, CaseIterable {
+public enum Opcode: UInt8, CaseIterable {
     
     case breakHere = 0x80
     

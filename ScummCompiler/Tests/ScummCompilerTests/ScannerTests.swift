@@ -95,5 +95,4 @@ final class ScannerTests: XCTestCase {
         XCTAssertEqual(token.lexeme, "identifier123")
         XCTAssertEqual(token.line, 2)
     }
-
 }

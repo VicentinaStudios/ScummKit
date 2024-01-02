@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum TokenType: CaseIterable {
+enum TokenType: String, CaseIterable {
     
     case lparen, rparen, lbrace, rbrace,lbracket, rbracket
     case comma, colon, semicolon, bang
     case plus, minus, slash, star
-    case hash, backslash, caret, apostrophe,backtick, at
+    case hash, backslash, caret, apostrophe, backtick, at
     
     case equal, equalEqual, bangEqual
     case less, lessEqual, greater, greaterEqual

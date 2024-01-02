@@ -10,7 +10,7 @@ import Foundation
 /// The `VirtualMachine` class interprets bytecode from a `Chunk`.
 ///
 /// This class emulates a simple virtual machine capable of interpreting bytecode instructions.
-class VirtualMachine {
+public class VirtualMachine {
     
     /// The bytecode chunk to interpret
     private var chunk: Chunk?
@@ -18,11 +18,13 @@ class VirtualMachine {
     /// The instruction pointer pointing to the next bytecode instruction.
     private var instructionPointer: Array.Index?
     
+    public init() { }
+    
     /// Interprets bytecode from a given `Chunk`.
     ///
     /// - Parameter chunk: The bytecode chunk to interpret.
     /// - Throws: A `CompilerError` if an issue occurs during interpretation.
-    func interpret(chunk: Chunk) throws {
+    public func interpret(chunk: Chunk) throws {
         
         guard chunk.size > 0 else {
             return
@@ -34,8 +36,18 @@ class VirtualMachine {
         try run()
     }
     
-    func interpret(source: String) {
+    public func interpret(source: String) throws {
         
+        chunk = Chunk()
+        instructionPointer = chunk!.codeStart
+        
+        let compiler = Compiler()
+        
+        if compiler.compile(source: source, chunk: chunk!) {
+            throw CompilerError.compileError
+        }
+        
+        try run()
     }
     
     /// Executes the bytecode instructions until a termination condition is met.

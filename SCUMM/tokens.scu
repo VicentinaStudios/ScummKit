@@ -1,0 +1,14 @@
+() {} []
+, : ; !
++ - / *
+# \ ^ ' ` @
+
+= == !=
+< <= > >=
++= -=
+
+identifier "string" 123
+label:
+
+include
+if else is

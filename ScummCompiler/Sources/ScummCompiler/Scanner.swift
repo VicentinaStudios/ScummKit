@@ -55,17 +55,28 @@ class Scanner {
         line = 1
     }
     
+    func scanAllTokens() throws -> [Token] {
+        
+        var tokens: [Token] = []
+        
+        while !isEndOfFile {
+            tokens.append(try scanToken())
+        }
+        
+        return tokens
+    }
+    
     /// Scans the source code for the next token.
     ///
     /// - Returns: A `Token` representing the scanned token.
     /// - Throws: A `CompilerError` in case of unexpected characters or errors during scanning.
     func scanToken() throws -> Token {
         
+        skipWhitespace()
+        
         guard !isEndOfFile else {
             return Token(type: .eof, lexeme: "", line: line)
         }
-        
-        skipWhitespace()
         
         start = current
         
@@ -201,7 +212,7 @@ class Scanner {
     /// Skips whitespace characters, including space, tab, and carriage return, and updates the line number for newline characters.
     private func skipWhitespace() {
         
-        while true {
+        while !isEndOfFile {
             
             switch String(character) {
                 
@@ -282,6 +293,8 @@ class Scanner {
                 switch source[source.index(start, offsetBy: 1)] {
                 case "f":
                     return checkKeyword(start: 2, length: 0, rest: "", type: .if)
+                case "s":
+                    return checkKeyword(start: 2, length: 0, rest: "", type: .is)
                 case "n":
                     return checkKeyword(start: 2, length: 5, rest: "clude", type: .include)
                 default:

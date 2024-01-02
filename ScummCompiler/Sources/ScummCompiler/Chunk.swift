@@ -23,25 +23,30 @@ import Foundation
 /// ```
 ///
 /// - SeeAlso: `CompilerError.outOfBounds` for potential errors when reading from the chunk.
-class Chunk {
+public class Chunk {
     
     /// The internal storage for the bytecode.
-    private var code: [UInt8] = []
+    private var code: [UInt8]
     
     /// The current size of the bytecode chunk.
-    var size: Int {
+    public var size: Int {
         code.count
     }
     
     /// The index representing the start of the bytecode in the chunk.
-    var codeStart: Array.Index {
+    public var codeStart: Array.Index {
         code.startIndex
+    }
+    
+    /// Initializes an empty chunk
+    public init() {
+        code = []
     }
     
     /// Adds a byte to the bytecode chunk.
     ///
     /// - Parameter byte: The byte to be added.
-    func write(byte: UInt8) {
+    public func write(byte: UInt8) {
         code.append(byte)
     }
     
@@ -51,7 +56,7 @@ class Chunk {
     ///   - offset: The offset of the byte to read.
     /// - Returns: The byte at the specified offset.
     /// - Throws: `CompilerError.outOfBounds` if the offset is out of bounds.
-    func read(at offset: Int) throws -> UInt8 {
+    public func read(at offset: Int) throws -> UInt8 {
         
         guard offset >= 0, offset < code.count else {
             throw CompilerError.outOfBounds("Chunk", offset, size)

@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Decompilation {
+public struct Decompilation {
     let offset: Int
     let opcode: Opcode
 }
 
-class Decompiler {
+public class Decompiler {
     
     private var chunk: Chunk?
     private var offset: Array.Index?
@@ -24,8 +24,10 @@ class Decompiler {
         decompilation?.removeAll()
         decompilation = nil
     }
+    
+    public init() { }
         
-    func decompile(_ chunk: Chunk) throws -> [Decompilation]? {
+    public func decompile(_ chunk: Chunk) throws -> [Decompilation]? {
         
         reset(with: chunk)
         
@@ -38,7 +40,7 @@ class Decompiler {
         return decompilation
     }
     
-    func prettyPrint() {
+    public func prettyPrint() {
         
         decompilation?.forEach { instruction in
             

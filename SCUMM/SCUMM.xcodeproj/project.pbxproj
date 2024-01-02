@@ -26,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C9B23892B44480400E3BE33 /* helloworld.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = helloworld.scu; sourceTree = "<group>"; };
+		4C9B238A2B44506A00E3BE33 /* tokens.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = tokens.scu; sourceTree = "<group>"; };
 		4C9EC0502B2B5721008DF577 /* SCUMM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SCUMM; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C9EC0532B2B5721008DF577 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4C9EC05C2B2B5773008DF577 /* SCUMM Manual Glossary.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "SCUMM Manual Glossary.md"; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 			children = (
 				4C9EC05C2B2B5773008DF577 /* SCUMM Manual Glossary.md */,
 				4C9EC05D2B2B5773008DF577 /* Scumm Grammar.md */,
+				4C9B23892B44480400E3BE33 /* helloworld.scu */,
+				4C9B238A2B44506A00E3BE33 /* tokens.scu */,
 				4C9EC0522B2B5721008DF577 /* SCUMM */,
 				4C9EC0512B2B5721008DF577 /* Products */,
 			);
