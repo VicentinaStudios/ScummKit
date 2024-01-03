@@ -32,6 +32,14 @@
 		4C9EC0532B2B5721008DF577 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4C9EC05C2B2B5773008DF577 /* SCUMM Manual Glossary.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "SCUMM Manual Glossary.md"; sourceTree = "<group>"; };
 		4C9EC05D2B2B5773008DF577 /* Scumm Grammar.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Scumm Grammar.md"; sourceTree = "<group>"; };
+		4CE09B582B4613FA00207CDD /* structure.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = structure.scu; sourceTree = "<group>"; };
+		4CE09B592B4615CE00207CDD /* office.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = office.scu; sourceTree = "<group>"; };
+		4CE09B5C2B4617A300207CDD /* office-finished.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = "office-finished.scu"; sourceTree = "<group>"; };
+		4CE09B5D2B46213100207CDD /* case.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = case.scu; sourceTree = "<group>"; };
+		4CE09B5F2B4621D800207CDD /* do-until.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = "do-until.scu"; sourceTree = "<group>"; };
+		4CE09B602B4622CC00207CDD /* for.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = for.scu; sourceTree = "<group>"; };
+		4CE09B612B46230C00207CDD /* if-else.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = "if-else.scu"; sourceTree = "<group>"; };
+		4CE09B622B46237500207CDD /* jump.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = jump.scu; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,7 @@
 				4C9EC05D2B2B5773008DF577 /* Scumm Grammar.md */,
 				4C9B23892B44480400E3BE33 /* helloworld.scu */,
 				4C9B238A2B44506A00E3BE33 /* tokens.scu */,
+				4CE09B5A2B46168700207CDD /* SCUMM University */,
 				4C9EC0522B2B5721008DF577 /* SCUMM */,
 				4C9EC0512B2B5721008DF577 /* Products */,
 			);
@@ -74,6 +83,29 @@
 				4C9EC0532B2B5721008DF577 /* main.swift */,
 			);
 			path = SCUMM;
+			sourceTree = "<group>";
+		};
+		4CE09B5A2B46168700207CDD /* SCUMM University */ = {
+			isa = PBXGroup;
+			children = (
+				4CE09B582B4613FA00207CDD /* structure.scu */,
+				4CE09B592B4615CE00207CDD /* office.scu */,
+				4CE09B5C2B4617A300207CDD /* office-finished.scu */,
+				4CE09B5E2B4621AA00207CDD /* Flow Control */,
+			);
+			path = "SCUMM University";
+			sourceTree = "<group>";
+		};
+		4CE09B5E2B4621AA00207CDD /* Flow Control */ = {
+			isa = PBXGroup;
+			children = (
+				4CE09B5D2B46213100207CDD /* case.scu */,
+				4CE09B5F2B4621D800207CDD /* do-until.scu */,
+				4CE09B602B4622CC00207CDD /* for.scu */,
+				4CE09B612B46230C00207CDD /* if-else.scu */,
+				4CE09B622B46237500207CDD /* jump.scu */,
+			);
+			path = "Flow Control";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -1,0 +1,52 @@
+[include "filename"]
+
+[script script-name {
+    [statements]
+}]
+
+define variable-name=value
+
+room "room-name" room-name {
+
+    [define first-script-in-room = max-scripts]
+    
+    define script
+    
+    [script script-name {
+        [statements]
+    }]
+    
+    sounds {
+        "SFX/sound-name" sound-name
+    }
+    
+    costumes {
+        "costumes\actor-name" actor-costume-name
+    }
+    
+    enter {
+        [statements]
+    }
+    
+    exit {
+        [statements]
+    }
+    
+    [order {
+        [object-name]
+        [object-names]
+    }]
+    
+    object real-object-name {
+    
+        name is "[visual-object-name]"
+        
+        [dependent-on object-name being object-state]
+        
+        [class is class-state [class-state]]
+        
+        [verb verb-name|default {
+            [statements]
+        }]
+    }
+}

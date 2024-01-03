@@ -1,0 +1,142 @@
+
+include "header.scu"
+include "system.scu"
+include "main-scripts.scu"
+include "boot.scu"
+
+room "office" office {
+
+    define move-bozo = 200
+    
+    script move-bozo {
+    
+        do {
+        
+            draw-object bozo-1
+            break-here
+            
+            draw-object bozo-2
+            break-here
+            
+            draw-object bozo-3
+            break-here
+            
+            draw-object bozo-2
+            break-here
+        }
+    }
+
+    sounds {
+        "SFX/doorclos" door-close
+        "SFX/dooropen" door-open
+    }
+    
+    costumes {
+        "costumes\sam" sam-skin
+    }
+    
+    enter {
+    }
+    
+    exit {
+    }
+    
+    order {
+        coat-hanger
+        closet-door
+    }
+    
+    object front-door {
+        
+        name is "front door"
+        
+        verb walk-to {
+            say-line "The door is closed."
+        }
+        
+        verb open {
+            if (state-of front-door is OPEN) {
+                say-line "It is already open!"
+            } else {
+                state-of front-door is OPEN
+            }
+        }
+        
+        verb close {
+            state-of front-door is CLOSED
+        }
+    }
+    
+    object Bat {
+        
+        name is "bat"
+        class is PICKUPABLE
+        
+        verb look-at {
+            if (owner-of bat is sam) {
+                say-line "It is a bat in my inventory"
+            } else {
+                say-line "it is a bat"
+            }
+        }
+        
+        verb pick-up {
+            pick-up-object bat
+        }
+        
+        verb use {
+            if (noun2 is window) {
+                state-of window is OPEN
+            }
+        }
+    }
+    
+    object bozo-1 {
+        
+        name is "bozo"
+        
+        verb push pull {
+            if (script-running move-bozo) {
+                stop-script move-bozo
+                draw-object bozo-2
+            } else {
+                start-script move-bozo
+            }
+        }
+    }
+    
+    object bozo-2 {
+        name is ""
+        class is UNTOUCHABLE
+    }
+    
+    object window {
+        name is "window"
+    }
+    
+    object closet-door {
+        
+        name is "closet"
+        
+        verb open {
+            open-door me
+        }
+        
+        verb close {
+            if (state-of closet-door is CLOSED) {
+                say-line "It is already closed!"
+            } else {
+                state-of closet-door is CLOSED
+            }
+        }
+        
+        verb use {
+            if (state-of closet-door is OPEN) {
+                state-of closet-door is CLOSED
+            } else {
+                state-of closet-door is OPEN
+            }
+        }
+    }
+}
+

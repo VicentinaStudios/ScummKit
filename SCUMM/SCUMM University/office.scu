@@ -1,0 +1,30 @@
+include "header.scu"
+include "system.scu"
+include "main-scripts.scu"
+include "boot.scu"
+
+room "office" office {
+
+    sounds {
+        "SFX/doorclos" door-close
+        "SFX/dooropen" door-open
+    }
+    
+    costumes {
+        "costumes\sam" sam-skin
+    }
+    
+    enter {
+    }
+    
+    exit {
+    }
+    
+    object front-door {
+        
+        name is "front door"
+        
+        verb walk-to {
+        }
+    }
+}

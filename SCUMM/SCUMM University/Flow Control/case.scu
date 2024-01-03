@@ -1,0 +1,26 @@
+case word-message {
+    
+    of 0 {
+        say-line "In Olde English"
+    }
+    
+    of 1 {
+        say-line "In Latin"
+    }
+    
+    of 2 {
+        say-line "In Etaskrit"
+    }
+    
+    of 3 {
+        say-line "In Porcinum-Atinlay"
+    }
+    
+    of 4 {
+        say-line "In Tuskin"
+    }
+    
+    of 5 {
+        say-line "In Vaachi"
+    }
+}
