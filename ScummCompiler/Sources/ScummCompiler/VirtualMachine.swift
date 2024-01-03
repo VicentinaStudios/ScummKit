@@ -43,7 +43,7 @@ public class VirtualMachine {
         
         let compiler = Compiler()
         
-        if compiler.compile(source: source, chunk: chunk!) {
+        if try compiler.compile(source: source, chunk: chunk!) {
             throw CompilerError.compileError
         }
         

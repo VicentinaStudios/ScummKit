@@ -1,13 +1,13 @@
 //
-//  File.swift
-//  
+//  PrattParser.swift
+//
 //
 //  Created by Michael Borgmann on 22/12/2023.
 //
 
 import Foundation
 
-public class Parser {
+public class PrattParser {
     
     private let tokens: [Token]
     private var current: Array.Index
@@ -46,7 +46,7 @@ public class Parser {
 
 // MARK: Parser Rules
 
-extension Parser {
+extension PrattParser {
     
     func number() {
         let value = tokens[previous]
