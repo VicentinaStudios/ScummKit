@@ -12,13 +12,17 @@ let vm = VirtualMachine()
 
 let args = Array(CommandLine.arguments)
 
+// demos()
+
 if args.count == 1 {
     repl()
 } else if args.count == 2 {
     run(args[1])
+} else if args.count == 3 {
+    Configuration.DEBUG_TRACE_EXECUTION = true
+    run(args[1])
 } else {
-    
-    fputs("Usage: clox [path]\n", stderr);
+    fputs("Usage: scumm [path] [-d]\n", stderr);
     exit(ExitStatusCodes.commandLineUsageError.rawValue)
 }
 
@@ -43,28 +47,64 @@ func run(_ filename: String) {
     else {
         fatalError("Can't read file: \(filename)")
     }
-    
-    try? vm.interpret(source: source)
+        
+    do {
+        try? vm.interpret(source: source)
+    } catch {
+        print(error)
+    }
 }
 
 func demos() {
+    
+    Configuration.DEBUG_TRACE_EXECUTION = true
+    
     print("** Chunk Demo **")
-    let chunk = Chunk()
-    chunk.write(byte: Opcode.breakHere.rawValue)
-    print("... completed")
+    let chunk = chunkVM
+    
+    print("... completed\n")
     
     print("** Decompiler Demo **")
     let decompiler = Decompiler()
     guard let decompilation = try? decompiler.decompile(chunk) else {
         fatalError()
     }
-    print(decompilation)
-    print("... completed")
+    print(decompiler.prettyPrint(decompilation, name: "Demo Chunk"))
+    print("... completed\n")
     
     print("** Virtual Machine Demo **")
     let vm = VirtualMachine()
     try? vm.interpret(chunk: chunk)
-    print("... completed")
+    print("... completed\n")
+    
+    exit(0)
+}
+
+var chunkVM: Chunk {
+    
+    // -((1 + 3) / 2)
+    
+    let chunk = Chunk()
+    
+    var constant = chunk.addConstant(value: 1)
+    chunk.write(byte: Opcode.constant.rawValue, line: 1)
+    chunk.write(byte: UInt8(constant), line: 1)
+    
+    constant = chunk.addConstant(value: 3)
+    chunk.write(byte: Opcode.constant.rawValue, line: 1)
+    chunk.write(byte: UInt8(constant), line: 1)
+    
+    chunk.write(byte: Opcode.add.rawValue, line: 1)
+    
+    constant = chunk.addConstant(value: 2)
+    chunk.write(byte: Opcode.constant.rawValue, line: 1)
+    chunk.write(byte: UInt8(constant), line: 1)
+    
+    chunk.write(byte: Opcode.divide.rawValue, line: 1)
+    
+    chunk.write(byte: Opcode.negate.rawValue, line: 3)
+    
+    return chunk
 }
 
 enum ExitStatusCodes: Int32 {

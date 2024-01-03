@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "${PROJECT_DIR}/helloworld.scu"
+            argument = "${PROJECT_DIR}/helloworld.scu -d"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

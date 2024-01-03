@@ -15,10 +15,21 @@ public class VirtualMachine {
     /// The bytecode chunk to interpret
     private var chunk: Chunk?
     
+    var stack: [Value?]
+    var stackTop = 0
+    let stackMax = 256
+    
+    private var decompiler: Decompiler? {
+        Configuration.DEBUG_TRACE_EXECUTION ? Decompiler() : nil
+    }
+    
     /// The instruction pointer pointing to the next bytecode instruction.
     private var instructionPointer: Array.Index?
     
-    public init() { }
+    public init() {
+        self.stack = [Value?](repeating: nil, count: stackMax)
+        resetStack()
+    }
     
     /// Interprets bytecode from a given `Chunk`.
     ///
@@ -38,14 +49,14 @@ public class VirtualMachine {
     
     public func interpret(source: String) throws {
         
-        chunk = Chunk()
-        instructionPointer = chunk!.codeStart
-        
         let compiler = Compiler()
         
-        if try compiler.compile(source: source, chunk: chunk!) {
+        guard let chunk = try compiler.compile(source: source) else {
             throw CompilerError.compileError
         }
+        
+        self.chunk = chunk
+        instructionPointer = chunk.codeStart
         
         try run()
     }
@@ -58,11 +69,15 @@ public class VirtualMachine {
     /// - Throws: A `CompilerError` if an issue occurs during execution.
     private func run() throws {
         
+        decompiler?.printHeader(name: "TRACE")
+        
         while
             let instructionPointer = instructionPointer,
             let chunk = chunk,
             instructionPointer < chunk.size
         {
+            
+            try decompiler?.trace(chunk, offset: instructionPointer)
             
             let byte = try readNextByte()
             
@@ -73,7 +88,40 @@ public class VirtualMachine {
             switch instruction {
             case .breakHere:
                 debugPrint("break here")
+            case .add:
+                binaryOperation(op: +)
+            case .subtract:
+                binaryOperation(op: -)
+            case .multiply:
+                binaryOperation(op: *)
+            case .divide:
+                binaryOperation(op: /)
+            case .return:
+                 break
+            case .constant:
+                let byte = try Int(readNextByte())
+                let constant = chunk.readConstant(byte: byte - 1)
+                push(value: constant)
+            case .negate:
+                push(value: -pop())
             }
+            
+            if Configuration.DEBUG_TRACE_EXECUTION {
+                showStack()
+            }
+        }
+    }
+    
+    private func showStack() {
+        
+        if Configuration.DEBUG_TRACE_EXECUTION, stack.contains { $0 != nil } {
+            
+            print("            ", terminator: "")
+            
+            stack.compactMap { $0 }.forEach { slot in
+                print("[\(slot)]", terminator: " ")
+            }
+            print()
         }
     }
     
@@ -94,5 +142,38 @@ public class VirtualMachine {
         self.instructionPointer = instructionPointer + 1
         
         return byte
+    }
+}
+
+// MARK: - Stack
+
+extension VirtualMachine {
+    
+    private func binaryOperation(op: (Int, Int) -> Int) {
+        
+        repeat {
+            
+            let b = pop()
+            let a = pop()
+            
+            push(value: op(a, b))
+            
+        } while false
+    }
+    
+    private func push(value: Value) {
+        stack[stackTop] = value
+        stackTop += 1
+    }
+    
+    private func pop() -> Value {
+        stackTop -= 1
+        let value = stack[stackTop]
+        stack[stackTop] = nil
+        return value!
+    }
+    
+    private func resetStack() {
+        stackTop = 0
     }
 }

@@ -109,3 +109,7 @@ enum CompilerError: LocalizedError, Equatable {
         }
     }
 }
+
+enum RuntimeError: LocalizedError, Equatable {
+    
+}

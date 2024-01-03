@@ -13,6 +13,8 @@ public class PrattParser {
     private var current: Array.Index
     private var previous: Array.Index
     
+    private var chunk = Chunk()
+    
     init(tokens: [Token]) {
         
         self.tokens = tokens
@@ -20,8 +22,9 @@ public class PrattParser {
         self.previous = tokens.startIndex
     }
     
-    func parse() {
+    func parse() -> Chunk {
         expression()
+        return chunk
     }
     
     private func advance() {
@@ -49,26 +52,25 @@ public class PrattParser {
 extension PrattParser {
     
     func number() {
-        let value = tokens[previous]
-        print(value.literal as? Int)
+        if let value = tokens[previous].literal as? Int {
+            emitConstant(value)
+        }
     }
     
     func grouping() {
         expression()
         try? consume(type: TokenType.rparen, message: "Expect ')' after expression.")
-        print("grouping")
     }
     
     func unary() {
         
         let operatorType = tokens[previous].type
-        expression()
         
-//        precedence(.unary)
+        precedence(.unary)
         
         switch operatorType {
         case .minus:
-            print("negate")
+            emitBytes(Opcode.negate.rawValue)
         default:
             break
         }
@@ -77,9 +79,8 @@ extension PrattParser {
     func binary() {
         
         let operatorType = tokens[previous].type
-        let token = tokens[previous].type
         
-        if let rule = rules[token.rawValue],
+        if let rule = rules[operatorType.rawValue],
            let next = Precedence(rawValue: rule.precedence.rawValue + 1)
         {
             precedence(next)
@@ -87,13 +88,13 @@ extension PrattParser {
         
         switch operatorType {
         case .plus:
-            print("add")
+            emitBytes(Opcode.add.rawValue)
         case .minus:
-            print("minus")
+            emitBytes(Opcode.subtract.rawValue)
         case .star:
-            print("multiply")
+            emitBytes(Opcode.multiply.rawValue)
         case .slash:
-            print("divide")
+            emitBytes(Opcode.divide.rawValue)
         default:
             return
         }
@@ -200,5 +201,31 @@ extension PrattParser {
         rules[TokenType.eof.rawValue] = ParseRule(precedence: .none)
         
         return rules
+    }
+}
+
+// MARK: Code Generator
+
+extension PrattParser {
+    
+    private func emitBytes(_ bytes: UInt8...) {
+        bytes.forEach {
+            chunk.write(byte: $0, line: tokens[previous].line)
+        }
+    }
+    
+    private func emitConstant(_ value: Value) {
+        emitBytes(Opcode.constant.rawValue, UInt8(makeConstant(value)))
+    }
+    
+    private func makeConstant(_ value: Value) -> Int {
+        
+        let constant = chunk.addConstant(value: value)
+        
+        if constant > UInt8.max {
+            fatalError("Too many constants in one chunk.")
+        }
+        
+        return constant
     }
 }

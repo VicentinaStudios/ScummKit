@@ -28,6 +28,10 @@ public class Chunk {
     /// The internal storage for the bytecode.
     private var code: [UInt8]
     
+    private(set) var lines: [Int]
+    
+    private var constants: ValueArray
+    
     /// The current size of the bytecode chunk.
     public var size: Int {
         code.count
@@ -41,13 +45,16 @@ public class Chunk {
     /// Initializes an empty chunk
     public init() {
         code = []
+        lines = []
+        constants = ValueArray()
     }
     
     /// Adds a byte to the bytecode chunk.
     ///
     /// - Parameter byte: The byte to be added.
-    public func write(byte: UInt8) {
+    public func write(byte: UInt8, line: Int) {
         code.append(byte)
+        lines.append(line)
     }
     
     /// Reads a byte from the bytecode chunk at the specified offset.
@@ -63,5 +70,19 @@ public class Chunk {
         }
         
         return code[offset]
+    }
+}
+
+// MARK: Data Segment
+
+extension Chunk {
+    
+    public func addConstant(value: Value) -> Int {
+        constants.write(value: value)
+        return constants.count
+    }
+    
+    public func readConstant(byte: Int) -> Value {
+        constants.values[byte]
     }
 }

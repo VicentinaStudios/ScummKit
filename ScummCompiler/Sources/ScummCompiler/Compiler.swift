@@ -9,17 +9,28 @@ import Foundation
 
 class Compiler {
     
-    func compile(source: String, chunk: Chunk) throws -> Bool {
+    func compile(source: String) throws -> Chunk? {
         
         let scanner = Scanner(source: source)
         let tokens = try scanner.scanAllTokens()
+        
+        let parser = PrattParser(tokens: tokens)
+        return parser.parse()
+        
+        /*
         let parser = DecentParser(tokens: tokens)
         let expression = try parser.parse()
         
         let ast = AbstractSyntaxTree()
-        let string = ast.print(expression: expression)
-        print(string)
+        if let string = ast.print(expression: expression) {
+            print(string)
+        }
         
-        return true
+        let interpreter = Interpreter()
+        try interpreter.interpret(ast: expression)
+        
+        let codeGen = CodeGenerator(with: Chunk())
+        try codeGen.generateByteCode(expression: expression)
+        */
     }
 }
