@@ -12,7 +12,7 @@ let vm = VirtualMachine()
 
 let args = Array(CommandLine.arguments)
 
-// demos()
+demos()
 
 if args.count == 1 {
     repl()
@@ -60,7 +60,7 @@ func demos() {
     Configuration.DEBUG_TRACE_EXECUTION = true
     
     print("** Chunk Demo **")
-    let chunk = chunkVM
+    let chunk = chunkCompiler
     
     print("... completed\n")
     
@@ -103,6 +103,24 @@ var chunkVM: Chunk {
     chunk.write(byte: Opcode.divide.rawValue, line: 1)
     
     chunk.write(byte: Opcode.negate.rawValue, line: 3)
+    
+    return chunk
+}
+
+var chunkCompiler: Chunk {
+    
+    // (-1 + 2) * 3 - -4
+    
+    let source = """
+    (-1 + 2)
+    
+    """
+    
+    let compiler = Compiler()
+    
+    guard let chunk = try? compiler.compile(source: source) else {
+        exit(1)
+    }
     
     return chunk
 }

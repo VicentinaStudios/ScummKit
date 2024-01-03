@@ -34,6 +34,10 @@ class CodeGenerator {
         bytes.forEach { chunk.write(byte: $0, line: 2) }
     }
     
+    private func emitConstant(_ value: Value) {
+        emitBytes(Opcode.constant.rawValue, UInt8(makeConstant(value)))
+    }
+    
     private func makeConstant(_ value: Value) -> Int {
         
         let constant = chunk.addConstant(value: value)
@@ -53,12 +57,16 @@ class CodeGenerator {
 extension CodeGenerator: ExpressionVisitor {
     
     func visitLiteralExpr(_ expression: Literal) -> Any? {
-        expression.value
+        
+        if let value = expression.value as? Int {
+            emitConstant(value)
+        }
+        
+        return expression.value
     }
     
     func visitGroupingExpr(_ expression: Grouping) throws -> Any? {
-        try evaluate(expression)
-        return nil
+        try evaluate(expression.expression)
     }
     
     func visitUnaryExpr(_ expression: Unary) throws -> Any? {
@@ -74,39 +82,42 @@ extension CodeGenerator: ExpressionVisitor {
         case .minus:
             
             emitBytes(Opcode.negate.rawValue)
+            return -right
             
         default:
             return nil
         }
-        
-        return nil
     }
     
     func visitBinaryExpr(_ expression: Binary) throws -> Any? {
         
-        let left = try evaluate(expression.left)
-        let right = try evaluate(expression.right)
+        guard
+            let left = try evaluate(expression.left) as? Int,
+            let right = try evaluate(expression.right) as? Int
+        else {
+            throw CompilerError.compileError
+        }
         
         switch expression.operatorToken.type {
             
         case .minus:
             emitBytes(Opcode.subtract.rawValue)
+            return left - right
             
         case .slash:
             emitBytes(Opcode.divide.rawValue)
+            return left / right
             
         case .star:
             emitBytes(Opcode.multiply.rawValue)
+            return left * right
             
         case .plus:
             emitBytes(Opcode.add.rawValue)
+            return left + right
             
         default:
             return nil
         }
-        
-        
-        
-        return nil
     }
 }

@@ -51,7 +51,7 @@ extension Interpreter: ExpressionVisitor {
     }
     
     func visitGroupingExpr(_ expression: Grouping) throws -> Any? {
-        try evaluate(expression)
+        try evaluate(expression.expression)
     }
     
     func visitUnaryExpr(_ expression: Unary) throws -> Any? {
