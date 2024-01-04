@@ -113,7 +113,7 @@ struct SCRPView: View {
 struct SCRPView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let block = Block(for: .CDHD, with: 5416, at: 0x65a14)
+        let block = Block(for: .SCRP, with: 5416, at: 0x65a14)
         let buffer = ScummStore.buffer(at: ScummStore.dataFileURL, for: block)
         
         SCRPView(buffer: .constant(buffer))

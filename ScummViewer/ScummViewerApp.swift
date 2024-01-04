@@ -95,6 +95,8 @@ struct ScummViewerApp: App {
                     var imageCount = 0
                     var objectCount = 0
                     var costumeCount = 0
+                    var scriptCount = 0
+                    var localScriptCount = 0
                     
                     dataFile.value.tree?.depthFirstTraversal { node in
                         
@@ -171,6 +173,8 @@ struct ScummViewerApp: App {
                             }
                         case .COST:
                             
+                            return
+                            
                             guard
                                 let roomNode = node.find(blockType: .ROOM, in: .LFLF),
                                 let clutNode = roomNode.find(blockType: .CLUT, in: .ROOM)
@@ -202,6 +206,34 @@ struct ScummViewerApp: App {
                             }
                              
                             costumeCount += 1
+                            
+                        case .SCRP:
+                            
+                            let buffer = try! node.read(in: scummStore.scummFiles.last?.value.fileURL)
+                            let scrp = SCRP.create(from: buffer)
+                            
+                            let leadingZeros = String(format: "%03d", scriptCount)
+                            let filename = "script_\(leadingZeros).o"
+                            
+                            if let path = panel.url?.appendingPathComponent("scripts") {
+                                try? Data(buffer).saveScript(fileName: filename, to: path)
+                            }
+                            
+                            scriptCount += 1
+                            
+                        case .LSCR:
+                            
+                            var buffer = try! node.read(in: scummStore.scummFiles.last?.value.fileURL)
+                            let scrp = SCRP.create(from: buffer)
+                            
+                            let leadingZeros = String(format: "%03d", localScriptCount)
+                            let filename = "lscript_\(leadingZeros).o"
+                            
+                            if let path = panel.url?.appendingPathComponent("lscripts") {
+                                try? Data(buffer).saveScript(fileName: filename, to: path)
+                            }
+                            
+                            localScriptCount += 1
                             
                         default:
                             break
