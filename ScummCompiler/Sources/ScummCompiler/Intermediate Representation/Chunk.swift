@@ -84,9 +84,7 @@ public class Chunk {
                 throw CompilerError.outOfBounds("Chunk", offset, size)
             }
             
-            var uint16 = pointer.pointee
-            
-            return uint16
+            return pointer.pointee
         }
         
         return word

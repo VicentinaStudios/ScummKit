@@ -23,7 +23,7 @@ public class Compiler {
             let parser = DecentParser(tokens: tokens)
             let expression = try parser.parse()
             
-            let ast = AbstractSyntaxTree()
+            let ast = ASTPrinter()
             if let string = ast.print(expression: expression) {
                 print(string)
             }

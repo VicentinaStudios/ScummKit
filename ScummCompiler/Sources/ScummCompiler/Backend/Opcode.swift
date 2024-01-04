@@ -25,3 +25,4 @@ public enum Opcode: UInt8, CaseIterable {
         return "OP_" + String(describing: self).lowercased()
     }
 }
+

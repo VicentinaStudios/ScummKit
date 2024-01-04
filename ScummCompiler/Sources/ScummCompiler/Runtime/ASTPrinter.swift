@@ -1,5 +1,5 @@
 //
-//  AbstractSyntaxTree.swift
+//  ASTPrinter.swift
 //
 //
 //  Created by Michael Borgmann on 03/01/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AbstractSyntaxTree {
+class ASTPrinter {
     
     func print(expression: Expression) -> String? {
         do {
@@ -27,7 +27,7 @@ class AbstractSyntaxTree {
     }
 }
 
-extension AbstractSyntaxTree: ExpressionVisitor {
+extension ASTPrinter: ExpressionVisitor {
     
     func visitBinaryExpr(_ expression: Binary) throws -> String {
         try parenthesize(name: expression.operatorToken.lexeme, expressions: expression.left, expression.right)
