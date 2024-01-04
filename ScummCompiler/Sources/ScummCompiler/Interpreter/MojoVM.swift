@@ -1,5 +1,5 @@
 //
-//  VirtualMachine.swift
+//  MojoVM.swift
 //
 //
 //  Created by Michael Borgmann on 16/12/2023.
@@ -10,7 +10,7 @@ import Foundation
 /// The `VirtualMachine` class interprets bytecode from a `Chunk`.
 ///
 /// This class emulates a simple virtual machine capable of interpreting bytecode instructions.
-public class VirtualMachineLOX {
+public class MojoVM {
     
     /// The bytecode chunk to interpret
     private var chunk: Chunk?
@@ -149,7 +149,7 @@ public class VirtualMachineLOX {
 
 // MARK: - Stack
 
-extension VirtualMachineLOX {
+extension MojoVM {
     
     private func binaryOperation(op: (Int, Int) -> Int) {
         

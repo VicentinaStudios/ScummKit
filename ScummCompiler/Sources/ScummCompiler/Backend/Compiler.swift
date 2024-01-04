@@ -32,10 +32,10 @@ public class Compiler {
             try interpreter.interpret(ast: expression)
             
             if Configuration.BACKEND == .scumm {
-                let codeGen = CodeGeneratorSCUMM(with: Chunk())
+                let codeGen = GenerateSCUMM(with: Chunk())
                 return try codeGen.generateByteCode(expression: expression)
             } else {
-                let codeGen = CodeGeneratorLOX(with: Chunk())
+                let codeGen = GenerateMojo(with: Chunk())
                 return try codeGen.generateByteCode(expression: expression)
             }
         }

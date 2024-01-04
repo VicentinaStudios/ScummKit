@@ -1,13 +1,13 @@
 //
-//  CodeGeneratorLOX.swift
+//  GenerateSCUMM.swift
+//  
 //
-//
-//  Created by Michael Borgmann on 02/01/2024.
+//  Created by Michael Borgmann on 04/01/2024.
 //
 
 import Foundation
 
-class CodeGeneratorLOX {
+class GenerateSCUMM {
     
     // MARK: Properties
     
@@ -23,7 +23,11 @@ class CodeGeneratorLOX {
     
     func generateByteCode(expression: Expression) throws -> Chunk {
         
+        emitBytes(Opcode.expression.rawValue, 0x02, 0x40)
+        
         _ = try evaluate(expression)
+        
+        emitBytes(0xff)
         
         return chunk
     }
@@ -54,13 +58,9 @@ class CodeGeneratorLOX {
     }
 }
 
-extension CodeGeneratorLOX: ExpressionVisitor {
+extension GenerateSCUMM: ExpressionVisitor {
     
     func visitLiteralExpr(_ expression: Literal) -> Any? {
-        
-        if let value = expression.value as? Int {
-            emitConstant(value)
-        }
         
         return expression.value
     }
@@ -80,8 +80,6 @@ extension CodeGeneratorLOX: ExpressionVisitor {
         switch expression.operatorToken.type {
         
         case .minus:
-            
-            emitBytes(Opcode.negate.rawValue)
             return -right
             
         default:
@@ -91,33 +89,48 @@ extension CodeGeneratorLOX: ExpressionVisitor {
     
     func visitBinaryExpr(_ expression: Binary) throws -> Any? {
         
-        guard
-            let left = try evaluate(expression.left) as? Int,
-            let right = try evaluate(expression.right) as? Int
-        else {
-            throw CompilerError.compileError
+        if let left = try evaluate(expression.left) as? Int {
+            emitBytes(0x01, integerToBytes(left)[0], integerToBytes(left)[1])
+        }
+        
+        if let right = try evaluate(expression.right) as? Int {
+            emitBytes(0x01, integerToBytes(right)[0], integerToBytes(right)[1])
         }
         
         switch expression.operatorToken.type {
             
-        case .minus:
-            emitBytes(Opcode.subtract.rawValue)
-            return left - right
+        case .plus:
+            emitBytes(0x02)
             
-        case .slash:
-            emitBytes(Opcode.divide.rawValue)
-            return left / right
+        case .minus:
+            emitBytes(0x03)
             
         case .star:
-            emitBytes(Opcode.multiply.rawValue)
-            return left * right
+            emitBytes(0x04)
             
-        case .plus:
-            emitBytes(Opcode.add.rawValue)
-            return left + right
+        case .slash:
+            emitBytes(0x05)
             
         default:
             return nil
         }
+        
+        return nil
+    }
+    
+    func integerToBytes(_ value: Int) -> [UInt8] {
+        
+        var integerValue = value
+        let byteCount = MemoryLayout.size(ofValue: integerValue)
+
+        var result = [UInt8](repeating: 0, count: byteCount)
+
+        withUnsafeBytes(of: &integerValue) { rawBuffer in
+            for i in 0..<byteCount {
+                result[i] = rawBuffer[i]
+            }
+        }
+
+        return result
     }
 }

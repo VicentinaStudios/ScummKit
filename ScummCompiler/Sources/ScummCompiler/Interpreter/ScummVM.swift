@@ -10,7 +10,7 @@ import Foundation
 /// The `VirtualMachine` class interprets bytecode from a `Chunk`.
 ///
 /// This class emulates a simple virtual machine capable of interpreting bytecode instructions.
-public class VirtualMachineSCUMM {
+public class ScummVM {
     
     /// The bytecode chunk to interpret
     private var chunk: Chunk?
@@ -150,7 +150,7 @@ public class VirtualMachineSCUMM {
 
 // MARK: - Stack
 
-extension VirtualMachineSCUMM {
+extension ScummVM {
     
     private func binaryOperation(op: (Int, Int) -> Int) {
         
@@ -183,7 +183,7 @@ extension VirtualMachineSCUMM {
 
 // MARK: - SCUMM
 
-extension VirtualMachineSCUMM {
+extension ScummVM {
     
     private func expression(chunk: Chunk, offset: Int) throws {
         

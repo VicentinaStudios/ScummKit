@@ -8,7 +8,7 @@
 import Foundation
 import ScummCompiler
 
-let vm = VirtualMachineLOX()
+let vm = MojoVM()
 
 let args = Array(CommandLine.arguments)
 
@@ -74,10 +74,10 @@ func demos() {
     
     print("** Virtual Machine Demo **")
     if Configuration.BACKEND == .scumm {
-        let vm = VirtualMachineSCUMM()
+        let vm = ScummVM()
         try? vm.interpret(chunk: chunk)
     } else {
-        let vm = VirtualMachineLOX()
+        let vm = MojoVM()
         try? vm.interpret(chunk: chunk)
     }
     print("... completed\n")
