@@ -1,5 +1,5 @@
 //
-//  VirtualMachine.swift
+//  VirtualMachineScumm.swift
 //
 //
 //  Created by Michael Borgmann on 16/12/2023.
@@ -10,7 +10,7 @@ import Foundation
 /// The `VirtualMachine` class interprets bytecode from a `Chunk`.
 ///
 /// This class emulates a simple virtual machine capable of interpreting bytecode instructions.
-public class VirtualMachineLOX {
+public class VirtualMachineSCUMM {
     
     /// The bytecode chunk to interpret
     private var chunk: Chunk?
@@ -105,7 +105,8 @@ public class VirtualMachineLOX {
             case .negate:
                 push(value: -pop())
             case .expression:
-                break
+                
+                try expression(chunk: chunk, offset: instructionPointer)
             }
             
             if Configuration.DEBUG_TRACE_EXECUTION {
@@ -149,7 +150,7 @@ public class VirtualMachineLOX {
 
 // MARK: - Stack
 
-extension VirtualMachineLOX {
+extension VirtualMachineSCUMM {
     
     private func binaryOperation(op: (Int, Int) -> Int) {
         
@@ -177,5 +178,50 @@ extension VirtualMachineLOX {
     
     private func resetStack() {
         stackTop = 0
+    }
+}
+
+// MARK: - SCUMM
+
+extension VirtualMachineSCUMM {
+    
+    private func expression(chunk: Chunk, offset: Int) throws {
+        
+        let variableNumber = try chunk.readWord(at: offset + 1).bigEndian
+        
+        var current = offset + 3
+        
+        while
+            let subOpcode = try? chunk.read(at: current),
+            subOpcode != 0xff
+        {
+            
+            current += 1
+            
+            switch subOpcode {
+            
+            case 0x1:
+                
+//                let value = try chunk.readWord(at: current)
+                let value = Int(Int16(bitPattern: try chunk.readWord(at: current)))
+                push(value: value)
+                current += 2
+            
+            case 0x2:
+                binaryOperation(op: +)
+                
+            case 0x3:
+                binaryOperation(op: -)
+                
+            case 0x4:
+                binaryOperation(op: *)
+                
+            case 0x5:
+                binaryOperation(op: /)
+                
+            default:
+                throw CompilerError.compileError
+            }
+        }
     }
 }

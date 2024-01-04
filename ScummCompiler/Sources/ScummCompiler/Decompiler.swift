@@ -123,6 +123,8 @@ public class Decompiler {
             return try constantInstruction(opcode: .constant)
         case .negate:
             return try simpleInstruction(opcode: .negate)
+        case .expression:
+            return try simpleInstruction(opcode: .expression)
         }
     }
     

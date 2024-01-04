@@ -16,24 +16,28 @@ public class Compiler {
         let scanner = Scanner(source: source)
         let tokens = try scanner.scanAllTokens()
         
-//        let parser = PrattParser(tokens: tokens)
-//        return parser.parse()
-        
-        
-        let parser = DecentParser(tokens: tokens)
-        let expression = try parser.parse()
-        
-        let ast = AbstractSyntaxTree()
-        if let string = ast.print(expression: expression) {
-            print(string)
+        if Configuration.PARSER == .pratt {
+            let parser = PrattParser(tokens: tokens)
+            return parser.parse()
+        } else {
+            let parser = DecentParser(tokens: tokens)
+            let expression = try parser.parse()
+            
+            let ast = AbstractSyntaxTree()
+            if let string = ast.print(expression: expression) {
+                print(string)
+            }
+            
+            let interpreter = Interpreter()
+            try interpreter.interpret(ast: expression)
+            
+            if Configuration.BACKEND == .scumm {
+                let codeGen = CodeGeneratorSCUMM(with: Chunk())
+                return try codeGen.generateByteCode(expression: expression)
+            } else {
+                let codeGen = CodeGeneratorLOX(with: Chunk())
+                return try codeGen.generateByteCode(expression: expression)
+            }
         }
-        
-        let interpreter = Interpreter()
-        try interpreter.interpret(ast: expression)
-        
-        let codeGen = CodeGenerator(with: Chunk())
-        let chunk = try codeGen.generateByteCode(expression: expression)
-        
-        return chunk
     }
 }

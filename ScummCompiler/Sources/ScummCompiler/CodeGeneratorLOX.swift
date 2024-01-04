@@ -1,5 +1,5 @@
 //
-//  CodeGenerator.swift
+//  CodeGeneratorLOX.swift
 //
 //
 //  Created by Michael Borgmann on 02/01/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CodeGenerator {
+class CodeGeneratorLOX {
     
     // MARK: Properties
     
@@ -54,7 +54,7 @@ class CodeGenerator {
     }
 }
 
-extension CodeGenerator: ExpressionVisitor {
+extension CodeGeneratorLOX: ExpressionVisitor {
     
     func visitLiteralExpr(_ expression: Literal) -> Any? {
         

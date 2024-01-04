@@ -11,6 +11,8 @@ public enum Opcode: UInt8, CaseIterable {
     
     case breakHere  = 0x80
     
+    case expression = 0xac
+    
     case add        = 0xf0
     case subtract   = 0xf1
     case multiply   = 0xf2

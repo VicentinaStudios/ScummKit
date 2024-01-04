@@ -71,6 +71,26 @@ public class Chunk {
         
         return code[offset]
     }
+    
+    public func readWord(at offset: Int) throws -> UInt16 {
+        
+        guard offset >= 0, offset+1 < code.count else {
+            throw CompilerError.outOfBounds("Chunk", offset, size)
+        }
+        
+        let word = try code[offset..<offset + 1].withUnsafeBytes { buffer in
+            
+            guard let pointer = buffer.baseAddress?.assumingMemoryBound(to: UInt16.self) else {
+                throw CompilerError.outOfBounds("Chunk", offset, size)
+            }
+            
+            var uint16 = pointer.pointee
+            
+            return uint16
+        }
+        
+        return word
+    }
 }
 
 // MARK: Data Segment

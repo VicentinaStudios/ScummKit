@@ -8,7 +8,7 @@
 import Foundation
 import ScummCompiler
 
-let vm = VirtualMachine()
+let vm = VirtualMachineLOX()
 
 let args = Array(CommandLine.arguments)
 
@@ -64,17 +64,22 @@ func demos() {
     
     print("... completed\n")
     
-    print("** Decompiler Demo **")
-    let decompiler = Decompiler()
-    guard let decompilation = try? decompiler.decompile(chunk) else {
-        fatalError()
-    }
-    print(decompiler.prettyPrint(decompilation, name: "Demo Chunk"))
-    print("... completed\n")
+//    print("** Decompiler Demo **")
+//    let decompiler = Decompiler()
+//    guard let decompilation = try? decompiler.decompile(chunk) else {
+//        fatalError()
+//    }
+//    print(decompiler.prettyPrint(decompilation, name: "Demo Chunk"))
+//    print("... completed\n")
     
     print("** Virtual Machine Demo **")
-    let vm = VirtualMachine()
-    try? vm.interpret(chunk: chunk)
+    if Configuration.BACKEND == .scumm {
+        let vm = VirtualMachineSCUMM()
+        try? vm.interpret(chunk: chunk)
+    } else {
+        let vm = VirtualMachineLOX()
+        try? vm.interpret(chunk: chunk)
+    }
     print("... completed\n")
     
     exit(0)
@@ -112,7 +117,7 @@ var chunkCompiler: Chunk {
     // (-1 + 2) * 3 - -4
     
     let source = """
-    (-1 + 2)
+    (-1 + 2) * 3 - -4
     
     """
     
