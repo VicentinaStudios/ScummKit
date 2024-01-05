@@ -1,6 +1,6 @@
 //
 //  GenerateSCUMM.swift
-//  
+//
 //
 //  Created by Michael Borgmann on 04/01/2024.
 //
@@ -23,23 +23,23 @@ class GenerateSCUMM {
     
     func generateByteCode(expression: Expression) throws -> Chunk {
         
-        emitBytes(Opcode.expression.rawValue, 0x02, 0x40)
+        try emitBytes(Opcode.expression.rawValue, 0x02, 0x40)
         
         _ = try evaluate(expression)
         
-        emitBytes(0xff)
+        try emitBytes(0xff)
         
         return chunk
     }
     
     // MARK: Helper
     
-    private func emitBytes(_ bytes: UInt8...) {
-        bytes.forEach { chunk.write(byte: $0, line: 2) }
+    private func emitBytes(_ bytes: UInt8...) throws {
+        try bytes.forEach { try chunk.write(byte: $0, line: 2) }
     }
     
-    private func emitConstant(_ value: Value) {
-        emitBytes(Opcode.constant.rawValue, UInt8(makeConstant(value)))
+    private func emitConstant(_ value: Value) throws {
+        try emitBytes(Opcode.constant.rawValue, UInt8(makeConstant(value)))
     }
     
     private func makeConstant(_ value: Value) -> Int {
@@ -90,26 +90,26 @@ extension GenerateSCUMM: ExpressionVisitor {
     func visitBinaryExpr(_ expression: Binary) throws -> Any? {
         
         if let left = try evaluate(expression.left) as? Int {
-            emitBytes(0x01, integerToBytes(left)[0], integerToBytes(left)[1])
+            try emitBytes(0x01, integerToBytes(left)[0], integerToBytes(left)[1])
         }
         
         if let right = try evaluate(expression.right) as? Int {
-            emitBytes(0x01, integerToBytes(right)[0], integerToBytes(right)[1])
+            try emitBytes(0x01, integerToBytes(right)[0], integerToBytes(right)[1])
         }
         
         switch expression.operatorToken.type {
             
         case .plus:
-            emitBytes(0x02)
+            try emitBytes(0x02)
             
         case .minus:
-            emitBytes(0x03)
+            try emitBytes(0x03)
             
         case .star:
-            emitBytes(0x04)
+            try emitBytes(0x04)
             
         case .slash:
-            emitBytes(0x05)
+            try emitBytes(0x05)
             
         default:
             return nil

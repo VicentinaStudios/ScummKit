@@ -22,8 +22,8 @@ public class PrattParser {
         self.previous = tokens.startIndex
     }
     
-    func parse() -> Chunk {
-        expression()
+    func parse() throws -> Chunk {
+        try expression()
         return chunk
     }
     
@@ -42,8 +42,8 @@ public class PrattParser {
         advance()
     }
     
-    private func expression() {
-        precedence(.assignement)
+    private func expression() throws {
+        try precedence(.assignement)
     }
 }
 
@@ -51,50 +51,50 @@ public class PrattParser {
 
 extension PrattParser {
     
-    func number() {
+    func number() throws {
         if let value = tokens[previous].literal as? Int {
-            emitConstant(value)
+            try emitConstant(value)
         }
     }
     
-    func grouping() {
-        expression()
-        try? consume(type: TokenType.rparen, message: "Expect ')' after expression.")
+    func grouping() throws {
+        try expression()
+        try? consume(type: TokenType.rightParen, message: "Expect ')' after expression.")
     }
     
-    func unary() {
+    func unary() throws {
         
         let operatorType = tokens[previous].type
         
-        precedence(.unary)
+        try precedence(.unary)
         
         switch operatorType {
         case .minus:
-            emitBytes(Opcode.negate.rawValue)
+            try emitBytes(Opcode.negate.rawValue)
         default:
             break
         }
     }
     
-    func binary() {
+    func binary() throws {
         
         let operatorType = tokens[previous].type
         
         if let rule = rules[operatorType.rawValue],
            let next = Precedence(rawValue: rule.precedence.rawValue + 1)
         {
-            precedence(next)
+            try precedence(next)
         }
         
         switch operatorType {
         case .plus:
-            emitBytes(Opcode.add.rawValue)
+            try emitBytes(Opcode.add.rawValue)
         case .minus:
-            emitBytes(Opcode.subtract.rawValue)
+            try emitBytes(Opcode.subtract.rawValue)
         case .star:
-            emitBytes(Opcode.multiply.rawValue)
+            try emitBytes(Opcode.multiply.rawValue)
         case .slash:
-            emitBytes(Opcode.divide.rawValue)
+            try emitBytes(Opcode.divide.rawValue)
         default:
             return
         }
@@ -111,7 +111,7 @@ extension PrattParser {
         case primary
     }
     
-    typealias ParseFn = () -> Void
+    typealias ParseFn = () throws -> Void
     
     struct ParseRule {
         var prefix: ParseFn?
@@ -119,14 +119,14 @@ extension PrattParser {
         var precedence: Precedence
     }
         
-    private func precedence(_ precedence: Precedence) {
+    private func precedence(_ precedence: Precedence) throws {
         
         advance()
         
         let token = tokens[previous].type
         
         if let prefixRule = rules[token.rawValue]?.prefix {
-            prefixRule()
+            try prefixRule()
         }
         
         while
@@ -138,7 +138,7 @@ extension PrattParser {
             let token = tokens[previous].type
             
             if let infixRule = rules[token.rawValue]?.infix {
-                infixRule()
+                try infixRule()
             }
         }
     }
@@ -147,12 +147,12 @@ extension PrattParser {
         
         var rules: [String: ParseRule] = [:]
         
-        rules[TokenType.lparen.rawValue] = ParseRule(prefix: grouping, precedence: .none)
-        rules[TokenType.rparen.rawValue] = ParseRule(precedence: .none)
-        rules[TokenType.lbrace.rawValue] = ParseRule(precedence: .none)
-        rules[TokenType.rbrace.rawValue] = ParseRule(precedence: .none)
-        rules[TokenType.lbracket.rawValue] = ParseRule(precedence: .none)
-        rules[TokenType.rbracket.rawValue] = ParseRule(precedence: .none)
+        rules[TokenType.leftParen.rawValue] = ParseRule(prefix: grouping, precedence: .none)
+        rules[TokenType.rightParen.rawValue] = ParseRule(precedence: .none)
+        rules[TokenType.leftBrace.rawValue] = ParseRule(precedence: .none)
+        rules[TokenType.rightBrace.rawValue] = ParseRule(precedence: .none)
+        rules[TokenType.leftBracket.rawValue] = ParseRule(precedence: .none)
+        rules[TokenType.rightBracket.rawValue] = ParseRule(precedence: .none)
         
         rules[TokenType.comma.rawValue] = ParseRule(precedence: .none)
         rules[TokenType.colon.rawValue] = ParseRule(precedence: .none)
@@ -208,14 +208,14 @@ extension PrattParser {
 
 extension PrattParser {
     
-    private func emitBytes(_ bytes: UInt8...) {
-        bytes.forEach {
-            chunk.write(byte: $0, line: tokens[previous].line)
+    private func emitBytes(_ bytes: UInt8...) throws {
+        try bytes.forEach {
+            try chunk.write(byte: $0, line: tokens[previous].line)
         }
     }
     
-    private func emitConstant(_ value: Value) {
-        emitBytes(Opcode.constant.rawValue, UInt8(makeConstant(value)))
+    private func emitConstant(_ value: Value) throws {
+        try emitBytes(Opcode.constant.rawValue, UInt8(makeConstant(value)))
     }
     
     private func makeConstant(_ value: Value) -> Int {

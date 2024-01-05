@@ -31,7 +31,7 @@ final class ChunkTests: XCTestCase {
         
         XCTAssertEqual(chunk.size, 0)
         
-        chunk.write(byte: 0xAA)
+        chunk.write(byte: 0xAA, line: <#Int#>)
         
         XCTAssertEqual(chunk.size, 1)
         
@@ -41,14 +41,14 @@ final class ChunkTests: XCTestCase {
     
     func testReadOutOfBounds() {
         
-        XCTAssertThrowsError(try chunk.read(at: 0)) { error in
+        XCTAssertThrowsError(try chunk.readByte(at: 0)) { error in
             XCTAssertEqual(error as? CompilerError, CompilerError.outOfBounds("Chunk", 0, 0))
         }
     }
     
     func testReadNegativeOffset() {
         
-        XCTAssertThrowsError(try chunk.read(at: -1)) { error in
+        XCTAssertThrowsError(try chunk.readByte(at: -1)) { error in
             XCTAssertEqual(error as? CompilerError, CompilerError.outOfBounds("Chunk", -1, 0))
         }
     }

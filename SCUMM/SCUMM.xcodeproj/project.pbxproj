@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C64AFC22B48053700AA11EE /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64AFC12B48053700AA11EE /* Options.swift */; };
+		4C64AFC42B4805FD00AA11EE /* CommandLine+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64AFC32B4805FD00AA11EE /* CommandLine+Ext.swift */; };
+		4C64AFC62B48061800AA11EE /* EscapeSequences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64AFC52B48061800AA11EE /* EscapeSequences.swift */; };
 		4C9EC0542B2B5721008DF577 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EC0532B2B5721008DF577 /* main.swift */; };
 		4C9EC0602B2B57FF008DF577 /* ScummCompiler in Frameworks */ = {isa = PBXBuildFile; productRef = 4C9EC05F2B2B57FF008DF577 /* ScummCompiler */; };
 		4C9EC0632B2B584B008DF577 /* ScummCompiler in Frameworks */ = {isa = PBXBuildFile; productRef = 4C9EC0622B2B584B008DF577 /* ScummCompiler */; };
@@ -26,6 +29,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C64AFC12B48053700AA11EE /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		4C64AFC32B4805FD00AA11EE /* CommandLine+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommandLine+Ext.swift"; sourceTree = "<group>"; };
+		4C64AFC52B48061800AA11EE /* EscapeSequences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscapeSequences.swift; sourceTree = "<group>"; };
 		4C9B23892B44480400E3BE33 /* helloworld.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = helloworld.scu; sourceTree = "<group>"; };
 		4C9B238A2B44506A00E3BE33 /* tokens.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = tokens.scu; sourceTree = "<group>"; };
 		4C9EC0502B2B5721008DF577 /* SCUMM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SCUMM; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +87,9 @@
 			isa = PBXGroup;
 			children = (
 				4C9EC0532B2B5721008DF577 /* main.swift */,
+				4C64AFC12B48053700AA11EE /* Options.swift */,
+				4C64AFC32B4805FD00AA11EE /* CommandLine+Ext.swift */,
+				4C64AFC52B48061800AA11EE /* EscapeSequences.swift */,
 			);
 			path = SCUMM;
 			sourceTree = "<group>";
@@ -173,6 +182,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C64AFC22B48053700AA11EE /* Options.swift in Sources */,
+				4C64AFC62B48061800AA11EE /* EscapeSequences.swift in Sources */,
+				4C64AFC42B4805FD00AA11EE /* CommandLine+Ext.swift in Sources */,
 				4C9EC0542B2B5721008DF577 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

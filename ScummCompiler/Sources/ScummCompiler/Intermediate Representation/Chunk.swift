@@ -7,6 +7,9 @@
 
 import Foundation
 
+/// Represents a numeric value used in the bytecode.
+public typealias Value = Int
+
 /// A representation of a chunk of bytecode in the compiler.
 ///
 /// Bytecode chunks are used to store sequences of bytes that represent
@@ -16,91 +19,131 @@ import Foundation
 ///   within the chunk.
 ///
 /// Example Usage:
-/// ```
+/// ```swift
 /// let bytecodeChunk = Chunk()
-/// bytecodeChunk.write(byte: 0x01)
+/// bytecodeChunk.write(byte: 0x01, line: 42)
 /// let firstByte = try? bytecodeChunk.read(at: 0)
 /// ```
 ///
-/// - SeeAlso: `CompilerError.outOfBounds` for potential errors when reading from the chunk.
+/// - SeeAlso: `ChunkError` for potential errors
 public class Chunk {
     
-    /// The internal storage for the bytecode.
-    private var code: [UInt8]
+    // MARK: Properties
     
-    private(set) var lines: [Int]
+    /// The array of bytecode.
+    private var code: [UInt8] = []
     
-    private var constants: ValueArray
+    /// The array storing line information for each bytecode.
+    private(set) var lines: [Int] = []
     
-    /// The current size of the bytecode chunk.
-    public var size: Int {
-        code.count
-    }
+    /// The array storing constants used in the bytecode.
+    private var constants: [Int] = []
     
-    /// The index representing the start of the bytecode in the chunk.
-    public var codeStart: Array.Index {
-        code.startIndex
-    }
+    // MARK: Computed Properties
     
-    /// Initializes an empty chunk
-    public init() {
-        code = []
-        lines = []
-        constants = ValueArray()
-    }
+    /// The total size of the bytecode chunk.
+    public var size: Int { code.count }
     
-    /// Adds a byte to the bytecode chunk.
+    /// The starting index of the bytecode array.
+    public var codeStart: Array.Index { code.startIndex }
+    
+    // MARK: Lifecycle
+    
+    /// Initializes a new instance of `Chunk`.
+    public init() { }
+}
+
+// MARK: - Read/Write Code
+
+extension Chunk {
+    
+    /// Writes a byte to the bytecode chunk.
     ///
-    /// - Parameter byte: The byte to be added.
-    public func write(byte: UInt8, line: Int) {
+    /// - Parameters:
+    ///   - byte: The byte to be written.
+    ///   - line: The line number associated with the byte. This is useful for debugging and tracking source code locations.
+    ///
+    /// - Throws: `ChunkError.invalidLineNumber` if the line number is negative.
+    public func write(byte: UInt8, line: Int) throws {
+        
+        guard line >= 0 else {
+            throw ChunkError.invalidLineNumber(line)
+        }
+        
         code.append(byte)
         lines.append(line)
     }
     
-    /// Reads a byte from the bytecode chunk at the specified offset.
+    /// Reads a byte at a specified offset in the bytecode chunk.
     ///
     /// - Parameters:
-    ///   - offset: The offset of the byte to read.
+    ///    - offset: The offset at which to read the byte.
+    ///
+    /// - Throws: `ChunkError.outOfBounds` if the offset is invalid.
+    ///
     /// - Returns: The byte at the specified offset.
-    /// - Throws: `CompilerError.outOfBounds` if the offset is out of bounds.
     public func read(at offset: Int) throws -> UInt8 {
         
         guard offset >= 0, offset < code.count else {
-            throw CompilerError.outOfBounds("Chunk", offset, size)
+            throw ChunkError.outOfBounds("byte", offset, size)
         }
         
         return code[offset]
     }
     
-    public func readWord(at offset: Int) throws -> UInt16 {
+    /// Reads a 16-bit word at a specified offset in the bytecode chunk.
+    ///
+    /// - Parameters:
+    ///    - offset: The offset at which to read the word.
+    ///
+    /// - Throws:
+    ///    - `ChunkError.outOfBounds` if the offset is invalid.
+    ///    - `ChunkError.insufficientBytes` if there are not enough bytes to form a word.
+    ///
+    /// - Returns: The 16-bit word at the specified offset.
+    public func readWord(at offset: Int) throws -> Int16 {
         
         guard offset >= 0, offset+1 < code.count else {
-            throw CompilerError.outOfBounds("Chunk", offset, size)
+            throw ChunkError.outOfBounds("word", offset, size)
         }
         
-        let word = try code[offset..<offset + 1].withUnsafeBytes { buffer in
-            
-            guard let pointer = buffer.baseAddress?.assumingMemoryBound(to: UInt16.self) else {
-                throw CompilerError.outOfBounds("Chunk", offset, size)
-            }
-            
-            return pointer.pointee
+        if offset == code.count - 1 {
+            throw ChunkError.insufficientBytes("word", offset, size)
         }
         
-        return word
+        return (Int16(code[offset]) | Int16(code[offset + 1]) << 8)
     }
 }
 
-// MARK: Data Segment
+// MARK: - Read/Write Data
 
 extension Chunk {
     
+    /// Adds a constant value to the constants array and returns its index.
+    ///
+    /// - Parameters:
+    ///    - value: The constant value to be added.
+    ///
+    /// - Returns: The index of the added constant.
     public func addConstant(value: Value) -> Int {
-        constants.write(value: value)
+        constants.append(value)
         return constants.count
     }
     
-    public func readConstant(byte: Int) -> Value {
-        constants.values[byte]
+    /// Reads a constant value at a specified index in the constants array.
+    ///
+    /// - Parameters:
+    ///    - index: The index at which to read the constant.
+    ///
+    /// - Throws: `ChunkError.invalidConstantIndex` if the index is invalid.
+    ///
+    /// - Returns: The constant value at the specified index.
+    public func readConstant(at index: Int) throws -> Value {
+        
+        guard index >= 0, index < constants.count else {
+            throw ChunkError.invalidConstantIndex(index, constants.count)
+        }
+        
+        return constants[index]
     }
 }

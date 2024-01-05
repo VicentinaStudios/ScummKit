@@ -5,7 +5,7 @@ final class ScummCompilerTests: XCTestCase {
     
     func testLeftParenthesesTokenTypeExist() throws {
         
-        XCTAssertTrue(TokenType.allCases.contains(.lparen))
-        XCTAssertTrue(TokenType.allCases.contains(.rparen))
+        XCTAssertTrue(TokenType.allCases.contains(.leftParen))
+        XCTAssertTrue(TokenType.allCases.contains(.rightParen))
     }
 }

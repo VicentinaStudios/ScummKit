@@ -16,28 +16,49 @@ public class Compiler {
         let scanner = Scanner(source: source)
         let tokens = try scanner.scanAllTokens()
         
-        if Configuration.PARSER == .pratt {
+        var chunk: Chunk?
+        
+        switch Configuration.PARSER {
+            
+        case .pratt:
+            
+            print("Pratt Parser")
             let parser = PrattParser(tokens: tokens)
-            return parser.parse()
-        } else {
+            chunk = try parser.parse()
+            
+        case .decent:
+            
+            print("Decent Parser")
             let parser = DecentParser(tokens: tokens)
             let expression = try parser.parse()
             
-            let ast = ASTPrinter()
-            if let string = ast.print(expression: expression) {
-                print(string)
-            }
-            
-            let interpreter = Interpreter()
-            try interpreter.interpret(ast: expression)
-            
-            if Configuration.BACKEND == .scumm {
+            switch Configuration.BACKEND {
+                
+//            case .ast:
+//                let ast = ASTPrinter()
+//                if let string = ast.print(expression: expression) {
+//                    print("AST:", string)
+//                }
+//                
+//            case .interpreter:
+//                print("Interpreter:", terminator: " ")
+//                let interpreter = Interpreter()
+//                let value = try interpreter.interpret(ast: expression)
+//                print(interpreter.stringify(value))
+                
+            case .scumm:
+                print("Gernerate SCUMM")
                 let codeGen = GenerateSCUMM(with: Chunk())
-                return try codeGen.generateByteCode(expression: expression)
-            } else {
+                chunk = try codeGen.generateByteCode(expression: expression)
+                
+                
+            case .mojo:
+                print("Gernerate Mojos")
                 let codeGen = GenerateMojo(with: Chunk())
-                return try codeGen.generateByteCode(expression: expression)
+                chunk = try codeGen.generateByteCode(expression: expression)
             }
         }
+        
+        return chunk
     }
 }

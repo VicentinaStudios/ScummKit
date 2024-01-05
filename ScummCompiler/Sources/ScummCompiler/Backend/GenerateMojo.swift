@@ -30,12 +30,12 @@ class GenerateMojo {
     
     // MARK: Helper
     
-    private func emitBytes(_ bytes: UInt8...) {
-        bytes.forEach { chunk.write(byte: $0, line: 2) }
+    private func emitBytes(_ bytes: UInt8...) throws {
+        try bytes.forEach { try chunk.write(byte: $0, line: 2) }
     }
     
-    private func emitConstant(_ value: Value) {
-        emitBytes(Opcode.constant.rawValue, UInt8(makeConstant(value)))
+    private func emitConstant(_ value: Value) throws {
+        try emitBytes(Opcode.constant.rawValue, UInt8(makeConstant(value)))
     }
     
     private func makeConstant(_ value: Value) -> Int {
@@ -56,10 +56,10 @@ class GenerateMojo {
 
 extension GenerateMojo: ExpressionVisitor {
     
-    func visitLiteralExpr(_ expression: Literal) -> Any? {
+    func visitLiteralExpr(_ expression: Literal) throws -> Any? {
         
         if let value = expression.value as? Int {
-            emitConstant(value)
+            try emitConstant(value)
         }
         
         return expression.value
@@ -81,7 +81,7 @@ extension GenerateMojo: ExpressionVisitor {
         
         case .minus:
             
-            emitBytes(Opcode.negate.rawValue)
+            try emitBytes(Opcode.negate.rawValue)
             return -right
             
         default:
@@ -101,19 +101,19 @@ extension GenerateMojo: ExpressionVisitor {
         switch expression.operatorToken.type {
             
         case .minus:
-            emitBytes(Opcode.subtract.rawValue)
+            try emitBytes(Opcode.subtract.rawValue)
             return left - right
             
         case .slash:
-            emitBytes(Opcode.divide.rawValue)
+            try emitBytes(Opcode.divide.rawValue)
             return left / right
             
         case .star:
-            emitBytes(Opcode.multiply.rawValue)
+            try emitBytes(Opcode.multiply.rawValue)
             return left * right
             
         case .plus:
-            emitBytes(Opcode.add.rawValue)
+            try emitBytes(Opcode.add.rawValue)
             return left + right
             
         default:

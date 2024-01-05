@@ -99,8 +99,8 @@ public class MojoVM {
             case .return:
                  break
             case .constant:
-                let byte = try Int(readNextByte())
-                let constant = chunk.readConstant(byte: byte - 1)
+                let index = try Int(readNextByte())
+                let constant = try chunk.readConstant(at: index - 1)
                 push(value: constant)
             case .negate:
                 push(value: -pop())

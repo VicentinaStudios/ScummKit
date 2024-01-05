@@ -52,7 +52,15 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
+            argument = "--noansi --debug --frontend=decent --backend=mojo"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "${PROJECT_DIR}/helloworld.scu -d"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--noansi --debug --frontend=decent --backend=mojo --runtime=decompiler ${PROJECT_DIR}/helloworld.scu -o bytecode.scumm"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

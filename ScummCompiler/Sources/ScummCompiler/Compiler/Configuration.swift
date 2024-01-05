@@ -9,17 +9,25 @@ import Foundation
 
 public struct Configuration {
     
-    public enum Backend {
+    public enum Backend: String {
         case scumm
-        case lox
+        case mojo
     }
     
-    public enum ParserType {
+    public enum ParserType: String {
         case decent
         case pratt
     }
     
+    public enum Runtime: String {
+        case ast
+        case interpreter
+        case mojo
+        case scumm
+        case decompiler
+    }
+    
     public static var DEBUG_TRACE_EXECUTION = false
     public static var BACKEND = Backend.scumm
-    public static var PARSER = ParserType.pratt
+    public static var PARSER = ParserType.decent
 }

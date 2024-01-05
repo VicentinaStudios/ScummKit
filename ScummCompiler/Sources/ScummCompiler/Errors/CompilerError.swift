@@ -7,16 +7,18 @@
 
 import Foundation
 
+// MARK: - Compiler Error
+
 enum CompilerError: LocalizedError, Equatable {
     
     case cantFetchInstruction(Int)
     case unknownOpcode(UInt8)
     case emptyCodeChunk
-    case outOfBounds(String, Int, Int)          // Type, Index, Total
     case unknownIndex
-    case unexpectedCharacter(Character)
-    case unterminatedString(String)
+
     case compileError
+    
+    // MARK: Error Descriptions
     
     var errorDescription: String? {
         
@@ -30,18 +32,9 @@ enum CompilerError: LocalizedError, Equatable {
             
         case .emptyCodeChunk:
             return "Empty Code Chunk"
-            
-        case .outOfBounds:
-            return "Out of Bounds"
-            
+        
         case .unknownIndex:
             return "Unknown Index"
-            
-        case .unexpectedCharacter:
-            return "Unexpected Character"
-            
-        case .unterminatedString:
-            return "Unterminated Character"
             
         case .compileError:
             return "Compile Error"
@@ -49,12 +42,14 @@ enum CompilerError: LocalizedError, Equatable {
         
     }
     
+    // MARK: Failure Reason
+    
     var failureReason: String? {
         
         switch self {
             
         case .cantFetchInstruction(let offset):
-            return "No instruction found at byte `\(offset)`"
+            return "No instruction found at byte `\(offset)`."
             
         case .unknownOpcode(let byte):
             return "No opcode is assigned for the instruction byte `\(byte)`."
@@ -62,22 +57,15 @@ enum CompilerError: LocalizedError, Equatable {
         case .emptyCodeChunk:
             return "The chunk is empty, but should have byte code."
             
-        case .outOfBounds(let type, _, _):
-            return "Index out of bound for `\(type)`."
-            
         case .unknownIndex:
             return "Unknown index for operation."
-            
-        case .unexpectedCharacter(let character):
-            return "Unexpected character `\(character)` in the source code."
-            
-        case .unterminatedString(let string):
-            return "The string \(string)\" (<~~) isn't terminated"
             
         case .compileError:
             return "Failed to compile the source code."
         }
     }
+    
+    // MARK: Recovery Suggestions
     
     var recoverySuggestion: String? {
         
@@ -91,24 +79,17 @@ enum CompilerError: LocalizedError, Equatable {
             
         case .emptyCodeChunk:
             return "Try to clean the project and compile again."
-        
-        case .outOfBounds(_, let index, let total):
-            return "Make sure the index @`\(index)` is within the bounds of `\(total)`."
             
         case .unknownIndex:
             return "Try to clean the project and compile again."
-            
-        case .unexpectedCharacter:
-            return "Check your code for correctness and compile again."
-            
-        case .unterminatedString:
-            return "Check the string and make sure it's properly terminated with an `\"`."
             
         case .compileError:
             return "Check the source code is using the correct syntax."
         }
     }
 }
+
+// MARK: - Runtime Error
 
 enum RuntimeError: LocalizedError, Equatable {
     

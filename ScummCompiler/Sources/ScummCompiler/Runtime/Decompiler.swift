@@ -146,7 +146,7 @@ public class Decompiler {
         guard
             let offset = offset,
             let constant = try chunk?.read(at: offset + 1),
-            let value = chunk?.readConstant(byte: Int(constant - 1))
+            let value = try chunk?.readConstant(at: Int(constant - 1))
         else {
             throw CompilerError.unknownIndex
         }

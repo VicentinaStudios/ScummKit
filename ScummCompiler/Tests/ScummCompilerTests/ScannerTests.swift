@@ -16,7 +16,7 @@ final class ScannerTests: XCTestCase {
         let scanner = Scanner(source: source)
         
         let expectedTokens: [TokenType] = [
-            .lparen, .rparen, .lbrace, .rbrace, .lbracket, .rbracket,
+            .leftParen, .rightParen, .leftBrace, .rightBrace, .leftBracket, .rightBracket,
             .comma, .colon, .semicolon, .plus, .minus, .slash, .star,
             .hash, .backslash, .caret, .apostrophe, .backtick, .at, .eof
         ]
@@ -72,11 +72,11 @@ final class ScannerTests: XCTestCase {
     
     func testMatchKeyword() throws {
         
-        let source = "else if include"
+        let source = "else if include is"
         let scanner = Scanner(source: source)
         
         let expectedTokens: [TokenType] = [
-            .else, .if, .include
+            .else, .if, .include, .is
         ]
         
         for expectedToken in expectedTokens {

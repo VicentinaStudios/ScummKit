@@ -99,8 +99,8 @@ public class ScummVM {
             case .return:
                  break
             case .constant:
-                let byte = try Int(readNextByte())
-                let constant = chunk.readConstant(byte: byte - 1)
+                let index = try Int(readNextByte())
+                let constant = try chunk.readConstant(at: index - 1)
                 push(value: constant)
             case .negate:
                 push(value: -pop())
@@ -187,7 +187,7 @@ extension ScummVM {
     
     private func expression(chunk: Chunk, offset: Int) throws {
         
-        let variableNumber = try chunk.readWord(at: offset + 1).bigEndian
+        let variableNumber = try chunk.readWord(at: offset + 1)
         
         var current = offset + 3
         
@@ -202,9 +202,8 @@ extension ScummVM {
             
             case 0x1:
                 
-//                let value = try chunk.readWord(at: current)
-                let value = Int(Int16(bitPattern: try chunk.readWord(at: current)))
-                push(value: value)
+                let value = try chunk.readWord(at: current)
+                push(value: Int(value))
                 current += 2
             
             case 0x2:
