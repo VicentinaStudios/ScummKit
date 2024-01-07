@@ -14,6 +14,9 @@
 		4C9EC0602B2B57FF008DF577 /* ScummCompiler in Frameworks */ = {isa = PBXBuildFile; productRef = 4C9EC05F2B2B57FF008DF577 /* ScummCompiler */; };
 		4C9EC0632B2B584B008DF577 /* ScummCompiler in Frameworks */ = {isa = PBXBuildFile; productRef = 4C9EC0622B2B584B008DF577 /* ScummCompiler */; };
 		4C9EC0662B2B58D9008DF577 /* ScummCompiler in Frameworks */ = {isa = PBXBuildFile; productRef = 4C9EC0652B2B58D9008DF577 /* ScummCompiler */; };
+		4CA980402B48AA9F007D4416 /* CompilerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA9803F2B48AA9F007D4416 /* CompilerError.swift */; };
+		4CA980422B49DA33007D4416 /* CommandLineParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA980412B49DA33007D4416 /* CommandLineParser.swift */; };
+		4CA980442B49E47F007D4416 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA980432B49E47F007D4416 /* Console.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +41,9 @@
 		4C9EC0532B2B5721008DF577 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4C9EC05C2B2B5773008DF577 /* SCUMM Manual Glossary.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "SCUMM Manual Glossary.md"; sourceTree = "<group>"; };
 		4C9EC05D2B2B5773008DF577 /* Scumm Grammar.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Scumm Grammar.md"; sourceTree = "<group>"; };
+		4CA9803F2B48AA9F007D4416 /* CompilerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerError.swift; sourceTree = "<group>"; };
+		4CA980412B49DA33007D4416 /* CommandLineParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineParser.swift; sourceTree = "<group>"; };
+		4CA980432B49E47F007D4416 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		4CE09B582B4613FA00207CDD /* structure.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = structure.scu; sourceTree = "<group>"; };
 		4CE09B592B4615CE00207CDD /* office.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = office.scu; sourceTree = "<group>"; };
 		4CE09B5C2B4617A300207CDD /* office-finished.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = "office-finished.scu"; sourceTree = "<group>"; };
@@ -87,9 +93,12 @@
 			isa = PBXGroup;
 			children = (
 				4C9EC0532B2B5721008DF577 /* main.swift */,
+				4CA9803F2B48AA9F007D4416 /* CompilerError.swift */,
+				4CA980412B49DA33007D4416 /* CommandLineParser.swift */,
 				4C64AFC12B48053700AA11EE /* Options.swift */,
 				4C64AFC32B4805FD00AA11EE /* CommandLine+Ext.swift */,
 				4C64AFC52B48061800AA11EE /* EscapeSequences.swift */,
+				4CA980432B49E47F007D4416 /* Console.swift */,
 			);
 			path = SCUMM;
 			sourceTree = "<group>";
@@ -184,8 +193,11 @@
 			files = (
 				4C64AFC22B48053700AA11EE /* Options.swift in Sources */,
 				4C64AFC62B48061800AA11EE /* EscapeSequences.swift in Sources */,
+				4CA980422B49DA33007D4416 /* CommandLineParser.swift in Sources */,
 				4C64AFC42B4805FD00AA11EE /* CommandLine+Ext.swift in Sources */,
 				4C9EC0542B2B5721008DF577 /* main.swift in Sources */,
+				4CA980402B48AA9F007D4416 /* CompilerError.swift in Sources */,
+				4CA980442B49E47F007D4416 /* Console.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +328,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FNBTP68MJQ;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.vicentinastudios.scumm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -327,6 +340,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FNBTP68MJQ;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.vicentinastudios.scumm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

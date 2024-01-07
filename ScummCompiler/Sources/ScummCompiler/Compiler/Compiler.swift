@@ -11,12 +11,12 @@ public class Compiler {
     
     public init() { }
     
-    public func compile(source: String) throws -> Chunk? {
+    public func compile(source: String) throws -> Chunk {
         
         let scanner = Scanner(source: source)
         let tokens = try scanner.scanAllTokens()
         
-        var chunk: Chunk?
+        var chunk: Chunk
         
         switch Configuration.PARSER {
             
@@ -34,18 +34,6 @@ public class Compiler {
             
             switch Configuration.BACKEND {
                 
-//            case .ast:
-//                let ast = ASTPrinter()
-//                if let string = ast.print(expression: expression) {
-//                    print("AST:", string)
-//                }
-//                
-//            case .interpreter:
-//                print("Interpreter:", terminator: " ")
-//                let interpreter = Interpreter()
-//                let value = try interpreter.interpret(ast: expression)
-//                print(interpreter.stringify(value))
-                
             case .scumm:
                 print("Gernerate SCUMM")
                 let codeGen = GenerateSCUMM(with: Chunk())
@@ -53,12 +41,56 @@ public class Compiler {
                 
                 
             case .mojo:
-                print("Gernerate Mojos")
+                print("Gernerate Mojo")
                 let codeGen = GenerateMojo(with: Chunk())
                 chunk = try codeGen.generateByteCode(expression: expression)
             }
         }
         
         return chunk
+    }
+    
+    public func interpret(source: String) throws {
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        
+        switch Configuration.PARSER {
+            
+        case .pratt:
+            throw CompilerError.compileError
+            
+        case .decent:
+            
+            let parser = DecentParser(tokens: tokens)
+            let expression = try parser.parse()
+                
+            print("Evaluate:", terminator: " ")
+            let interpreter = Interpreter()
+            let value = try interpreter.interpret(ast: expression)
+            print(interpreter.stringify(value))
+        }
+    }
+    
+    public func ast(source: String) throws {
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        
+        switch Configuration.PARSER {
+            
+        case .pratt:
+            throw CompilerError.compileError
+            
+        case .decent:
+            
+            let parser = DecentParser(tokens: tokens)
+            let expression = try parser.parse()
+                
+            let ast = ASTPrinter()
+            if let string = ast.print(expression: expression) {
+                print("AST:", string)
+            }
+        }
     }
 }

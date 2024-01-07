@@ -7,168 +7,93 @@
 
 import Foundation
 
+/// Extension for working with command line arguments.
+///
+/// This extension provides utility functions to check for options, extract values, and extract multiple values for a specified option.
+///
+/// Example usage:
+/// ```swift
+/// if CommandLine.hasOption("--verbose") {
+///     print("Verbose mode is enabled!")
+/// }
+///
+/// if let value = CommandLine.extractValue(for: "--output") {
+///     print("Output file: \(value)")
+/// }
+///
+/// if let values = CommandLine.extractValuesForOption(with: "--files") {
+///     print("Files: \(values.joined(separator: ", "))")
+/// }
+/// ```
 extension CommandLine {
     
-    static var isEmpty: Bool {
-        CommandLine.arguments.count == 1
+    /// Check if a specific option is present in the command line arguments.
+    ///
+    /// - Parameter option: The option to check for.
+    /// - Returns: `true` if the option is found, `false` otherwise.
+    static func hasOption(_ option: String) -> Bool {
+        arguments.contains { $0.hasPrefix(option) }
     }
     
-    static var shouldShowVersion: Bool {
+    /// Extract the value associated with a specified option from the command line arguments.
+    ///
+    /// - Parameters:
+    ///   - option: The option to extract the value for.
+    ///   - prefix: An optional prefix for the option.
+    /// - Returns: The extracted value, or `nil` if the option is not found.
+    static func extractValue(for option: String, prefix: String? = nil) -> String? {
         
-        guard CommandLine.arguments.count > 0 else {
-            return false
-        }
+        let option = option + (prefix ?? "")
         
-        let search = /--version/
-        
-        for arg in args {
-            if let _ = try? search.wholeMatch(in: arg) {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
-    static var shouldDisableANSI: Bool {
-        
-        guard CommandLine.arguments.count > 0 else {
-            return false
-        }
-        
-        let search = /--noansi/
-        
-        for arg in args {
-            if let _ = try? search.wholeMatch(in: arg) {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
-    static var shouldEnableDebug: Bool {
-        
-        guard CommandLine.arguments.count > 0 else {
-            return false
-        }
-        
-        let search = /--debug/
-        
-        for arg in args {
-            if let _ = try? search.wholeMatch(in: arg) {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
-    static var shouldShowHelp: Bool {
-        
-        guard CommandLine.arguments.count > 0 else {
-            return false
-        }
-        
-        let search = /--help/
-        
-        for arg in args {
-            if let _ = try? search.wholeMatch(in: arg) {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
-    static var extractTargetVersion: Int? {
-        
-        guard CommandLine.arguments.count > 0 else {
+        guard
+            let index = arguments.firstIndex(where: { $0.hasPrefix(option) })
+        else {
             return nil
         }
         
-        let search = /-v(\d+)/
-        
-        for arg in args {
-            if let match = try? search.wholeMatch(in: arg) {
-                return Int(match.1)
-            }
-        }
-        
-        return nil
+        let value = arguments[index].replacingOccurrences(of: option, with: "")
+        return value.isEmpty ? nil : value
     }
     
-    static var extractFilenames: [String]? {
+    /// Extract multiple values for a specified option from the command line arguments.
+    ///
+    /// - Parameter option: The option to extract values for.
+    /// - Returns: An array of extracted values, or `nil` if the option is not found.
+    static func extractValuesForOption(with option: String? = nil, subsequentOption: String? = nil) -> [String]? {
         
-        guard CommandLine.arguments.count > 1 else {
-            return nil
-        }
+        guard arguments.count != 1 else { return nil }
         
-        let optionWithParameter = /-[o]|--(output)/
-        let optionWithoutParamter = /-.*|--.*/
+        var values: [String]?
+        var skipNextArgument = false
+        var previous = arguments[1]
         
-        var filenames: [String]?
-        var skipArgument = false
-        
-        for arg in CommandLine.arguments.dropFirst() {
+        for arg in arguments.dropFirst() {
             
-            if skipArgument {
-                skipArgument = false
+            if skipNextArgument, arg.hasPrefix("-") {
+                return nil
+                
+            } else if arg.hasPrefix("-"), let values = values {
+                return values
+                
+            } else if skipNextArgument {
+                skipNextArgument = false
+                values = (values ?? []) + [arg]
+                
+            } else if let option = option, arg.hasPrefix(option) {
+                skipNextArgument = true
                 continue
-            } else if let _ = try? optionWithParameter.wholeMatch(in: arg) {
-                skipArgument = true
+                
+            } else if option == nil, !arg.hasPrefix("-"), !previous.hasPrefix(subsequentOption ?? "") {
+                values = (values ?? []) + [arg]
                 continue
-            } else if let _ = try? optionWithoutParamter.wholeMatch(in: arg) {
-                continue
-            } else {
-                if filenames?.append(arg) == nil {
-                    filenames = [arg]
-                }
+                
+            } else if let _ = values {
+                values?.append(arg)
             }
+            
+            previous = arg
         }
         
-        return filenames
-    }
-    
-    static var extractFrontend: String? {
-        
-        for arg in CommandLine.arguments {
-            if arg.hasPrefix("--frontend=") {
-                let components = arg.split(separator: "=", maxSplits: 1)
-                if components.count == 2 {
-                    return String(components[1])
-                }
-            }
-        }
-        
-        return nil
-    }
-    
-    static var extractBackend: String? {
-        
-        for arg in CommandLine.arguments {
-            if arg.hasPrefix("--backend=") {
-                let components = arg.split(separator: "=", maxSplits: 1)
-                if components.count == 2 {
-                    return String(components[1])
-                }
-            }
-        }
-        
-        return nil
-    }
-    
-    static var extractRuntime: String? {
-        
-        for arg in CommandLine.arguments {
-            if arg.hasPrefix("--runtime=") {
-                let components = arg.split(separator: "=", maxSplits: 1)
-                if components.count == 2 {
-                    return String(components[1])
-                }
-            }
-        }
-        
-        return nil
+        return values
     }
 }

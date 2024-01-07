@@ -24,10 +24,11 @@ public struct Configuration {
         case interpreter
         case mojo
         case scumm
-        case decompiler
+        case xray
     }
     
     public static var DEBUG_TRACE_EXECUTION = false
     public static var BACKEND = Backend.scumm
     public static var PARSER = ParserType.decent
+    public static var RUNTIME = Runtime.scumm
 }

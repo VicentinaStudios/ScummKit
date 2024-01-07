@@ -51,10 +51,7 @@ public class ScummVM {
         
         let compiler = Compiler()
         
-        guard let chunk = try compiler.compile(source: source) else {
-            throw CompilerError.compileError
-        }
-        
+        let chunk = try compiler.compile(source: source)
         self.chunk = chunk
         instructionPointer = chunk.codeStart
         

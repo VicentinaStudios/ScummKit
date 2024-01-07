@@ -8,75 +8,88 @@
 import Foundation
 import ScummCompiler
 
-let args = Array(CommandLine.arguments)
+main()
 
-//demos()
-
-if CommandLine.shouldDisableANSI {
-    Options.isAnsiEnabled = false
-}
-
-if CommandLine.shouldEnableDebug {
-    Options.isDebugEnabled = true
-    Configuration.DEBUG_TRACE_EXECUTION = true
-}
-
-if CommandLine.shouldShowVersion {
-    print("SCUMM Compiler v0.1".escape.greenBold)
-    exit(ExitStatusCodes.successfulTermination.rawValue)
-} else if CommandLine.shouldShowHelp {
-    let executableName = (CommandLine.arguments[0] as NSString).lastPathComponent
-    print("Syntax:\n\t\t\(executableName) [OPTIONS] FILENAME")
-    print("Options:\n\t\t-v5     Input Script is v5")
-    exit(ExitStatusCodes.successfulTermination.rawValue)
-}
-
-Options.frontend = CommandLine.extractFrontend ?? "decent"
-Options.backend = CommandLine.extractBackend ?? "scumm"
-Options.runtime = CommandLine.extractRuntime ?? "scumm"
-
-if Options.backend == "scumm" {
+func main() {
     
-    Options.version = CommandLine.extractTargetVersion ?? 5
+    let commandLineParser = CommandLineParser()
+    let options = commandLineParser.parseOptions()
     
-    guard (0...8).contains(Options.version) else {
-        let error = "Error:".escape.red
-        let message = "Invalid SCUMM version.".escape.whiteBold
-        fputs("\(error) \(message)\n", stderr)
-        exit(ExitStatusCodes.terminateApp.rawValue)
+    do {
+        
+        try configureCompiler(with: options)
+                
+        switch Configuration.RUNTIME {
+            
+        case .interpreter:
+            
+            guard let _ = loadSources() else {
+                repl(with: options)
+                return
+            }
+            
+            guard
+                !CommandLine.hasOption("-o"),
+                !CommandLine.hasOption("--o")
+            else {
+                throw CLIError.redundantOutput
+            }
+            
+            print("Interpreter:", options.frontend ?? "-", options.backend ?? "-", options.runtime ?? "-")
+            
+            guard
+                let filename = loadSources()?.first,
+                let source = try? String(contentsOfFile: filename, encoding: .utf8)
+            else {
+                throw CLIError.missingSources
+            }
+            
+            let compiler = Compiler()
+            try compiler.interpret(source: source)
+            
+        case .ast:
+            
+            print("AST:", options.frontend ?? "-", options.backend ?? "-", options.runtime ?? "-")
+            
+            guard
+                let filename = loadSources()?.first,
+                let source = try? String(contentsOfFile: filename, encoding: .utf8)
+            else {
+                throw CLIError.missingSources
+            }
+            
+            let compiler = Compiler()
+            try compiler.ast(source: source)
+            
+        case .scumm, .mojo, .xray:
+            
+            print("BYTECODE:", options.frontend ?? "-", options.backend ?? "-", options.runtime ?? "-")
+            
+            guard let sources = loadSources() else {
+                throw CLIError.missingSources
+            }
+            
+            guard
+                !CommandLine.hasOption("-o"),
+                !CommandLine.hasOption("--o")
+            else {
+                print("* Compile to bytecode")
+                return
+            }
+            
+            try run(sources, with: options)
+        }
+        
+    } catch CLIError.missingSources {
+        Console.showWarning(error: CLIError.missingSources)
+    } catch {
+        Console.showErrorAndExit(error: error)
     }
+}
+
+func repl(with options: CompilerOptions) {
     
-    guard Options.version == 5 else {
-        let error = "Error:".escape.red
-        let message = "SCUMM version not supported.".escape.whiteBold
-        fputs("\(error) \(message)\n", stderr)
-        exit(ExitStatusCodes.terminateApp.rawValue)
-    }
-}
-
-guard let filenames = CommandLine.extractFilenames else {
-    repl()
-    exit(ExitStatusCodes.terminateApp.rawValue)
-}
-
-let filesNotFound = filenames.filter { filename in
-    !FileManager.default.fileExists(atPath: filename)
-}
-
-guard filesNotFound.isEmpty else {
-    let error = "Error:".escape.red
-    let message = "Files not found: \(filesNotFound.joined(separator: ", "))".escape.whiteBold
-    fputs("\(error) \(message)\n", stderr)
-    exit(ExitStatusCodes.terminateApp.rawValue)
-}
-
-filenames.forEach { filename in
-    run(filename)
-}
-
-exit(ExitStatusCodes.terminateApp.rawValue)
-
-func repl() {
+    print("REPL:", options.frontend ?? "-", options.backend ?? "-", options.runtime ?? "-")
     
     while true {
         
@@ -91,70 +104,149 @@ func repl() {
     }
 }
 
-func run(_ filename: String) {
+func run(_ sources: [String], with options: CompilerOptions) throws {
+    
+    print("VM:", options.frontend ?? "-", options.backend ?? "-", options.runtime ?? "-")
     
     guard
-        let source = try? String(contentsOfFile: filename, encoding: .utf8),
-        let frontend = Configuration.ParserType(rawValue: Options.frontend),
-        let backend = Configuration.Backend(rawValue: Options.backend),
-        let runtime = Configuration.Runtime(rawValue: Options.runtime)
+        let filename = sources.first,
+        let source = try? String(contentsOfFile: filename, encoding: .utf8)
     else {
-        fatalError("Can't read file: \(filename)")
+        throw CLIError.missingSources
     }
     
-    Configuration.PARSER = frontend
-    Configuration.BACKEND = backend
+    let compiler = Compiler()
+    let chunk = try compiler.compile(source: source)
     
-    do {
-        let compiler = Compiler()
+    switch Configuration.RUNTIME {
         
-        guard let chunk = try compiler.compile(source: source) else {
-            print("empty chunk")
-            exit(ExitStatusCodes.terminateApp.rawValue)
+    case .mojo:
+        
+        print("Mojo VM")
+        
+        let vm = MojoVM()
+        try vm.interpret(chunk: chunk)
+
+    case .scumm:
+        
+        print("SCUMM VM")
+        
+        let vm = ScummVM()
+        try vm.interpret(chunk: chunk)
+
+    case .xray:
+        
+        print("Mojo Decompiler")
+        
+        let decompiler = Decompiler()
+        if let decompilation = try decompiler.decompile(chunk) {
+            decompiler.prettyPrint(decompilation, name: "Demo Chunk")
         }
         
-        switch runtime {
-        case .ast:
-            print("Abstratc Syntax Tree")
-        case .interpreter:
-            print("Interpreter")
-        case .mojo:
-            print("Mojo VM")
-            let vm = MojoVM()
-            try vm.interpret(chunk: chunk)
-        case .scumm:
-            print("SCUMM VM")
-            let vm = ScummVM()
-            try vm.interpret(chunk: chunk)
-        case .decompiler:
-            print("Mojo Decompiler")
-            let decompiler = Decompiler()
-            if let decompilation = try decompiler.decompile(chunk){
-                decompiler.prettyPrint(decompilation, name: "Demo Chunk")
-            }
-        }
-    } catch {
-        print(error)
+    default:
+        throw CLIError.unsupportedRuntime(
+            runtime: Configuration.RUNTIME.rawValue, 
+            backend: Configuration.BACKEND.rawValue
+        )
+        
     }
 }
 
-enum ExitStatusCodes: Int32 {
-    
-    case successfulTermination = 0
-    case terminateApp = 1
-    case commandLineUsageError = 64
-    case dataFormatError = 65
-    case cannotOpenInput = 66
-    case addresseeUnknown = 67
-    case hostNameUnknown = 68
-    case serviceUnavailable = 69
-    case internalSoftwareError = 70
-    case systemError = 71
-    case criticalOperatingSystemFileMissing = 72
-    case cantCreateUserOutputFile = 73
-    case inputOutputError = 74
-    case tempFailureUserInvitedToRetry = 75
-    case remoteErrorInOrotocol = 76
-    case permissionDenied = 77
-    case configurationError = 78
+func loadSources() -> [String]? {
+    CommandLine.extractValuesForOption(subsequentOption: "-o")
 }
+
+func configureCompiler(with options: CompilerOptions) throws {
+    
+    do {
+        
+        try setupFrontend(options.frontend)
+        try setupBackend(for: options)
+        try setupRuntime(options.runtime)
+        
+    } catch CLIError.noBackendSelected(let runtime) {
+        Console.showWarning(error: CLIError.noBackendSelected(runtime))
+    }
+}
+
+func setupFrontend(_ frontend: String?) throws {
+    
+    guard
+        let frontend = frontend,
+        let parser = Configuration.ParserType(rawValue: frontend)
+    else {
+        throw CLIError.missingFrontend
+    }
+    
+    Configuration.PARSER = parser
+}
+
+func setupBackend(for options: CompilerOptions) throws {
+        
+    guard
+        let backend = options.backend,
+        let codeGenerator = Configuration.Backend(rawValue: backend)
+    else {
+        
+        if options.runtime == "interpreter" || options.runtime == "ast"{
+            return
+        }
+        
+        guard let runtime = options.runtime else {
+            
+            let runtime = CommandLine.hasOption("--pretty")
+                ? "AST printer (enabled command line argument: '--pretty')"
+                : "interpreter"
+            
+                throw CLIError.noBackendSelected(runtime)
+        }
+        
+        throw CLIError.missingBackend(runtime)
+    }
+    
+    Configuration.BACKEND = codeGenerator
+}
+
+func setupRuntime(_ runtime: String?) throws {
+    
+    guard
+        let runtime = runtime,
+        let virtualMachine = Configuration.Runtime(rawValue: runtime)
+    else {
+        return
+    }
+    
+    Configuration.RUNTIME = virtualMachine
+}
+
+//
+
+/*
+if Options.backend == "scumm" {
+    
+    do {
+        
+    guard let extract = CommandLine.extractValue(for: "-v") else {
+        throw CLIError.missingVersion(backend: "SCUMM")
+    }
+    
+    guard let version = Int(extract) else {
+        throw CLIError.invalidOption(option: "-v", value: extract)
+    }
+    
+    Options.version = version
+    
+        guard (0...8).contains(Options.version) else {
+            throw CLIError.invalidVersions(version: Options.version)
+        }
+        
+        guard Options.version == 5 else {
+            throw CLIError.unsupportedVersion(version: Options.version)
+            
+            
+        }
+    } catch {
+        showErrorAndExit(error: error)
+    }
+}
+*/

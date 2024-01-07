@@ -52,16 +52,60 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--noansi --debug --frontend=decent --backend=mojo"
+            argument = "--noansi --debug"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "${PROJECT_DIR}/helloworld.scu -d"
+            argument = "--help"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--noansi --debug --frontend=decent --backend=mojo --runtime=decompiler ${PROJECT_DIR}/helloworld.scu -o bytecode.scumm"
-            isEnabled = "YES">
+            argument = "--version"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--pretty"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-v5"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--frontend=decent"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--frontend=pratt"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--backend=mojo"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--backend=scumm"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--runtime=mojo"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--runtime=scumm"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--runtime=xray"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "${PROJECT_DIR}/helloworld.scu"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-o bytecode.scumm"
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
