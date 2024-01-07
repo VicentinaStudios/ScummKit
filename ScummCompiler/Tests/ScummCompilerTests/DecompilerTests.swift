@@ -34,7 +34,7 @@ final class DecompilerTests: XCTestCase {
     
     func testDecompileWithSingleInstruction() throws {
         
-        chunk.write(byte: Opcode.breakHere.rawValue)
+        try chunk.write(byte: Opcode.breakHere.rawValue, line: 1)
 
         let result = try decompiler.decompile(chunk)
         XCTAssertEqual(result?.count, 1, "Expected one decompiled instruction")
@@ -45,7 +45,7 @@ final class DecompilerTests: XCTestCase {
     func testDecompileWithUnknownOpcode() throws {
 
         let invalidOpcode: UInt8 = 255
-        chunk.write(byte: invalidOpcode)
+        try chunk.write(byte: invalidOpcode, line: 1)
 
         do {
             _ = try decompiler.decompile(chunk)

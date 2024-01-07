@@ -13,7 +13,7 @@ final class OpcodeTests: XCTestCase {
 
     func testExistingOpcodes() throws {
         
-        XCTAssertTrue(Opcode.allCases.count == 1)
+        XCTAssertTrue(Opcode.allCases.count == 9)
         
         XCTAssertTrue(Opcode.allCases.contains(.breakHere))
     }

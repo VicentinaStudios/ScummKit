@@ -31,7 +31,7 @@ final class ChunkTests: XCTestCase {
         
         XCTAssertEqual(chunk.size, 0)
         
-        chunk.write(byte: 0xAA, line: <#Int#>)
+        try chunk.write(byte: 0xAA, line: 1)
         
         XCTAssertEqual(chunk.size, 1)
         
@@ -41,24 +41,24 @@ final class ChunkTests: XCTestCase {
     
     func testReadOutOfBounds() {
         
-        XCTAssertThrowsError(try chunk.readByte(at: 0)) { error in
-            XCTAssertEqual(error as? CompilerError, CompilerError.outOfBounds("Chunk", 0, 0))
+        XCTAssertThrowsError(try chunk.read(at: 0)) { error in
+            XCTAssertEqual(error as? ChunkError, ChunkError.outOfBounds("byte", 0, 0))
         }
     }
     
     func testReadNegativeOffset() {
         
-        XCTAssertThrowsError(try chunk.readByte(at: -1)) { error in
-            XCTAssertEqual(error as? CompilerError, CompilerError.outOfBounds("Chunk", -1, 0))
+        XCTAssertThrowsError(try chunk.read(at: -1)) { error in
+            XCTAssertEqual(error as? ChunkError, ChunkError.outOfBounds("byte", -1, 0))
         }
     }
     
     func testMultipleWritesAndReads() throws {
         let chunk = Chunk()
         
-        chunk.write(byte: 0xAA)
-        chunk.write(byte: 0xBB)
-        chunk.write(byte: 0xCC)
+        try chunk.write(byte: 0xAA, line: 1)
+        try chunk.write(byte: 0xBB, line: 1)
+        try chunk.write(byte: 0xCC, line: 1)
         
         XCTAssertEqual(chunk.size, 3)
         

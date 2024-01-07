@@ -20,28 +20,28 @@ final class VirtualMachineTests: XCTestCase {
 
     func testInterpretWithEmptyChunk() throws {
         
-        let virtualMachine = VirtualMachine()
+        let virtualMachine = MojoVM()
         let emptyChunk = Chunk()
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: emptyChunk))
     }
     
-    func testInterpretWithBreakHereOpcode() {
+    func testInterpretWithBreakHereOpcode() throws {
         
-        let virtualMachine = VirtualMachine()
+        let virtualMachine = MojoVM()
         let chunk = Chunk()
         
-        chunk.write(byte: Opcode.breakHere.rawValue)
+        try chunk.write(byte: Opcode.breakHere.rawValue, line: 1)
 
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
     }
     
-    func testInterpretWithUnknownOpcode() {
+    func testInterpretWithUnknownOpcode() throws {
         
-        let virtualMachine = VirtualMachine()
+        let virtualMachine = MojoVM()
         let chunk = Chunk()
         
-        chunk.write(byte: 0xFF) // An arbitrary value that is not a valid opcode.
+        try chunk.write(byte: 0xFF, line: 1) // An arbitrary value that is not a valid opcode.
 
         XCTAssertThrowsError(try virtualMachine.interpret(chunk: chunk)) { error in
             XCTAssertEqual(error as? CompilerError, CompilerError.unknownOpcode(0xFF))
