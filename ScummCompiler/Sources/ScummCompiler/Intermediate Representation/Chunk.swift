@@ -103,7 +103,7 @@ extension Chunk {
     /// - Returns: The 16-bit word at the specified offset.
     public func readWord(at offset: Int) throws -> Int16 {
         
-        guard offset >= 0, offset+1 < code.count else {
+        guard offset >= 0, offset <= code.count - 1 else {
             throw ChunkError.outOfBounds("word", offset, size)
         }
         
@@ -127,7 +127,7 @@ extension Chunk {
     /// - Returns: The index of the added constant.
     public func addConstant(value: Value) -> Int {
         constants.append(value)
-        return constants.count
+        return constants.count - 1
     }
     
     /// Reads a constant value at a specified index in the constants array.

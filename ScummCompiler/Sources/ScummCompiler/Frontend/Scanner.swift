@@ -99,6 +99,8 @@ class Scanner {
             tokens.append(try scanToken())
         }
         
+        tokens.append(Token(type: .eof, lexeme: "\0", line: line))
+        
         return tokens
     }
     
@@ -276,7 +278,7 @@ extension Scanner {
     /// - Throws: A `ScannerError` if the string literal is not terminated.
     private func stringLiteral() throws -> Token {
         
-        while character != "\"" && !isEndOfFile {
+        while !isEndOfFile && character != "\"" {
             
             if character.isNewline {
                 line += 1

@@ -95,4 +95,60 @@ final class ScannerTests: XCTestCase {
         XCTAssertEqual(token.lexeme, "identifier123")
         XCTAssertEqual(token.line, 2)
     }
+    
+    func testEmptySource() throws {
+        
+        let source = ""
+        let scanner = Scanner(source: source)
+        
+        let token = try scanner.scanToken()
+        
+        XCTAssertEqual(token.type, .eof)
+    }
+    
+    func testInvalidCharacter() throws {
+        
+        let source = "%"
+        let scanner = Scanner(source: source)
+        
+        XCTAssertThrowsError(try scanner.scanToken()) { error in
+            XCTAssertEqual(error as? ScannerError, ScannerError.unexpectedCharacter(found: "%", line: 1))
+        }
+    }
+    
+    func testIdentifierStartingWithKeyword() throws {
+        
+        let source = "ifElseVariable"
+        let scanner = Scanner(source: source)
+        
+        let token = try scanner.scanToken()
+        
+        XCTAssertEqual(token.type, .identifier)
+        XCTAssertEqual(token.lexeme, "ifElseVariable")
+    }
+    
+    func testUnterminatedStringLiteral() throws {
+        
+        let source = "\"Hello, World!"
+        let scanner = Scanner(source: source)
+        
+        XCTAssertThrowsError(try scanner.scanToken()) { error in
+            XCTAssertEqual(error as? ScannerError, ScannerError.unterminatedString(found: "\"Hello, World!", line: 1))
+        }
+    }
+    
+    func testLastTokenIsEOF() throws {
+        
+        let source = "1 + 2"
+            
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+
+        let lastToken = tokens.last
+            
+        XCTAssertNotNil(lastToken)
+        XCTAssertEqual(lastToken?.type, .eof)
+        XCTAssertEqual(lastToken?.lexeme, "\0")
+        XCTAssertEqual(lastToken?.line, 1)
+    }
 }

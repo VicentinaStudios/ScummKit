@@ -40,14 +40,14 @@ public class Decompiler {
         return decompilation
     }
     
-    public func trace(_ chunk: Chunk, offset: Int) throws  {
+    public func trace(_ chunk: Chunk, offset: Int) throws -> String {
         
         reset(with: chunk)
         self.offset = offset
         
         let decompilation = try decompileInstruction(at: offset)
         
-        printInstruction(decompilation)
+        return formatInstruction(decompilation)
     }
     
     public func prettyPrint(_ decompilation: [Decompilation], name: String) {
@@ -146,7 +146,7 @@ public class Decompiler {
         guard
             let offset = offset,
             let constant = try chunk?.read(at: offset + 1),
-            let value = try chunk?.readConstant(at: Int(constant - 1))
+            let value = try chunk?.readConstant(at: Int(constant))
         else {
             throw CompilerError.unknownIndex
         }
@@ -156,5 +156,32 @@ public class Decompiler {
         self.offset = offset + 2
         
         return decompilation
+    }
+    
+    private func formatInstruction(_ instruction: Decompilation) -> String {
+        var output = ""
+        
+        let offset = String(format: "%04d", instruction.offset)
+        let line = String(format: "%4d", chunk!.lines[instruction.offset])
+        let opcode = instruction.opcode.name.withCString { String(format: "%-16s", $0) }
+        
+        if instruction.offset > 0,
+           chunk?.lines[instruction.offset] == chunk?.lines[instruction.offset - 1]
+        {
+            output += "[\(offset)]   |" + opcode
+        } else {
+            output += "[\(offset)] \(line) \(opcode)"
+        }
+        
+        if let constant = instruction.constant,
+           let key = constant.keys.first,
+           let value = constant[key]
+        {
+            output += " \(key) '\(value)'"
+        }
+        
+        output += "\n"
+        
+        return output
     }
 }

@@ -56,4 +56,29 @@ final class DecompilerTests: XCTestCase {
             XCTFail("Unexpected error: \(error)")
         }
     }
+    
+    func testDecompileWithMultipleInstructions() throws {
+        
+        try chunk.write(byte: Opcode.add.rawValue, line: 1)
+        let constant = chunk.addConstant(value: 123)
+        try chunk.write(byte: Opcode.constant.rawValue, line: 1)
+        try chunk.write(byte: UInt8(constant), line: 1)
+        
+        let result = try decompiler.decompile(chunk)
+        
+        XCTAssertEqual(result?.count, 2, "Expected two decompiled instructions")
+        XCTAssertEqual(result?[0].opcode, .add, "Unexpected opcode for instruction 1")
+        XCTAssertEqual(result?[1].opcode, .constant, "Unexpected opcode for instruction 2")
+        XCTAssertEqual(result?[1].constant?.values.first, 123, "Unexpected constant value for instruction 2")
+    }
+    
+    func testTraceWithValidOffset() throws {
+        
+        try chunk.write(byte: Opcode.multiply.rawValue, line: 1)
+        
+        let result = try decompiler.trace(chunk, offset: 0)
+        
+        XCTAssertTrue(result.contains("0000"), "Expected output to contain offset information")
+        XCTAssertTrue(result.contains("OP_multiply"), "Expected output to contain opcode information")
+    }
 }
