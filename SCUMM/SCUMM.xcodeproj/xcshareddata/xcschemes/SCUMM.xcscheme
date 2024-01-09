@@ -53,7 +53,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "--noansi --debug"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--help"
@@ -73,7 +73,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--frontend=decent"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--frontend=pratt"
@@ -81,7 +81,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--backend=mojo"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--backend=scumm"
@@ -89,7 +89,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--runtime=mojo"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--runtime=scumm"
@@ -101,7 +101,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "${PROJECT_DIR}/helloworld.scu"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-o bytecode.scumm"

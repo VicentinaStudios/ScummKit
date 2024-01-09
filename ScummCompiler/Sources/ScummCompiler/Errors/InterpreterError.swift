@@ -24,6 +24,12 @@ enum InterpreterError: LocalizedError, Equatable {
     ///   - line: The line number in the source code where the error occurred.
     case missingOperand(type: String, line: Int)
     
+    /// Error indicating division by zero in a binary expression.
+    ///
+    /// - Parameters:
+    ///   - line: The line number in the source code where the error occurred.
+    case divisionByZero(line: Int)
+    
     /// A human-readable description of the error.
     var errorDescription: String? {
         
@@ -32,6 +38,8 @@ enum InterpreterError: LocalizedError, Equatable {
             return "Unsupported Operator"
         case .missingOperand:
             return "Missing Integer Operand"
+        case .divisionByZero:
+            return "Division by Zero"
         }
     }
     
@@ -43,6 +51,8 @@ enum InterpreterError: LocalizedError, Equatable {
             return "Unsupported \(type) operator at line \(line)"
         case .missingOperand(let type, let line):
             return "\(type.capitalized) expression at line \(line) expects in operand."
+        case .divisionByZero(let line):
+            return "Division by zero at line \(line)"
         }
     }
 
@@ -54,6 +64,9 @@ enum InterpreterError: LocalizedError, Equatable {
             return "Review the expression and ensure that it uses supported operators."
         case .missingOperand:
             return "Check the expression for missing operands and correct the syntax."
+        case .divisionByZero:
+            return "Ensure that the divisor in the expression is not zero."
+
         }
     }
 }

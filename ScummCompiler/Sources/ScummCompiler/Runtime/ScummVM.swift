@@ -74,7 +74,9 @@ public class ScummVM {
             instructionPointer < chunk.size
         {
             
-            try decompiler?.trace(chunk, offset: instructionPointer)
+            if let decompilation = try decompiler?.trace(chunk, offset: instructionPointer) {
+                print(decompilation)
+            }
             
             let byte = try readNextByte()
             

@@ -138,6 +138,11 @@ extension Interpreter: ExpressionVisitor {
             return left - right
             
         case .slash:
+            
+            guard right != 0 else {
+                throw InterpreterError.divisionByZero(line: expression.operatorToken.line)
+            }
+            
             return left / right
             
         case .star:

@@ -74,7 +74,9 @@ public class MojoVM {
             instructionPointer < chunk.size
         {
             
-            try decompiler?.trace(chunk, offset: instructionPointer)
+            if let decompilation = try decompiler?.trace(chunk, offset: instructionPointer) {
+                print(decompilation)
+            }
             
             let byte = try readNextByte()
             
@@ -97,7 +99,7 @@ public class MojoVM {
                  break
             case .constant:
                 let index = try Int(readNextByte())
-                let constant = try chunk.readConstant(at: index - 1)
+                let constant = try chunk.readConstant(at: index)
                 push(value: constant)
             case .negate:
                 push(value: -pop())
