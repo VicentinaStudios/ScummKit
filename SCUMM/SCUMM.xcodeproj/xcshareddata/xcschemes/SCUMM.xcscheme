@@ -52,7 +52,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--noansi --debug"
+            argument = "--noansi"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--debug"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

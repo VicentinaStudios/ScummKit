@@ -34,10 +34,13 @@ enum InterpreterError: LocalizedError, Equatable {
     var errorDescription: String? {
         
         switch self {
+            
         case .unsupportedOperator:
             return "Unsupported Operator"
+            
         case .missingOperand:
             return "Missing Integer Operand"
+            
         case .divisionByZero:
             return "Division by Zero"
         }
@@ -47,10 +50,13 @@ enum InterpreterError: LocalizedError, Equatable {
     var failureReason: String? {
         
         switch self {
+            
         case .unsupportedOperator(let type, let line):
             return "Unsupported \(type) operator at line \(line)"
+            
         case .missingOperand(let type, let line):
             return "\(type.capitalized) expression at line \(line) expects in operand."
+            
         case .divisionByZero(let line):
             return "Division by zero at line \(line)"
         }
@@ -60,13 +66,15 @@ enum InterpreterError: LocalizedError, Equatable {
     var recoverySuggestion: String? {
         
         switch self {
+            
         case .unsupportedOperator:
             return "Review the expression and ensure that it uses supported operators."
+            
         case .missingOperand:
             return "Check the expression for missing operands and correct the syntax."
+            
         case .divisionByZero:
             return "Ensure that the divisor in the expression is not zero."
-
         }
     }
 }

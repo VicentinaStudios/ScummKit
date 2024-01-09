@@ -133,7 +133,6 @@ class InterpreterTests: XCTestCase {
     func testInterpreterPipeline() throws {
         
         let source = "(-1 + 2) * 3 - -4"
-        
         let scanner = Scanner(source: source)
         let tokens = try scanner.scanAllTokens()
         let parser = DecentParser(tokens: tokens)
