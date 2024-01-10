@@ -143,7 +143,6 @@ public class BaseVM: VirtualMachine {
     internal func run() throws {
         
         // NOTE: Implement this in the concrete virtual machine
-        fatalError("Subclasses must implement their own run method.")
         
         defer {
             if Configuration.DEBUG_TRACE_EXECUTION {

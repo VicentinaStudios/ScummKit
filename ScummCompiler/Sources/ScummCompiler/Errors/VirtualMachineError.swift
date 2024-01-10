@@ -39,6 +39,8 @@ enum VirtualMachineError: LocalizedError, Equatable {
     /// - Throws: `VirtualMachineError.divisionByZero` if division by zero occurs.
     case divisionByZero(line: Int?)
     
+    case emptyChunk
+    
     /// A human-readable description of the error.
     var errorDescription: String? {
         
@@ -55,6 +57,9 @@ enum VirtualMachineError: LocalizedError, Equatable {
             
         case .divisionByZero:
             return "Division by Zero"
+            
+        case .emptyChunk:
+            return "Empty Chunk"
         }
     }
     
@@ -74,6 +79,9 @@ enum VirtualMachineError: LocalizedError, Equatable {
             
         case .divisionByZero(let line):
             return "Division by zero at line: '\(line.map { "\($0)" } ?? "unknown")'"
+            
+        case .emptyChunk:
+            return nil
         }
     }
     
@@ -93,6 +101,9 @@ enum VirtualMachineError: LocalizedError, Equatable {
             
         case .divisionByZero:
             return "Ensure that the divisor in the expression is not zero."
+            
+        case .emptyChunk:
+            return nil
         }
     }
 }

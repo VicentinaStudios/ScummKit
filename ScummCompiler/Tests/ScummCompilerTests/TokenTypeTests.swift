@@ -1,7 +1,14 @@
+//
+//  TokenTypeTests.swift
+//
+//
+//  Created by Michael Borgmann on 16/12/2023.
+//
+
 import XCTest
 @testable import ScummCompiler
 
-final class ScummCompilerTests: XCTestCase {
+final class TokenTypeTests: XCTestCase {
     
     func testExistingTokenTypes() throws {
         XCTAssertTrue(TokenType.allCases.count == 40)

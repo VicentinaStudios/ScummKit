@@ -1,5 +1,5 @@
 //
-//  VirtualMachineScumm.swift
+//  ScummVM.swift
 //
 //
 //  Created by Michael Borgmann on 16/12/2023.
