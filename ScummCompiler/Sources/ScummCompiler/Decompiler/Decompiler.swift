@@ -8,7 +8,7 @@
 import Foundation
 
 /// A protocol for defining a decompiler.
-protocol Decompiler {
+public protocol Decompiler {
     
     /// Decompile the provided bytecode chunk.
     /// - Parameter chunk: The bytecode chunk to decompile.
@@ -69,7 +69,7 @@ public class BaseDecompiler<T: Opcode>: Decompiler {
     /// - Parameter chunk: The bytecode chunk to decompile.
     /// - Returns: An array of decompilations representing the decompiled instructions.
     /// - Throws: An error if decompilation fails.
-    func decompile(_ chunk: Chunk) throws -> [Decompilation]? {
+    public func decompile(_ chunk: Chunk) throws -> [Decompilation]? {
         
         reset(with: chunk)
         
@@ -181,7 +181,7 @@ extension BaseDecompiler {
 
     /// Print the header for the decompiled output.
     /// - Parameter name: The name associated with the decompilation.
-    func printHeader(name: String) {
+    public func printHeader(name: String) {
         
         print("== \(name) ==")
         
@@ -211,7 +211,7 @@ extension BaseDecompiler {
         if instruction.offset > 0,
            chunk.lines[instruction.offset] == chunk.lines[instruction.offset - 1]
         {
-            output += "[\(offset)]   |" + opcode
+            output += "[\(offset)]    | " + opcode
         } else {
             output += "[\(offset)] \(line) \(opcode)"
         }

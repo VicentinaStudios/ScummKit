@@ -70,7 +70,8 @@ class GenerateSCUMM: BaseCodeGenerator<ScummOpcode> {
         switch expression.operatorToken.type {
         
         case .minus:
-            return -right
+            try emitBytes(0x01, integerToBytes(-right)[0], integerToBytes(-right)[1])
+            return nil  // -right
             
         default:
             return nil
@@ -85,15 +86,13 @@ class GenerateSCUMM: BaseCodeGenerator<ScummOpcode> {
         
         line = expression.operatorToken.line
         
-        guard
-            let left = try evaluate(expression.left) as? Int,
-            let right = try evaluate(expression.right) as? Int
-        else {
-            throw CodeGeneratorError.expressionEvaluationFailed
+        if let left = try evaluate(expression.left) as? Int {
+            try emitBytes(0x01, integerToBytes(left)[0], integerToBytes(left)[1])
         }
-        
-        try emitBytes(0x01, integerToBytes(left)[0], integerToBytes(left)[1])
-        try emitBytes(0x01, integerToBytes(right)[0], integerToBytes(right)[1])
+            
+        if let right = try evaluate(expression.right) as? Int {
+            try emitBytes(0x01, integerToBytes(right)[0], integerToBytes(right)[1])
+        }
         
         switch expression.operatorToken.type {
             

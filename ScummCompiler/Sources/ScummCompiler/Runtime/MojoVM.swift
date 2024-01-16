@@ -41,6 +41,10 @@ public class MojoVM: BaseVM<MojoOpcode> {
             }
             
             try handleInstruction(instruction)
+            
+            if Configuration.DEBUG_TRACE_EXECUTION {
+                showStack()
+            }
         }
     }
 }

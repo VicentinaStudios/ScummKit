@@ -36,11 +36,8 @@ public class Compiler {
             
             case .scumm:
                 print("Gernerate SCUMM")
-                /*
                 let codeGen = GenerateSCUMM(with: Chunk())
                 chunk = try codeGen.generateByteCode(expression: expression)
-                */
-                chunk = Chunk()
                 
             case .mojo:
                 print("Gernerate Mojo")

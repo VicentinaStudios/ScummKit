@@ -36,6 +36,10 @@ public class ScummVM: BaseVM<ScummOpcode> {
             }
             
             try handleInstruction(instruction)
+            
+            if Configuration.DEBUG_TRACE_EXECUTION {
+                showStack()
+            }
         }
     }
 }

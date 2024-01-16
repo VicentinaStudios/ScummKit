@@ -8,7 +8,7 @@
 import Foundation
 
 /// A decompiler for Mojo opcodes.
-class MojoDecompiler: BaseDecompiler<MojoOpcode> {
+public class MojoDecompiler: BaseDecompiler<MojoOpcode> {
     
     /// Handle the decompilation of a Mojo opcode.
     /// - Parameter opcode: The Mojo opcode to handle.

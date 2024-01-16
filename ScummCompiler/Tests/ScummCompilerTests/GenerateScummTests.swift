@@ -93,4 +93,23 @@ final class GenerateScummTests: XCTestCase {
         XCTAssertEqual(chunk?.code, [172, 2, 64, 1, 0xed, 0xff, 1, 0x18, 0, 2, 255])
         XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 11))
     }
+    
+    func testGenerateComplexExpression() throws {
+        
+        let source = "(-1 + 2) * 3 - -4"
+        let chunk = try createChunkFromSource(source)
+        
+        XCTAssertEqual(chunk.code, [172, 2, 64, 1, 255, 255, 1, 2, 0, 2, 1, 3, 0, 4, 1, 252, 255, 3, 255])
+    }
+    
+    func createChunkFromSource(_ source: String) throws -> Chunk {
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let expression = try parser.parse()
+        let codeGenerator = GenerateSCUMM(with: Chunk())
+        
+        return try codeGenerator.generateByteCode(expression: expression)
+    }
 }

@@ -79,8 +79,19 @@ public class BaseVM<OpcodeType: Opcode>: VirtualMachine {
     // MARK: Computed Propertiex
     
     /// The decompiler used for debugging traces.
-    internal var decompiler: BaseDecompiler<OpcodeType>? {
-        Configuration.DEBUG_TRACE_EXECUTION ? BaseDecompiler() : nil
+    internal var decompiler: Decompiler? {
+        
+        guard Configuration.DEBUG_TRACE_EXECUTION else {
+            return nil
+        }
+
+        if OpcodeType.self == MojoOpcode.self {
+            return MojoDecompiler()
+        } else if OpcodeType.self == ScummOpcode.self {
+            return ScummDecompiler()
+        } else {
+            return nil
+        }
     }
     
     // MARK: Lifecycle
@@ -142,14 +153,7 @@ public class BaseVM<OpcodeType: Opcode>: VirtualMachine {
     /// - Throws: An error if there's an issue during execution.
     internal func run() throws {
         
-        // NOTE: Implement this in the concrete virtual machine
-        
-        defer {
-            if Configuration.DEBUG_TRACE_EXECUTION {
-                showStack()
-            }
-        }
-        
+        // NOTE: Override this in the concrete virtual machine
         decompiler?.printHeader(name: "TRACE")
     }
 }

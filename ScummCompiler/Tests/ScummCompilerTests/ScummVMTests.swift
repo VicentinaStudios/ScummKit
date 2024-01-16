@@ -75,6 +75,16 @@ final class ScummVMTests: XCTestCase {
         XCTAssertEqual(try virtualMachine.pop(), -5)
     }
     
+    func testComplexExpression() throws {
+        
+        let source = "(-1 + 2) * 3 - -4"
+        let chunk = try createChunkFromSource(source)
+        
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+        XCTAssertEqual(try virtualMachine.pop(), 7)
+    }
+    
     func createChunkFromSource(_ source: String) throws -> Chunk {
         
         let scanner = Scanner(source: source)
