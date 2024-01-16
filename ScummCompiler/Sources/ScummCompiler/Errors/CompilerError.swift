@@ -7,15 +7,12 @@
 
 import Foundation
 
-// MARK: - Compiler Error
-
 enum CompilerError: LocalizedError, Equatable {
     
-    case cantFetchInstruction(Int)
     case unknownOpcode(UInt8)
     case emptyCodeChunk
     case unknownIndex
-
+    
     case compileError
     
     // MARK: Error Descriptions
@@ -23,9 +20,6 @@ enum CompilerError: LocalizedError, Equatable {
     var errorDescription: String? {
         
         switch self {
-        
-        case .cantFetchInstruction:
-            return "Can't Fetch Instruction"
             
         case .unknownOpcode:
             return "Unknown Opcode"
@@ -48,9 +42,6 @@ enum CompilerError: LocalizedError, Equatable {
         
         switch self {
             
-        case .cantFetchInstruction(let offset):
-            return "No instruction found at byte `\(offset)`."
-            
         case .unknownOpcode(let byte):
             return "No opcode is assigned for the instruction byte `\(byte)`."
             
@@ -71,9 +62,6 @@ enum CompilerError: LocalizedError, Equatable {
         
         switch self {
             
-        case .cantFetchInstruction:
-            return "The data is corrupted, and can be a compilation error. Try to clean the project and compile again."
-            
         case .unknownOpcode:
             return "The data is corrupted, and can be a compilation error. Try to clean the project and compile again."
             
@@ -87,10 +75,4 @@ enum CompilerError: LocalizedError, Equatable {
             return "Check the source code is using the correct syntax."
         }
     }
-}
-
-// MARK: - Runtime Error
-
-enum RuntimeError: LocalizedError, Equatable {
-    
 }

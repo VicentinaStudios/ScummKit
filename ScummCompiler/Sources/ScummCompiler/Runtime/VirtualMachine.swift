@@ -57,7 +57,7 @@ protocol VirtualMachine {
 /// common functionality such as a stack, instruction pointer, and methods for interpreting
 /// bytecode chunks. Conforming types should inherit from `BaseVM` and implement the `run()` method
 /// to specify their own execution logic.
-public class BaseVM: VirtualMachine {
+public class BaseVM<OpcodeType: Opcode>: VirtualMachine {
     
     // MARK: Properties
     
@@ -79,8 +79,8 @@ public class BaseVM: VirtualMachine {
     // MARK: Computed Propertiex
     
     /// The decompiler used for debugging traces.
-    internal var decompiler: Decompiler? {
-        Configuration.DEBUG_TRACE_EXECUTION ? Decompiler() : nil
+    internal var decompiler: BaseDecompiler<OpcodeType>? {
+        Configuration.DEBUG_TRACE_EXECUTION ? BaseDecompiler() : nil
     }
     
     // MARK: Lifecycle
@@ -264,7 +264,7 @@ extension BaseVM {
         }
         
         guard let byte = try chunk?.read(at: instructionPointer) else {
-            throw CompilerError.cantFetchInstruction(instructionPointer)
+            throw RuntimeError.cantFetchInstruction(instructionPointer)
         }
         
         self.instructionPointer = instructionPointer + 1

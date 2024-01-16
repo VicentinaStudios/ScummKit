@@ -138,7 +138,7 @@ func run(_ sources: [String], with options: CompilerOptions) throws {
         
         print("Mojo Decompiler")
         
-        let decompiler = Decompiler()
+        let decompiler = BaseDecompiler()
         if let decompilation = try decompiler.decompile(chunk) {
             decompiler.prettyPrint(decompilation, name: "Demo Chunk")
         }

@@ -109,7 +109,6 @@ extension Interpreter: ExpressionVisitor {
         switch expression.operatorToken.type {
         
         case .minus:
-            
             return -right
             
         default:

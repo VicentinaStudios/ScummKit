@@ -70,7 +70,8 @@ extension PrattParser {
         
         switch operatorType {
         case .minus:
-            try emitBytes(Opcode.negate.rawValue)
+//            try emitBytes(Opcode.negate.rawValue)
+            break
         default:
             break
         }
@@ -88,13 +89,17 @@ extension PrattParser {
         
         switch operatorType {
         case .plus:
-            try emitBytes(Opcode.add.rawValue)
+//            try emitBytes(Opcode.add.rawValue)
+            break
         case .minus:
-            try emitBytes(Opcode.subtract.rawValue)
+//            try emitBytes(Opcode.subtract.rawValue)
+            break
         case .star:
-            try emitBytes(Opcode.multiply.rawValue)
+//            try emitBytes(Opcode.multiply.rawValue)
+            break
         case .slash:
-            try emitBytes(Opcode.divide.rawValue)
+//            try emitBytes(Opcode.divide.rawValue)
+            break
         default:
             return
         }
@@ -215,7 +220,7 @@ extension PrattParser {
     }
     
     private func emitConstant(_ value: Value) throws {
-        try emitBytes(Opcode.constant.rawValue, UInt8(makeConstant(value)))
+//        try emitBytes(Opcode.constant.rawValue, UInt8(makeConstant(value)))
     }
     
     private func makeConstant(_ value: Value) -> Int {

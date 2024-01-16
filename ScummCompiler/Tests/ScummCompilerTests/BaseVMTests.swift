@@ -10,7 +10,7 @@ import XCTest
 
 final class BaseVMTests: XCTestCase {
     
-    var virtualMachine: BaseVM!
+    var virtualMachine: BaseVM<MojoOpcode>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -122,11 +122,11 @@ final class BaseVMTests: XCTestCase {
         let chunk = Chunk()
         let dividend = chunk.addConstant(value: 2)
         let divisor = chunk.addConstant(value: 0)
-        try chunk.write(byte: Opcode.constant.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
         try chunk.write(byte: UInt8(dividend), line: 1)
-        try chunk.write(byte: Opcode.constant.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
         try chunk.write(byte: UInt8(divisor), line: 1)
-        try chunk.write(byte: Opcode.divide.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.divide.rawValue, line: 1)
         virtualMachine.chunk = chunk
         virtualMachine.stack = [2, 0]
         virtualMachine.stackTop = 2

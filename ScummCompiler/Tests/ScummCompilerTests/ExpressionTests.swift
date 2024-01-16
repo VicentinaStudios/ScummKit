@@ -14,7 +14,10 @@ class ExpressionVisitorTests: XCTestCase {
 
     func testBinaryExpressionVisiting() {
         
-        let binaryExpression = Binary(left: Literal(value: 5), operatorToken: Token(type: .plus, lexeme: "+", line: 1), right: Literal(value: 3))
+        let binaryExpression = Binary(
+            left: Literal(value: 5),
+            operatorToken: Token(type: .plus, lexeme: "+", line: 1),
+            right: Literal(value: 3))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try binaryExpression.accept(visitor: mockVisitor))
@@ -23,7 +26,7 @@ class ExpressionVisitorTests: XCTestCase {
 
     func testGroupingExpressionVisiting() {
         
-        let groupingExpression = Grouping(expression: Literal(value: "Hello"))
+        let groupingExpression = Grouping(expression: Literal(value: Token(type: .string, lexeme: "Hello", literal: "Hello", line: 1)))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try groupingExpression.accept(visitor: mockVisitor))
@@ -41,7 +44,9 @@ class ExpressionVisitorTests: XCTestCase {
 
     func testUnaryExpressionVisiting() {
         
-        let unaryExpression = Unary(operatorToken: Token(type: .minus, lexeme: "-", line: 1), right: Literal(value: 7))
+        let unaryExpression = Unary(
+            operatorToken: Token(type: .minus, lexeme: "-", line: 1),
+            right: Literal(value: 7))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try unaryExpression.accept(visitor: mockVisitor))
@@ -53,7 +58,10 @@ class ExpressionTests: XCTestCase {
 
     func testBinaryExpressionAccept() {
         
-        let binaryExpression = Binary(left: Literal(value: 5), operatorToken: Token(type: .plus, lexeme: "+", line: 1), right: Literal(value: 3))
+        let binaryExpression = Binary(
+            left: Literal(value: 5),
+            operatorToken: Token(type: .plus, lexeme: "+", line: 1),
+            right: Literal(value: 3))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try binaryExpression.accept(visitor: mockVisitor))
@@ -62,7 +70,7 @@ class ExpressionTests: XCTestCase {
 
     func testGroupingExpressionAccept() {
         
-        let groupingExpression = Grouping(expression: Literal(value: "Hello"))
+        let groupingExpression = Grouping(expression: Literal(value: Token(type: .string, lexeme: "Hello", literal: "Hello", line: 1)))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try groupingExpression.accept(visitor: mockVisitor))
@@ -80,7 +88,9 @@ class ExpressionTests: XCTestCase {
 
     func testUnaryExpressionAccept() {
         
-        let unaryExpression = Unary(operatorToken: Token(type: .minus, lexeme: "-", line: 1), right: Literal(value: 7))
+        let unaryExpression = Unary(
+            operatorToken: Token(type: .minus, lexeme: "-", line: 1),
+            right: Literal(value: 7))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try unaryExpression.accept(visitor: mockVisitor))

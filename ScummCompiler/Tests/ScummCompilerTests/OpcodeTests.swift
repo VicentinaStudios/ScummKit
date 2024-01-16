@@ -9,10 +9,21 @@ import XCTest
 @testable import ScummCompiler
 
 final class OpcodeTests: XCTestCase {
-
-
-    func testExistingOpcodes() throws {
-        XCTAssertTrue(Opcode.allCases.count == 9)
-        XCTAssertTrue(Opcode.allCases.contains(.breakHere))
+    
+    func testExistingMojoOpcodes() throws {
+        XCTAssertTrue(MojoOpcode.allCases.count == 7)
+        XCTAssertTrue(MojoOpcode.allCases.contains(.add))
+        XCTAssertTrue(MojoOpcode.allCases.contains(.subtract))
+        XCTAssertTrue(MojoOpcode.allCases.contains(.multiply))
+        XCTAssertTrue(MojoOpcode.allCases.contains(.divide))
+        XCTAssertTrue(MojoOpcode.allCases.contains(.return))
+        XCTAssertTrue(MojoOpcode.allCases.contains(.constant))
+        XCTAssertTrue(MojoOpcode.allCases.contains(.negate))
+    }
+    
+    func testExistingScummOpcodes() throws {
+        XCTAssertTrue(ScummOpcode.allCases.count == 2)
+        XCTAssertTrue(ScummOpcode.allCases.contains(.breakHere))
+        XCTAssertTrue(ScummOpcode.allCases.contains(.expression))
     }
 }

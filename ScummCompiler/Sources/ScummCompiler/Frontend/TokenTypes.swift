@@ -157,5 +157,4 @@ enum TokenType: String, CaseIterable {
     
     /// Represents the end of the input source code.
     case eof
-
 }

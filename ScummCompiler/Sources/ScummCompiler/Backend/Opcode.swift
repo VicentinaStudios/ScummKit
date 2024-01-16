@@ -7,22 +7,60 @@
 
 import Foundation
 
-public enum Opcode: UInt8, CaseIterable {
+/// A protocol representing an opcode used in a virtual machine.
+///
+/// Conforming types must provide a name property.
+public protocol Opcode: RawRepresentable where RawValue == UInt8 {
     
+    /// The name of the opcode.
+    var name: String { get }
+}
+
+/// An enumeration of opcodes for the SCUMM virtual machine.
+///
+/// Each case corresponds to a specific operation or instruction in the SCUMM bytecode.
+public enum ScummOpcode: UInt8, CaseIterable, Opcode {
+    
+    /// Represents a breakpoint instruction.
     case breakHere  = 0x80
     
+    /// Represents an expression instruction.
     case expression = 0xac
     
-    case add        = 0xf0
-    case subtract   = 0xf1
-    case multiply   = 0xf2
-    case divide     = 0xf3
-    case `return`   = 0xf4
-    case constant   = 0xf5
-    case negate     = 0xf6
-    
-    var name: String {
+    /// The name of the opcode.
+    public var name: String {
         return "OP_" + String(describing: self).lowercased()
     }
 }
 
+/// An enumeration of opcodes for the Mojo virtual machine.
+///
+/// Each case corresponds to a specific operation or instruction in the Mojo bytecode.
+public enum MojoOpcode: UInt8, CaseIterable, Opcode {
+    
+    /// Represents an addition operation.
+    case add        = 0xf0
+    
+    /// Represents a subtraction operation.
+    case subtract   = 0xf1
+    
+    /// Represents a multiplication operation.
+    case multiply   = 0xf2
+    
+    /// Represents a division operation.
+    case divide     = 0xf3
+    
+    /// Represents a return instruction.
+    case `return`   = 0xf4
+    
+    /// Represents a constant instruction.
+    case constant   = 0xf5
+    
+    /// Represents a negation operation.
+    case negate     = 0xf6
+    
+    /// The name of the opcode.
+    public var name: String {
+        return "OP_" + String(describing: self).lowercased()
+    }
+}

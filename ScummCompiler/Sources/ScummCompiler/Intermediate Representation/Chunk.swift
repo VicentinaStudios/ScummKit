@@ -31,7 +31,7 @@ public class Chunk {
     // MARK: Properties
     
     /// The array of bytecode.
-    private var code: [UInt8] = []
+    internal var code: [UInt8] = []
     
     /// The array storing line information for each bytecode.
     private(set) var lines: [Int] = []

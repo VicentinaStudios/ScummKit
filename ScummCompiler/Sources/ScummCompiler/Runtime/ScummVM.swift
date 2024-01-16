@@ -7,8 +7,16 @@
 
 import Foundation
 
-public class ScummVM: BaseVM {
+/// A virtual machine implementation specialized for executing bytecode with SCUMM opcodes.
+///
+/// `ScummVM` is a concrete implementation of the `BaseVM` class, providing a runtime environment
+/// for interpreting and executing bytecode instructions using the opcodes defined in the
+/// `ScummOpcode` enumeration.
+public class ScummVM: BaseVM<ScummOpcode> {
     
+    /// Run the SCUMM virtual machine.
+    ///
+    /// - Throws: An error of type `VirtualMachineError` if an issue occurs during execution.
     internal override func run() throws {
         
         try super.run()
@@ -19,39 +27,38 @@ public class ScummVM: BaseVM {
             instructionPointer < chunk.size
         {
             
-            if let decompilation = try decompiler?.trace(chunk, offset: instructionPointer) {
-                print(decompilation)
-            }
+            try printDecompilation()
             
             let byte = try readNextByte()
             
-            guard let instruction = Opcode(rawValue: byte) else {
+            guard let instruction = ScummOpcode(rawValue: byte) else {
                 throw CompilerError.unknownOpcode(byte)
             }
             
-            switch instruction {
-            case .breakHere:
-                debugPrint("break here")
-            case .add:
-                try binaryOperation(op: +)
-            case .subtract:
-                try binaryOperation(op: -)
-            case .multiply:
-                try binaryOperation(op: *)
-            case .divide:
-                try binaryOperation(op: /)
-            case .return:
-                 break
-            case .constant:
-                let index = try Int(readNextByte())
-                let constant = try chunk.readConstant(at: index - 1)
-                try push(value: constant)
-            case .negate:
-                try push(value: -pop())
-            case .expression:
-                
-                try expression(chunk: chunk, offset: instructionPointer)
-            }
+            try handleInstruction(instruction)
+        }
+    }
+}
+
+// MARK: Debug
+
+extension ScummVM {
+    
+    /// Prints the decompilation of the current instruction if decompiler is enabled.
+    ///
+    /// - Throws: An error of type `VirtualMachineError` if an issue occurs during decompilation.
+    private func printDecompilation() throws {
+        
+        guard let instructionPointer = instructionPointer else {
+            throw VirtualMachineError.undefinedInstructionPointer
+        }
+        
+        guard let chunk = chunk else {
+            throw VirtualMachineError.emptyChunk
+        }
+        
+        if let decompilation = try decompiler?.trace(chunk, offset: instructionPointer) {
+            print(decompilation)
         }
     }
 }
@@ -60,11 +67,37 @@ public class ScummVM: BaseVM {
 
 extension ScummVM {
     
+    /// Handles the execution of a SCUMM opcode.
+    /// - Parameter instruction: The SCUMM opcode to handle.
+    /// - Throws: An error of type `VirtualMachineError` if an issue occurs during opcode execution.
+    private func handleInstruction(_ instruction: ScummOpcode) throws {
+        
+        guard let instructionPointer = instructionPointer else {
+            throw VirtualMachineError.undefinedInstructionPointer
+        }
+        
+        guard let chunk = chunk else {
+            throw VirtualMachineError.emptyChunk
+        }
+        
+        switch instruction {
+        case .breakHere:
+            debugPrint("break here")
+        case .expression:
+            try expression(chunk: chunk, offset: instructionPointer)
+        }
+    }
+    
+    /// Executes a SCUMM expression opcode.
+    /// - Parameters:
+    ///   - chunk: The chunk containing the bytecode.
+    ///   - offset: The offset of the expression opcode.
+    /// - Throws: An error of type `VirtualMachineError` if an issue occurs during expression execution.
     private func expression(chunk: Chunk, offset: Int) throws {
         
-        let variableNumber = try chunk.readWord(at: offset + 1)
+        let variableNumber = try chunk.readWord(at: offset)
         
-        var current = offset + 3
+        var current = offset + 2
         
         while
             let subOpcode = try? chunk.read(at: current),
@@ -97,5 +130,14 @@ extension ScummVM {
                 throw CompilerError.compileError
             }
         }
+        
+        guard
+            let instructionPointer = instructionPointer,
+            instructionPointer < chunk.size
+        else {
+            throw VirtualMachineError.undefinedInstructionPointer
+        }
+        
+        self.instructionPointer = instructionPointer + current
     }
 }

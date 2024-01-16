@@ -7,12 +7,19 @@
 
 import Foundation
 
-/// A virtual machine implementation specialized for executing bytecode with custom opcodes.
-public class MojoVM: BaseVM {
+/// A virtual machine implementation specialized for executing bytecode with Mojo opcodes.
+///
+/// `MojoVM` is a concrete implementation of the `BaseVM` class, providing a runtime environment
+/// for interpreting and executing bytecode instructions using the opcodes defined in the
+/// `MojoOpcode` enumeration.
+public class MojoVM: BaseVM<MojoOpcode> {
     
     // MARK: Actions
     
-    /// Executes the bytecode stored in the associated `chunk` using custom opcodes.
+    /// Executes the bytecode stored in the associated `chunk` using Mojo opcodes.
+    ///
+    /// The `run` method of `MojoVM` interprets and executes the bytecode instructions in the
+    /// associated `chunk` using the opcodes defined in the `MojoOpcode` enumeration.
     ///
     /// - Throws: An error of type `VirtualMachineError` if an issue occurs during execution.
     internal override func run() throws {
@@ -29,7 +36,7 @@ public class MojoVM: BaseVM {
             
             let byte = try readNextByte()
             
-            guard let instruction = Opcode(rawValue: byte) else {
+            guard let instruction = MojoOpcode(rawValue: byte) else {
                 throw CompilerError.unknownOpcode(byte)
             }
             
@@ -63,17 +70,16 @@ extension MojoVM {
 
 extension MojoVM {
     
-    /// Handles the execution of instructions based on their opcodes.
+    /// Handles the execution of Mojo opcodes.
+    ///
+    /// The `handleInstruction` method processes and executes instructions based on the provided Mojo opcode.
     ///
     /// - Parameters:
-    ///   - instruction: The opcode to be executed.
+    ///   - instruction: The Mojo opcode to be executed.
     /// - Throws: An error of type `VirtualMachineError` if an issue occurs during instruction execution.
-    private func handleInstruction(_ instruction: Opcode) throws {
+    private func handleInstruction(_ instruction: MojoOpcode) throws {
         
         switch instruction {
-            
-        case .breakHere:
-            debugPrint("break here")
             
         case .add:
             try binaryOperation(op: +)
@@ -95,9 +101,6 @@ extension MojoVM {
             
         case .negate:
             try push(value: -pop())
-            
-        case .expression:
-            break
         }
     }
     
