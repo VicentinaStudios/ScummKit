@@ -86,16 +86,16 @@ extension MojoVM {
         switch instruction {
             
         case .add:
-            try binaryOperation(op: +)
+            try binaryOperation(valueType: Value.int, op: +)
             
         case .subtract:
-            try binaryOperation(op: -)
+            try binaryOperation(valueType: Value.int, op: -)
             
         case .multiply:
-            try binaryOperation(op: *)
+            try binaryOperation(valueType: Value.int, op: *)
             
         case .divide:
-            try binaryOperation(op: /)
+            try binaryOperation(valueType: Value.int, op: /)
             
         case .return:
              break
@@ -104,7 +104,15 @@ extension MojoVM {
             try handleConstant()
             
         case .negate:
-            try push(value: -pop())
+            
+            guard
+                case .int = peek(0),
+                case .int(let poppedValue) = try pop()
+            else {
+                fatalError("Operand must be a number.")
+            }
+            
+            try push(value: .int(-poppedValue))
         }
     }
     

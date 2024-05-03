@@ -66,8 +66,13 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
             throw CodeGeneratorError.unknownLiteral
         }
         
-        try emitConstant(value)
-        
+        switch expression.value {
+        case let intValue as Int:
+            try emitConstant(.int(intValue))
+        default:
+            throw CodeGeneratorError.unknownLiteral
+        }
+                
         return expression.value
     }
     

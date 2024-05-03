@@ -68,7 +68,7 @@ final class DecompilerTests: XCTestCase {
         decompiler = MojoDecompiler()
         
         try chunk.write(byte: MojoOpcode.add.rawValue, line: 1)
-        let constant = chunk.addConstant(value: 123)
+        let constant = chunk.addConstant(value: .int(123))
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
         try chunk.write(byte: UInt8(constant), line: 1)
         
@@ -77,7 +77,14 @@ final class DecompilerTests: XCTestCase {
         XCTAssertEqual(result?.count, 2, "Expected two decompiled instructions")
         XCTAssertEqual(result?[0].opcode as? MojoOpcode, .add, "Unexpected opcode for instruction 1")
         XCTAssertEqual(result?[1].opcode as? MojoOpcode, .constant, "Unexpected opcode for instruction 2")
-        XCTAssertEqual(result?[1].constant?.values.first, 123, "Unexpected constant value for instruction 2")
+        
+        if case let .int(constantValue) = result?[1].constant?.values.first
+        {
+            XCTAssertEqual(constantValue, 123, "Unexpected constant value for instruction 2")
+        } else {
+            XCTFail("Unable to obtain value.")
+            return
+        }
     }
     
     func testTraceWithValidOffset() throws {

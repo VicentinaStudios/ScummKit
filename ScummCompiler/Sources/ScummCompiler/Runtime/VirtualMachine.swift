@@ -192,14 +192,22 @@ extension BaseVM {
     /// This method pops the top two values from the stack, applies the specified binary
     /// operation (`op`), and pushes the result back onto the stack.
     ///
-    /// - Parameter op: The binary operation to perform.
+    /// - Parameters:
+    ///   - valueType: A closure that converts the result of the binary operation to a `Value`.
+    ///   - op: The binary operation to perform.
     /// - Throws: An error if there's an issue during the operation, such as division by zero.
-    internal func binaryOperation(op: (Int, Int) -> Int) throws {
+    internal func binaryOperation<T>(valueType: (T) -> Value, op: (Int, Int) -> T) throws {
         
         repeat {
             
-            let b = try pop()
-            let a = try pop()
+            guard
+                case .int = peek(0),
+                case .int = peek(1),
+                case let .int(b) = try pop(),
+                case let .int(a) = try pop()
+            else {
+                fatalError("INTERPRET_RUNTIME_ERROR: Operands must be numbers.")
+            }
             
             guard b != 0 else {
                 
@@ -210,9 +218,18 @@ extension BaseVM {
                 throw VirtualMachineError.divisionByZero(line: line)
             }
             
-            try push(value: op(a, b))
+            try push(value: valueType(op(a, b)))
+
             
         } while false
+    }
+    
+    /// Retrieves the value from the stack at a specified distance from the top without removing it.
+    ///
+    /// - Parameter distance: The distance from the top of the stack.
+    /// - Returns: The value from the stack at the specified distance, or `nil` if the distance exceeds the stack size.
+    internal func peek(_ distance: Int) -> Value? {
+        stack[stackTop - 1 - distance]
     }
     
     /// Pushes a value onto the stack.

@@ -28,83 +28,121 @@ final class MojoVMTests: XCTestCase {
     func testAddInstruction() throws {
         
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
-        var constant = chunk.addConstant(value: 2)
+        var constant = chunk.addConstant(value: .int(2))
         try chunk.write(byte: UInt8(constant), line: 1)
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
-        constant = chunk.addConstant(value: 3)
+        constant = chunk.addConstant(value: .int(3))
         try chunk.write(byte: UInt8(constant), line: 1)
         try chunk.write(byte: MojoOpcode.add.rawValue, line: 1)
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), 5)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 5)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
+        
+        
     }
     
     func testSubtractInstruction() throws {
         
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
-        var constant = chunk.addConstant(value: 5)
+        var constant = chunk.addConstant(value: .int(5))
         try chunk.write(byte: UInt8(constant), line: 1)
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
-        constant = chunk.addConstant(value: 2)
+        constant = chunk.addConstant(value: .int(2))
         try chunk.write(byte: UInt8(constant), line: 1)
         try chunk.write(byte: MojoOpcode.subtract.rawValue, line: 1)
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), 3)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 3)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
     
     func testMultiplyInstruction() throws {
         
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
-        var constant = chunk.addConstant(value: 3)
+        var constant = chunk.addConstant(value: .int(3))
         try chunk.write(byte: UInt8(constant), line: 1)
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
-        constant = chunk.addConstant(value: 4)
+        constant = chunk.addConstant(value: .int(4))
         try chunk.write(byte: UInt8(constant), line: 1)
         try chunk.write(byte: MojoOpcode.multiply.rawValue, line: 1)
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), 12)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 12)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
     
     func testDivideInstruction() throws {
         
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
-        var constant = chunk.addConstant(value: 10)
+        var constant = chunk.addConstant(value: .int(10))
         try chunk.write(byte: UInt8(constant), line: 1)
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
-        constant = chunk.addConstant(value: 2)
+        constant = chunk.addConstant(value: .int(2))
         try chunk.write(byte: UInt8(constant), line: 1)
         try chunk.write(byte: MojoOpcode.divide.rawValue, line: 1)
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), 5)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 5)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
     
     func testNegateInstruction() throws {
         
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
-        let constant = chunk.addConstant(value: 8)
+        let constant = chunk.addConstant(value: .int(8))
         try chunk.write(byte: UInt8(constant), line: 1)
         try chunk.write(byte: MojoOpcode.negate.rawValue, line: 1)
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), -8)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, -8)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
     
     func testConstantInstruction() throws {
         
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
-        let constant = chunk.addConstant(value: 42)
+        let constant = chunk.addConstant(value: .int(42))
         try chunk.write(byte: UInt8(constant), line: 1)
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), 42)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 42)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
 }

@@ -33,21 +33,37 @@ final class BaseVMTests: XCTestCase {
     
     func testPushPopStack() throws {
         
-        try virtualMachine.push(value: 42)
+        try virtualMachine.push(value: .int(42))
         
-        XCTAssertEqual(try virtualMachine.pop(), 42)
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 42)
+        } else {
+            XCTFail("Failed to pop an integer value.")
+            return
+        }
     }
     
     func testBinaryOperation() throws {
         
-        virtualMachine.stack = [1, 2, 3]
+        virtualMachine.stack = [.int(1), .int(2), .int(3)]
         virtualMachine.stackTop = 3
         
-        try virtualMachine.binaryOperation(op: +)
+        try virtualMachine.binaryOperation(valueType: Value.int, op: +)
         
         XCTAssertEqual(virtualMachine.stackTop, 2)
-        XCTAssertEqual(virtualMachine.stack[0], 1)
-        XCTAssertEqual(virtualMachine.stack[1], 5)
+        
+        if
+            case let .int(poppedValue1) = virtualMachine.stack[0],
+            case let .int(poppedValue2) = virtualMachine.stack[1]
+        {
+            XCTAssertEqual(poppedValue1, 1)
+            XCTAssertEqual(poppedValue2, 5)
+        }
+        else {
+            XCTFail("Failed to pop an integer value.")
+            return
+        }
+        
         XCTAssertNil(virtualMachine.stack[2])
     }
     
@@ -68,7 +84,7 @@ final class BaseVMTests: XCTestCase {
     
     func testResetStack() {
         
-        virtualMachine.stack = [1, 2, 3]
+        virtualMachine.stack = [.int(1), .int(2), .int(3)]
         virtualMachine.stackTop = 3
 
         virtualMachine.resetStack()
@@ -83,11 +99,11 @@ final class BaseVMTests: XCTestCase {
             XCTAssertEqual(error as? VirtualMachineError, .emptyStack)
         }
 
-        let fullStack = Array(repeating: 42, count: virtualMachine.stackMax)
+        let fullStack = Array(repeating: Value.int(42), count: virtualMachine.stackMax)
         virtualMachine.stack = fullStack
         virtualMachine.stackTop = virtualMachine.stackMax
 
-        XCTAssertThrowsError(try virtualMachine.push(value: 99)) { error in
+        XCTAssertThrowsError(try virtualMachine.push(value: .int(99))) { error in
             XCTAssertEqual(error as? VirtualMachineError, .fullStack)
         }
     }
@@ -105,11 +121,12 @@ final class BaseVMTests: XCTestCase {
     }
     
     func testMaxCapacityStack() {
-        let fullStack = Array(repeating: 42, count: virtualMachine.stackMax)
+        
+        let fullStack = Array(repeating: Value.int(42), count: virtualMachine.stackMax)
         virtualMachine.stack = fullStack
         virtualMachine.stackTop = virtualMachine.stackMax
 
-        XCTAssertThrowsError(try virtualMachine.push(value: 99)) { error in
+        XCTAssertThrowsError(try virtualMachine.push(value: .int(99))) { error in
             XCTAssertEqual(error as? VirtualMachineError, .fullStack)
         }
 
@@ -120,79 +137,114 @@ final class BaseVMTests: XCTestCase {
     func testBinaryOperationErrorOnDivisionByZero() throws {
         
         let chunk = Chunk()
-        let dividend = chunk.addConstant(value: 2)
-        let divisor = chunk.addConstant(value: 0)
+        let dividend = chunk.addConstant(value: .int(2))
+        let divisor = chunk.addConstant(value: .int(0))
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
         try chunk.write(byte: UInt8(dividend), line: 1)
         try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
         try chunk.write(byte: UInt8(divisor), line: 1)
         try chunk.write(byte: MojoOpcode.divide.rawValue, line: 1)
         virtualMachine.chunk = chunk
-        virtualMachine.stack = [2, 0]
+        virtualMachine.stack = [.int(2), .int(0)]
         virtualMachine.stackTop = 2
 
-        XCTAssertThrowsError(try virtualMachine.binaryOperation(op: /)) { error in
+        XCTAssertThrowsError(try virtualMachine.binaryOperation(valueType: Value.int, op: /)) { error in
             XCTAssertEqual(error as? VirtualMachineError, VirtualMachineError.divisionByZero(line: nil))
         }
     }
 
     func testBinaryOperationAddition() throws {
         
-        virtualMachine.stack = [2, 3]
+        virtualMachine.stack = [.int(2), .int(3)]
         virtualMachine.stackTop = 2
 
-        try virtualMachine.binaryOperation(op: +)
+        try virtualMachine.binaryOperation(valueType: Value.int, op: +)
 
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(virtualMachine.stack[0], 5)
+        
+        if case let .int(stackValue) = virtualMachine.stack[0] {
+            XCTAssertEqual(stackValue, 5)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
+        
         XCTAssertNil(virtualMachine.stack[1])
     }
 
     func testBinaryOperationSubtraction() throws {
         
-        virtualMachine.stack = [5, 3]
+        virtualMachine.stack = [.int(5), .int(3)]
         virtualMachine.stackTop = 2
 
-        try virtualMachine.binaryOperation(op: -)
+        try virtualMachine.binaryOperation(valueType: Value.int, op: -)
 
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(virtualMachine.stack[0], 2)
+        
+        if case let .int(stackValue) = virtualMachine.stack[0] {
+            XCTAssertEqual(stackValue, 2)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
+        
         XCTAssertNil(virtualMachine.stack[1])
     }
 
     func testBinaryOperationMultiplication() throws {
         
-        virtualMachine.stack = [2, 3]
+        virtualMachine.stack = [.int(2), .int(3)]
         virtualMachine.stackTop = 2
 
-        try virtualMachine.binaryOperation(op: *)
+        try virtualMachine.binaryOperation(valueType: Value.int, op: *)
 
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(virtualMachine.stack[0], 6)
+        
+        if case let .int(stackValue) = virtualMachine.stack[0] {
+            XCTAssertEqual(stackValue, 6)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
+        
         XCTAssertNil(virtualMachine.stack[1])
     }
 
     func testBinaryOperationDivision() throws {
         
-        virtualMachine.stack = [10, 2]
+        virtualMachine.stack = [.int(10), .int(2)]
         virtualMachine.stackTop = 2
 
-        try virtualMachine.binaryOperation(op: /)
+        try virtualMachine.binaryOperation(valueType: Value.int, op: /)
 
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(virtualMachine.stack[0], 5)
+        
+        if case let .int(stackValue) = virtualMachine.stack[0] {
+            XCTAssertEqual(stackValue, 5)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
+        
         XCTAssertNil(virtualMachine.stack[1])
     }
 
     func testBinaryOperationModulo() throws {
         
-        virtualMachine.stack = [10, 3]
+        virtualMachine.stack = [.int(10), .int(3)]
         virtualMachine.stackTop = 2
 
-        try virtualMachine.binaryOperation(op: %)
+        try virtualMachine.binaryOperation(valueType: Value.int, op: %)
 
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(virtualMachine.stack[0], 1)
+        
+        if case let .int(stackValue) = virtualMachine.stack[0] {
+            XCTAssertEqual(stackValue, 1)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
+        
         XCTAssertNil(virtualMachine.stack[1])
     }
 }

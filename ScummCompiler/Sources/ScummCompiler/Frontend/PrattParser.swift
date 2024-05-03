@@ -53,7 +53,7 @@ extension PrattParser {
     
     func number() throws {
         if let value = tokens[previous].literal as? Int {
-            try emitConstant(value)
+            try emitConstant(.int(value))
         }
     }
     

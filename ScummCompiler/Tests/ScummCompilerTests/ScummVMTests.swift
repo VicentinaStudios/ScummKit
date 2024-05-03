@@ -32,7 +32,13 @@ final class ScummVMTests: XCTestCase {
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), 30)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 30)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
     
     func testExpressionInstruction_Subtraction() throws {
@@ -42,7 +48,13 @@ final class ScummVMTests: XCTestCase {
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), 3)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 3)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
     
     func testExpressionInstruction_Multiplication() throws {
@@ -52,7 +64,13 @@ final class ScummVMTests: XCTestCase {
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), 12)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 12)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
     
     func testExpressionInstruction_Division() throws {
@@ -62,7 +80,13 @@ final class ScummVMTests: XCTestCase {
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), 5)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 5)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
     
     func testExpressionInstruction_Negation() throws {
@@ -72,7 +96,13 @@ final class ScummVMTests: XCTestCase {
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), -5)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, -5)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
     
     func testComplexExpression() throws {
@@ -82,7 +112,13 @@ final class ScummVMTests: XCTestCase {
         
         XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
         XCTAssertEqual(virtualMachine.stackTop, 1)
-        XCTAssertEqual(try virtualMachine.pop(), 7)
+        
+        if case let .int(poppedValue) = try virtualMachine.pop() {
+            XCTAssertEqual(poppedValue, 7)
+        } else {
+            XCTFail("Can't pop integer value from stack.")
+            return
+        }
     }
     
     func createChunkFromSource(_ source: String) throws -> Chunk {

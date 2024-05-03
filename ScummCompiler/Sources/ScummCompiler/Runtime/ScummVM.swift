@@ -115,20 +115,20 @@ extension ScummVM {
             case 0x1:
                 
                 let value = try chunk.readWord(at: current)
-                try push(value: Int(value))
+                try push(value: Value.int(Int(value)))
                 current += 2
             
             case 0x2:
-                try binaryOperation(op: +)
+                try binaryOperation(valueType: Value.int, op: +)
                 
             case 0x3:
-                try binaryOperation(op: -)
+                try binaryOperation(valueType: Value.int, op: -)
                 
             case 0x4:
-                try binaryOperation(op: *)
+                try binaryOperation(valueType: Value.int, op: *)
                 
             case 0x5:
-                try binaryOperation(op: /)
+                try binaryOperation(valueType: Value.int, op: /)
                 
             default:
                 throw CompilerError.compileError

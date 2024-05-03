@@ -7,9 +7,6 @@
 
 import Foundation
 
-/// Represents a numeric value used in the bytecode.
-public typealias Value = Int
-
 /// A representation of a chunk of bytecode in the compiler.
 ///
 /// Bytecode chunks are used to store sequences of bytes that represent
@@ -37,7 +34,7 @@ public class Chunk {
     private(set) var lines: [Int] = []
     
     /// The array storing constants used in the bytecode.
-    private var constants: [Int] = []
+    private var constants: [Value] = []
     
     // MARK: Computed Properties
     

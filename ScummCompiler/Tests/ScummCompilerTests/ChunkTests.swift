@@ -117,14 +117,21 @@ final class ChunkTests: XCTestCase {
 
     func testConstants() {
         
-        let index1 = chunk.addConstant(value: 42)
-        let index2 = chunk.addConstant(value: 55)
+        let index1 = chunk.addConstant(value: .int(42))
+        let index2 = chunk.addConstant(value: .int(55))
 
         XCTAssertEqual(index1, 0)
         XCTAssertEqual(index2, 1)
 
-        XCTAssertEqual(try? chunk.readConstant(at: 0), 42)
-        XCTAssertEqual(try? chunk.readConstant(at: 1), 55)
+        if case let .int(first) = try? chunk.readConstant(at: 0),
+           case let .int(second) = try? chunk.readConstant(at: 1)
+        {
+            XCTAssertEqual(first, 42)
+            XCTAssertEqual(second, 55)
+        } else {
+            XCTFail("Can't get value from constant.")
+            return
+        }
     }
 
     func testReadConstantOutOfBounds() {
