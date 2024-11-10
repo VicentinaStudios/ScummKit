@@ -32,6 +32,9 @@ public class MojoDecompiler: BaseDecompiler<MojoOpcode> {
             return try simpleInstruction(opcode: .negate)
         case .return:
             return try simpleInstruction(opcode: .return)
+            
+        case .true, .false:
+            fatalError("Instruction for opcode not handled")
         }
     }
     

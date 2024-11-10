@@ -40,7 +40,6 @@ class GenerateSCUMM: BaseCodeGenerator<ScummOpcode> {
     /// - Parameter expression: The literal expression to visit.
     /// - Returns: The literal value.
     override func visitLiteralExpr(_ expression: Literal) -> Any? {
-        
         return expression.value
     }
     

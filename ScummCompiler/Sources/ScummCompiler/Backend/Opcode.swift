@@ -59,6 +59,9 @@ public enum MojoOpcode: UInt8, CaseIterable, Opcode {
     /// Represents a negation operation.
     case negate     = 0xf6
     
+    case `true`     = 0xf9
+    case `false`    = 0xfa
+    
     /// The name of the opcode.
     public var name: String {
         return "OP_" + String(describing: self).lowercased()

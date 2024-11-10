@@ -150,6 +150,7 @@
 				TargetAttributes = {
 					4CC64D272A6332C700D8A27C = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1610;
 					};
 				};
 			};
@@ -320,11 +321,13 @@
 		4CC64D302A6332C700D8A27C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FNBTP68MJQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -332,6 +335,7 @@
 		4CC64D312A6332C700D8A27C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FNBTP68MJQ;
 				ENABLE_HARDENED_RUNTIME = YES;

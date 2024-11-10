@@ -120,11 +120,25 @@ struct Grouping: Expression {
 /// Represents a literal expression in the abstract syntax tree.
 ///
 /// - Properties:
-///   - value: The value of the literal expression, which can be of any type.
+///   - `value`: The value of the literal expression, which can be of any type (e.g., `Int`, `Bool`, `nil`).
+///   - `token`: The token associated with the literal, which may be `nil`. The token contains metadata
+///     such as the line and column where the literal was found in the source code. This is primarily
+///     used for debugging and error reporting.
+///
+/// - Initializer:
+///   - `value`: The value of the literal.
+///   - `token`: An optional token representing the position of the literal in the source code (defaults to `nil`).
+///
 struct Literal: Expression {
     
     /// The value of the literal expression, which can be of any type.
     let value: Any?
+    let token: Token?
+    
+    init(value: Any?, token: Token? = nil) {
+        self.value = value
+        self.token = token
+    }
     
     /// Accepts a visitor to perform operations on the literal expression.
     ///

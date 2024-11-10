@@ -57,18 +57,24 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
     
     /// Visits a literal expression and emits the corresponding bytecode.
     ///
-    /// - Parameter expression: The literal expression to visit.
+    /// This method generates the corresponding bytecode for a literal expression. The line number for the literal
+    /// expression is retrieved from the expression's `token` if available; otherwise, the `line` from the surrounding
+    /// context (e.g., `Unary`, `Binary` expressions) is used.
+    ///
+    /// - Parameter expression: The literal expression to visit, which contains the value and token information.
     /// - Returns: The literal value.
-    /// - Throws: An error of type `CodeGeneratorError.unknownLiteral` if the literal value is unknown.
+    /// - Throws:
+    ///   - `CodeGeneratorError.unknownLiteral`: If the literal value's type is unknown (not `Int` or `Bool`).
     override func visitLiteralExpr(_ expression: Literal) throws -> Any? {
         
-        guard let value = expression.value as? Int else {
-            throw CodeGeneratorError.unknownLiteral
-        }
+        // Retrieve the line from the expression's token, or fall back to the previous expression's line (context-aware).
+        line = expression.token?.line ?? line
         
         switch expression.value {
         case let intValue as Int:
             try emitConstant(.int(intValue))
+        case let boolValue as Bool:
+            try emitBytes(boolValue ? MojoOpcode.true.rawValue : MojoOpcode.false.rawValue)
         default:
             throw CodeGeneratorError.unknownLiteral
         }

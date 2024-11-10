@@ -59,18 +59,22 @@ class BaseCodeGenerator<OpcodeType: RawRepresentable & CaseIterable>: CodeGenera
     
     // MARK: Helper
     
-    /// Emits a sequence of bytes into the chunk.
+    /// Emits a sequence of bytes into the chunk, associating each byte with the current line number.
     ///
-    /// - Parameter bytes: The bytes to emit.
-    /// - Throws: An error of type `CodeGeneratorError.unknownLine` if the line number is not known.
+    /// This method writes each byte in the provided sequence to the chunk, using the current line number.
+    /// If the line number is not available (i.e., `line` is `nil`), an error is thrown.
+    ///
+    /// - Parameter bytes: The bytes to emit into the chunk.
+    /// - Throws:
+    ///   - `CodeGeneratorError.unknownLine`: If the line number is not known (`line` is `nil`).
     func emitBytes(_ bytes: UInt8...) throws {
         
-        guard let line = line else {
+        guard let currentLine = line else {
             throw CodeGeneratorError.unknownLine(bytes: Array(bytes))
         }
         
-        try bytes.forEach {
-            try chunk.write(byte: $0, line: line)
+        try bytes.forEach { byte in
+            try chunk.write(byte: byte, line: currentLine)
         }
     }
     

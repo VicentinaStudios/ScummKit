@@ -113,6 +113,9 @@ extension MojoVM {
             }
             
             try push(value: .int(-poppedValue))
+            
+        case .true, .false:
+            fatalError("Instruction not handled")
         }
     }
     

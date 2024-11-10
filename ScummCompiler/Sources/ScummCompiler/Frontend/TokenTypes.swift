@@ -150,6 +150,12 @@ enum TokenType: String, CaseIterable {
     /// Represents the keyword "is".
     case `is`
     
+    /// Represents the keyword "true".
+    case `true`
+    
+    /// Represents the keyword "false".
+    case `false`
+    
     // MARK: Special Tokens
     
     /// Represents a label used in the code.

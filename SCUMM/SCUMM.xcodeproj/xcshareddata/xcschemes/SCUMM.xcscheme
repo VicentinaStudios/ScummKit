@@ -85,15 +85,15 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--backend=mojo"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--backend=scumm"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--runtime=mojo"
+            argument = "--backend=scumm"
             isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--runtime=mojo"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--runtime=scumm"

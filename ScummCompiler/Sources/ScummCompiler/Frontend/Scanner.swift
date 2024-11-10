@@ -330,6 +330,8 @@ extension Scanner {
         switch source[start] {
         case "e":
             return checkKeyword(start: 1, length: 3, rest: "lse", type: .else)
+        case "f":
+            return checkKeyword(start: 1, length: 4, rest: "alse", type: .false)
         case "i":
             
             if current > source.index(start, offsetBy: 1) {
@@ -344,6 +346,8 @@ extension Scanner {
                     break
                 }
             }
+        case "t":
+            return checkKeyword(start: 1, length: 3, rest: "rue", type: .true)
             
         default:
             break

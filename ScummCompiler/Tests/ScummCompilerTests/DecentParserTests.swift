@@ -12,7 +12,7 @@ class DecentParserTests: XCTestCase {
 
     class MockVisitor: ExpressionVisitor {
 
-        var visitedExpressions: [Expression] = []
+        var visitedExpressions: [ScummCompiler.Expression] = []
 
         func visitBinaryExpr(_ expression: Binary) throws {
             visitedExpressions.append(expression)
@@ -104,5 +104,67 @@ class DecentParserTests: XCTestCase {
             XCTFail("Cannot unwrap expression")
         }
     }
+    
+    func testParseEqualEquality() throws {
+        
+        let source = "true"
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let abstractSyntaxTree = try parser.parse()
+        
+        let mockVisitor = MockVisitor()
+        try abstractSyntaxTree.accept(visitor: mockVisitor)
 
+        XCTAssertEqual(mockVisitor.visitedExpressions.count, 1)
+        
+        if let boolean = abstractSyntaxTree as? Literal {
+            XCTAssertEqual(boolean.value as? Bool, true)
+        } else {
+            XCTFail("Not true")
+        }
+    }
+    
+    func testParseFalse() throws {
+        
+        let source = "false"
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let abstractSyntaxTree = try parser.parse()
+        
+        let mockVisitor = MockVisitor()
+        try abstractSyntaxTree.accept(visitor: mockVisitor)
+
+        XCTAssertEqual(mockVisitor.visitedExpressions.count, 1)
+        
+        if let boolean = abstractSyntaxTree as? Literal {
+            XCTAssertEqual(boolean.value as? Bool, false)
+        } else {
+            XCTFail("Boolean not false")
+        }
+    }
+    
+    func testParseTrue() throws {
+        
+        let source = "true"
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let abstractSyntaxTree = try parser.parse()
+        
+        let mockVisitor = MockVisitor()
+        try abstractSyntaxTree.accept(visitor: mockVisitor)
+
+        XCTAssertEqual(mockVisitor.visitedExpressions.count, 1)
+        
+        if let boolean = abstractSyntaxTree as? Literal {
+            XCTAssertEqual(boolean.value as? Bool, true)
+        } else {
+            XCTFail("Boolean not true")
+        }
+    }
 }

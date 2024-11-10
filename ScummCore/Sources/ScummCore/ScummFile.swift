@@ -221,7 +221,7 @@ public class ScummFile {
         }
     }
     
-    /// Reads an unsigned 8-bit integer from the current position within the data buffer,
+    /// Reads an unsigned 32-bit integer from the current position within the data buffer,
     /// advances the position by one, and returns the read value.
     ///
     /// - Returns: The read unsigned 8-bit integer value.

@@ -213,8 +213,16 @@ extension DecentParser {
     /// - Throws: A `ParserError` if parsing encounters an issue.
     private func primary() throws -> Expression {
         
+        if match(types: [.false]) {
+            return Literal(value: false, token: previous)
+        }
+        
+        if match(types: [.true]) {
+            return Literal(value: true, token: previous)
+        }
+        
         if match(types: [.number]) {
-            return Literal(value: previous.literal)
+            return Literal(value: previous.literal, token: previous)
         }
         
         if match(types: [.leftParen]) {
