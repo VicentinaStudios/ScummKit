@@ -97,6 +97,9 @@ extension MojoVM {
         case .divide:
             try binaryOperation(valueType: Value.int, op: /)
             
+        case .not:
+            try push(value: .bool(isFalsey(try pop())))
+            
         case .return:
              break
             
@@ -114,8 +117,14 @@ extension MojoVM {
             
             try push(value: .int(-poppedValue))
             
-        case .true, .false:
-            fatalError("Instruction not handled")
+        case .true:
+            try push(value: .bool(true))
+            
+        case .false:
+            try push(value: .bool(false))
+            
+        case .nil:
+            try push(value: .nil)
         }
     }
     

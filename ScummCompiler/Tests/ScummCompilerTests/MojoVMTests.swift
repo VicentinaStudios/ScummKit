@@ -145,4 +145,20 @@ final class MojoVMTests: XCTestCase {
             return
         }
     }
+    
+    func testNotBoolInstrunction() throws {
+        
+        try chunk.write(byte: MojoOpcode.true.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.not.rawValue, line: 1)
+        
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+        
+        if case let .bool(poppedVaue) = try virtualMachine.pop() {
+            XCTAssertFalse(poppedVaue)
+        } else {
+            XCTFail("Can't pop boo value from stack.")
+            return
+        }
+    }
 }

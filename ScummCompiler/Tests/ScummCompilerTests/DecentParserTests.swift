@@ -167,4 +167,51 @@ class DecentParserTests: XCTestCase {
             XCTFail("Boolean not true")
         }
     }
+    
+    func testParseNil() throws {
+        
+        let source = "nil"
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let abstractSyntaxTree = try parser.parse()
+        
+        let mockVisitor = MockVisitor()
+        try abstractSyntaxTree.accept(visitor: mockVisitor)
+
+        XCTAssertEqual(mockVisitor.visitedExpressions.count, 1)
+        
+        if let literal = abstractSyntaxTree as? Literal {
+            XCTAssertNil(literal.value)
+            
+        } else {
+            XCTFail("Not nil")
+        }
+    }
+    
+    func testParseNotTrue() throws {
+        
+        let source = "!true"
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let abstractSyntaxTree = try parser.parse()
+        
+        let mockVisitor = MockVisitor()
+        try abstractSyntaxTree.accept(visitor: mockVisitor)
+
+        XCTAssertEqual(mockVisitor.visitedExpressions.count, 1)
+        
+        if
+            let notOperator = abstractSyntaxTree as? Unary,
+            let boolLiteral = notOperator.right as? Literal
+        {
+            XCTAssertEqual(notOperator.operatorToken.type, .bang)
+            XCTAssertEqual(boolLiteral.value as? Bool, true)
+        } else {
+            XCTFail("Boolean not true")
+        }
+    }
 }

@@ -26,15 +26,20 @@ public class MojoDecompiler: BaseDecompiler<MojoOpcode> {
             return try simpleInstruction(opcode: .multiply)
         case .divide:
             return try simpleInstruction(opcode: .divide)
+        case .not:
+            return try simpleInstruction(opcode: .not)
         case .constant:
             return try constantInstruction(opcode: .constant)
         case .negate:
             return try simpleInstruction(opcode: .negate)
         case .return:
             return try simpleInstruction(opcode: .return)
-            
-        case .true, .false:
-            fatalError("Instruction for opcode not handled")
+        case .true:
+            return try simpleInstruction(opcode: .true)
+        case .false:
+            return try simpleInstruction(opcode: .false)
+        case .nil:
+            return try simpleInstruction(opcode: .nil)
         }
     }
     

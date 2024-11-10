@@ -156,6 +156,9 @@ enum TokenType: String, CaseIterable {
     /// Represents the keyword "false".
     case `false`
     
+    /// Represents the keyword "nil".
+    case `nil`
+    
     // MARK: Special Tokens
     
     /// Represents a label used in the code.

@@ -59,7 +59,16 @@ public enum MojoOpcode: UInt8, CaseIterable, Opcode {
     /// Represents a negation operation.
     case negate     = 0xf6
     
+    /// Represents a negate operation.
+    case not        = 0xf7
+    
+    /// Represents a nil vaue.
+    case `nil`      = 0xf8
+    
+    /// Represents a true booean value.
     case `true`     = 0xf9
+    
+    /// Represents a false boolean value.
     case `false`    = 0xfa
     
     /// The name of the opcode.

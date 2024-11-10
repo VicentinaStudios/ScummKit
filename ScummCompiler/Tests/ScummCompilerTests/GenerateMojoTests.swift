@@ -32,7 +32,7 @@ final class GenerateMojoTests: XCTestCase {
         
         let chunk = try codeGenerator?.generateByteCode(expression: additionExpression)
         
-        XCTAssertEqual(chunk?.code, [245, 0, 245, 1, 240])
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf5, 1, 0xf0])
         XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 5))
     }
     
@@ -46,7 +46,7 @@ final class GenerateMojoTests: XCTestCase {
         
         let chunk = try codeGenerator?.generateByteCode(expression: subtractionExpression)
         
-        XCTAssertEqual(chunk?.code, [245, 0, 245, 1, 241])
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf5, 1, 0xf1])
         XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 5))
     }
     
@@ -60,7 +60,7 @@ final class GenerateMojoTests: XCTestCase {
         
         let chunk = try codeGenerator?.generateByteCode(expression: multiplicationExpression)
         
-        XCTAssertEqual(chunk?.code, [245, 0, 245, 1, 242])
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf5, 1, 0xf2])
         XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 5))
     }
     
@@ -74,7 +74,7 @@ final class GenerateMojoTests: XCTestCase {
         
         let chunk = try codeGenerator?.generateByteCode(expression: divisionExpression)
         
-        XCTAssertEqual(chunk?.code, [245, 0, 245, 1, 243])
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf5, 1, 0xf3])
         XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 5))
     }
     
@@ -87,7 +87,7 @@ final class GenerateMojoTests: XCTestCase {
         
         let chunk = try codeGenerator?.generateByteCode(expression: negationExpression)
         
-        XCTAssertEqual(chunk?.code, [245, 0, 246])
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf6])
         XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 3))
     }
     
@@ -98,18 +98,43 @@ final class GenerateMojoTests: XCTestCase {
         codeGenerator = GenerateMojo(with: Chunk())
         let chunk = try codeGenerator?.generateByteCode(expression: expression)
         
-        XCTAssertEqual(chunk?.code, [MojoOpcode.true.rawValue])
+        XCTAssertEqual(chunk?.code, [0xf9])
         XCTAssertEqual(chunk?.lines, [4])
     }
     
     func testGenerateMojo_FalseLiteral() throws {
         
-        let expression = Literal(value: true, token: Token(type: .false, lexeme: "false", line: 2))
+        let expression = Literal(value: false, token: Token(type: .false, lexeme: "false", line: 2))
         
         codeGenerator = GenerateMojo(with: Chunk())
         let chunk = try codeGenerator?.generateByteCode(expression: expression)
         
-        XCTAssertEqual(chunk?.code, [MojoOpcode.true.rawValue])
+        XCTAssertEqual(chunk?.code, [0xfa])
         XCTAssertEqual(chunk?.lines, [2])
+    }
+    
+    func testGenerateMojo_NilLiteral() throws {
+        
+        let token = Token(type: .nil, lexeme: "nil", line: 2)
+        let expression = Literal(value: nil, token: token)
+        
+        codeGenerator = GenerateMojo(with: Chunk())
+        let chunk = try codeGenerator?.generateByteCode(expression: expression)
+        
+        XCTAssertEqual(chunk?.code, [0xf8])
+        XCTAssertEqual(chunk?.lines, [2])
+    }
+    
+    func testGenerateMojo_NotTrue() throws {
+        
+        let notTrue = Unary(
+            operatorToken: Token(type: .bang, lexeme: "!", line: 1),
+            right: Literal(value: true)
+        )
+        
+        let chunk = try codeGenerator?.generateByteCode(expression: notTrue)
+        
+        XCTAssertEqual(chunk?.code, [0xf9, 0xf7])
+        XCTAssertEqual(chunk?.lines, [1, 1])
     }
 }

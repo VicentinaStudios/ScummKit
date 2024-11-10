@@ -346,6 +346,8 @@ extension Scanner {
                     break
                 }
             }
+        case "n":
+            return checkKeyword(start: 1, length: 2, rest: "il", type: .nil)
         case "t":
             return checkKeyword(start: 1, length: 3, rest: "rue", type: .true)
             

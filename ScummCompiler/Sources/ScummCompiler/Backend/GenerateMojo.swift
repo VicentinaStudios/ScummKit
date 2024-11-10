@@ -75,6 +75,8 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
             try emitConstant(.int(intValue))
         case let boolValue as Bool:
             try emitBytes(boolValue ? MojoOpcode.true.rawValue : MojoOpcode.false.rawValue)
+        case nil:
+            try emitBytes(MojoOpcode.nil.rawValue)
         default:
             throw CodeGeneratorError.unknownLiteral
         }
@@ -100,18 +102,29 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
         
         line = expression.operatorToken.line
         
-        guard
-            let right = try evaluate(expression.right) as? Int
-        else {
-            throw CodeGeneratorError.expressionEvaluationFailed
-        }
-        
         switch expression.operatorToken.type {
         
         case .minus:
             
+            guard
+                let right = try evaluate(expression.right) as? Int
+            else {
+                throw CodeGeneratorError.expressionEvaluationFailed
+            }
+            
             try emitBytes(MojoOpcode.negate.rawValue)
             return -right
+            
+        case .bang:
+            
+            guard
+                let right = try evaluate(expression.right) as? Bool
+            else {
+                throw CodeGeneratorError.expressionEvaluationFailed
+            }
+            
+            try emitBytes(MojoOpcode.not.rawValue)
+            return !right
             
         default:
             return nil

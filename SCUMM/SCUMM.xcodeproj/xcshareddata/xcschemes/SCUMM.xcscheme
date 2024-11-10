@@ -92,6 +92,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "${PROJECT_DIR}/playground.scu"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "--runtime=mojo"
             isEnabled = "YES">
          </CommandLineArgument>
@@ -101,10 +105,6 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--runtime=xray"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "${PROJECT_DIR}/helloworld.scu"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

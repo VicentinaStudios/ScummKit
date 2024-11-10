@@ -181,7 +181,22 @@ extension BaseVM {
             print("            ", terminator: "")
             
             stack.compactMap { $0 }.forEach { slot in
-                print("[\(slot)]", terminator: " ")
+                
+                let representation: String
+                
+                switch slot {
+                case .bool(let value): 
+                    representation = "\(value)"
+                case .int(let value): 
+                    representation = "\(value)"
+                case .double(let value): 
+                    representation = "\(value)"
+                case .string(let value):
+                    representation = value
+                case .nil: return
+                }
+                
+                print("[\(representation)]", terminator: " ")
             }
             print()
         }
@@ -222,6 +237,21 @@ extension BaseVM {
 
             
         } while false
+    }
+    
+    /// Determines whether a given value is considered "falsey".
+    ///
+    /// In this context, a value is considered "falsey" if it is either:
+    /// - `.nil`, representing the absence of a value.
+    /// - `.bool(false)`, representing a boolean false.
+    ///
+    /// - Parameter value: The `Value` to check for a falsey state.
+    /// - Returns: `true` if `value` is `.nil` or `.bool(false)`; otherwise, `false`.
+    ///
+    /// - Note: This function is typically used in logical conditions where
+    ///   a `nil` or `false` value should be treated as "falsey".
+    internal func isFalsey(_ value: Value) -> Bool {
+        value == .nil || (value == .bool(false))
     }
     
     /// Retrieves the value from the stack at a specified distance from the top without removing it.
