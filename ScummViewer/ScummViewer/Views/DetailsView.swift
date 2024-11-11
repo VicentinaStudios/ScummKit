@@ -40,7 +40,7 @@ struct DetailsView: View {
                     // V5
                     .RNAM, .MAXS, .DROO, .DSCR, .DSOU, .DCOS, .DCHR, .DOBJ,
                     .LOFF, .RMHD, .CLUT, .SMAP, .TRNS, .IMHD,
-                    .COST, .CDHD, .CHAR, .SOUN,
+                    .COST, .CDHD, .SCRP, .CHAR, .SOUN,
                         //.ZP01, .ZP02, .ZP03:
                     
                     // V4

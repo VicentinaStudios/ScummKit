@@ -7,6 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C00A21F2CE1B5A2005B52B5 /* SCRPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A21E2CE1B59C005B52B5 /* SCRPView.swift */; };
+		4C00A2212CE1B5DD005B52B5 /* SCRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2202CE1B5DA005B52B5 /* SCRP.swift */; };
+		4C00A2232CE1B652005B52B5 /* VirtualMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2222CE1B652005B52B5 /* VirtualMachine.swift */; };
+		4C00A2252CE1B669005B52B5 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2242CE1B669005B52B5 /* Opcode.swift */; };
+		4C00A2272CE1B697005B52B5 /* OpcodesV5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2262CE1B696005B52B5 /* OpcodesV5.swift */; };
+		4C00A2402CE1B6E6005B52B5 /* OCnotEqualZero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2372CE1B6E6005B52B5 /* OCnotEqualZero.swift */; };
+		4C00A2412CE1B6E6005B52B5 /* OCcursorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2292CE1B6E6005B52B5 /* OCcursorCommand.swift */; };
+		4C00A2422CE1B6E6005B52B5 /* OCloadRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2352CE1B6E6005B52B5 /* OCloadRoom.swift */; };
+		4C00A2432CE1B6E6005B52B5 /* OCpseudoRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2382CE1B6E6005B52B5 /* OCpseudoRoom.swift */; };
+		4C00A2442CE1B6E6005B52B5 /* OCisNotEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2322CE1B6E6005B52B5 /* OCisNotEqual.swift */; };
+		4C00A2452CE1B6E6005B52B5 /* OCincrement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A22E2CE1B6E6005B52B5 /* OCincrement.swift */; };
+		4C00A2462CE1B6E6005B52B5 /* OCstringOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A23E2CE1B6E6005B52B5 /* OCstringOps.swift */; };
+		4C00A2472CE1B6E6005B52B5 /* OCisGreaterEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2302CE1B6E6005B52B5 /* OCisGreaterEqual.swift */; };
+		4C00A2482CE1B6E6005B52B5 /* OCisEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A22F2CE1B6E6005B52B5 /* OCisEqual.swift */; };
+		4C00A2492CE1B6E6005B52B5 /* OCdelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A22A2CE1B6E6005B52B5 /* OCdelay.swift */; };
+		4C00A24A2CE1B6E6005B52B5 /* OCstopObjectCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A23D2CE1B6E6005B52B5 /* OCstopObjectCode.swift */; };
+		4C00A24B2CE1B6E6005B52B5 /* OCstartScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A23C2CE1B6E6005B52B5 /* OCstartScript.swift */; };
+		4C00A24C2CE1B6E6005B52B5 /* OCisLess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2312CE1B6E6005B52B5 /* OCisLess.swift */; };
+		4C00A24D2CE1B6E6005B52B5 /* OCroomOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A23A2CE1B6E6005B52B5 /* OCroomOps.swift */; };
+		4C00A24E2CE1B6E6005B52B5 /* OCexpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A22C2CE1B6E6005B52B5 /* OCexpression.swift */; };
+		4C00A24F2CE1B6E6005B52B5 /* OCbreakHere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2282CE1B6E6005B52B5 /* OCbreakHere.swift */; };
+		4C00A2502CE1B6E6005B52B5 /* OCresourceRoutines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2392CE1B6E6005B52B5 /* OCresourceRoutines.swift */; };
+		4C00A2512CE1B6E6005B52B5 /* OCjumpRelative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2332CE1B6E6005B52B5 /* OCjumpRelative.swift */; };
+		4C00A2522CE1B6E6005B52B5 /* OCequalZero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A22B2CE1B6E6005B52B5 /* OCequalZero.swift */; };
+		4C00A2532CE1B6E6005B52B5 /* OCmove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2362CE1B6E6005B52B5 /* OCmove.swift */; };
+		4C00A2542CE1B6E6005B52B5 /* OCgetRandomNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A22D2CE1B6E6005B52B5 /* OCgetRandomNumber.swift */; };
+		4C00A2552CE1B6E6005B52B5 /* OClessOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A2342CE1B6E6005B52B5 /* OClessOrEqual.swift */; };
+		4C00A2562CE1B6E6005B52B5 /* OCsetVarRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00A23B2CE1B6E6005B52B5 /* OCsetVarRange.swift */; };
 		4C0C50932A927EB9004B4466 /* CHARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0C50922A927EB9004B4466 /* CHARView.swift */; };
 		4C0C50952A928341004B4466 /* CHAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0C50942A928341004B4466 /* CHAR.swift */; };
 		4C1CFD5F2730295F001663CE /* ImageCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1CFD5E2730295F001663CE /* ImageCodec.swift */; };
@@ -84,6 +112,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C00A21E2CE1B59C005B52B5 /* SCRPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRPView.swift; sourceTree = "<group>"; };
+		4C00A2202CE1B5DA005B52B5 /* SCRP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRP.swift; sourceTree = "<group>"; };
+		4C00A2222CE1B652005B52B5 /* VirtualMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMachine.swift; sourceTree = "<group>"; };
+		4C00A2242CE1B669005B52B5 /* Opcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
+		4C00A2262CE1B696005B52B5 /* OpcodesV5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpcodesV5.swift; sourceTree = "<group>"; };
+		4C00A2282CE1B6E6005B52B5 /* OCbreakHere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCbreakHere.swift; sourceTree = "<group>"; };
+		4C00A2292CE1B6E6005B52B5 /* OCcursorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCcursorCommand.swift; sourceTree = "<group>"; };
+		4C00A22A2CE1B6E6005B52B5 /* OCdelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCdelay.swift; sourceTree = "<group>"; };
+		4C00A22B2CE1B6E6005B52B5 /* OCequalZero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCequalZero.swift; sourceTree = "<group>"; };
+		4C00A22C2CE1B6E6005B52B5 /* OCexpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCexpression.swift; sourceTree = "<group>"; };
+		4C00A22D2CE1B6E6005B52B5 /* OCgetRandomNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCgetRandomNumber.swift; sourceTree = "<group>"; };
+		4C00A22E2CE1B6E6005B52B5 /* OCincrement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCincrement.swift; sourceTree = "<group>"; };
+		4C00A22F2CE1B6E6005B52B5 /* OCisEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCisEqual.swift; sourceTree = "<group>"; };
+		4C00A2302CE1B6E6005B52B5 /* OCisGreaterEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCisGreaterEqual.swift; sourceTree = "<group>"; };
+		4C00A2312CE1B6E6005B52B5 /* OCisLess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCisLess.swift; sourceTree = "<group>"; };
+		4C00A2322CE1B6E6005B52B5 /* OCisNotEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCisNotEqual.swift; sourceTree = "<group>"; };
+		4C00A2332CE1B6E6005B52B5 /* OCjumpRelative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCjumpRelative.swift; sourceTree = "<group>"; };
+		4C00A2342CE1B6E6005B52B5 /* OClessOrEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OClessOrEqual.swift; sourceTree = "<group>"; };
+		4C00A2352CE1B6E6005B52B5 /* OCloadRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCloadRoom.swift; sourceTree = "<group>"; };
+		4C00A2362CE1B6E6005B52B5 /* OCmove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCmove.swift; sourceTree = "<group>"; };
+		4C00A2372CE1B6E6005B52B5 /* OCnotEqualZero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCnotEqualZero.swift; sourceTree = "<group>"; };
+		4C00A2382CE1B6E6005B52B5 /* OCpseudoRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCpseudoRoom.swift; sourceTree = "<group>"; };
+		4C00A2392CE1B6E6005B52B5 /* OCresourceRoutines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCresourceRoutines.swift; sourceTree = "<group>"; };
+		4C00A23A2CE1B6E6005B52B5 /* OCroomOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCroomOps.swift; sourceTree = "<group>"; };
+		4C00A23B2CE1B6E6005B52B5 /* OCsetVarRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCsetVarRange.swift; sourceTree = "<group>"; };
+		4C00A23C2CE1B6E6005B52B5 /* OCstartScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCstartScript.swift; sourceTree = "<group>"; };
+		4C00A23D2CE1B6E6005B52B5 /* OCstopObjectCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCstopObjectCode.swift; sourceTree = "<group>"; };
+		4C00A23E2CE1B6E6005B52B5 /* OCstringOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCstringOps.swift; sourceTree = "<group>"; };
 		4C0C50922A927EB9004B4466 /* CHARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CHARView.swift; sourceTree = "<group>"; };
 		4C0C50942A928341004B4466 /* CHAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CHAR.swift; sourceTree = "<group>"; };
 		4C1CFD5E2730295F001663CE /* ImageCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCodec.swift; sourceTree = "<group>"; };
@@ -174,6 +230,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C00A23F2CE1B6E6005B52B5 /* Opcodes */ = {
+			isa = PBXGroup;
+			children = (
+				4C00A2282CE1B6E6005B52B5 /* OCbreakHere.swift */,
+				4C00A2292CE1B6E6005B52B5 /* OCcursorCommand.swift */,
+				4C00A22A2CE1B6E6005B52B5 /* OCdelay.swift */,
+				4C00A22B2CE1B6E6005B52B5 /* OCequalZero.swift */,
+				4C00A22C2CE1B6E6005B52B5 /* OCexpression.swift */,
+				4C00A22D2CE1B6E6005B52B5 /* OCgetRandomNumber.swift */,
+				4C00A22E2CE1B6E6005B52B5 /* OCincrement.swift */,
+				4C00A22F2CE1B6E6005B52B5 /* OCisEqual.swift */,
+				4C00A2302CE1B6E6005B52B5 /* OCisGreaterEqual.swift */,
+				4C00A2312CE1B6E6005B52B5 /* OCisLess.swift */,
+				4C00A2322CE1B6E6005B52B5 /* OCisNotEqual.swift */,
+				4C00A2332CE1B6E6005B52B5 /* OCjumpRelative.swift */,
+				4C00A2342CE1B6E6005B52B5 /* OClessOrEqual.swift */,
+				4C00A2352CE1B6E6005B52B5 /* OCloadRoom.swift */,
+				4C00A2362CE1B6E6005B52B5 /* OCmove.swift */,
+				4C00A2372CE1B6E6005B52B5 /* OCnotEqualZero.swift */,
+				4C00A2382CE1B6E6005B52B5 /* OCpseudoRoom.swift */,
+				4C00A2392CE1B6E6005B52B5 /* OCresourceRoutines.swift */,
+				4C00A23A2CE1B6E6005B52B5 /* OCroomOps.swift */,
+				4C00A23B2CE1B6E6005B52B5 /* OCsetVarRange.swift */,
+				4C00A23C2CE1B6E6005B52B5 /* OCstartScript.swift */,
+				4C00A23D2CE1B6E6005B52B5 /* OCstopObjectCode.swift */,
+				4C00A23E2CE1B6E6005B52B5 /* OCstringOps.swift */,
+			);
+			path = Opcodes;
+			sourceTree = "<group>";
+		};
 		4C40806B271B973300A76C75 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +277,7 @@
 		4C40806C271B973B00A76C75 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				4C00A2242CE1B669005B52B5 /* Opcode.swift */,
 				4C5CDFA8271776EE0090BA59 /* Data Structure & Algorithms */,
 				4C40806B271B973300A76C75 /* Extensions */,
 				4CF2240F2721DCA50006F1CE /* SCUMM */,
@@ -342,10 +429,13 @@
 		4CF2240F2721DCA50006F1CE /* SCUMM */ = {
 			isa = PBXGroup;
 			children = (
+				4C00A23F2CE1B6E6005B52B5 /* Opcodes */,
 				4C79B819271C23D00030E564 /* ScummVersion.swift */,
+				4C00A2262CE1B696005B52B5 /* OpcodesV5.swift */,
 				4C872D442721751C007FCCA7 /* BlockType.swift */,
 				4C1CFD5E2730295F001663CE /* ImageCodec.swift */,
 				4C2A78D8274874DD00F358BA /* RLECodec.swift */,
+				4C00A2222CE1B652005B52B5 /* VirtualMachine.swift */,
 			);
 			path = SCUMM;
 			sourceTree = "<group>";
@@ -360,6 +450,7 @@
 				4C6204C2273891FA003E6A28 /* ZPnn.swift */,
 				4C4A7B612734DC48006DE394 /* TRNS.swift */,
 				4C27C98427386E080081F280 /* IMHD.swift */,
+				4C00A2202CE1B5DA005B52B5 /* SCRP.swift */,
 				4C64A24F273AC8A700AD9AB8 /* COST.swift */,
 				4C92B5C92A5C37CC00967FF2 /* CDHD.swift */,
 				4C0C50942A928341004B4466 /* CHAR.swift */,
@@ -376,6 +467,7 @@
 				4C9F3D992723C6570052EEE2 /* CLUTView.swift */,
 				4C9F3DA12724A7E80052EEE2 /* SMAPView.swift */,
 				4C4A7B632734DD68006DE394 /* TRNSView.swift */,
+				4C00A21E2CE1B59C005B52B5 /* SCRPView.swift */,
 				4C27C9862738714D0081F280 /* IMHDView.swift */,
 				4C340B64273B27D00066B0F5 /* COSTView.swift */,
 				4C92B5C72A5C366F00967FF2 /* CDHDView.swift */,
@@ -461,13 +553,39 @@
 				4CC620892A963C620052936C /* DirectoryView_v4.swift in Sources */,
 				4CC6207F2A959D9B0052936C /* VersionInfoView.swift in Sources */,
 				4C408072271B97BC00A76C75 /* UInt32+Ext.swift in Sources */,
+				4C00A2252CE1B669005B52B5 /* Opcode.swift in Sources */,
 				4C637CCB27209E3600634F8E /* RNAM.swift in Sources */,
 				4C92B5CA2A5C37CC00967FF2 /* CDHD.swift in Sources */,
 				4C2A78D9274874DD00F358BA /* RLECodec.swift in Sources */,
 				4C9F3D9E272447950052EEE2 /* Bitmap.swift in Sources */,
+				4C00A21F2CE1B5A2005B52B5 /* SCRPView.swift in Sources */,
 				4C33EF71271BA9B800323220 /* DetailsView.swift in Sources */,
+				4C00A2212CE1B5DD005B52B5 /* SCRP.swift in Sources */,
 				4CEFF22C271AEE14001021C9 /* NavigatorView.swift in Sources */,
 				4CC620772A9505670052936C /* SOUNView.swift in Sources */,
+				4C00A2402CE1B6E6005B52B5 /* OCnotEqualZero.swift in Sources */,
+				4C00A2412CE1B6E6005B52B5 /* OCcursorCommand.swift in Sources */,
+				4C00A2422CE1B6E6005B52B5 /* OCloadRoom.swift in Sources */,
+				4C00A2432CE1B6E6005B52B5 /* OCpseudoRoom.swift in Sources */,
+				4C00A2442CE1B6E6005B52B5 /* OCisNotEqual.swift in Sources */,
+				4C00A2452CE1B6E6005B52B5 /* OCincrement.swift in Sources */,
+				4C00A2462CE1B6E6005B52B5 /* OCstringOps.swift in Sources */,
+				4C00A2472CE1B6E6005B52B5 /* OCisGreaterEqual.swift in Sources */,
+				4C00A2482CE1B6E6005B52B5 /* OCisEqual.swift in Sources */,
+				4C00A2492CE1B6E6005B52B5 /* OCdelay.swift in Sources */,
+				4C00A24A2CE1B6E6005B52B5 /* OCstopObjectCode.swift in Sources */,
+				4C00A24B2CE1B6E6005B52B5 /* OCstartScript.swift in Sources */,
+				4C00A24C2CE1B6E6005B52B5 /* OCisLess.swift in Sources */,
+				4C00A24D2CE1B6E6005B52B5 /* OCroomOps.swift in Sources */,
+				4C00A24E2CE1B6E6005B52B5 /* OCexpression.swift in Sources */,
+				4C00A24F2CE1B6E6005B52B5 /* OCbreakHere.swift in Sources */,
+				4C00A2502CE1B6E6005B52B5 /* OCresourceRoutines.swift in Sources */,
+				4C00A2512CE1B6E6005B52B5 /* OCjumpRelative.swift in Sources */,
+				4C00A2522CE1B6E6005B52B5 /* OCequalZero.swift in Sources */,
+				4C00A2532CE1B6E6005B52B5 /* OCmove.swift in Sources */,
+				4C00A2542CE1B6E6005B52B5 /* OCgetRandomNumber.swift in Sources */,
+				4C00A2552CE1B6E6005B52B5 /* OClessOrEqual.swift in Sources */,
+				4C00A2562CE1B6E6005B52B5 /* OCsetVarRange.swift in Sources */,
 				4C872D3B2720D084007FCCA7 /* MAXS.swift in Sources */,
 				4C9F3D9A2723C6570052EEE2 /* CLUTView.swift in Sources */,
 				4C1CFD5F2730295F001663CE /* ImageCodec.swift in Sources */,
@@ -484,6 +602,7 @@
 				4C2A78DB2748772300F358BA /* Texture.swift in Sources */,
 				4CF22411272207870006F1CE /* LOFF.swift in Sources */,
 				4C872D3F27211783007FCCA7 /* BottomBarView.swift in Sources */,
+				4C00A2272CE1B697005B52B5 /* OpcodesV5.swift in Sources */,
 				4C5CDFA427176B7F0090BA59 /* TreeNode.swift in Sources */,
 				4C340B65273B27D00066B0F5 /* COSTView.swift in Sources */,
 				4C92B5C82A5C366F00967FF2 /* CDHDView.swift in Sources */,
@@ -515,6 +634,7 @@
 				4C6936172A97FC3C00359E3B /* MIDI.swift in Sources */,
 				4CD9F4D72722217A00D3F0D7 /* InputFieldView.swift in Sources */,
 				4CF2241427220AFF0006F1CE /* LOFFView.swift in Sources */,
+				4C00A2232CE1B652005B52B5 /* VirtualMachine.swift in Sources */,
 				4C79B827271D8CC40030E564 /* ScummFile.swift in Sources */,
 				4CDF0F742733FC45008A9B6A /* TreeNode<Block>+Ext.swift in Sources */,
 				4C27C9832736A2520081F280 /* NumberedListView.swift in Sources */,
