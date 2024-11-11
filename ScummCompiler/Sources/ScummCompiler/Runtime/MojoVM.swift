@@ -98,7 +98,7 @@ extension MojoVM {
             try binaryOperation(valueType: Value.int, op: /)
             
         case .not:
-            try push(value: .bool(isFalsey(try pop())))
+            try push(value: .bool(pop().isFalsey))
             
         case .return:
              break
@@ -122,6 +122,18 @@ extension MojoVM {
             
         case .false:
             try push(value: .bool(false))
+            
+        case .equal:
+            
+            let b = try pop()
+            let a = try pop()
+            try push(value: .bool(a == b))
+            
+        case .greater:
+            try binaryOperation(valueType: Value.bool, op: >)
+            
+        case .less:
+            try binaryOperation(valueType: Value.bool, op: <)
             
         case .nil:
             try push(value: .nil)

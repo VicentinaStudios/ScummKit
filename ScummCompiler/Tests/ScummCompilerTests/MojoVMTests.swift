@@ -44,8 +44,6 @@ final class MojoVMTests: XCTestCase {
             XCTFail("Can't pop integer value from stack.")
             return
         }
-        
-        
     }
     
     func testSubtractInstruction() throws {
@@ -159,6 +157,222 @@ final class MojoVMTests: XCTestCase {
         } else {
             XCTFail("Can't pop boo value from stack.")
             return
+        }
+    }
+    
+    func testIntegerEquality() throws {
+        
+        // 5 == 5
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        var constant = chunk.addConstant(value: .int(5))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        constant = chunk.addConstant(value: .int(5))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.equal.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertTrue(result)
+        } else {
+            XCTFail("Expected boolean result for equality comparison.")
+        }
+    }
+    
+    func testBooleanEquality() throws {
+        
+        // true == true
+        try chunk.write(byte: MojoOpcode.true.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.true.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.equal.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertTrue(result)
+        } else {
+            XCTFail("Expected boolean result for equality comparison.")
+        }
+    }
+    
+    func testNilEquality() throws {
+        
+        // nil == nil
+        try chunk.write(byte: MojoOpcode.nil.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.nil.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.equal.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertTrue(result)
+        } else {
+            XCTFail("Expected boolean result for equality comparison.")
+        }
+    }
+    
+    func testMixedEquality() throws {
+        
+        // 5 == true (should be false)
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        let constant = chunk.addConstant(value: .int(5))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.true.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.equal.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertFalse(result)
+        } else {
+            XCTFail("Expected boolean result for equality comparison.")
+        }
+    }
+    
+    func testIntegerInequality() throws {
+        
+        // 5 != 3
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        var constant = chunk.addConstant(value: .int(5))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        constant = chunk.addConstant(value: .int(3))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.equal.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.not.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertTrue(result)
+        } else {
+            XCTFail("Expected boolean result for inequality comparison.")
+        }
+    }
+    
+    func testBooleanInequality() throws {
+        
+        // true != false
+        try chunk.write(byte: MojoOpcode.true.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.false.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.equal.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.not.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertTrue(result)
+        } else {
+            XCTFail("Expected boolean result for inequality comparison.")
+        }
+    }
+    
+    func testNilInequality() throws {
+        
+        // nil != true
+        try chunk.write(byte: MojoOpcode.nil.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.true.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.equal.rawValue, line: 1)
+        try chunk.write(byte: MojoOpcode.not.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertTrue(result)
+        } else {
+            XCTFail("Expected boolean result for inequality comparison.")
+        }
+    }
+    
+    func testIntegerGreaterThan() throws {
+        
+        // 10 > 5
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        var constant = chunk.addConstant(value: .int(10))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        constant = chunk.addConstant(value: .int(5))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.greater.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertTrue(result)
+        } else {
+            XCTFail("Expected boolean result for greater-than comparison.")
+        }
+    }
+    
+    func testIntegerLessThan() throws {
+        
+        // 5 < 10
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        var constant = chunk.addConstant(value: .int(5))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        constant = chunk.addConstant(value: .int(10))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.less.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertTrue(result)
+        } else {
+            XCTFail("Expected boolean result for less-than comparison.")
+        }
+    }
+    
+    func testIntegerGreaterThanOrEqual() throws {
+        
+        // 10 >= 5
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        var constant = chunk.addConstant(value: .int(10))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        constant = chunk.addConstant(value: .int(5))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.greater.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertTrue(result)
+        } else {
+            XCTFail("Expected boolean result for greater-than-or-equal comparison.")
+        }
+    }
+    
+    func testIntegerLessThanOrEqual() throws {
+        
+        // 5 <= 10
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        var constant = chunk.addConstant(value: .int(5))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        constant = chunk.addConstant(value: .int(10))
+        try chunk.write(byte: UInt8(constant), line: 1)
+        try chunk.write(byte: MojoOpcode.less.rawValue, line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+
+        if case let .bool(result) = try virtualMachine.pop() {
+            XCTAssertTrue(result)
+        } else {
+            XCTFail("Expected boolean result for less-than-or-equal comparison.")
         }
     }
 }

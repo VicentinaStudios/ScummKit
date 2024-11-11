@@ -38,6 +38,12 @@ public class MojoDecompiler: BaseDecompiler<MojoOpcode> {
             return try simpleInstruction(opcode: .true)
         case .false:
             return try simpleInstruction(opcode: .false)
+        case .equal:
+            return try simpleInstruction(opcode: .equal)
+        case .greater:
+            return try simpleInstruction(opcode: .greater)
+        case .less:
+            return try simpleInstruction(opcode: .less)
         case .nil:
             return try simpleInstruction(opcode: .nil)
         }

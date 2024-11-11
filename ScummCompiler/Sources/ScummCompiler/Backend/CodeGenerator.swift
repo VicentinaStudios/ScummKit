@@ -73,7 +73,7 @@ class BaseCodeGenerator<OpcodeType: RawRepresentable & CaseIterable>: CodeGenera
             throw CodeGeneratorError.unknownLine(bytes: Array(bytes))
         }
         
-        try bytes.forEach { byte in
+        for byte in bytes {
             try chunk.write(byte: byte, line: currentLine)
         }
     }
@@ -131,6 +131,5 @@ class BaseCodeGenerator<OpcodeType: RawRepresentable & CaseIterable>: CodeGenera
     /// - Throws: An error of type `CodeGeneratorError.methodNotOverridden` if the method is not overridden.
     func visitBinaryExpr(_ expression: Binary) throws -> Any? {
         fatalError("Method should be overridden by subclasses")
-
     }
 }

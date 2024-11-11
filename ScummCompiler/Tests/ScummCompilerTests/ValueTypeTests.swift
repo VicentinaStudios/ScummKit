@@ -23,10 +23,57 @@ class ValueTests: XCTestCase {
         XCTAssertEqual(Value.string("hello"), .string("hello"))
         XCTAssertEqual(Value.nil, .nil)
     }
-
+    
     func testEquality() {
+        // Test equality between two identical `int` values
         XCTAssertEqual(Value.int(5), Value.int(5))
         XCTAssertNotEqual(Value.int(5), Value.int(10))
+        
+        // Test `int` vs `double`
         XCTAssertNotEqual(Value.int(5), Value.double(5.0))
+        
+        // Test equality of `bool` values
+        XCTAssertEqual(Value.bool(true), Value.bool(true))
+        XCTAssertNotEqual(Value.bool(true), Value.bool(false))
+        
+        // Test equality of `double` values
+        XCTAssertEqual(Value.double(3.14), Value.double(3.14))
+        XCTAssertNotEqual(Value.double(3.14), Value.double(2.71))
+        
+        // Test equality of `string` values
+        XCTAssertEqual(Value.string("hello"), Value.string("hello"))
+        XCTAssertNotEqual(Value.string("hello"), Value.string("world"))
+        
+        // Test equality of `nil` values
+        XCTAssertEqual(Value.nil, Value.nil)
+        
+        // Test `nil` vs other types
+        XCTAssertNotEqual(Value.nil, Value.bool(false))
+        
+        // Test `nil` vs `bool(false)`
+        XCTAssertNotEqual(Value.nil, Value.bool(false))
+        
+        // Test operator overloading for `==`
+        XCTAssertTrue(Value.int(5) == Value.int(5))
+        XCTAssertTrue(Value.bool(true) == Value.bool(true))
+        XCTAssertTrue(Value.double(3.14) == Value.double(3.14))
+        XCTAssertTrue(Value.string("hello") == Value.string("hello"))
+        XCTAssertTrue(Value.nil == Value.nil)
+    }
+    
+    func testFalsey() {
+        
+        // Falsey cases
+        XCTAssertTrue(Value.bool(5 == 6).isFalsey)
+        XCTAssertTrue(Value.bool(5 > 6).isFalsey)
+        XCTAssertTrue(Value.bool(5 >= 6).isFalsey)
+        
+        // Truthy cases
+        XCTAssertFalse(Value.bool(5 != 6).isFalsey)
+        XCTAssertFalse(Value.bool(5 < 6).isFalsey)
+        XCTAssertFalse(Value.bool(5 <= 6).isFalsey)
+        
+        // Nil case
+        XCTAssertTrue(Value.nil.isFalsey)
     }
 }

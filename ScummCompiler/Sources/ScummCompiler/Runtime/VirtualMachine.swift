@@ -239,21 +239,6 @@ extension BaseVM {
         } while false
     }
     
-    /// Determines whether a given value is considered "falsey".
-    ///
-    /// In this context, a value is considered "falsey" if it is either:
-    /// - `.nil`, representing the absence of a value.
-    /// - `.bool(false)`, representing a boolean false.
-    ///
-    /// - Parameter value: The `Value` to check for a falsey state.
-    /// - Returns: `true` if `value` is `.nil` or `.bool(false)`; otherwise, `false`.
-    ///
-    /// - Note: This function is typically used in logical conditions where
-    ///   a `nil` or `false` value should be treated as "falsey".
-    internal func isFalsey(_ value: Value) -> Bool {
-        value == .nil || (value == .bool(false))
-    }
-    
     /// Retrieves the value from the stack at a specified distance from the top without removing it.
     ///
     /// - Parameter distance: The distance from the top of the stack.

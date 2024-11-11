@@ -140,33 +140,100 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
         
         line = expression.operatorToken.line
         
-        guard
-            let left = try evaluate(expression.left) as? Int,
-            let right = try evaluate(expression.right) as? Int
-        else {
-            throw CodeGeneratorError.expressionEvaluationFailed
+        let left = try evaluate(expression.left)
+        let right = try evaluate(expression.right)
+        
+        func evaluateBinaryOp<T: Numeric>(operation: (T, T) -> T) throws -> T? {
+            
+            if let a = left as? T, let b = right as? T {
+                return operation(a, b)
+            }
+            
+            return nil
         }
         
         switch expression.operatorToken.type {
             
         case .minus:
+            
             try emitBytes(MojoOpcode.subtract.rawValue)
-            return left - right
+            
+            if let result = try evaluateBinaryOp(operation: -) as Int? { return result }
+            if let result = try evaluateBinaryOp(operation: -) as Double? { return result }
             
         case .slash:
+            
             try emitBytes(MojoOpcode.divide.rawValue)
-            return left / right
+            
+            if let result = try evaluateBinaryOp(operation: /) as Int? { return result }
+            if let result = try evaluateBinaryOp(operation: /) as Double? { return result }
             
         case .star:
+            
             try emitBytes(MojoOpcode.multiply.rawValue)
-            return left * right
+            
+            if let result = try evaluateBinaryOp(operation: *) as Int? { return result }
+            if let result = try evaluateBinaryOp(operation: *) as Double? { return result }
             
         case .plus:
+            
             try emitBytes(MojoOpcode.add.rawValue)
-            return left + right
+            
+            if let result = try evaluateBinaryOp(operation: +) as Int? { return result }
+            if let result = try evaluateBinaryOp(operation: +) as Double? { return result }
+            
+        case .bangEqual:
+            
+            try emitBytes(MojoOpcode.equal.rawValue, MojoOpcode.not.rawValue)
+            
+            if let a = left as? Int, let b = right as? Int { return a != b }
+            if let a = left as? Double, let b = right as? Double { return a != b }
+            if let a = left as? Bool, let b = right as? Bool { return a != b }
+            
+            return (left == nil) != (right == nil)
+            
+        case .equalEqual:
+            
+            try emitBytes(MojoOpcode.equal.rawValue)
+            
+            if let a = left as? Int, let b = right as? Int { return a == b }
+            if let a = left as? Double, let b = right as? Double { return a == b }
+            if let a = left as? Bool, let b = right as? Bool { return a == b }
+            
+            return left == nil && right == nil
+            
+        case .greater:
+            
+            try emitBytes(MojoOpcode.greater.rawValue)
+
+            if let a = left as? Int, let b = right as? Int { return a > b }
+            if let a = left as? Double, let b = right as? Double { return a > b }
+            
+        case .greaterEqual:
+            
+            try emitBytes(MojoOpcode.less.rawValue, MojoOpcode.not.rawValue)
+            
+            if let a = left as? Int, let b = right as? Int { return a >= b }
+            if let a = left as? Double, let b = right as? Double { return a >= b }
+            
+        case .less:
+            
+            try emitBytes(MojoOpcode.less.rawValue)
+            
+            if let a = left as? Int, let b = right as? Int { return a < b }
+            if let a = left as? Double, let b = right as? Double { return a < b }
+            
+        case .lessEqual:
+            
+            try emitBytes(MojoOpcode.greater.rawValue, MojoOpcode.not.rawValue)
+            
+            if let a = left as? Int, let b = right as? Int { return a <= b }
+            if let a = left as? Double, let b = right as? Double { return a <= b }
             
         default:
-            return nil
+            throw CodeGeneratorError.expressionEvaluationFailed
         }
+        
+        throw CodeGeneratorError.expressionEvaluationFailed
     }
 }

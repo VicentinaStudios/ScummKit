@@ -137,4 +137,113 @@ final class GenerateMojoTests: XCTestCase {
         XCTAssertEqual(chunk?.code, [0xf9, 0xf7])
         XCTAssertEqual(chunk?.lines, [1, 1])
     }
+    
+    func testGenerateMojo_Equality() throws {
+        
+        let equalityExpression = Binary(
+            left: Literal(value: 10),
+            operatorToken: Token(type: .equalEqual, lexeme: "==", line: 1),
+            right: Literal(value: 10)
+        )
+
+        let chunk = try codeGenerator?.generateByteCode(expression: equalityExpression)
+
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf5, 1, 0xfb])
+        XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 5))
+    }
+    
+    func testGenerateMojo_GreaterThan() throws {
+        
+        let greaterThanExpression = Binary(
+            left: Literal(value: 10),
+            operatorToken: Token(type: .greater, lexeme: ">", line: 1),
+            right: Literal(value: 5)
+        )
+
+        let chunk = try codeGenerator?.generateByteCode(expression: greaterThanExpression)
+
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf5, 1, 0xfc])
+        XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 5))
+    }
+    
+    func testGenerateMojo_LessThan() throws {
+        let lessThanExpression = Binary(
+            left: Literal(value: 5),
+            operatorToken: Token(type: .less, lexeme: "<", line: 1),
+            right: Literal(value: 10)
+        )
+
+        let chunk = try codeGenerator?.generateByteCode(expression: lessThanExpression)
+
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf5, 1, 0xfd])
+        XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 5))
+    }
+    
+    func testGenerateMojo_Equality_Int() throws {
+        let equalityExpression = Binary(
+            left: Literal(value: 10),
+            operatorToken: Token(type: .equalEqual, lexeme: "==", line: 1),
+            right: Literal(value: 10)
+        )
+
+        let chunk = try codeGenerator?.generateByteCode(expression: equalityExpression)
+
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf5, 1, 0xfb])
+        XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 5))
+    }
+
+    func testGenerateMojo_Equality_Boolean() throws {
+        
+        let equalityExpression = Binary(
+            left: Literal(value: true),
+            operatorToken: Token(type: .equalEqual, lexeme: "==", line: 1),
+            right: Literal(value: true)
+        )
+
+        let chunk = try codeGenerator?.generateByteCode(expression: equalityExpression)
+
+        XCTAssertEqual(chunk?.code, [0xf9, 0xf9, 0xfb])
+        XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 3))
+    }
+
+    func testGenerateMojo_Equality_BooleanFalse() throws {
+        let equalityExpression = Binary(
+            left: Literal(value: false),
+            operatorToken: Token(type: .equalEqual, lexeme: "==", line: 1),
+            right: Literal(value: false)
+        )
+
+        let chunk = try codeGenerator?.generateByteCode(expression: equalityExpression)
+
+        XCTAssertEqual(chunk?.code, [0xfa, 0xfa, 0xfb])
+        XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 3))
+    }
+
+    func testGenerateMojo_Equality_Nil() throws {
+        
+        let equalityExpression = Binary(
+            left: Literal(value: nil),
+            operatorToken: Token(type: .equalEqual, lexeme: "==", line: 1),
+            right: Literal(value: nil)
+        )
+
+        let chunk = try codeGenerator?.generateByteCode(expression: equalityExpression)
+
+        XCTAssertEqual(chunk?.code, [0xf8, 0xf8, 0xfb])
+        XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 3))
+    }
+
+    func testGenerateMojo_Equality_IntAndNil() throws {
+        
+        let equalityExpression = Binary(
+            left: Literal(value: 10),
+            operatorToken: Token(type: .equalEqual, lexeme: "==", line: 1),
+            right: Literal(value: nil)
+        )
+
+        let chunk = try codeGenerator?.generateByteCode(expression: equalityExpression)
+
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf8, 0xfb])
+        XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 4))
+    }
 }
