@@ -43,14 +43,14 @@ extension Data {
         Data(byteBuffer.map { $0.xor(with: xor) })
     }
     
-    func dump(with value: UInt8 = 0x69) throws {
+    func dump(with value: UInt8 = 0x69, filename: String? = "scumm_dump.txt") throws {
         
         let decoded = xor(with: value)
         let data = Data(decoded)
         
         let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as NSURL
         
-        guard let fileUrl = documentsUrl.appendingPathComponent("scumm_dump.txt") else {
+        guard let fileUrl = documentsUrl.appendingPathComponent(filename!) else {
             throw FileError.urlFailure
         }
         
@@ -71,6 +71,26 @@ extension Data {
         
         do {
             try self.write(to: fileUrl)
+        } catch {
+            throw FileError.saveFailure
+        }
+    }
+    
+    func saveScript(with value: UInt8 = 0x69, fileName: String = "script.o", to path: URL) throws {
+        
+        var isDirectory: ObjCBool = false
+        
+        if !FileManager.default.fileExists(atPath: path.absoluteString, isDirectory: &isDirectory) {
+            try? FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil)
+        }
+        
+        let fileURL = path.appendingPathComponent(fileName)
+        
+//        let decoded = xor(with: value)
+//        let data = Data(decoded)
+        
+        do {
+            try write(to: fileURL)
         } catch {
             throw FileError.saveFailure
         }

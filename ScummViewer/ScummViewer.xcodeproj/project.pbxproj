@@ -81,6 +81,7 @@
 		4C8A0B4A271790240088A49B /* ScummStoreDevData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A0B49271790240088A49B /* ScummStoreDevData.swift */; };
 		4C92B5C82A5C366F00967FF2 /* CDHDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C92B5C72A5C366F00967FF2 /* CDHDView.swift */; };
 		4C92B5CA2A5C37CC00967FF2 /* CDHD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C92B5C92A5C37CC00967FF2 /* CDHD.swift */; };
+		4C973F292CE1BA1800E3A7E1 /* VERB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C973F282CE1BA1800E3A7E1 /* VERB.swift */; };
 		4C9F3D982723C4260052EEE2 /* CLUT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D972723C4260052EEE2 /* CLUT.swift */; };
 		4C9F3D9A2723C6570052EEE2 /* CLUTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D992723C6570052EEE2 /* CLUTView.swift */; };
 		4C9F3D9C2724476D0052EEE2 /* Bitstream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3D9B2724476D0052EEE2 /* Bitstream.swift */; };
@@ -186,6 +187,7 @@
 		4C8A0B49271790240088A49B /* ScummStoreDevData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScummStoreDevData.swift; sourceTree = "<group>"; };
 		4C92B5C72A5C366F00967FF2 /* CDHDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDHDView.swift; sourceTree = "<group>"; };
 		4C92B5C92A5C37CC00967FF2 /* CDHD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDHD.swift; sourceTree = "<group>"; };
+		4C973F282CE1BA1800E3A7E1 /* VERB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VERB.swift; sourceTree = "<group>"; };
 		4C9F3D972723C4260052EEE2 /* CLUT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLUT.swift; sourceTree = "<group>"; };
 		4C9F3D992723C6570052EEE2 /* CLUTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLUTView.swift; sourceTree = "<group>"; };
 		4C9F3D9B2724476D0052EEE2 /* Bitstream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitstream.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				4C64A24F273AC8A700AD9AB8 /* COST.swift */,
 				4C92B5C92A5C37CC00967FF2 /* CDHD.swift */,
 				4C0C50942A928341004B4466 /* CHAR.swift */,
+				4C973F282CE1BA1800E3A7E1 /* VERB.swift */,
 				4CC620782A9507980052936C /* SOUN.swift */,
 			);
 			path = "Data File Models";
@@ -645,6 +648,7 @@
 				4CC620812A961DD20052936C /* RecentFilesManager.swift in Sources */,
 				4C538F0C2A942B6100D29783 /* Glyph.swift in Sources */,
 				4CF22419272210B10006F1CE /* RMHDView.swift in Sources */,
+				4C973F292CE1BA1800E3A7E1 /* VERB.swift in Sources */,
 				4CD01E6C272DD0EB0022462F /* CGImage+Ext.swift in Sources */,
 				4CE24556271F99E4007D7847 /* HexEditorView.swift in Sources */,
 				4C40806E271B976C00A76C75 /* UInt8+Ext.swift in Sources */,
