@@ -19,14 +19,47 @@ public enum Value: Equatable {
     /// Represents a double value.
     case double(Double)
     
-    /// Represents a string value.
-    case string(String)
+    /// Represents a heap object.
+    case object(Object)
     
     /// Represents a nil value.
     case `nil`
 }
 
+/// Provides additional computed properties and utility functions for the `Value` type.
 extension Value {
+    
+    /// Indicates whether the value is a string.
+    ///
+    /// - Returns: `true` if the value is a string; otherwise, `false`.
+    var isString: Bool {
+        if case .object(let type) = self, type.isString { return true }
+        return false
+    }
+    
+    /// Retrieves the value as a string if it is a string type.
+    ///
+    /// - Returns: The string value if the value is a string, or `nil` if it is not a string.
+    var asString: String? {
+        if case .object(let object) = self, case .string(let value) = object.type {
+            return value
+        }
+        return nil
+    }
+    
+    /// Indicates whether the value is numeric.
+    ///
+    /// A value is considered numeric if it is of type `.int` or `.double`.
+    ///
+    /// - Returns: `true` if the value is numeric; otherwise, `false`.
+    var isNumeric: Bool {
+        switch self {
+        case .int, .double:
+            return true
+        default:
+            return false
+        }
+    }
     
     /// Determines whether a given value is considered "falsey".
     ///
@@ -67,8 +100,11 @@ extension Value {
         case (.double(let left), .double(let right)):
             return left.isEqual(to: right)
             
-        case (.string(let left), .string(let right)):
-            return left == right
+        case (.object(let leftObject), .object(let rightObject)):
+            if case .string(let left) = leftObject.type, case .string(let right) = rightObject.type {
+                return left == right
+            }
+            return false
             
         case (.nil, .nil):
             return true

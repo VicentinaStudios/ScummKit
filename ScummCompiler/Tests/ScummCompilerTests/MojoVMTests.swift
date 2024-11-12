@@ -375,4 +375,58 @@ final class MojoVMTests: XCTestCase {
             XCTFail("Expected boolean result for less-than-or-equal comparison.")
         }
     }
+    
+    #if CUSTOM_GARBAGE_COLLECTION
+    func testNoObjectsInitially() throws {
+        XCTAssertNil(virtualMachine.objects)
+    }
+    
+    func testSingleObjectConstantHandling() throws {
+        
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        let constant = chunk.addConstant(value: .object(Object(type: .string("test"))))
+        try chunk.write(byte: UInt8(constant), line: 1)
+
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        
+        XCTAssertEqual(virtualMachine.stackTop, 1)
+        XCTAssertNotNil(virtualMachine.objects)
+        
+        if let firstObject = virtualMachine.objects {
+            XCTAssertEqual(firstObject.type, .string("test"))
+            XCTAssertNil(firstObject.next)
+        } else {
+            XCTFail("Expected object to be added to objects list.")
+        }
+    }
+    
+    func testMultipleObjectConstantHandling() throws {
+        
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        let firstConstant = chunk.addConstant(value: .object(Object(type: .string("first"))))
+        try chunk.write(byte: UInt8(firstConstant), line: 1)
+        try chunk.write(byte: MojoOpcode.constant.rawValue, line: 1)
+        let secondConstant = chunk.addConstant(value: .object(Object(type: .string("second"))))
+        try chunk.write(byte: UInt8(secondConstant), line: 1)
+        
+        XCTAssertNoThrow(try virtualMachine.interpret(chunk: chunk))
+        
+        XCTAssertNotNil(virtualMachine.objects)
+        
+        if let firstObject = virtualMachine.objects {
+            XCTAssertEqual(firstObject.type, .string("second"))
+            XCTAssertNotNil(firstObject.next)
+            
+            if let nextObject = firstObject.next {
+                XCTAssertEqual(nextObject.type, .string("first"))
+                XCTAssertNil(nextObject.next) // This should be the last object.
+            } else {
+                XCTFail("Expected object linkage in the garbage collection chain.")
+            }
+        } else {
+            XCTFail("Expected objects to be linked.")
+        }
+        
+    }
+    #endif
 }

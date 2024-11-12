@@ -133,8 +133,19 @@ struct Literal: Expression {
     
     /// The value of the literal expression, which can be of any type.
     let value: Any?
+    
+    /// The associated token for the literal, containing line number information for error reporting.
+    ///
+    /// - Note: The token is primarily used for the line number in error handling and VM code generation.
     let token: Token?
     
+    /// Initializes a new literal expression.
+    ///
+    /// - Parameters:
+    ///   - value: The actual value of the literal expression. This can be of any type (e.g., `String`, `Int`, `Bool`).
+    ///   - token: An optional `Token` associated with this literal expression, which may contain line number
+    ///     information for error handling or code generation.
+    ///     - If not provided, the token will default to `nil`, meaning there is no token associated with the literal.
     init(value: Any?, token: Token? = nil) {
         self.value = value
         self.token = token

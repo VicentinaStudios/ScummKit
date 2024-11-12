@@ -24,6 +24,8 @@ enum CodeGeneratorError: LocalizedError, Equatable {
     /// An error indicating that the maximum limit of constants in one chunk has been exceeded.
     case tooManyConstants
     
+    case invalidOperandType
+    
     /// A human-readable description of the error.
     var errorDescription: String? {
         
@@ -40,6 +42,9 @@ enum CodeGeneratorError: LocalizedError, Equatable {
             
         case .tooManyConstants:
             return "Too Many Constants"
+            
+        case .invalidOperandType:
+            return "Invalid Operant Type"
         }
     }
     
@@ -59,6 +64,9 @@ enum CodeGeneratorError: LocalizedError, Equatable {
             
         case .tooManyConstants:
             return "Exceeded the maximum limit of constants in one chunk."
+            
+        case .invalidOperandType:
+            return "The operand type is invalid for the operation. Expected a numeric value (Int or Double) for unary minus operations, or a boolean value for the logical NOT operation."
         }
     }
     
@@ -78,6 +86,9 @@ enum CodeGeneratorError: LocalizedError, Equatable {
 
         case .tooManyConstants:
             return "Reduce the number of constants in the code or split them into multiple chunks."
+            
+        case .invalidOperandType:
+            return "Ensure that the operands used in the expression match the expected types (e.g., use numeric types for operations like unary minus, and boolean for logical NOT)."
         }
     }
 }

@@ -214,4 +214,114 @@ class DecentParserTests: XCTestCase {
             XCTFail("Boolean not true")
         }
     }
+    
+    func testParseNumber() throws {
+        let source = "12345"
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let abstractSyntaxTree = try parser.parse()
+        
+        let mockVisitor = MockVisitor()
+        try abstractSyntaxTree.accept(visitor: mockVisitor)
+
+        XCTAssertEqual(mockVisitor.visitedExpressions.count, 1)
+        
+        if let literal = abstractSyntaxTree as? Literal {
+            XCTAssertEqual(literal.value as? Int, 12345)
+        } else {
+            XCTFail("Not a number literal")
+        }
+    }
+    
+    func testParseNegativeNumber() throws {
+        let source = "-123"
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let abstractSyntaxTree = try parser.parse()
+        
+        let mockVisitor = MockVisitor()
+        try abstractSyntaxTree.accept(visitor: mockVisitor)
+
+        XCTAssertEqual(mockVisitor.visitedExpressions.count, 1)
+        
+        if let unary = abstractSyntaxTree as? Unary,
+           let literal = unary.right as? Literal {
+            XCTAssertEqual(unary.operatorToken.type, .minus)
+            XCTAssertEqual(literal.value as? Int, 123)
+        } else {
+            XCTFail("Not a negative number literal")
+        }
+    }
+    
+    func testParseStringLiteral() throws {
+        let source = "\"Hello, World!\""
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let abstractSyntaxTree = try parser.parse()
+        
+        let mockVisitor = MockVisitor()
+        try abstractSyntaxTree.accept(visitor: mockVisitor)
+
+        XCTAssertEqual(mockVisitor.visitedExpressions.count, 1)
+        
+        if let literal = abstractSyntaxTree as? Literal {
+            XCTAssertEqual(literal.value as? String, "\"Hello, World!\"")
+        } else {
+            XCTFail("Not a string literal")
+        }
+    }
+    
+    func testParseStringConcatenation() throws {
+        let source = "\"Hello\" + \" World!\""
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let abstractSyntaxTree = try parser.parse()
+        
+        let mockVisitor = MockVisitor()
+        try abstractSyntaxTree.accept(visitor: mockVisitor)
+
+        XCTAssertEqual(mockVisitor.visitedExpressions.count, 1)
+        
+        if let binary = abstractSyntaxTree as? Binary,
+           let left = binary.left as? Literal,
+           let right = binary.right as? Literal {
+            XCTAssertEqual(binary.operatorToken.type, .plus)
+            XCTAssertEqual(left.value as? String, "\"Hello\"")
+            XCTAssertEqual(right.value as? String, "\" World!\"")
+        } else {
+            XCTFail("Not a string concatenation expression")
+        }
+    }
+    
+    func testParseStringEquality() throws {
+        let source = "\"Hello\" == \"World!\""
+        
+        let scanner = Scanner(source: source)
+        let tokens = try scanner.scanAllTokens()
+        let parser = DecentParser(tokens: tokens)
+        let abstractSyntaxTree = try parser.parse()
+        
+        let mockVisitor = MockVisitor()
+        try abstractSyntaxTree.accept(visitor: mockVisitor)
+
+        XCTAssertEqual(mockVisitor.visitedExpressions.count, 1)
+        
+        if let binary = abstractSyntaxTree as? Binary,
+           let left = binary.left as? Literal,
+           let right = binary.right as? Literal {
+            XCTAssertEqual(binary.operatorToken.type, .equalEqual)
+            XCTAssertEqual(left.value as? String, "\"Hello\"")
+            XCTAssertEqual(right.value as? String, "\"World!\"")
+        } else {
+            XCTFail("Not a string equality expression")
+        }
+    }
 }
