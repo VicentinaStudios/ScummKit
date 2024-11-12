@@ -86,7 +86,20 @@ extension MojoVM {
         switch instruction {
             
         case .add:
-            try binaryOperation(valueType: Value.int, op: +)
+            
+            guard let a = peek(0), let b = peek(1) else {
+                throw RuntimeError.missingOperands
+            }
+            
+            if a.isString && b.isString {
+                try concatenate(op: +)
+                
+            } else if a.isNumeric && b.isNumeric {
+                try binaryOperation(valueType: Value.int, op: +)
+                
+            } else {
+                throw RuntimeError.invalidOperands
+            }
             
         case .subtract:
             try binaryOperation(valueType: Value.int, op: -)
@@ -140,9 +153,16 @@ extension MojoVM {
         }
     }
     
-    /// Handles the execution of the constant instruction.
+    /// Handles the execution of the constant instruction and manages the garbage collection linkage for objects.
     ///
-    /// - Throws: An error of type `VirtualMachineError` if an issue occurs during constant handling.
+    /// This method retrieves a constant value from the bytecode at a specified index and pushes it onto the virtual machine's stack. If the constant is an object and custom garbage collection is enabled, the object is linked into the `objects` list for future garbage collection.
+    ///
+    /// - Throws:
+    ///   - `VirtualMachineError.emptyChunk` if the bytecode chunk is empty or unavailable.
+    ///   - Any error thrown by `chunk.readConstant(at:)` if reading the constant at the specified index fails.
+    ///
+    /// - Note:
+    ///   - If custom garbage collection is enabled, and the constant is an object, the object is linked to the global `objects` list by setting its `next` property to point to the current head of the `objects` list. The object then becomes the new head of the list.
     private func handleConstant() throws {
         
         guard let chunk = chunk else {
@@ -152,5 +172,12 @@ extension MojoVM {
         let index = try Int(readNextByte())
         let constant = try chunk.readConstant(at: index)
         try push(value: constant)
+        
+        #if CUSTOM_GARBAGE_COLLECTION
+        if case .object(let object) = constant {
+            object.next = objects
+            objects = object
+        }
+        #endif
     }
 }

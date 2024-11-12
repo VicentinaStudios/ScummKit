@@ -9,6 +9,10 @@ import XCTest
 @testable import ScummCompiler
 
 class ValueTests: XCTestCase {
+    
+    private func stringValue(_ str: String) -> Value {
+        return .object(Object(type: .string(str)))
+    }
 
     func testEquatable() {
         XCTAssertEqual(Value.int(5), Value.int(5))
@@ -20,8 +24,8 @@ class ValueTests: XCTestCase {
         XCTAssertEqual(Value.int(10), .int(10))
         XCTAssertEqual(Value.bool(false), .bool(false))
         XCTAssertEqual(Value.double(3.14), .double(3.14))
-        XCTAssertEqual(Value.string("hello"), .string("hello"))
         XCTAssertEqual(Value.nil, .nil)
+        XCTAssertEqual(stringValue("hello"), stringValue("hello"))
     }
     
     func testEquality() {
@@ -41,8 +45,8 @@ class ValueTests: XCTestCase {
         XCTAssertNotEqual(Value.double(3.14), Value.double(2.71))
         
         // Test equality of `string` values
-        XCTAssertEqual(Value.string("hello"), Value.string("hello"))
-        XCTAssertNotEqual(Value.string("hello"), Value.string("world"))
+        XCTAssertEqual(stringValue("hello"), stringValue("hello"))
+        XCTAssertNotEqual(stringValue("hello"), stringValue("world"))
         
         // Test equality of `nil` values
         XCTAssertEqual(Value.nil, Value.nil)
@@ -57,8 +61,8 @@ class ValueTests: XCTestCase {
         XCTAssertTrue(Value.int(5) == Value.int(5))
         XCTAssertTrue(Value.bool(true) == Value.bool(true))
         XCTAssertTrue(Value.double(3.14) == Value.double(3.14))
-        XCTAssertTrue(Value.string("hello") == Value.string("hello"))
         XCTAssertTrue(Value.nil == Value.nil)
+        XCTAssertTrue(stringValue("hello") == stringValue("hello"))
     }
     
     func testFalsey() {

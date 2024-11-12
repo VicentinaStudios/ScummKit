@@ -246,4 +246,44 @@ final class GenerateMojoTests: XCTestCase {
         XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf8, 0xfb])
         XCTAssertEqual(chunk?.lines, Array(repeating: 1, count: 4))
     }
+    
+    func testGenerateMojo_StringLiteral() throws {
+        
+        let stringExpression = Literal(value: "Hello, World!", token: Token(type: .string, lexeme: "\"Hello, World!\"", line: 1))
+        
+        codeGenerator = GenerateMojo(with: Chunk())
+        let chunk = try codeGenerator?.generateByteCode(expression: stringExpression)
+        
+        XCTAssertEqual(chunk?.code, [0xf5, 0])
+        XCTAssertEqual(chunk?.lines, [1, 1])
+    }
+    
+    func testGenerateMojo_ConcatenateStringLiterals() throws {
+        
+        let concatenationExpression = Binary(
+            left: Literal(value: "Hello", token: Token(type: .string, lexeme: "\"Hello\"", line: 5)),
+            operatorToken: Token(type: .plus, lexeme: "+", line: 5),
+            right: Literal(value: " World!", token: Token(type: .string, lexeme: "\" World!\"", line: 5))
+        )
+        
+        codeGenerator = GenerateMojo(with: Chunk())
+        let chunk = try codeGenerator?.generateByteCode(expression: concatenationExpression)
+        
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf5, 1, 0xf0])
+        XCTAssertEqual(chunk?.lines, [5, 5, 5, 5, 5])
+    }
+    
+    func testGenerateMojo_Equality_String() throws {
+        
+        let equalityExpression = Binary(
+            left: Literal(value: "Hello", token: Token(type: .string, lexeme: "\"Hello\"", line: 2)),
+            operatorToken: Token(type: .equalEqual, lexeme: "==", line: 1),
+            right: Literal(value: " World!", token: Token(type: .string, lexeme: "\" World!\"", line: 2))
+        )
+
+        let chunk = try codeGenerator?.generateByteCode(expression: equalityExpression)
+
+        XCTAssertEqual(chunk?.code, [0xf5, 0, 0xf5, 1, 0xfb])
+        XCTAssertEqual(chunk?.lines, Array(repeating: 2, count: 5))
+    }
 }

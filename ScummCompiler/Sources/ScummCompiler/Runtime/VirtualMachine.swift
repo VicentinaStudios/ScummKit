@@ -76,6 +76,15 @@ public class BaseVM<OpcodeType: Opcode>: VirtualMachine {
     /// The maximum size of the stack.
     internal let stackMax = 256
     
+    #if CUSTOM_GARBAGE_COLLECTION
+    /// A linked list of objects in memory used for garbage collection.
+    ///
+    /// This property holds the head of the linked list, which is used to traverse all the objects in memory. When garbage collection is enabled, this list is used to track and manage memory. The `next` property of each `Object` links to the next object in memory.
+    ///
+    /// - Note: This is a temporary structure for enabling custom garbage collection. The actual garbage collection logic will be implemented later.
+    internal var objects: Object?
+    #endif
+    
     // MARK: Computed Propertiex
     
     /// The decompiler used for debugging traces.
@@ -98,9 +107,27 @@ public class BaseVM<OpcodeType: Opcode>: VirtualMachine {
     
     /// Initializes a new instance of the virtual machine.
     public init() {
+        
         stack = [Value?](repeating: nil, count: stackMax)
         resetStack()
+        
+        #if CUSTOM_GARBAGE_COLLECTION
+        objects = nil
+        #endif
     }
+    
+    #if CUSTOM_GARBAGE_COLLECTION
+    /// Deinitializes the `BaseVM` instance, cleaning up all objects in memory.
+    ///
+    /// This method is responsible for deallocating objects and cleaning up memory when the virtual machine instance is destroyed. It traverses the linked list of objects, setting the `objects` property to `nil` to break the links and release references to objects.
+    ///
+    /// - Important: This does not free memory occupied by objects themselves. The garbage collection mechanism should be implemented separately.
+    deinit {
+        while objects != nil {
+            objects = objects?.next
+        }
+    }
+    #endif
     
     // MARK: Actions
     
@@ -191,8 +218,13 @@ extension BaseVM {
                     representation = "\(value)"
                 case .double(let value): 
                     representation = "\(value)"
-                case .string(let value):
-                    representation = value
+                case .object(let type):
+                    if case .string(let value) = type.type {
+                        representation = "\(value)"
+                    } else{
+                        return
+                    }
+                    
                 case .nil: return
                 }
                 
@@ -216,8 +248,6 @@ extension BaseVM {
         repeat {
             
             guard
-                case .int = peek(0),
-                case .int = peek(1),
                 case let .int(b) = try pop(),
                 case let .int(a) = try pop()
             else {
@@ -237,6 +267,29 @@ extension BaseVM {
 
             
         } while false
+    }
+    
+    /// Concatenates two string values and pushes the result onto the stack.
+    ///
+    /// This method pops two string values from the stack, concatenates them, and then pushes the concatenated result back onto the stack as a new `Value.object` instance containing the resulting string.
+    ///
+    /// - Throws: `RuntimeError.invalidOperands` if the values popped from the stack are not strings.
+    ///
+    /// - Parameters:
+    ///   - op: A closure that defines the concatenation operation (in this case, `+`).
+    ///
+    /// - Note: This method is part of handling the `.add` opcode in the virtual machine, where if two strings are encountered, they are concatenated instead of being added numerically.
+    internal func concatenate(op: (String, String) -> String) throws {
+        
+        guard
+            let b = try pop().asString,
+            let a = try pop().asString
+        else {
+            throw RuntimeError.invalidOperands
+        }
+        
+        let concatenated = Value.object(.init(type: .string(a + b)))
+        try push(value: concatenated)
     }
     
     /// Retrieves the value from the stack at a specified distance from the top without removing it.

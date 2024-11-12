@@ -59,24 +59,37 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
     ///
     /// This method generates the corresponding bytecode for a literal expression. The line number for the literal
     /// expression is retrieved from the expression's `token` if available; otherwise, the `line` from the surrounding
-    /// context (e.g., `Unary`, `Binary` expressions) is used.
+    /// context (e.g., `Unary`, `Binary` expressions) is used. It handles various types of literals including `Int`,
+    /// `Double`, `Bool`, `String`, and `nil`. For string literals, the quotes are removed before storing the value
+    /// as an object on the heap in the VM.
     ///
     /// - Parameter expression: The literal expression to visit, which contains the value and token information.
-    /// - Returns: The literal value.
+    /// - Returns: The literal value, typically used by the visitor pattern to return the result of the expression.
     /// - Throws:
-    ///   - `CodeGeneratorError.unknownLiteral`: If the literal value's type is unknown (not `Int` or `Bool`).
+    ///   - `CodeGeneratorError.unknownLiteral`: If the literal value's type is unknown (not `Int`, `Double`, `Bool`, `String`, or `nil`).
     override func visitLiteralExpr(_ expression: Literal) throws -> Any? {
         
         // Retrieve the line from the expression's token, or fall back to the previous expression's line (context-aware).
         line = expression.token?.line ?? line
         
         switch expression.value {
+            
         case let intValue as Int:
             try emitConstant(.int(intValue))
+            
+        case let doubleValue as Double:
+            try emitConstant(.double(doubleValue))
+            
         case let boolValue as Bool:
             try emitBytes(boolValue ? MojoOpcode.true.rawValue : MojoOpcode.false.rawValue)
+            
+        case let stringValue as String:
+            let trimmed = String(stringValue.dropFirst().dropLast())
+            try emitConstant(.object(.init(type: .string(trimmed))))
+            
         case nil:
             try emitBytes(MojoOpcode.nil.rawValue)
+            
         default:
             throw CodeGeneratorError.unknownLiteral
         }
@@ -106,14 +119,20 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
         
         case .minus:
             
-            guard
-                let right = try evaluate(expression.right) as? Int
-            else {
+            guard let right = try evaluate(expression.right) else {
                 throw CodeGeneratorError.expressionEvaluationFailed
             }
             
             try emitBytes(MojoOpcode.negate.rawValue)
-            return -right
+            
+            switch right {
+            case let rightInt as Int:
+                return -rightInt
+            case let rightDouble as Double:
+                return -rightDouble
+            default:
+                throw CodeGeneratorError.invalidOperandType
+            }
             
         case .bang:
             
@@ -143,7 +162,7 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
         let left = try evaluate(expression.left)
         let right = try evaluate(expression.right)
         
-        func evaluateBinaryOp<T: Numeric>(operation: (T, T) -> T) throws -> T? {
+        func evaluateBinaryOp<T>(operation: (T, T) -> T) throws -> T? {
             
             if let a = left as? T, let b = right as? T {
                 return operation(a, b)
@@ -181,6 +200,7 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
             
             if let result = try evaluateBinaryOp(operation: +) as Int? { return result }
             if let result = try evaluateBinaryOp(operation: +) as Double? { return result }
+            if let result = try evaluateBinaryOp(operation: +) as String? { return result }
             
         case .bangEqual:
             

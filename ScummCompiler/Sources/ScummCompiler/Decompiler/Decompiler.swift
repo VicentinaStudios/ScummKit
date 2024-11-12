@@ -220,7 +220,20 @@ extension BaseDecompiler {
            let key = constant.keys.first,
            let value = constant[key]
         {
-            output += " \(key) '\(value)'"
+            
+            switch value {
+            case .object(let type):
+                switch type.type {
+                case .string(let value):
+                    output += " \(key) '\(value)'"
+                }
+            case .nil:
+                print("nil")
+            case .bool(let value):
+                print(value ? "true" : "false")
+            default:
+                output += " \(key) '\(value)'"
+            }
         }
         
         output += "\n"

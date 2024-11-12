@@ -225,7 +225,7 @@ extension DecentParser {
             return Literal(value: nil, token: previous)
         }
         
-        if match(types: [.number]) {
+        if match(types: [.number, .string]) {
             return Literal(value: previous.literal, token: previous)
         }
         

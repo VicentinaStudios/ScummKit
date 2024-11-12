@@ -31,4 +31,5 @@ public struct Configuration {
     public static var BACKEND = Backend.scumm
     public static var PARSER = ParserType.decent
     public static var RUNTIME = Runtime.scumm
+    public static var GARBAGE_COLLECTION = false
 }

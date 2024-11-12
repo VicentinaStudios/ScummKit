@@ -96,6 +96,25 @@ class ExpressionTests: XCTestCase {
         XCTAssertNoThrow(try unaryExpression.accept(visitor: mockVisitor))
         XCTAssertEqual(mockVisitor.visitedUnaryExprCount, 1)
     }
+    
+    func testLiteralExpressionWithTokenVisiting() {
+        
+        // Test a literal with an associated token that carries line number and lexeme
+        let token = Token(type: .string, lexeme: "\"Hello, World!\"", literal: "\"Hello, World!\"", line: 1)
+        let literalExpression = Literal(value: "\"Hello, World!\"", token: token)
+        let mockVisitor = MockExpressionVisitor()
+
+        XCTAssertNoThrow(try literalExpression.accept(visitor: mockVisitor))
+        XCTAssertEqual(mockVisitor.visitedLiteralExprCount, 1)
+        
+        if let token = literalExpression.token {
+            XCTAssertEqual(token.lexeme, "\"Hello, World!\"")
+            XCTAssertEqual(token.line, 1)
+            XCTAssertEqual(literalExpression.value as? String, "\"Hello, World!\"")
+        } else {
+            XCTFail("Token should be present")
+        }
+    }
 }
 
 class MockExpressionVisitor: ExpressionVisitor {
