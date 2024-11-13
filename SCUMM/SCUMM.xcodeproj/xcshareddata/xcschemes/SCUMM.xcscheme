@@ -85,11 +85,11 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--backend=mojo"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--backend=scumm"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "${PROJECT_DIR}/playground.scu"
@@ -97,15 +97,15 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--runtime=mojo"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--runtime=scumm"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--runtime=xray"
+            argument = "--runtime=scumm"
             isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--runtime=xray"
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-o bytecode.scumm"
