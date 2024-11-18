@@ -80,4 +80,33 @@ class ValueTests: XCTestCase {
         // Nil case
         XCTAssertTrue(Value.nil.isFalsey)
     }
+    
+    func testIntValuePrint() {
+        let intValue = Value.int(42)
+        XCTAssertEqual(intValue.description, "42")
+    }
+    
+    func testDoubleValuePrint() {
+        let doubleValue = Value.double(3.14)
+        XCTAssertEqual(doubleValue.description, "3.14")
+    }
+    
+    func testBoolValuePrint() {
+        let trueValue = Value.bool(true)
+        XCTAssertEqual(trueValue.description, "true")
+        
+        let falseValue = Value.bool(false)
+        XCTAssertEqual(falseValue.description, "false")
+    }
+    
+    func testStringObjectValuePrint() {
+        let stringObject = Object(type: .string("Hello, world!"))
+        let stringValue = Value.object(stringObject)
+        XCTAssertEqual(stringValue.description, "Hello, world!")
+    }
+    
+    func testNilValuePrint() {
+        let nilValue = Value.nil
+        XCTAssertEqual(nilValue.description, "nil")
+    }
 }

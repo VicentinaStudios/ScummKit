@@ -11,42 +11,65 @@ import XCTest
 class ASTPrinterTests: XCTestCase {
 
     func testPrintBinaryExpression() {
-        let binaryExpression = Binary(left: Literal(value: 5), operatorToken: Token(type: .plus, lexeme: "+", line: 1), right: Literal(value: 3))
+        let binaryExpression = BinaryExpression(left: LiteralExpression(value: 5), operatorToken: Token(type: .plus, lexeme: "+", line: 1), right: LiteralExpression(value: 3))
         let astPrinter = ASTPrinter()
 
         XCTAssertEqual(astPrinter.print(expression: binaryExpression), "(+ 5 3)")
     }
 
     func testPrintGroupingExpression() {
-        let groupingExpression = Grouping(expression: Literal(value: "Hello"))
+        let groupingExpression = GroupingExpession(expression: LiteralExpression(value: "Hello"))
         let astPrinter = ASTPrinter()
 
         XCTAssertEqual(astPrinter.print(expression: groupingExpression), "(group Hello)")
     }
 
     func testPrintLiteralExpression() {
-        let literalExpression = Literal(value: 42)
+        let literalExpression = LiteralExpression(value: 42)
         let astPrinter = ASTPrinter()
 
         XCTAssertEqual(astPrinter.print(expression: literalExpression), "42")
     }
 
     func testPrintUnaryExpression() {
-        let unaryExpression = Unary(operatorToken: Token(type: .minus, lexeme: "-", line: 1), right: Literal(value: 7))
+        let unaryExpression = UnaryExpression(operatorToken: Token(type: .minus, lexeme: "-", line: 1), right: LiteralExpression(value: 7))
         let astPrinter = ASTPrinter()
 
         XCTAssertEqual(astPrinter.print(expression: unaryExpression), "(- 7)")
     }
 
     func testPrintNestedExpressions() {
-        let nestedExpression = Binary(
-            left: Literal(value: 5),
+        let nestedExpression = BinaryExpression(
+            left: LiteralExpression(value: 5),
             operatorToken: Token(type: .minus, lexeme: "-", line: 1),
-            right: Grouping(expression: Unary(operatorToken: Token(type: .bang, lexeme: "!", line: 1), right: Literal(value: 3)))
+            right: GroupingExpession(expression: UnaryExpression(operatorToken: Token(type: .bang, lexeme: "!", line: 1), right: LiteralExpression(value: 3)))
         )
         let astPrinter = ASTPrinter()
 
         XCTAssertEqual(astPrinter.print(expression: nestedExpression), "(- 5 (group (! 3)))")
     }
-}
+    
+    func testPrintVariableExpression() {
+        let variableExpression = VariableExpression(name: Token(type: .identifier, lexeme: "x", line: 1))
+        let astPrinter = ASTPrinter()
 
+        XCTAssertEqual(astPrinter.print(expression: variableExpression), "x")
+    }
+    
+    func testPrintNilLiteralExpression() {
+        let nilExpression = LiteralExpression(value: nil)
+        let astPrinter = ASTPrinter()
+
+        XCTAssertEqual(astPrinter.print(expression: nilExpression), "nil")
+    }
+    
+//    func testPrintAssignExpression() {
+//        let assignExpression = AssignExpression(
+//            name: Token(type: .identifier, lexeme: "myVar", line: 1),
+//            value: LiteralExpression(value: 10)
+//        )
+//        let astPrinter = ASTPrinter()
+//
+//        XCTAssertEqual(astPrinter.print(expression: assignExpression), "(= x 42)")
+//    }
+}

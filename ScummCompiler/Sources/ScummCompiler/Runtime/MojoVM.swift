@@ -125,7 +125,7 @@ extension MojoVM {
                 case .int = peek(0),
                 case .int(let poppedValue) = try pop()
             else {
-                fatalError("Operand must be a number.")
+                throw RuntimeError.invalidOperands
             }
             
             try push(value: .int(-poppedValue))
@@ -150,6 +150,53 @@ extension MojoVM {
             
         case .nil:
             try push(value: .nil)
+            
+        case .print:
+            let value = try pop()
+            print(value.description)
+            
+        case .pop:
+            _ = try pop()
+            
+        case .global:
+            
+            let index = try Int(readNextByte())
+            
+            guard let constant = try chunk?.readConstant(at: index).asString else {
+                throw RuntimeError.unknownVariableIndex(index: index)
+            }
+            
+            globals[constant] = peek(0)
+            _ = try pop()
+            
+        case .get:
+            
+            let index = try Int(readNextByte())
+            
+            guard let key = try chunk?.readConstant(at: index).asString else {
+                throw RuntimeError.unknownVariableIndex(index: index)
+            }
+            
+            guard let value = globals[key] else {
+                throw RuntimeError.undefinedVariable(name: key)
+            }
+            
+            try push(value: value)
+            
+        case .set:
+            
+            let index = try Int(readNextByte())
+            
+            guard let constant = try chunk?.readConstant(at: index).asString else {
+                throw RuntimeError.unknownVariableIndex(index: index)
+            }
+            
+            if globals[constant] == nil {
+                globals.removeValue(forKey: constant)
+                throw RuntimeError.undefinedVariable(name: constant)
+            } else {
+                globals[constant] = peek(0)
+            }
         }
     }
     

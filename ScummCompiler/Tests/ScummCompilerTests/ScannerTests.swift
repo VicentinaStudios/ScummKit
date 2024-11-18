@@ -72,11 +72,11 @@ final class ScannerTests: XCTestCase {
     
     func testMatchKeyword() throws {
         
-        let source = "else if include is"
+        let source = "else if include is false nil print true var"
         let scanner = Scanner(source: source)
         
         let expectedTokens: [TokenType] = [
-            .else, .if, .include, .is
+            .else, .if, .include, .is, .false, .nil, .print, .true, .var
         ]
         
         for expectedToken in expectedTokens {

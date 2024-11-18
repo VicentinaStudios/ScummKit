@@ -13,11 +13,11 @@ public enum Value: Equatable {
     /// Represents an integer value.
     case int(Int)
     
-    /// Represents a boolean value.
-    case bool(Bool)
-    
     /// Represents a double value.
     case double(Double)
+    
+    /// Represents a boolean value.
+    case bool(Bool)
     
     /// Represents a heap object.
     case object(Object)
@@ -28,6 +28,20 @@ public enum Value: Equatable {
 
 /// Provides additional computed properties and utility functions for the `Value` type.
 extension Value {
+    
+    /// Indicates whether the value is numeric.
+    ///
+    /// A value is considered numeric if it is of type `.int` or `.double`.
+    ///
+    /// - Returns: `true` if the value is numeric; otherwise, `false`.
+    var isNumeric: Bool {
+        switch self {
+        case .int, .double:
+            return true
+        default:
+            return false
+        }
+    }
     
     /// Indicates whether the value is a string.
     ///
@@ -45,20 +59,6 @@ extension Value {
             return value
         }
         return nil
-    }
-    
-    /// Indicates whether the value is numeric.
-    ///
-    /// A value is considered numeric if it is of type `.int` or `.double`.
-    ///
-    /// - Returns: `true` if the value is numeric; otherwise, `false`.
-    var isNumeric: Bool {
-        switch self {
-        case .int, .double:
-            return true
-        default:
-            return false
-        }
     }
     
     /// Determines whether a given value is considered "falsey".
@@ -111,6 +111,50 @@ extension Value {
             
         default:
             return false
+        }
+    }
+}
+
+/// Conformance to `CustomStringConvertible` to provide a textual representation of the value.
+extension Value: CustomStringConvertible {
+    
+    /// Returns a string representation of the value.
+    ///
+    /// The `stringRepresentation` property converts the `Value` into a human-readable string:
+    /// - `.int`: Converts the integer value to its string representation.
+    /// - `.double`: Converts the double value to its string representation.
+    /// - `.bool`: Converts the boolean value (`true` or `false`) to its string representation.
+    /// - `.object`: Converts the underlying object type to a string:
+    ///     - `.string`: Returns the string value of the object.
+    /// - `.nil`: Returns the string `"nil"`.
+    ///
+    /// - Returns: A string representation of the value.
+    ///
+
+    /// A textual representation of the value.
+    ///
+    /// This property provides a human-readable string representation of the `Value`:
+    /// - For `.int`, it converts the integer value to its string equivalent.
+    /// - For `.double`, it converts the double value to its string equivalent.
+    /// - For `.bool`, it returns `"true"` or `"false"` depending on the boolean value.
+    /// - For `.object`, it delegates the conversion to the specific object type:
+    ///   - For `.string`, it returns the string content.
+    /// - For `.nil`, it returns `"nil"`.
+    public var description: String {
+        switch self {
+        case .int(let value):
+            return "\(value)"
+        case .double(let value):
+            return "\(value)"
+        case .bool(let value):
+            return "\(value)"
+        case .object(let object):
+            switch object.type {
+            case .string(let value):
+                return value
+            }
+        case .nil:
+            return "nil"
         }
     }
 }

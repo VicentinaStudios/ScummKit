@@ -348,8 +348,12 @@ extension Scanner {
             }
         case "n":
             return checkKeyword(start: 1, length: 2, rest: "il", type: .nil)
+        case "p":
+            return checkKeyword(start: 1, length: 4, rest: "rint", type: .print)
         case "t":
             return checkKeyword(start: 1, length: 3, rest: "rue", type: .true)
+        case "v":
+            return checkKeyword(start: 1, length: 2, rest: "ar", type: .var)
             
         default:
             break
