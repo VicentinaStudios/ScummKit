@@ -22,6 +22,30 @@ enum ParserError: LocalizedError, Equatable {
     ///   - message: Additional details or message associated with the unexpected token.
     case unexpectedToken(message: String)
     
+    /// Indicates an invalid assignment at a given line.
+    ///
+    /// - Parameters:
+    ///   - line: The line number where the invalid assignment occurred.
+    case invalidAssignment(line: Int)
+    
+    /// Indicates a missing semicolon at a specific line.
+    ///
+    /// - Parameters:
+    ///   - line: The line number where the semicolon is expected.
+    case missingSemicolon(line: Int)
+    
+    /// Indicates a missing bracket (either opening or closing).
+    ///
+    /// - Parameters:
+    ///   - line: The line number where the bracket is expected.
+    case missingBracket(line: Int)
+    
+    /// Indicates that a variable name was expected but not found.
+    ///
+    /// - Parameters:
+    ///   - line: The line number where the variable name is expected.
+    case missingVariable(line: Int)
+    
     /// A human-readable description of the error.
     var errorDescription: String? {
         
@@ -32,6 +56,18 @@ enum ParserError: LocalizedError, Equatable {
             
         case .unexpectedToken:
             return "Unexpected Token"
+            
+        case .invalidAssignment:
+            return "Invalid Assignment"
+            
+        case .missingSemicolon:
+            return "Missing Semicolon"
+            
+        case .missingVariable:
+            return "Missing Variable Name"
+            
+        case .missingBracket:
+            return "Missing Bracket"
         }
     }
     
@@ -45,6 +81,18 @@ enum ParserError: LocalizedError, Equatable {
             
         case .unexpectedToken(let message):
             return message
+            
+        case .invalidAssignment(let line):
+            return "Invalid assignment at line \(line)."
+            
+        case .missingSemicolon(let line):
+            return "A semicolon is expected at line \(line)."
+            
+        case .missingVariable(let line):
+            return "A variable name is expected at line \(line)."
+            
+        case .missingBracket(let line):
+            return "A bracket (either '(' or ')') is missing at line \(line)."
         }
     }
     
@@ -58,6 +106,18 @@ enum ParserError: LocalizedError, Equatable {
             
         case .unexpectedToken:
             return "Review the source code for any unexpected tokens or syntax errors. Make sure the input adheres to the language grammar rules."
+            
+        case .invalidAssignment:
+            return "Check the assignment statement and ensure it's being used correctly. Valid assignments should be to variables."
+            
+        case .missingSemicolon:
+            return "Check if you've forgotten to include a semicolon at the end of the statement."
+
+        case .missingVariable:
+            return "Ensure that a variable name is provided at the specified line. Check if it's properly declared."
+            
+        case .missingBracket:
+            return "Ensure that all brackets are correctly paired and closed."
         }
     }
 }

@@ -61,7 +61,7 @@ extension ASTPrinter: ExpressionVisitor {
     ///   - expression: The binary expression to be printed.
     /// - Returns: A string representation of the binary expression structure.
     /// - Throws: An error if an issue occurs during the expression traversal.
-    func visitBinaryExpr(_ expression: Binary) throws -> String {
+    func visitBinaryExpr(_ expression: BinaryExpression) throws -> String {
         try parenthesize(name: expression.operatorToken.lexeme, expressions: expression.left, expression.right)
     }
     
@@ -71,7 +71,7 @@ extension ASTPrinter: ExpressionVisitor {
     ///   - expression: The grouping expression to be printed.
     /// - Returns: A string representation of the grouping expression structure.
     /// - Throws: An error if an issue occurs during the expression traversal.
-    func visitGroupingExpr(_ expression: Grouping) throws -> String {
+    func visitGroupingExpr(_ expression: GroupingExpession) throws -> String {
         try parenthesize(name: "group", expressions: expression.expression)
     }
     
@@ -80,7 +80,7 @@ extension ASTPrinter: ExpressionVisitor {
     /// - Parameters:
     ///   - expression: The literal expression to be printed.
     /// - Returns: A string representation of the literal expression structure.
-    func visitLiteralExpr(_ expression: Literal) -> String {
+    func visitLiteralExpr(_ expression: LiteralExpression) -> String {
         "\(expression.value ?? "nil")"
     }
     
@@ -90,7 +90,31 @@ extension ASTPrinter: ExpressionVisitor {
     ///   - expression: The unary expression to be printed.
     /// - Returns: A string representation of the unary expression structure.
     /// - Throws: An error if an issue occurs during the expression traversal.
-    func visitUnaryExpr(_ expression: Unary) throws -> String {
+    func visitUnaryExpr(_ expression: UnaryExpression) throws -> String {
         try parenthesize(name: expression.operatorToken.lexeme, expressions: expression.right)
+    }
+    
+    /// Prints the structure of a variable expression.
+    ///
+    /// A variable expression refers to a named identifier in the program's environment.
+    ///
+    /// - Parameters:
+    ///   - expression: The variable expression to be printed.
+    /// - Returns: A string representation of the variable name.
+    /// - Throws: An error if an issue occurs during the expression traversal.
+    func visitVariableExpr(_ expression: VariableExpression) throws -> String {
+        expression.name.lexeme
+    }
+    
+    /// Prints the structure of an assignment expression.
+    ///
+    /// An assignment expression assigns a value to a variable and is represented as `name = value`.
+    ///
+    /// - Parameters:
+    ///   - expression: The assignment expression to be printed.
+    /// - Returns: A string representation of the assignment expression structure.
+    /// - Throws: An error if an issue occurs during the expression traversal.
+    func visitAssignExpr(_ expression: AssignExpression) throws -> String {
+        try parenthesize(name: "=", expressions: expression)
     }
 }

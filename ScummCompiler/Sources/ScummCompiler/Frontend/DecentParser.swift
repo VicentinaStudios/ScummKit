@@ -47,6 +47,9 @@ class DecentParser {
     /// The current index position in the `tokens` array.
     private var current: Array.Index
     
+    /// Errors encountered during parsing, if any.
+    private var errors: [Error]?
+    
     // MARK: Computed Properties
     
     /// The current token being pointed to by the parser.
@@ -62,6 +65,11 @@ class DecentParser {
     /// Checks if the parser has reached the end of the token sequence.
     private var isEndOfFile: Bool {
         peek.type == .eof
+    }
+    
+    /// Read-only access to parsing errors.
+    var collectedErrors: [Error]? {
+        errors
     }
     
     // MARK: Lifecycle
@@ -83,6 +91,27 @@ class DecentParser {
     func parse() throws -> Expression {
         try expression()
     }
+    
+    /// Parses a sequence of statements and returns an array of AST nodes.
+    ///
+    /// - Returns: An array of `Statement` AST nodes.
+    /// - Throws: A `ParserError` if a statement cannot be parsed.
+    func parse() throws -> [Statement] {
+        
+        var statements: [Statement] = []
+        
+        while !isEndOfFile {
+            if let statement = try declaration() {
+                statements.append(statement)
+            }
+        }
+        
+        if errors != nil {
+            print("Parsing completed with errors: \(errors!.count)")
+        }
+        
+        return statements
+    }
 }
 
 // MARK: - Parser
@@ -100,28 +129,156 @@ extension DecentParser {
         
         return previous
     }
+
+    /// Recovers from a parsing error by advancing the parser to a safe point in the code.
+    /// The parser skips over invalid tokens until it encounters a valid token, such as a semicolon,
+    /// `var`, or `print`, to resume parsing.
+    ///
+    /// - Note: This function has no return value; it merely advances the parser's position.
+    private func synchronize() {
+        
+        _ = advance()
+        
+        while !isEndOfFile {
+            
+            if previous.type == .semicolon {
+                return
+            }
+            
+            switch peek.type {
+            case .var, .print:
+                return
+            default:
+                break
+            }
+            
+            _ = advance()
+        }
+    }
+    
+    /// Parses a declaration.
+    ///
+    /// - Returns: The parsed declaration.
+    /// - Throws: A `ParserError` if parsing encounters an issue.
+    private func declaration() throws -> Statement? {
+        
+        do {
+            if match(types: [.var]) {
+                return try variableDeclaration()
+            } else {
+                return try statement()
+            }
+        } catch {
+            
+            errors = (errors ?? []) + [error]
+            synchronize()
+            return nil
+        }
+    }
+    
+    /// Parses a variable declaration, which includes the declaration of a new variable
+    /// and optionally an initializer expression.
+    ///
+    /// - Returns: A `VariableStatement` representing the variable declaration. This includes the variable's name
+    ///           and its initializer expression (if present).
+    /// - Throws:
+    ///   - `ParserError.expectedVariableName`: If the token doesn't match an expected variable name (identifier).
+    ///   - `ParserError.missingSemicolon`: If the semicolon is missing at the end of the declaration.
+    private func variableDeclaration() throws -> Statement {
+        
+        let variableName = try consume(type: .identifier, error: ParserError.missingVariable(line: peek.line))
+        let initializer = match(types: [.equal]) ? try expression() : nil
+        
+        _ = try consume(type: .semicolon, error: ParserError.missingSemicolon(line: peek.line))
+        
+        return VariableStatement(name: variableName, initializer: initializer)
+    }
+    
+    /// Parses a statement.
+    ///
+    /// - Returns: The parsed statement.
+    /// - Throws: A `ParserError` if parsing encounters an issue.
+    private func statement() throws -> Statement {
+        
+        if match(types: [.print]) {
+            return try printStatement()
+        } else {
+            return try expressionStatement()
+        }
+    }
     
     /// Parses an expression.
     ///
     /// - Returns: The parsed expression.
     /// - Throws: A `ParserError` if parsing encounters an issue.
     private func expression() throws -> Expression {
-        try equality()
+        try assignment()
+    }
+    
+    /// Parses an assignment expression, which may involve assigning a value to a variable.
+    ///
+    /// - Returns: An `AssignExpression` if an assignment is detected, otherwise, the parsed expression.
+    /// - Throws: A `ParserError.invalidAssignment` error if an invalid assignment is attempted (e.g., attempting
+    ///           to assign to something that is not a variable).
+    private func assignment() throws -> Expression {
+        
+        let expression = try equality()
+        
+        if match(types: [.equal]) {
+            
+            let equals = previous
+            let value = try assignment()
+            
+            guard let expression = expression as? VariableExpression else {
+                throw ParserError.invalidAssignment(line: equals.line)
+            }
+            
+            return AssignExpression(name: expression.name, value: value)
+        }
+        
+        return expression
     }
     
     /// Consumes the current token if it matches the expected type; otherwise, throws a `ParserError`.
     ///
     /// - Parameters:
-    ///   - type: The expected token type.
-    ///   - errorMessage: The error message to be used if the token type doesn't match.
-    /// - Throws: A `ParserError` if the token type doesn't match the expected type.
-    private func consume(type: TokenType, errorMessage: String) throws {
+    ///   - type: The expected token type. If the current token does not match this type, the specified error is thrown.
+    ///   - error: The error to throw if the current token does not match the expected type. Typically, this will be a
+    ///     `ParserError` indicating what went wrong, such as an unexpected token or a missing semicolon.
+    /// - Returns: The consumed `Token` if the current token matches the expected type.
+    /// - Throws: The provided `error` if the current token does not match the expected type.
+    private func consume(type: TokenType, error: Error) throws -> Token {
         
-        guard tokens[current].type == type else {
-            throw ParserError.unexpectedToken(message: errorMessage)
+        guard check(type: type) else {
+            throw error
         }
         
-        _ = advance()
+        return advance()
+    }
+}
+
+// MARK: - Parse Statements
+
+extension DecentParser {
+    
+    /// Parses a print statement and consumes the required semicolon.
+    ///
+    /// - Returns: A `Print` statement, which is a type of `Statement` representing the `print` command.
+    /// - Throws: A `ParserError.missingSemicolon` error if the semicolon is not found after the statement.
+    private func printStatement() throws -> Statement {
+        let expression = try expression()
+        _ = try consume(type: .semicolon, error: ParserError.missingSemicolon(line: peek.line))
+        return Print(expression: expression)
+    }
+    
+    /// Parses a general expression statement and consumes the required semicolon.
+    ///
+    /// - Returns: An `ExpressionStmt` statement, representing the parsed expression in statement form.
+    /// - Throws: A `ParserError.missingSemicolon` error if the semicolon is not found after the statement.
+    private func expressionStatement() throws -> Statement {
+        let expression = try expression()
+        _ = try consume(type: .semicolon, error: ParserError.missingSemicolon(line: peek.line))
+        return ExpressionStmt(expression: expression)
     }
 }
 
@@ -145,7 +302,7 @@ extension DecentParser {
             let operatorToken = previous
             let right = try nextPrecedence()
             
-            expression = Binary(
+            expression = BinaryExpression(
                 left: expression,
                 operatorToken: operatorToken,
                 right: right
@@ -198,7 +355,7 @@ extension DecentParser {
             let operatorToken = previous
             let right = try unary()
             
-            return Unary(
+            return UnaryExpression(
                 operatorToken: operatorToken,
                 right: right
             )
@@ -214,27 +371,31 @@ extension DecentParser {
     private func primary() throws -> Expression {
         
         if match(types: [.false]) {
-            return Literal(value: false, token: previous)
+            return LiteralExpression(value: false, token: previous)
         }
         
         if match(types: [.true]) {
-            return Literal(value: true, token: previous)
+            return LiteralExpression(value: true, token: previous)
         }
         
         if match(types: [.nil]) {
-            return Literal(value: nil, token: previous)
+            return LiteralExpression(value: nil, token: previous)
         }
         
         if match(types: [.number, .string]) {
-            return Literal(value: previous.literal, token: previous)
+            return LiteralExpression(value: previous.literal, token: previous)
+        }
+        
+        if match(types: [.identifier]) {
+            return VariableExpression(name: previous)
         }
         
         if match(types: [.leftParen]) {
             
             let expression = try expression()
-            try consume(type: .rightParen, errorMessage: "Expect ')' after expression at line \(peek.line).")
+            _ = try consume(type: .rightParen, error: ParserError.missingBracket(line: peek.line))
             
-            return Grouping(expression: expression)
+            return GroupingExpession(expression: expression)
         }
         
         throw ParserError.expressionExpected(line: peek.line)
@@ -250,6 +411,7 @@ extension DecentParser {
     /// - Parameter types: The expected token types.
     /// - Returns: `true` if a match is found; otherwise, `false`.
     private func match(types: [TokenType]) -> Bool {
+        
         for type in types {
             if check(type: type) {
                 current = tokens.index(after: current)

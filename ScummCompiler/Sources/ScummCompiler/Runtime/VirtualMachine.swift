@@ -85,6 +85,9 @@ public class BaseVM<OpcodeType: Opcode>: VirtualMachine {
     internal var objects: Object?
     #endif
     
+    /// A pool for storing global variables.
+    internal var globals: [String : Value] = [:]
+    
     // MARK: Computed Propertiex
     
     /// The decompiler used for debugging traces.

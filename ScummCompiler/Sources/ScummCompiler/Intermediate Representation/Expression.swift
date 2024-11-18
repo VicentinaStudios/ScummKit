@@ -25,37 +25,57 @@ protocol ExpressionVisitor {
     /// Visits a binary expression node in the abstract syntax tree.
     ///
     /// - Parameters:
-    ///   - expression: The `Binary` expression to be visited.
+    ///   - expression: The `BinaryExpression` expression to be visited.
     /// - Returns: The result of the visitor's operation.
-    func visitBinaryExpr(_ expression: Binary) throws -> ExpressionReturnType
+    func visitBinaryExpr(_ expression: BinaryExpression) throws -> ExpressionReturnType
     
     /// Visits a grouping expression node in the abstract syntax tree.
     ///
     /// - Parameters:
-    ///   - expression: The `Grouping` expression to be visited.
+    ///   - expression: The `GroupingExpression` expression to be visited.
     /// - Returns: The result of the visitor's operation.
-    func visitGroupingExpr(_ expression: Grouping) throws -> ExpressionReturnType
+    func visitGroupingExpr(_ expression: GroupingExpession) throws -> ExpressionReturnType
     
     /// Visits a literal expression node in the abstract syntax tree.
     ///
     /// - Parameters:
-    ///   - expression: The `Literal` expression to be visited.
+    ///   - expression: The `LiteralExpression` expression to be visited.
     /// - Returns: The result of the visitor's operation.
-    func visitLiteralExpr(_ expression: Literal) throws -> ExpressionReturnType
+    func visitLiteralExpr(_ expression: LiteralExpression) throws -> ExpressionReturnType
     
     /// Visits a unary expression node in the abstract syntax tree.
     ///
     /// - Parameters:
-    ///   - expression: The `Unary` expression to be visited.
+    ///   - expression: The `UnaryExpression` expression to be visited.
     /// - Returns: The result of the visitor's operation.
-    func visitUnaryExpr(_ expression: Unary) throws -> ExpressionReturnType
+    func visitUnaryExpr(_ expression: UnaryExpression) throws -> ExpressionReturnType
+    
+    /// Visits a variable expression node in the abstract syntax tree.
+    ///
+    /// This method is called when a variable is accessed in an expression.
+    /// The `VariableExpression` expression contains a reference to the variable's name, represented by a `Token`.
+    ///
+    /// - Parameters:
+    ///   - expression: The `VariableExpression` expression to be visited.
+    /// - Returns: The result of the visitor's operation.
+    func visitVariableExpr(_ expression: VariableExpression) throws -> ExpressionReturnType
+    
+    /// Visits an assignment expression node in the abstract syntax tree.
+    ///
+    /// This method is called when a variable is assigned a new value in an expression.
+    /// The `AssignExpression` expression contains a reference to the variable's name and the value being assigned.
+    ///
+    /// - Parameters:
+    ///   - expression: The `AssignExpression` expression to be visited.
+    /// - Returns: The result of the visitor's operation.
+    func visitAssignExpr(_ expression: AssignExpression) throws -> ExpressionReturnType
 }
 
 /// Protocol for expressions in the abstract syntax tree.
 ///
 /// The `Expression` protocol represents nodes in the AST and provides a way for visitors to traverse and operate on different expression types.
 ///
-/// To implement the Visitor pattern, conforming types (e.g., `Binary`, `Grouping`, `Literal`, `Unary`) must define the `accept` method, allowing a visitor to perform operations based on the specific expression type.
+/// To implement the Visitor pattern, conforming types (e.g., `BinaryExpression`, `GroupingExpression`, `LiteralExpression`, `UnaryExpression`) must define the `accept` method, allowing a visitor to perform operations based on the specific expression type.
 ///
 /// This protocol is essential for building interpreters, AST printers, and other tools that need to process and analyze expressions within a programming language.
 ///
@@ -76,7 +96,7 @@ protocol Expression {
 ///   - left: The left operand of the binary operation.
 ///   - operatorToken: The token representing the binary operator.
 ///   - right: The right operand of the binary operation.
-struct Binary: Expression {
+struct BinaryExpression: Expression {
     
     /// The left operand of the binary operation.
     let left: Expression
@@ -102,7 +122,7 @@ struct Binary: Expression {
 ///
 /// - Properties:
 ///   - expression: The grouped expression.
-struct Grouping: Expression {
+struct GroupingExpession: Expression {
     
     /// The grouped expression.
     let expression: Expression
@@ -129,7 +149,7 @@ struct Grouping: Expression {
 ///   - `value`: The value of the literal.
 ///   - `token`: An optional token representing the position of the literal in the source code (defaults to `nil`).
 ///
-struct Literal: Expression {
+struct LiteralExpression: Expression {
     
     /// The value of the literal expression, which can be of any type.
     let value: Any?
@@ -166,7 +186,7 @@ struct Literal: Expression {
 /// - Properties:
 ///   - operatorToken: The token representing the unary operator.
 ///   - right: The operand of the unary operation.
-struct Unary: Expression {
+struct UnaryExpression: Expression {
     
     /// The token representing the unary operator.
     let operatorToken: Token
@@ -181,5 +201,54 @@ struct Unary: Expression {
     /// - Returns: The result of the visitor's operation.
     func accept<V, R>(visitor: V) throws -> R where V : ExpressionVisitor, R == V.ExpressionReturnType {
         try visitor.visitUnaryExpr(self)
+    }
+}
+
+/// Represents a variable expression in the abstract syntax tree.
+///
+/// This expression node is used to reference a variable by its name.
+/// It appears in cases where a variable is accessed for its value.
+///
+/// - Properties:
+///   - `name`: The token representing the variable's identifier.
+///
+/// Example:
+/// ```
+/// var x = 10; // VariableExpression represents "x" when it's accessed.
+/// ```
+///
+/// - SeeAlso: `AssignExpression`
+
+struct VariableExpression: Expression {
+    
+    let name: Token
+    
+    func accept<V, R>(visitor: V) throws -> R where V : ExpressionVisitor, R == V.ExpressionReturnType {
+        try visitor.visitVariableExpr(self)
+    }
+}
+
+/// Represents an assignment expression in the abstract syntax tree.
+///
+/// This expression node is used to assign a value to a variable.
+/// It appears in cases where a variable's value is updated.
+///
+/// - Properties:
+///   - `name`: The token representing the variable's identifier.
+///   - `value`: The expression representing the value being assigned to the variable.
+///
+/// Example:
+/// ```
+/// x = 10; // AssignExpression represents the assignment "x = 10".
+/// ```
+///
+/// - SeeAlso: `VariableExpression`
+struct AssignExpression: Expression {
+    
+    let name: Token
+    let value: Expression?
+    
+    func accept<V, R>(visitor: V) throws -> R where V : ExpressionVisitor, R == V.ExpressionReturnType {
+        try visitor.visitAssignExpr(self)
     }
 }

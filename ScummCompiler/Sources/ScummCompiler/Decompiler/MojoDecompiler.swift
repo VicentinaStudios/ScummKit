@@ -46,6 +46,16 @@ public class MojoDecompiler: BaseDecompiler<MojoOpcode> {
             return try simpleInstruction(opcode: .less)
         case .nil:
             return try simpleInstruction(opcode: .nil)
+        case .print:
+            return try simpleInstruction(opcode: .print)
+        case .pop:
+            return try simpleInstruction(opcode: .pop)
+        case .global:
+            return try constantInstruction(opcode: .global)
+        case .get:
+            return try constantInstruction(opcode: .get)
+        case .set:
+            return try constantInstruction(opcode: .set)
         }
     }
     

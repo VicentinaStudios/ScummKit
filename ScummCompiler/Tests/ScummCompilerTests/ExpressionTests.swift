@@ -14,10 +14,10 @@ class ExpressionVisitorTests: XCTestCase {
 
     func testBinaryExpressionVisiting() {
         
-        let binaryExpression = Binary(
-            left: Literal(value: 5),
+        let binaryExpression = BinaryExpression(
+            left: LiteralExpression(value: 5),
             operatorToken: Token(type: .plus, lexeme: "+", line: 1),
-            right: Literal(value: 3))
+            right: LiteralExpression(value: 3))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try binaryExpression.accept(visitor: mockVisitor))
@@ -26,7 +26,7 @@ class ExpressionVisitorTests: XCTestCase {
 
     func testGroupingExpressionVisiting() {
         
-        let groupingExpression = Grouping(expression: Literal(value: Token(type: .string, lexeme: "Hello", literal: "Hello", line: 1)))
+        let groupingExpression = GroupingExpession(expression: LiteralExpression(value: Token(type: .string, lexeme: "Hello", literal: "Hello", line: 1)))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try groupingExpression.accept(visitor: mockVisitor))
@@ -35,7 +35,7 @@ class ExpressionVisitorTests: XCTestCase {
 
     func testLiteralExpressionVisiting() {
         
-        let literalExpression = Literal(value: 42)
+        let literalExpression = LiteralExpression(value: 42)
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try literalExpression.accept(visitor: mockVisitor))
@@ -44,9 +44,9 @@ class ExpressionVisitorTests: XCTestCase {
 
     func testUnaryExpressionVisiting() {
         
-        let unaryExpression = Unary(
+        let unaryExpression = UnaryExpression(
             operatorToken: Token(type: .minus, lexeme: "-", line: 1),
-            right: Literal(value: 7))
+            right: LiteralExpression(value: 7))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try unaryExpression.accept(visitor: mockVisitor))
@@ -58,10 +58,10 @@ class ExpressionTests: XCTestCase {
 
     func testBinaryExpressionAccept() {
         
-        let binaryExpression = Binary(
-            left: Literal(value: 5),
+        let binaryExpression = BinaryExpression(
+            left: LiteralExpression(value: 5),
             operatorToken: Token(type: .plus, lexeme: "+", line: 1),
-            right: Literal(value: 3))
+            right: LiteralExpression(value: 3))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try binaryExpression.accept(visitor: mockVisitor))
@@ -70,7 +70,7 @@ class ExpressionTests: XCTestCase {
 
     func testGroupingExpressionAccept() {
         
-        let groupingExpression = Grouping(expression: Literal(value: Token(type: .string, lexeme: "Hello", literal: "Hello", line: 1)))
+        let groupingExpression = GroupingExpession(expression: LiteralExpression(value: Token(type: .string, lexeme: "Hello", literal: "Hello", line: 1)))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try groupingExpression.accept(visitor: mockVisitor))
@@ -79,7 +79,7 @@ class ExpressionTests: XCTestCase {
 
     func testLiteralExpressionAccept() {
         
-        let literalExpression = Literal(value: 42)
+        let literalExpression = LiteralExpression(value: 42)
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try literalExpression.accept(visitor: mockVisitor))
@@ -88,9 +88,9 @@ class ExpressionTests: XCTestCase {
 
     func testUnaryExpressionAccept() {
         
-        let unaryExpression = Unary(
+        let unaryExpression = UnaryExpression(
             operatorToken: Token(type: .minus, lexeme: "-", line: 1),
-            right: Literal(value: 7))
+            right: LiteralExpression(value: 7))
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try unaryExpression.accept(visitor: mockVisitor))
@@ -101,7 +101,7 @@ class ExpressionTests: XCTestCase {
         
         // Test a literal with an associated token that carries line number and lexeme
         let token = Token(type: .string, lexeme: "\"Hello, World!\"", literal: "\"Hello, World!\"", line: 1)
-        let literalExpression = Literal(value: "\"Hello, World!\"", token: token)
+        let literalExpression = LiteralExpression(value: "\"Hello, World!\"", token: token)
         let mockVisitor = MockExpressionVisitor()
 
         XCTAssertNoThrow(try literalExpression.accept(visitor: mockVisitor))
@@ -115,6 +115,27 @@ class ExpressionTests: XCTestCase {
             XCTFail("Token should be present")
         }
     }
+    
+    func testVariableExpressionAccept() {
+        
+        let variableExpression = VariableExpression(
+            name: Token(type: .identifier, lexeme: "x", line: 1))
+        let mockVisitor = MockExpressionVisitor()
+
+        XCTAssertNoThrow(try variableExpression.accept(visitor: mockVisitor))
+        XCTAssertEqual(mockVisitor.visitedVariableExprCount, 1)
+    }
+    
+    func testAssignExpressionAccept() {
+        
+        let assignExpression = AssignExpression(
+            name: Token(type: .identifier, lexeme: "x", line: 1),
+            value: LiteralExpression(value: 42))
+        let mockVisitor = MockExpressionVisitor()
+
+        XCTAssertNoThrow(try assignExpression.accept(visitor: mockVisitor))
+        XCTAssertEqual(mockVisitor.visitedAssignExprCount, 1)
+    }
 }
 
 class MockExpressionVisitor: ExpressionVisitor {
@@ -123,24 +144,36 @@ class MockExpressionVisitor: ExpressionVisitor {
     var visitedGroupingExprCount = 0
     var visitedLiteralExprCount = 0
     var visitedUnaryExprCount = 0
+    var visitedVariableExprCount = 0
+    var visitedAssignExprCount = 0
 
-    func visitBinaryExpr(_ expression: Binary) throws -> Int {
+    func visitBinaryExpr(_ expression: BinaryExpression) throws -> Int {
         visitedBinaryExprCount += 1
         return 0
     }
 
-    func visitGroupingExpr(_ expression: Grouping) throws -> Int {
+    func visitGroupingExpr(_ expression: GroupingExpession) throws -> Int {
         visitedGroupingExprCount += 1
         return 0
     }
 
-    func visitLiteralExpr(_ expression: Literal) throws -> Int {
+    func visitLiteralExpr(_ expression: LiteralExpression) throws -> Int {
         visitedLiteralExprCount += 1
         return 0
     }
 
-    func visitUnaryExpr(_ expression: Unary) throws -> Int {
+    func visitUnaryExpr(_ expression: UnaryExpression) throws -> Int {
         visitedUnaryExprCount += 1
+        return 0
+    }
+    
+    func visitVariableExpr(_ expression: ScummCompiler.VariableExpression) throws -> Int {
+        visitedVariableExprCount += 1
+        return 0
+    }
+    
+    func visitAssignExpr(_ expression: ScummCompiler.AssignExpression) throws -> Int {
+        visitedAssignExprCount += 1
         return 0
     }
 }

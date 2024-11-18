@@ -159,6 +159,12 @@ enum TokenType: String, CaseIterable {
     /// Represents the keyword "nil".
     case `nil`
     
+    /// Represents the "print" keyword.
+    case print
+    
+    /// Represents the "var" keyword for variable declaration.
+    case `var`
+    
     // MARK: Special Tokens
     
     /// Represents a label used in the code.

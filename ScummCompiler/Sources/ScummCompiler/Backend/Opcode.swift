@@ -80,6 +80,21 @@ public enum MojoOpcode: UInt8, CaseIterable, Opcode {
     /// Represents a less-than comparison operation.
     case less       = 0xfd
     
+    /// Represents a print instruction.
+    case print      = 0xfe
+    
+    /// Represents a pop operation (removes an item from the stack).
+    case pop        = 0xff
+    
+    /// Represents a global variable instruction.
+    case global     = 0xef
+    
+    /// Represents an instruction to get a variable's value.
+    case get        = 0xee
+    
+    /// Represents an instruction to set a variable's value.
+    case set        = 0xed
+    
     /// The name of the opcode.
     public var name: String {
         return "OP_" + String(describing: self).lowercased()

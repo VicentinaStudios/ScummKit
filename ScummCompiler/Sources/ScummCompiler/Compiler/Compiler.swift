@@ -30,19 +30,19 @@ public class Compiler {
             
             print("Decent Parser")
             let parser = DecentParser(tokens: tokens)
-            let expression = try parser.parse()
+            let statements: [Statement] = try parser.parse()
             
             switch Configuration.BACKEND {
             
             case .scumm:
                 print("Gernerate SCUMM")
                 let codeGen = GenerateSCUMM(with: Chunk())
-                chunk = try codeGen.generateByteCode(expression: expression)
+                chunk = try codeGen.generateByteCode(statements: statements)
                 
             case .mojo:
                 print("Gernerate Mojo")
                 let codeGen = GenerateMojo(with: Chunk())
-                chunk = try codeGen.generateByteCode(expression: expression)
+                chunk = try codeGen.generateByteCode(statements: statements)
             }
         }
         
@@ -62,7 +62,7 @@ public class Compiler {
         case .decent:
             
             let parser = DecentParser(tokens: tokens)
-            let expression = try parser.parse()
+            let expression: Expression = try parser.parse()
                 
             print("Evaluate:", terminator: " ")
             let interpreter = Interpreter()
@@ -84,7 +84,7 @@ public class Compiler {
         case .decent:
             
             let parser = DecentParser(tokens: tokens)
-            let expression = try parser.parse()
+            let expression: Expression = try parser.parse()
                 
             let ast = ASTPrinter()
             if let string = ast.print(expression: expression) {

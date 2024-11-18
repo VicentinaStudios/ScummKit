@@ -11,7 +11,7 @@ import XCTest
 final class TokenTypeTests: XCTestCase {
     
     func testExistingTokenTypes() throws {
-        XCTAssertTrue(TokenType.allCases.count == 43)
+        XCTAssertTrue(TokenType.allCases.count == 45)
     }
     
     func testLeftParenthesesTokenTypeExist() throws {
@@ -85,6 +85,8 @@ final class TokenTypeTests: XCTestCase {
         XCTAssertTrue(TokenType.allCases.contains(.false))
         XCTAssertTrue(TokenType.allCases.contains(.true))
         XCTAssertTrue(TokenType.allCases.contains(.nil))
+        XCTAssertTrue(TokenType.allCases.contains(.print))
+        XCTAssertTrue(TokenType.allCases.contains(.var))
     }
     
     func testSpecialTokenTypesExist() throws {

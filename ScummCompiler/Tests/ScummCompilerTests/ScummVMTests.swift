@@ -126,9 +126,10 @@ final class ScummVMTests: XCTestCase {
         let scanner = Scanner(source: source)
         let tokens = try scanner.scanAllTokens()
         let parser = DecentParser(tokens: tokens)
-        let expression = try parser.parse()
+        let expression: ScummCompiler.Expression = try parser.parse()
+        let statement = ExpressionStmt(expression: expression)
         let codeGenerator = GenerateSCUMM(with: Chunk())
         
-        return try codeGenerator.generateByteCode(expression: expression)
+        return try codeGenerator.generateByteCode(statements: [statement])
     }
 }

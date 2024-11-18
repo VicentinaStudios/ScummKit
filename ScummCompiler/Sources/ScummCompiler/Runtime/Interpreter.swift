@@ -78,7 +78,7 @@ extension Interpreter: ExpressionVisitor {
     /// - Parameters:
     ///   - expression: The `Literal` expression to be visited.
     /// - Returns: The value of the literal expression.
-    func visitLiteralExpr(_ expression: Literal) -> Any? {
+    func visitLiteralExpr(_ expression: LiteralExpression) -> Any? {
         expression.value
     }
     
@@ -88,7 +88,7 @@ extension Interpreter: ExpressionVisitor {
     ///   - expression: The `Grouping` expression to be visited.
     /// - Returns: The result of the grouped expression.
     /// - Throws: An error if the evaluation of the grouped expression encounters issues.
-    func visitGroupingExpr(_ expression: Grouping) throws -> Any? {
+    func visitGroupingExpr(_ expression: GroupingExpession) throws -> Any? {
         try evaluate(expression.expression)
     }
     
@@ -98,7 +98,7 @@ extension Interpreter: ExpressionVisitor {
     ///   - expression: The `Unary` expression to be visited.
     /// - Returns: The result of the unary operation.
     /// - Throws: An error if the evaluation of the unary expression encounters issues.
-    func visitUnaryExpr(_ expression: Unary) throws -> Any? {
+    func visitUnaryExpr(_ expression: UnaryExpression) throws -> Any? {
 
         guard
             let right = try evaluate(expression.right) as? Int
@@ -122,7 +122,7 @@ extension Interpreter: ExpressionVisitor {
     ///   - expression: The `Binary` expression to be visited.
     /// - Returns: The result of the binary operation.
     /// - Throws: An error if the evaluation of the binary expression encounters issues.
-    func visitBinaryExpr(_ expression: Binary) throws -> Any? {
+    func visitBinaryExpr(_ expression: BinaryExpression) throws -> Any? {
         
         guard
             let left = try evaluate(expression.left) as? Int,
@@ -153,5 +153,13 @@ extension Interpreter: ExpressionVisitor {
         default:
             throw InterpreterError.unsupportedOperator(type: "binary", line: expression.operatorToken.line)
         }
+    }
+    
+    func visitVariableExpr(_ expression: VariableExpression) throws -> Any? {
+        fatalError("Method should be overridden by subclasses")
+    }
+    
+    func visitAssignExpr(_ expression: AssignExpression) throws -> Any? {
+        fatalError("Method should be overridden by subclasses")
     }
 }
