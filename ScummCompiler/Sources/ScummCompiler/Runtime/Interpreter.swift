@@ -58,7 +58,7 @@ class Interpreter {
                 try execute(statement)
             }
         } catch {
-            throw RuntimeError.invalidOperands
+            throw RuntimeError.invalidOperands          // TODO: Check error type
         }
     }
     

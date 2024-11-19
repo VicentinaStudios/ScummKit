@@ -69,7 +69,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--pretty"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-v5"

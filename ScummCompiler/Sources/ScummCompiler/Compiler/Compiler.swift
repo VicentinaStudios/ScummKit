@@ -82,11 +82,14 @@ public class Compiler {
         case .decent:
             
             let parser = DecentParser(tokens: tokens)
-            let expression: Expression = try parser.parse()
+            let statements: [Statement] = try parser.parse()
                 
             let ast = ASTPrinter()
-            if let string = ast.print(expression: expression) {
-                print("AST:", string)
+            
+            try statements.forEach { statement in
+                if let string = try ast.print(statement: statement) {
+                    print("AST:", string)
+                }
             }
         }
     }
