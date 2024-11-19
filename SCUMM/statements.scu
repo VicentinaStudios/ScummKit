@@ -1,0 +1,34 @@
+print 10 + 20;
+print 30 - 10;
+print 5 * 4;
+print 25 / 5;
+
+print -1;
+
+print true;
+print false;
+print nil;
+print !true;
+
+print 10 > 5;
+print 5 < 10;
+print 10 == 10;
+print true == true;
+print false == false;
+print nil == nil;
+print 10 == nil;
+
+print "hello world";
+print "hello " + "world";
+print "hello" == "hello";
+print "hello" != "hello";
+print "hello" == "world";
+print "hello" != "world";
+
+var x;
+x = 10;
+print x;
+var y = 20;
+print 20;
+x = 30;
+print x + y;

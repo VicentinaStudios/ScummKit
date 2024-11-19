@@ -35,7 +35,7 @@ func main() {
                 throw CLIError.redundantOutput
             }
             
-            print("Interpreter:", options.frontend ?? "-", options.backend ?? "-", options.runtime ?? "-")
+            print("Interpreter:", options.frontend?.capitalized ?? "-", options.backend?.capitalized ?? "-", options.runtime?.capitalized ?? "-")
             
             guard
                 let filename = loadSources()?.first,

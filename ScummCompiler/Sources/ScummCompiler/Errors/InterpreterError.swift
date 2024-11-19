@@ -30,6 +30,11 @@ enum InterpreterError: LocalizedError, Equatable {
     ///   - line: The line number in the source code where the error occurred.
     case divisionByZero(line: Int)
     
+    /// Error indicating a failure to evaluate an expression.
+    ///
+    /// This error occurs when an expression cannot be evaluated due to incompatible operands or invalid operations.
+    case expressionEvaluationFailed
+    
     /// A human-readable description of the error.
     var errorDescription: String? {
         
@@ -43,6 +48,9 @@ enum InterpreterError: LocalizedError, Equatable {
             
         case .divisionByZero:
             return "Division by Zero"
+            
+        case .expressionEvaluationFailed:
+            return "Expression Evaluation Failed"
         }
     }
     
@@ -59,6 +67,9 @@ enum InterpreterError: LocalizedError, Equatable {
             
         case .divisionByZero(let line):
             return "Division by zero at line \(line)"
+            
+        case .expressionEvaluationFailed:
+            return "Failed to evaluate expression operands."
         }
     }
 
@@ -75,6 +86,9 @@ enum InterpreterError: LocalizedError, Equatable {
             
         case .divisionByZero:
             return "Ensure that the divisor in the expression is not zero."
+            
+        case .expressionEvaluationFailed:
+            return "Review the literal expression structure and ensure correct usage of operands and operators."
         }
     }
 }
