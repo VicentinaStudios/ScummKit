@@ -223,6 +223,7 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
             if let a = left as? Int, let b = right as? Int { return a != b }
             if let a = left as? Double, let b = right as? Double { return a != b }
             if let a = left as? Bool, let b = right as? Bool { return a != b }
+            if let a = left as? String, let b = right as? String { return a == b }
             
             return (left == nil) != (right == nil)
             
@@ -233,6 +234,7 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
             if let a = left as? Int, let b = right as? Int { return a == b }
             if let a = left as? Double, let b = right as? Double { return a == b }
             if let a = left as? Bool, let b = right as? Bool { return a == b }
+            if let a = left as? String, let b = right as? String { return a == b }
             
             return left == nil && right == nil
             
@@ -300,10 +302,14 @@ class GenerateMojo: BaseCodeGenerator<MojoOpcode> {
         
         line = expression.name.line
         
-        let value = try evaluate(expression.value!)
+        guard let value = expression.value else {
+            throw InterpreterError.missingOperand(type: "assignment", line: expression.name.line)
+        }
+        
+        let evaluatedValue = try evaluate(value)
         let argument = try identifierConstant(token: expression.name)
         try emitBytes(MojoOpcode.set.rawValue, UInt8(argument))
-        return value
+        return evaluatedValue
     }
     
     // MARK: Statement Visitor

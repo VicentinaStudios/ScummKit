@@ -48,6 +48,7 @@
 		4CA9803F2B48AA9F007D4416 /* CompilerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerError.swift; sourceTree = "<group>"; };
 		4CA980412B49DA33007D4416 /* CommandLineParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineParser.swift; sourceTree = "<group>"; };
 		4CA980432B49E47F007D4416 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
+		4CB5668D2CEC0E0300C4DE1B /* statements.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = statements.scu; sourceTree = "<group>"; };
 		4CE09B582B4613FA00207CDD /* structure.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = structure.scu; sourceTree = "<group>"; };
 		4CE09B592B4615CE00207CDD /* office.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = office.scu; sourceTree = "<group>"; };
 		4CE09B5C2B4617A300207CDD /* office-finished.scu */ = {isa = PBXFileReference; lastKnownFileType = text; path = "office-finished.scu"; sourceTree = "<group>"; };
@@ -82,6 +83,7 @@
 				4C6826BF2CE92557009369C8 /* Statements.md */,
 				4C9B23892B44480400E3BE33 /* helloworld.scu */,
 				4C1E3BD72CE11AE9006EA564 /* playground.scu */,
+				4CB5668D2CEC0E0300C4DE1B /* statements.scu */,
 				4C9B238A2B44506A00E3BE33 /* tokens.scu */,
 				4CE09B5A2B46168700207CDD /* SCUMM University */,
 				4C9EC0522B2B5721008DF577 /* SCUMM */,

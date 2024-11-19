@@ -62,12 +62,10 @@ public class Compiler {
         case .decent:
             
             let parser = DecentParser(tokens: tokens)
-            let expression: Expression = try parser.parse()
+            let statements: [Statement] = try parser.parse()
                 
-            print("Evaluate:", terminator: " ")
             let interpreter = Interpreter()
-            let value = try interpreter.interpret(ast: expression)
-            print(interpreter.stringify(value))
+            try interpreter.interpret(statements: statements)
         }
     }
     
