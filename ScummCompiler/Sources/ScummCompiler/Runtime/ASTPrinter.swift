@@ -28,12 +28,17 @@ class ASTPrinter {
     /// - Parameters:
     ///   - expression: The root expression of the AST to be printed.
     /// - Returns: A string representation of the AST structure.
-    func print(expression: Expression) -> String? {
-        do {
-            return try expression.accept(visitor: self)
-        } catch {
-            return error.localizedDescription
-        }
+    func print(expression: Expression) throws -> String? {
+        return try expression.accept(visitor: self)
+    }
+    
+    /// Prints the structure of the given statement in a readable, parenthesized format.
+    ///
+    /// - Parameter statement: The root statement of the AST to be printed.
+    /// - Returns: A string representation of the statement structure.
+    /// - Throws: An error if traversal of the statement fails.
+    func print(statement: Statement) throws -> String? {
+        try statement.accept(visitor: self)
     }
     
     /// Creates a parenthesized representation of an expression with a given name.
@@ -43,13 +48,64 @@ class ASTPrinter {
     ///   - expressions: The expressions to be parenthesized.
     /// - Returns: A parenthesized string representation of the expressions.
     /// - Throws: An error if an issue occurs during the expression traversal.
-    private func parenthesize(name: String, expressions: Expression...) throws -> String {
+    func parenthesize(name: String, expressions: Expression...) throws -> String {
         
-        let result = try expressions
-            .map { try $0.accept(visitor: self) }
-            .joined(separator: " ")
+        var result = "(\(name)"
         
-        return "(\(name) \(result))"
+        for expr in expressions {
+            result += " \(try expr.accept(visitor: self))"
+        }
+        
+        result += ")"
+        
+        return result
+    }
+    
+    /// Creates a parenthesized representation of a set of parts, including expressions, statements, or tokens.
+    ///
+    /// - Parameters:
+    ///   - name: The name associated with the type of construct being represented.
+    ///   - parts: The components of the construct, which can include expressions, statements, or tokens.
+    /// - Returns: A parenthesized string representation of the parts.
+    /// - Throws: An error if an issue occurs during traversal of the parts.
+    func parenthesize2(name: String, parts: Any...) throws -> String {
+        
+        var result = "(\(name)"
+        
+        result += try transform(parts)
+        result += ")"
+        
+        return result
+    }
+    
+    /// Transforms a list of parts into their string representations, handling expressions, statements, and tokens.
+    ///
+    /// - Parameter parts: A variadic list of components to transform.
+    /// - Returns: A concatenated string of the transformed parts.
+    /// - Throws: An error if traversal of any part fails.
+    private func transform(_ parts: Any...) throws -> String {
+        
+        var result = ""
+        
+        for part in parts {
+            
+            result += " "
+            
+            switch part {
+            case let expression as Expression:
+                result += try expression.accept(visitor: self)
+            case let statement as Statement:
+                result += try statement.accept(visitor: self)
+            case let token as Token:
+                result += token.lexeme
+//            case let list as [Any]:
+//                try transform2(&builder, parts: list)
+            default:
+                result += "\(part)"
+            }
+        }
+        
+        return result
     }
 }
 
@@ -115,6 +171,41 @@ extension ASTPrinter: ExpressionVisitor {
     /// - Returns: A string representation of the assignment expression structure.
     /// - Throws: An error if an issue occurs during the expression traversal.
     func visitAssignExpr(_ expression: AssignExpression) throws -> String {
-        try parenthesize(name: "=", expressions: expression)
+        try parenthesize2(name: "=", parts: expression.name.lexeme, expression.value!)
+    }
+}
+
+extension ASTPrinter: StatementVisitor {
+    
+    /// Prints the structure of a variable statement.
+    ///
+    /// - Parameter stmt: The variable statement to be printed.
+    /// - Returns: A string representation of the variable statement structure.
+    /// - Throws: An error if an issue occurs during the statement traversal.
+    func visitVarStmt(_ stmt: VariableStatement) throws -> String {
+        
+        guard stmt.initializer != nil else {
+            return try parenthesize2(name: "var", parts: stmt.name)
+        }
+        
+        return try parenthesize2(name: "var", parts: stmt.name, "=", stmt.initializer!)
+    }
+    
+    /// Prints the structure of a print statement.
+    ///
+    /// - Parameter stmt: The print statement to be printed.
+    /// - Returns: A string representation of the print statement structure.
+    /// - Throws: An error if an issue occurs during the statement traversal.
+    func visitPrintStmt(_ stmt: Print) throws -> String {
+        try parenthesize(name: "print", expressions: stmt.expression);
+    }
+    
+    /// Prints the structure of an expression statement.
+    ///
+    /// - Parameter stmt: The expression statement to be printed.
+    /// - Returns: A string representation of the expression statement structure.
+    /// - Throws: An error if an issue occurs during the statement traversal.
+    func visitExpressionStmt(_ stmt: ExpressionStmt) throws -> String {
+        try parenthesize(name: ";", expressions: stmt.expression)
     }
 }
